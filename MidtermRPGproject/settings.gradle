@@ -1,0 +1,3 @@
+rootProject.name = 'MidtermRPGproject'
+
+includeFlat 'RPGJPAProject'  
