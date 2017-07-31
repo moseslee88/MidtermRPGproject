@@ -11,8 +11,10 @@ public class Shop {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany(mappedBy = "shops")
 	private Integer id;
+
+	@OneToMany
+	private Inventory inventory;
 
 	public Shop() {
 		super();
@@ -22,9 +24,17 @@ public class Shop {
 		return id;
 	}
 
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
 	@Override
 	public String toString() {
-		return "Shop [id=" + id + "]";
+		return "Shop [id=" + id + ", inventory=" + inventory + "]";
 	}
 
 }
