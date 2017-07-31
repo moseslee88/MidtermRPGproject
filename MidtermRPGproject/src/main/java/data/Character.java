@@ -8,8 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import entities.Category;
 
 
 @Entity
@@ -18,10 +22,10 @@ public class Character {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@OneToMany(mappedBy="characters")
-	private Inventory inventory;
 	@Column
 	private String name;
+	@OneToMany(mappedBy="characters")
+	private Inventory inventory;
 	@Column
 	private int health;
 	@Column
@@ -46,11 +50,23 @@ public class Character {
 	private int experienceTotal;
 	@Column
 	private int level;
+	@ManyToOne
+	@JoinColumn(name="player_id")
+	private int playerId;
+	@ManyToMany
+	@JoinTable(name="character_id", joinColumns=@JoinColumn(name="ability_id"),
+	inverseJoinColumns=@JoinColumn(name="character_id"))
+	private List<Ability> abilities;
+	
+	
+	public int getPlayerId() {
+		return playerId;
+	}
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
 	public int getId() {
 		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public Inventory getInventory() {
 		return inventory;

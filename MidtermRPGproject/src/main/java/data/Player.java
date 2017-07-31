@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -36,6 +38,11 @@ public class Player {
 	@ManyToOne
 	@JoinColumn(name="user_type_id")
 	private int userType;
+	
+	@ManyToMany
+	@JoinTable(name="player_id", joinColumns=@JoinColumn(name="quest_id"),
+	inverseJoinColumns=@JoinColumn(name="player_id"))
+	private List<Quest> Quests;
 
 	public String getEmail() {
 		return email;
