@@ -30,8 +30,7 @@ public class Player {
 	@Column
 	private String displayName;
 	
-	@OneToMany
-	@JoinColumn
+	@OneToMany(mappedBy="friend")
 	private List<Friend> friends;
 	
 	@ManyToOne
@@ -87,5 +86,6 @@ public class Player {
 		return "Player [id=" + id + ", email=" + email + ", password=" + password + ", displayName=" + displayName
 				+ ", friends=" + friends + ", userType=" + userType + "]";
 	}
+
 	
 }
