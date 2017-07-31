@@ -1,5 +1,6 @@
 
 ##MidtermRPGproject
+---
 Our group midterm project - *Connor, Jake, Bryan, and Moses*.
 
 The technologies we will incorporate into this project are....
