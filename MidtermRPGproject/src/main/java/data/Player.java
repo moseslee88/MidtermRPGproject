@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Player {
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
