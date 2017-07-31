@@ -16,16 +16,16 @@ public class Inventory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany(mappedBy = "inventory")
 	private Integer id;
 
-	@ManyToOne
-	@Column(name = "character_id")
+	@ManyToOne 
+	@JoinColumn(name = "character_id")
 	private List<Character> characters;
 
 	@ManyToOne
-	@JoinColumn(name = "shop_id")
+	@Column(name = "shop_id")
 	List<Shop> shops;
+	
 
 	public Inventory() {
 		super();
