@@ -16,14 +16,14 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class Character {
+public class GameCharacter {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
-	@OneToMany(mappedBy="characters")
+	@OneToMany(mappedBy="gameCharacters")
 	private List<Inventory> inventory;
 	@Column
 	private int health;
@@ -54,8 +54,8 @@ public class Character {
 	//private int playerId;
 	private Player player;
 	@ManyToMany
-	@JoinTable(name="character_id", joinColumns=@JoinColumn(name="ability_id"),
-	inverseJoinColumns=@JoinColumn(name="character_id"))
+	@JoinTable(name="gameCharacter_id", joinColumns=@JoinColumn(name="ability_id"),
+	inverseJoinColumns=@JoinColumn(name="gameCharacter_id"))
 	private List<Ability> abilities;
 	
 	
@@ -155,7 +155,7 @@ public class Character {
 	}
 	@Override
 	public String toString() {
-		return "Character [id=" + id + ", name=" + name + ", health=" + health + ", power=" + power + ", level=" + level
+		return "GameCharacter [id=" + id + ", name=" + name + ", health=" + health + ", power=" + power + ", level=" + level
 				+ "]";
 	}
 }
