@@ -21,7 +21,7 @@ public class ShopTest {
 
 	@Before
 	public void setup() throws Exception {
-		emf = Persistence.createEntityManagerFactory("MidtermRPGproject");
+		emf = Persistence.createEntityManagerFactory("Midterm");
 		em = emf.createEntityManager();
 	}
 
