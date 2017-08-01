@@ -36,6 +36,11 @@ public class PlayerEditDaoImpl implements PlayerEditDao {
 	}
 
 	public boolean findFriend(Friend friend) {
-		return true;
+		if(friend.getClass() != null) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 }
