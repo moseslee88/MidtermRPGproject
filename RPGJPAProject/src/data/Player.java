@@ -40,6 +40,9 @@ public class Player {
 	@JoinTable(name = "player_id", joinColumns = @JoinColumn(name = "quest_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
 	private List<Quest> Quests;
 
+	@OneToMany(mappedBy = "players")
+	private List<GameCharacter> gameCharacters;
+
 	public String getEmail() {
 		return email;
 	}
@@ -90,6 +93,14 @@ public class Player {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<GameCharacter> getGameCharacters() {
+		return gameCharacters;
+	}
+
+	public void setGameCharacters(List<GameCharacter> gameCharacters) {
+		this.gameCharacters = gameCharacters;
 	}
 
 	@Override
