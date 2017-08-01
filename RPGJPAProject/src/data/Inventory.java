@@ -31,8 +31,6 @@ public class Inventory {
 	@JoinColumn(name="shop_id")
 	private Shop shop;
 	
-	@Column(name="max_size")
-	private int maxSize;
 	
 	@ManyToMany
 	@JoinTable(name = "inventory_item", joinColumns = @JoinColumn(name = "inventory_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
@@ -68,13 +66,6 @@ public class Inventory {
 		this.shop = shop;
 	}
 
-	public int getMaxSize() {
-		return maxSize;
-	}
-
-	public void setMaxSize(int maxSize) {
-		this.maxSize = maxSize;
-	}
 	
 	
 

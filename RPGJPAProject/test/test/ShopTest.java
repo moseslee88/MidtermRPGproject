@@ -15,7 +15,11 @@ import org.junit.Test;
 
 import data.Friend;
 import data.GameCharacter;
+import data.Inventory;
 import data.Player;
+import data.Quest;
+import data.UserType;
+import enums.TypeOfUser;
 
 public class ShopTest {
 	private EntityManagerFactory emf = null;
@@ -71,11 +75,26 @@ public class ShopTest {
     @Test
     public void test_player_quest_association (){
     	Player p = em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	List<Quest> quests = p.getQuests();
+    	assertNotNull(p);
+    	assertEquals("beginning agaaaa", quests.get(0).getName());
     }
     
     @Test
     public void test_player_usertype_association (){
-    	GameCharacter g
+    	Player p =em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	UserType ut = p.getUserType();
+    	assertEquals(TypeOfUser.user, ut.getUserType());
     } 
+    
+    @Test
+    public void test_game_character_inventory_association (){
+    	GameCharacter gc = em.find(GameCharacter.class, 1);       //'Banshee' in GameCharacter database
+    	List<Inventory> invent = gc.getInventory();
+    	assertNotNull(gc);
+    	assertEquals("Bosh", invent.get(0).getGameCharacter().getName());
+    	assertEquals(55, invent.get(0).getGameCharacter().getEnergy());
+    }
+    
 	
 }
