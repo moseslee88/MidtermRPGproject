@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import enums.Element;
@@ -28,6 +29,11 @@ public class Item {
 	private TypeOfItem typeOfItem;
 
 	private Element element;
+	
+	 @ManyToMany(mappedBy="items")
+	 private List<Inventory> inventory;  
+	
+	//gets and sets
 
 	public String getName() {
 		return name;
