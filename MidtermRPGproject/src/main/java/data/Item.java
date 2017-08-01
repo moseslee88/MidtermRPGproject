@@ -1,6 +1,5 @@
 package data;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,12 +14,11 @@ public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToMany(mappedBy = "items")
 	private Integer id;
 
 	private String name;
 
-	@Column(name = "item_level")
+	@OneToMany(mappedBy = "items")
 	private Integer itemLevel;
 
 	private String value;
