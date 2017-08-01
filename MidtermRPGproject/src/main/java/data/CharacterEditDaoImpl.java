@@ -44,7 +44,7 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	}
 
 	@Override
-	public boolean destroy(int charId) {
+	public boolean killChar(int charId) {
 		GameCharacter managedChar = em.find(GameCharacter.class, charId);
 		if (managedChar.getId() == charId) {			
 		Player p = em.find(Player.class, 2);
@@ -55,6 +55,7 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 			return false;
 		}
 	}
+	
 
 	
 }
