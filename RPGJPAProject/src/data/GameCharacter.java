@@ -166,6 +166,14 @@ public class GameCharacter {
 	}
 	
 
+	public List<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(List<Ability> abilities) {
+		this.abilities = abilities;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -173,6 +181,7 @@ public class GameCharacter {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
+	
 
 	@Override
 	public String toString() {

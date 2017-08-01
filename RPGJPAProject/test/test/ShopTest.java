@@ -13,11 +13,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import data.Ability;
 import data.Friend;
 import data.GameCharacter;
 import data.Inventory;
 import data.Player;
 import data.Quest;
+import data.Stage;
 import data.UserType;
 import enums.TypeOfUser;
 
@@ -98,13 +100,31 @@ public class ShopTest {
     }
     
     @Test
-    public void test_quest_stagegame_character_inventory_association (){
-    	GameChar  
+    public void test_quest_stage_association (){
+    	Quest q= em.find(Quest.class, 1);
+    	List<Stage> stages = q.getStages();
+    	assertNotNull(q);
+    	assertEquals("scaryque", stages.get(0).getName());
+    	assertEquals("beginning", stages.get(0).getIntro());
     }
     
     @Test
-    public void test_game_character_stage_association (){
-    	GameChar
+    public void test_game_character_ability_association (){
+    	GameCharacter gc = em.find(GameCharacter.class, 1);   //'Banshee' in GameCharacter in the database
+    	List<Ability> abilities = gc.getAbilities();
+    	assertNotNull(gc);
+    	assertEquals("frost", abilities.get(0).getName());
+    }
+    
+    @Test
+    public void test_inventory_item_association (){
+    	//stub
+    	
+    }
+    
+    @Test
+    public void test_inventory_shop_association (){
+    	//stub
     }
     
 	

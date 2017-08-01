@@ -82,6 +82,8 @@ public class Ability {
 	public int getId() {
 		return id;
 	}
+	
+	
 
 	@Override
 	public String toString() {
