@@ -40,13 +40,21 @@ public class ShopTest {
         boolean pass = true;
         assertEquals(pass, true);
     }
+    
+    @Test
+    public void test_game_character_association (){
+    	GameCharacter gc = em.find(GameCharacter.class, 5);
+    	assertNotNull(gc);
+    	assertEquals("Banshee", gc.getName());
+    	
+    }
     @Test
     public void test_player_gamecharacter_mappings() {
         Player p =em.find(Player.class, 1);
          List<GameCharacter> chs = p.getGameCharacters();
         assertNotNull(p);
-        assertEquals(p.getEmail(),"user@user.com");
-        assertEquals(chs.size(), 3);  //tests list of game characters for player 1
+        assertEquals("user@user.com", p.getEmail());
+        assertEquals(3, chs.size());  //tests list of game characters for player 1
         //assertEquals(p.getPhone(), “3333333”);
     }
 	
