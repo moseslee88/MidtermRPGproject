@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `item_level` INT NULL,
-  `value` VARCHAR(45) NULL,
+  `value` INT NULL,
   `type` ENUM('weapon', 'armor', 'edible', 'trash') NULL,
   `element` ENUM('physical', 'fire', 'frost', 'lightning', 'blood', 'dark') NULL,
   PRIMARY KEY (`id`))
@@ -418,6 +418,35 @@ COMMIT;
 START TRANSACTION;
 USE `MidtermProjectDB`;
 INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (1, 'Screech', 'frost', 3, 30);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (2, 'Snowball', 'frost', 1, 10);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (3, 'Ice spear', 'frost', 5, 50);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (4, 'Hail', 'frost', 7, 70);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (5, 'Blizzard', 'frost', 9, 90);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (6, 'Burn', 'fire', 1, 10);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (7, 'Fireball', 'fire', 3, 30);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (8, 'Crisp', 'fire', 5, 50);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (9, 'Torch', 'fire', 7, 70);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (10, 'Atomic', 'fire', 9, 90);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (11, 'Hit', 'physical', 1, 10);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (12, 'Wrap', 'physical', 3, 30);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (13, 'Headbutt', 'physical', 5, 50);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (14, 'Slam', 'physical', 7, 70);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (15, 'Crunch', 'physical', 9, 90);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (16, 'Shock', 'lightning', 1, 10);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (17, 'Zap', 'lightning', 3, 30);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (18, 'Fry', 'lightning', 5, 50);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (19, 'Thunderbolt', 'lightning', 7, 70);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (20, 'Electrocute', 'lightning', 9, 90);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (21, 'Stab', 'blood', 1, 10);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (22, 'Bite', 'blood', 3, 30);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (23, 'Gouge', 'blood', 5, 50);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (24, 'Flay', 'blood', 7, 70);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (25, 'Eat', 'blood', 9, 90);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (26, 'Scare', 'dark', 1, 10);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (27, 'Haunt', 'dark', 3, 30);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (28, 'Decimate', 'dark', 5, 50);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (29, 'Petrify', 'dark', 7, 70);
+INSERT INTO `ability` (`id`, `name`, `element`, `power`, `energy_cost`) VALUES (30, 'Finish', 'dark', 9, 90);
 
 COMMIT;
 
@@ -450,9 +479,51 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (1, 'Lesser Potion', 1, '10', 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (2, 'Potion', 2, '30', 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (3, 'Greater Potion', 3, '50', 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (1, 'Lesser Potion', 1, 5, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (2, 'Potion', 2, 8, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (3, 'Greater Potion', 3, 13, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (4, 'Lesser Draught', 1, 5, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (5, 'Draught', 2, 8, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (6, 'Greater Draught', 3, 13, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (7, 'Lesser Elixer', 1, 8, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (8, 'Elixer', 2, 13, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (9, 'Greater Elixer', 3, 21, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (10, 'Sitck', 1, 13, 'weapon', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (11, 'Mace', 2, 21, 'weapon', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (12, 'Hammer', 3, 34, 'weapon', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (13, 'Shield', 1, 13, 'armor', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (14, 'Mail', 2, 21, 'armor', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (15, 'Armor', 3, 34, 'armor', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (16, 'Earring of Burning', 1, 21, 'weapon', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (17, 'Tiara of Fire', 2, 34, 'weapon', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (18, 'Crown of Flame', 3, 55, 'weapon', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (19, 'Fire Resistant Hat', 1, 21, 'armor', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (20, 'Fire Retardant Hood', 2, 34, 'armor', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (21, 'Fireproof Helm', 3, 55, 'armor', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (22, 'Ring of Snow', 1, 21, 'weapon', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (23, 'Band of Freezing', 2, 34, 'weapon', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (24, 'Circle of Permafrost', 3, 55, 'weapon', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (25, 'Warm Gloves', 1, 21, 'armor', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (26, 'Frostbite Mittens', 2, 34, 'armor', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (27, 'Freezeproof Gauntlets', 3, 55, 'armor', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (28, 'Sandals of Shocking', 1, 21, 'weapon', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (29, 'Footgear of Electricity', 2, 34, 'weapon', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (30, 'Closed-toe Shoes of Zaps', 3, 55, 'weapon', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (31, 'Rubber Shoes', 1, 21, 'armor', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (32, 'Shock Resistant Boots', 2, 34, 'armor', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (33, 'Staticproof Socks', 3, 55, 'armor', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (34, 'Shiv of Bleeding', 1, 32, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (35, 'Fang', 2, 45, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (36, 'Cleaver', 3, 66, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (37, 'Moisture Wicking Shirt', 1, 32, 'armor', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (38, 'Stain Resistant Cloak', 2, 45, 'armor', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (39, 'Bloody Chestplate', 3, 66, 'armor', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (40, 'Knife of the Dark', 1, 32, 'weapon', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (41, 'Hidden Dagger', 2, 45, 'weapon', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (42, 'Blade of Obscurity', 3, 66, 'weapon', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (43, 'Twilight Necklace', 1, 32, 'armor', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (44, 'Dusk Collar', 2, 45, 'armor', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (45, 'Amulet of …', 3, 66, 'armor', 'dark');
 
 COMMIT;
 
