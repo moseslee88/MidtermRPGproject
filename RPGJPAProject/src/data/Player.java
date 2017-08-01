@@ -20,13 +20,11 @@ public class Player {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	
 	private String email;
 
-	
 	private String password;
 
-	@Column(name="display_name")
+	@Column(name = "display_name")
 	private String displayName;
 
 	@OneToMany(mappedBy = "friend")
@@ -101,6 +99,16 @@ public class Player {
 
 	public void setGameCharacters(List<GameCharacter> gameCharacters) {
 		this.gameCharacters = gameCharacters;
+	}
+
+	public boolean addPlayerAsFriend(Friend friend) {
+		friends.add(friend);
+		return true;
+	}
+	
+	public boolean removePlayerAsFriend(Friend friend) {
+		friends.remove(friend);
+		return true;
 	}
 
 	@Override

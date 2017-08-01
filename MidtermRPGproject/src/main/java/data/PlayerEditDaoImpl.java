@@ -1,5 +1,8 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -7,14 +10,13 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
 @Repository
 public class PlayerEditDaoImpl implements PlayerEditDao {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public Player create(Player newPlayer) {
 		em.persist(newPlayer);
@@ -33,4 +35,7 @@ public class PlayerEditDaoImpl implements PlayerEditDao {
 		return managedPlayer;
 	}
 
+	public boolean findFriend(Friend friend) {
+		return true;
+	}
 }
