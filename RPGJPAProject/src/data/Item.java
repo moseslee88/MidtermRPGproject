@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +21,7 @@ public class Item {
 	private String name;
 
 	@OneToMany(mappedBy = "items")
-	private Integer itemLevel;
+	private List<Integer> itemLevel;
 
 	private String value;
 
@@ -39,11 +41,11 @@ public class Item {
 		this.name = name;
 	}
 
-	public Integer getItemLevel() {
+	public List<Integer> getItemLevel() {
 		return itemLevel;
 	}
 
-	public void setItemLevel(Integer itemLevel) {
+	public void setItemLevel(List<Integer> itemLevel) {
 		this.itemLevel = itemLevel;
 	}
 
