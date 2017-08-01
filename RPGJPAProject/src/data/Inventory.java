@@ -19,7 +19,7 @@ public class Inventory {
 
 	@ManyToOne
 	@JoinColumn(name = "character_id")
-	private List<Character> characters;
+	private Character character;
 
 	@OneToMany(mappedBy = "inventory")
 	private List<InventoryItem> inventory;
@@ -28,12 +28,12 @@ public class Inventory {
 		super();
 	}
 
-	public List<Character> getCharacters() {
-		return characters;
+	public Character getCharacter() {
+		return character;
 	}
 
-	public void setCharacters(List<Character> characters) {
-		this.characters = characters;
+	public void setCharacter(Character character) {
+		this.character = character;
 	}
 
 	public List<InventoryItem> getInventory() {

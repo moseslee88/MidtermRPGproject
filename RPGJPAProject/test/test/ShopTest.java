@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import data.Inventory;
+
 import data.Player;
 import data.Shop;
 

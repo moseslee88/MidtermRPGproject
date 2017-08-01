@@ -51,18 +51,20 @@ public class Character {
 	private int level;
 	@ManyToOne
 	@JoinColumn(name="player_id")
-	private int playerId;
+	//private int playerId;
+	private Player player;
 	@ManyToMany
 	@JoinTable(name="character_id", joinColumns=@JoinColumn(name="ability_id"),
 	inverseJoinColumns=@JoinColumn(name="character_id"))
 	private List<Ability> abilities;
 	
 	
-	public int getPlayerId() {
-		return playerId;
+
+	public Player getPlayer() {
+		return player;
 	}
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	public int getId() {
 		return id;
