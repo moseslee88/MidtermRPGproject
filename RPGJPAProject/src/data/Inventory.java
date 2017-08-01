@@ -18,11 +18,15 @@ public class Inventory {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "character_id")
+	@JoinColumn(name = "////")
 	private Character character;
 
 	@OneToMany(mappedBy = "inventory")
 	private List<InventoryItem> inventory;
+	
+	@ManyToOne
+	@JoinColumn(name="shop_id")
+	private Shop shop;
 
 	public Inventory() {
 		super();
@@ -50,7 +54,7 @@ public class Inventory {
 
 	@Override
 	public String toString() {
-		return "Inventory [id=" + id + ", characters=" + character + ", inventory=" + inventory + "]";
+		return "Inventory [id=" + id + ", character=" + character + ", inventory=" + inventory + "]";
 	}
 
 }
