@@ -61,20 +61,24 @@ public class GameCharacter {
 	private List<Ability> abilities;
 	
 	
+	private Boolean active;
+	
+	
 	//gets and sets
 	
-	public GameCharacter ()  {
+	public GameCharacter ()  {   //NO args constructor
 		
 	}
 
+	public int getId() {
+		return id;
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-	public int getId() {
-		return id;
 	}
 	public List<Inventory> getInventory() {
 		return inventory;
@@ -160,6 +164,24 @@ public class GameCharacter {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+	
+
+	public List<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(List<Ability> abilities) {
+		this.abilities = abilities;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
 
 	@Override
 	public String toString() {

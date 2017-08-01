@@ -13,11 +13,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import data.Ability;
 import data.Friend;
 import data.GameCharacter;
 import data.Inventory;
 import data.Player;
 import data.Quest;
+import data.Stage;
 import data.UserType;
 import enums.TypeOfUser;
 
@@ -66,25 +68,26 @@ public class ShopTest {
     
     @Test
     public void test_player_friend_association (){
-    	Player p =em.find(Player.class, 2);   //'player' in ENUM TypeOfUser
+    	Player p =em.find(Player.class, 2);   //'admin' in ENUM TypeOfUser
     	List<Friend> friends = p.getFriends();
     	assertNotNull(p);
-    	assertEquals(12, friends.get(0).getId());
+    	assertEquals(1, friends.get(0).getId());
+    	assertEquals("admin@user.com", friends.get(0).getFriend().getEmail());
     }
     
     @Test
     public void test_player_quest_association (){
-    	Player p = em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	Player p = em.find(Player.class, 1);  //'admin' in ENUM TypeOfUser
     	List<Quest> quests = p.getQuests();
     	assertNotNull(p);
-    	assertEquals("beginning agaaaa", quests.get(0).getName());
+    	assertEquals("Beginning Again", quests.get(0).getName());
     }
     
     @Test
     public void test_player_usertype_association (){
-    	Player p =em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	Player p =em.find(Player.class, 1);  //'admin' in ENUM TypeOfUser
     	UserType ut = p.getUserType();
-    	assertEquals(TypeOfUser.user, ut.getUserType());
+    	assertEquals(TypeOfUser.admin, ut.getUserType());
     } 
     
     @Test
@@ -92,8 +95,36 @@ public class ShopTest {
     	GameCharacter gc = em.find(GameCharacter.class, 1);       //'Banshee' in GameCharacter database
     	List<Inventory> invent = gc.getInventory();
     	assertNotNull(gc);
-    	assertEquals("Bosh", invent.get(0).getGameCharacter().getName());
-    	assertEquals(55, invent.get(0).getGameCharacter().getEnergy());
+    	assertEquals("Banshee", invent.get(0).getGameCharacter().getName());
+    	assertEquals(100, invent.get(0).getGameCharacter().getEnergy());  //here we expect an integer for Energy with a value of 100
+    }
+    
+    @Test
+    public void test_quest_stage_association (){
+    	Quest q= em.find(Quest.class, 1);
+    	List<Stage> stages = q.getStages();
+    	assertNotNull(q);
+    	assertEquals("scaryque", stages.get(0).getName());
+    	assertEquals("beginning", stages.get(0).getIntro());
+    }
+    
+    @Test
+    public void test_game_character_ability_association (){
+    	GameCharacter gc = em.find(GameCharacter.class, 1);   //'Banshee' in GameCharacter in the database
+    	List<Ability> abilities = gc.getAbilities();
+    	assertNotNull(gc);
+    	assertEquals("frost", abilities.get(0).getName());
+    }
+    
+    @Test
+    public void test_inventory_item_association (){
+    	//stub
+    	
+    }
+    
+    @Test
+    public void test_inventory_shop_association (){
+    	//stub
     }
     
 	

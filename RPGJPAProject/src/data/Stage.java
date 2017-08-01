@@ -41,7 +41,7 @@ public class Stage {
     @Column(name="completed")
     private Boolean completed;
 	 
-	// @OneToMany(mappedBy="customer")
+	// @OneToMany(mappedBy="stages")
 	// private List<Rental> renta;  
     
 	 
