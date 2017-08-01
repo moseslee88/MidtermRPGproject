@@ -21,8 +21,8 @@ public class Inventory {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "character_id")
-	private Character character;
+	@JoinColumn(name = "gameCharacter_id")
+	private GameCharacter gameCharacter;
 
 	@OneToMany(mappedBy = "inventory")
 	private List<InventoryItem> inventory;
@@ -44,12 +44,12 @@ public class Inventory {
 		this.id = id;
 	}
 
-	public Character getCharacter() {
-		return character;
+	public GameCharacter getGameCharacter() {
+		return gameCharacter;
 	}
 
-	public void setCharacter(Character character) {
-		this.character = character;
+	public void setGameCharacter(GameCharacter gameCharacter) {
+		this.gameCharacter = gameCharacter;
 	}
 
 	public List<InventoryItem> getInventory() {
@@ -75,10 +75,20 @@ public class Inventory {
 	public void setMaxSize(int maxSize) {
 		this.maxSize = maxSize;
 	}
+	
+	
 
 	
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
 	@Override
 	public String toString() {
-		return "Inventory [id=" + id + ", character=" + character + ", inventory=" + inventory + "]";
+		return "Inventory [id=" + id + ", gameCharacterEnergy=" + this.getGameCharacter().getEnergy() + ", inventorySize=" + this.getInventory().size() + "]";
 	}
 }
