@@ -20,30 +20,30 @@ public class InventoryItem {
 
 	@ManyToOne
 	@JoinColumn(name = "inventory_id")
-	private List<Inventory> inventory;
+	private Inventory inventory;
 
 	@ManyToOne
 	@JoinColumn(name = "item_id")
-	private List<Item> items;
+	private Item item;
 
 	public InventoryItem() {
 		super();
 	}
 
-	public List<Inventory> getInventory() {
+	public Inventory getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(List<Inventory> inventory) {
+	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
 
-	public List<Item> getItems() {
-		return items;
+	public Item getItems() {
+		return item;
 	}
 
-	public void setItems(List<Item> items) {
-		this.items = items;
+	public void setItems(Item items) {
+		this.item = items;
 	}
 
 	public Integer getId() {
@@ -52,7 +52,7 @@ public class InventoryItem {
 
 	@Override
 	public String toString() {
-		return "InventoryItem [id=" + id + ", inventory=" + inventory + ", items=" + items + "]";
+		return "InventoryItem [id=" + id + ", inventory=" + inventory + ", items=" + item + "]";
 	}
 
 }

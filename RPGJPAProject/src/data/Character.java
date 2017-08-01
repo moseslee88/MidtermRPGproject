@@ -24,7 +24,7 @@ public class Character {
 	@Column
 	private String name;
 	@OneToMany(mappedBy="characters")
-	private Inventory inventory;
+	private List<Inventory> inventory;
 	@Column
 	private int health;
 	@Column
@@ -67,10 +67,10 @@ public class Character {
 	public int getId() {
 		return id;
 	}
-	public Inventory getInventory() {
+	public List<Inventory> getInventory() {
 		return inventory;
 	}
-	public void setInventory(Inventory inventory) {
+	public void setInventory(List<Inventory> inventory) {
 		this.inventory = inventory;
 	}
 	public String getName() {

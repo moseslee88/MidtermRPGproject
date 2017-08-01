@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +16,7 @@ public class Shop {
 	private Integer id;
 
 	@OneToMany(mappedBy="shops")
-	private Inventory inventory;
+	private List<Inventory> inventory;
 
 	public Shop() {
 		super();
@@ -24,11 +26,11 @@ public class Shop {
 		return id;
 	}
 
-	public Inventory getInventory() {
+	public List<Inventory> getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(Inventory inventory) {
+	public void setInventory(List<Inventory> inventory) {
 		this.inventory = inventory;
 	}
 
