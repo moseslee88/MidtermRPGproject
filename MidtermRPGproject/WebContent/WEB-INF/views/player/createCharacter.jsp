@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Page Title -->
-<title>Report Form</title>
+<title>Create Character</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -32,12 +32,12 @@
 <body>
 	<div class="container">
 		<div class="page-header">
-			<h2>Report Form</h2>
+			<h2>Create Character</h2>
 		</div>
 		<div class="container">
 <!-- Page Content -->
 <!-- in: playerInfo -->
-<!-- out: playerInfo, shareQuest -->	
+<!-- out: playerInfo -->	
 		
 		
 		

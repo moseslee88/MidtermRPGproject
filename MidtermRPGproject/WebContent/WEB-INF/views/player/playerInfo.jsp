@@ -37,7 +37,7 @@
 		<div class="container">
 <!-- Page Content -->
 <!-- in: login -->
-<!-- out: characterInfo, friendList, createQuest, report -->	
+<!-- out: characterInfo, friendList, createQuest, report, createCharacter -->	
 		
 		
 		
