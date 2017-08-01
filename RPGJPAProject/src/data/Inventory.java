@@ -2,7 +2,6 @@ package data;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,14 +17,12 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne 
+	@ManyToOne
 	@JoinColumn(name = "character_id")
 	private List<Character> characters;
 
-	@ManyToOne
-	@JoinColumn(name = "shop_id")
-	List<Shop> shops;
-	
+	@OneToMany(mappedBy = "inventory")
+	private List<InventoryItem> inventory;
 
 	public Inventory() {
 		super();
@@ -39,12 +36,12 @@ public class Inventory {
 		this.characters = characters;
 	}
 
-	public List<Shop> getShops() {
-		return shops;
+	public List<InventoryItem> getInventory() {
+		return inventory;
 	}
 
-	public void setShops(List<Shop> shops) {
-		this.shops = shops;
+	public void setInventory(List<InventoryItem> inventory) {
+		this.inventory = inventory;
 	}
 
 	public Integer getId() {
@@ -53,7 +50,7 @@ public class Inventory {
 
 	@Override
 	public String toString() {
-		return "Inventory [id=" + id + ", characters=" + characters + ", shops=" + shops + "]";
+		return "Inventory [id=" + id + ", characters=" + characters + ", inventory=" + inventory + "]";
 	}
 
 }

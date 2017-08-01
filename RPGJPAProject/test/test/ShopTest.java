@@ -31,12 +31,6 @@ public class ShopTest {
 
 	}
 	
-	@Test
-	public void test_shop_for_inventory_id() {
-		Shop shop = em.find(Shop.class, 1);
-		Inventory inventory = shop.getInventory();
-		assertEquals("dog", inventory.getShops());
-	}
 	
     @Test
     public void test() {

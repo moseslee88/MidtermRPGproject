@@ -17,12 +17,16 @@ import enums.*;
 @Entity
 public class Friend {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
 	@OneToOne
-	@JoinColumn(name="player_id1")
+	@JoinColumn(name = "player_id1")
 	private Player user;
-	
+
 	@ManyToOne
-	@JoinColumn(name="player_id2")
+	@JoinColumn(name = "player_id2")
 	private Player friend;
 
 	public Player getUser() {
@@ -41,9 +45,13 @@ public class Friend {
 		this.friend = friend;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
-		return "Friend [user=" + user + ", friend=" + friend + "]";
+		return "Friend [id=" + id + ", user=" + user + ", friend=" + friend + "]";
 	}
-	
+
 }
