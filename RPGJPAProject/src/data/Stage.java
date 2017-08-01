@@ -35,8 +35,8 @@ public class Stage {
     private String choice;
     
     @ManyToOne
-    @JoinColumn(name="character_id")
-    private Character character;
+    @JoinColumn(name="gameCharacter_id")
+    private GameCharacter gameCharacter;
     
     @Column(name="completed")
     private Boolean completed;
@@ -100,13 +100,13 @@ private List<Quest> questList;
 	}
 
 
-	public Character getCharacter() {
-		return character;
+	public GameCharacter getGameCharacter() {
+		return gameCharacter;
 	}
 
 
-	public void setCharacter(Character character) {
-		this.character = character;
+	public void setGameCharacter(GameCharacter gameCharacter) {
+		this.gameCharacter = gameCharacter;
 	}
 
 
@@ -130,7 +130,7 @@ private List<Quest> questList;
 	@Override
 	public String toString() {
 		return "Stage [id=" + id + ", name=" + name + ", level=" + level + ", intro=" + intro + ", conclusion="
-				+ conclusion + ", choice=" + choice + ", character=" + this.getCharacter() + ", completed=" + this.isCompleted()
+				+ conclusion + ", choice=" + choice + ", gameCharacter=" + this.getGameCharacter() + ", completed=" + this.isCompleted()
 				+ "]";
 	}
 	 
