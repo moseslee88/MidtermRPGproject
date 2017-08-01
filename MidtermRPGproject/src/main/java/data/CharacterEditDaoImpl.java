@@ -10,5 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public class CharacterEditDaoImpl implements CharacterEditDao {
-
+	@PersistenceContext
+	private EntityManager em;
 }

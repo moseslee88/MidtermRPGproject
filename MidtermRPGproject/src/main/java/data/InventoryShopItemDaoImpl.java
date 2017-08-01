@@ -11,5 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
-
+	@PersistenceContext
+	private EntityManager em;
 }
