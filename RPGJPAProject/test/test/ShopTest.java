@@ -66,25 +66,26 @@ public class ShopTest {
     
     @Test
     public void test_player_friend_association (){
-    	Player p =em.find(Player.class, 2);   //'player' in ENUM TypeOfUser
+    	Player p =em.find(Player.class, 2);   //'admin' in ENUM TypeOfUser
     	List<Friend> friends = p.getFriends();
     	assertNotNull(p);
-    	assertEquals(12, friends.get(0).getId());
+    	assertEquals(1, friends.get(0).getId());
+    	assertEquals("admin@user.com", friends.get(0).getFriend().getEmail());
     }
     
     @Test
     public void test_player_quest_association (){
-    	Player p = em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	Player p = em.find(Player.class, 1);  //'admin' in ENUM TypeOfUser
     	List<Quest> quests = p.getQuests();
     	assertNotNull(p);
-    	assertEquals("beginning agaaaa", quests.get(0).getName());
+    	assertEquals("Beginning Again", quests.get(0).getName());
     }
     
     @Test
     public void test_player_usertype_association (){
-    	Player p =em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	Player p =em.find(Player.class, 1);  //'admin' in ENUM TypeOfUser
     	UserType ut = p.getUserType();
-    	assertEquals(TypeOfUser.user, ut.getUserType());
+    	assertEquals(TypeOfUser.admin, ut.getUserType());
     } 
     
     @Test
@@ -92,8 +93,18 @@ public class ShopTest {
     	GameCharacter gc = em.find(GameCharacter.class, 1);       //'Banshee' in GameCharacter database
     	List<Inventory> invent = gc.getInventory();
     	assertNotNull(gc);
-    	assertEquals("Bosh", invent.get(0).getGameCharacter().getName());
-    	assertEquals(55, invent.get(0).getGameCharacter().getEnergy());
+    	assertEquals("Banshee", invent.get(0).getGameCharacter().getName());
+    	assertEquals(100, invent.get(0).getGameCharacter().getEnergy());  //here we expect an integer for Energy with a value of 100
+    }
+    
+    @Test
+    public void test_quest_stagegame_character_inventory_association (){
+    	GameChar  
+    }
+    
+    @Test
+    public void test_game_character_stage_association (){
+    	GameChar
     }
     
 	
