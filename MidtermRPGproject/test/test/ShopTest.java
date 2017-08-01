@@ -1,8 +1,6 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
+import static org.junit.Assert.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import data.Inventory;
+import data.Player;
 import data.Shop;
 
 public class ShopTest {
@@ -38,5 +37,19 @@ public class ShopTest {
 		Inventory inventory = shop.getInventory();
 		assertEquals("dog", inventory.getShops());
 	}
+	
+    @Test
+    public void test() {
+        boolean pass = true;
+        assertEquals(pass, true);
+    }
+    @Test
+    public void test_player_character_mappings() {
+        Player p =em.find(Player.class, 1);
+        assertNotNull(p);
+        assertEquals(p.getEmail(),"");
+        //assertEquals(p.getPhone(), “3333333”);
+
+    }
 	
 }
