@@ -23,7 +23,7 @@ public class Inventory {
 	private List<Character> characters;
 
 	@ManyToOne
-	@Column(name = "shop_id")
+	@JoinColumn(name = "shop_id")
 	List<Shop> shops;
 	
 
