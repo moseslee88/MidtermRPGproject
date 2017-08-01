@@ -5,4 +5,5 @@ import data.*;
 @Repository
 public interface PlayerEditDao {
 	public Player create(Player newPlayer);
+	public Player update(Player updatedPlayer, int id);
 }

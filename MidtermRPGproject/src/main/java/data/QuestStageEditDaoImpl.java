@@ -11,5 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public class QuestStageEditDaoImpl implements QuestStageEditDao {
-
+	@PersistenceContext
+	private EntityManager em;
 }

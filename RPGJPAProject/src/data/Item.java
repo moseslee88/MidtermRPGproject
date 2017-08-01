@@ -82,11 +82,21 @@ public class Item {
 	public Integer getId() {
 		return id;
 	}
+	
+	
+
+	public List<Inventory> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(List<Inventory> inventory) {
+		this.inventory = inventory;
+	}
 
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", itemLevel=" + itemLevel + ", value=" + value + ", typeOfItem="
-				+ typeOfItem + ", element=" + element + "]";
+				+ typeOfItem + ", element=" + element + ", inventorySize=" + this.getInventory().size() + "]";
 	}
 
 }

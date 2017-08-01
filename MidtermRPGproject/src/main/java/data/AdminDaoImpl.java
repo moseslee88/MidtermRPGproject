@@ -11,5 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public class AdminDaoImpl implements AdminDao {
-
+	@PersistenceContext
+	private EntityManager em;
 }

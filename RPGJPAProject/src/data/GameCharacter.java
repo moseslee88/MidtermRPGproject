@@ -54,8 +54,8 @@ public class GameCharacter {
 	//private int playerId;
 	private Player player;
 	@ManyToMany
-	@JoinTable(name="gameCharacter_id", joinColumns=@JoinColumn(name="ability_id"),
-	inverseJoinColumns=@JoinColumn(name="gameCharacter_id"))
+	@JoinTable(name="character_ability", joinColumns=@JoinColumn(name="character_id"),
+	inverseJoinColumns=@JoinColumn(name="ability_id"))
 	private List<Ability> abilities;
 	
 	

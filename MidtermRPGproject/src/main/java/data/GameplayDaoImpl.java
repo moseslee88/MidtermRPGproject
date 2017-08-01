@@ -11,5 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public class GameplayDaoImpl implements GameplayDao {
-
+	@PersistenceContext
+	private EntityManager em;
 }

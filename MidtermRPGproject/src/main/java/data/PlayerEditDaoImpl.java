@@ -12,10 +12,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class PlayerEditDaoImpl implements PlayerEditDao {
 	
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Override
 	public Player create(Player newPlayer) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(newPlayer);
+		em.flush();
+		return newPlayer;
+	}
+
+	@Override
+	public Player update(Player updatedPlayer, int id) {
+		Player managedPlayer = em.find(Player.class, id);
+		managedPlayer.setDisplayName(updatedPlayer.getDisplayName());
+		managedPlayer.setEmail(updatedPlayer.getEmail());
+		managedPlayer.setFriends(updatedPlayer.getFriends());
+		managedPlayer.setPassword(updatedPlayer.getPassword());
+		managedPlayer.setQuests(updatedPlayer.getQuests());
+		return managedPlayer;
 	}
 
 }
