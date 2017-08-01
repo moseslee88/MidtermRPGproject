@@ -13,35 +13,31 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Player {
-	
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column
 	private String email;
-	
+
 	@Column
 	private String password;
 
 	@Column
 	private String displayName;
-	
-	@OneToMany(mappedBy="friend")
+
+	@OneToMany(mappedBy = "friend")
 	private List<Friend> friends;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_type_id")
-	private int userType;
-	
+	@JoinColumn(name = "user_type_id")
+	private UserType userType;
+
 	@ManyToMany
-	@JoinTable(name="player_id", joinColumns=@JoinColumn(name="quest_id"),
-	inverseJoinColumns=@JoinColumn(name="player_id"))
+	@JoinTable(name = "player_id", joinColumns = @JoinColumn(name = "quest_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
 	private List<Quest> Quests;
 
 	public String getEmail() {
@@ -76,12 +72,20 @@ public class Player {
 		this.friends = friends;
 	}
 
-	public int getUserType() {
+	public UserType getUserType() {
 		return userType;
 	}
 
-	public void setUserType(int userType) {
+	public void setUserType(UserType userType) {
 		this.userType = userType;
+	}
+
+	public List<Quest> getQuests() {
+		return Quests;
+	}
+
+	public void setQuests(List<Quest> quests) {
+		Quests = quests;
 	}
 
 	public int getId() {
@@ -94,5 +98,4 @@ public class Player {
 				+ ", friends=" + friends + ", userType=" + userType + "]";
 	}
 
-	
 }
