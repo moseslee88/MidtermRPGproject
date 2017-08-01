@@ -38,7 +38,16 @@
 <!-- Page Content -->
 <!-- in: home, index, login -->
 <!-- out: login -->	
-		
+		<form action = "main.jsp" method = "POST">
+         Display Name: <input type = "text" name = displayName>
+         <br />
+         Email: <input type = "text" name = "email" />
+         <br />
+         Password: <input type = "text" name = "password" />
+         Confirm password: <input type = "text" name = "conPassword" />
+
+         <input type = "submit" value = "Submit" />
+      </form>
 		
 		
 		</div>
