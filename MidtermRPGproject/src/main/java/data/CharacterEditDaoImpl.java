@@ -22,7 +22,9 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 
 	@Override
 	public GameCharacter update(GameCharacter updatedChar, int id) {
+		
 		GameCharacter managedChar = em.find(GameCharacter.class, id);
+		
 		managedChar.setName(updatedChar.getName());
 		managedChar.setCritical(updatedChar.getCritical());
 		managedChar.setEnergy(updatedChar.getEnergy());
@@ -40,4 +42,19 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 
 		return managedChar;
 	}
+
+	@Override
+	public boolean destroy(int charId) {
+		GameCharacter managedChar = em.find(GameCharacter.class, charId);
+		if (managedChar.getId() == charId) {			
+		Player p = em.find(Player.class, 2);
+		managedChar.setPlayer(p);	
+		return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	
 }

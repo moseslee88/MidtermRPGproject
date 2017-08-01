@@ -12,10 +12,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 
 @Entity
+@Table(name="game_character")
 public class GameCharacter {
 	
 	@Id
@@ -23,7 +25,7 @@ public class GameCharacter {
 	private int id;
 	@Column
 	private String name;
-	@OneToMany(mappedBy="gameCharacters")
+	@OneToMany(mappedBy="gameCharacter")
 	private List<Inventory> inventory;
 	@Column
 	private int health;
@@ -59,6 +61,11 @@ public class GameCharacter {
 	private List<Ability> abilities;
 	
 	
+	//gets and sets
+	
+	public GameCharacter ()  {
+		
+	}
 
 	public Player getPlayer() {
 		return player;
@@ -153,9 +160,15 @@ public class GameCharacter {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
 	@Override
 	public String toString() {
-		return "GameCharacter [id=" + id + ", name=" + name + ", health=" + health + ", power=" + power + ", level=" + level
-				+ "]";
+		return "GameCharacter [id=" + id + ", name=" + name + ", inventorySize=" + this.getInventory().size() + ", health=" + health
+				+ ", energy=" + energy + ", power=" + power + ", critical=" + critical + ", physicalR=" + physicalR
+				+ ", fireR=" + fireR + ", frostR=" + frostR + ", lightningR=" + lightningR + ", bloodR=" + bloodR
+				+ ", experienceGiven=" + experienceGiven + ", experienceTotal=" + experienceTotal + ", level=" + level
+				+ ", playerName=" + this.getPlayer().getId() + "]";
 	}
+
+	
 }
