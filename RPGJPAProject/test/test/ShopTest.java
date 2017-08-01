@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import data.Friend;
 import data.GameCharacter;
 import data.Player;
 
@@ -62,12 +63,14 @@ public class ShopTest {
     @Test
     public void test_player_friend_association (){
     	Player p =em.find(Player.class, 2);   //'player' in ENUM TypeOfUser
-    	
+    	List<Friend> friends = p.getFriends();
+    	assertNotNull(p);
+    	assertEquals(12, friends.get(0).getId());
     }
     
     @Test
     public void test_player_quest_association (){
-    	GameCharacter g
+    	Player p = em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
     }
     
     @Test
