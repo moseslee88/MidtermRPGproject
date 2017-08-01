@@ -20,13 +20,13 @@ public class Player {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column
+	
 	private String email;
 
-	@Column
+	
 	private String password;
 
-	@Column
+	@Column(name="display_name")
 	private String displayName;
 
 	@OneToMany(mappedBy = "friend")
@@ -37,10 +37,10 @@ public class Player {
 	private UserType userType;
 
 	@ManyToMany
-	@JoinTable(name = "player_id", joinColumns = @JoinColumn(name = "quest_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
-	private List<Quest> Quests;
+	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
+	private List<Quest> quests;
 
-	@OneToMany(mappedBy = "players")
+	@OneToMany(mappedBy = "player")
 	private List<GameCharacter> gameCharacters;
 
 	public String getEmail() {
@@ -84,11 +84,11 @@ public class Player {
 	}
 
 	public List<Quest> getQuests() {
-		return Quests;
+		return quests;
 	}
 
 	public void setQuests(List<Quest> quests) {
-		Quests = quests;
+		quests = quests;
 	}
 
 	public int getId() {
