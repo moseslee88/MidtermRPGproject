@@ -21,7 +21,7 @@ public class Inventory {
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name = "gameCharacter_id")
+	@JoinColumn(name = "character_id")
 	private GameCharacter gameCharacter;
 
 	@OneToMany(mappedBy = "inventory")
