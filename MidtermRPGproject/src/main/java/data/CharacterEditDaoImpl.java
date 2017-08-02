@@ -46,17 +46,16 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	}
 
 	@Override
-	public boolean killChar(int charId) {
-		GameCharacter managedChar = em.find(GameCharacter.class, charId);
-		if (managedChar.getId() == charId) {
-			Player p = em.find(Player.class, 2);
-			managedChar.setPlayer(p);
-			return true;
-		} else {
-			return false;
+	public boolean killChar(int charId, Player p) {
+		for (GameCharacter managedChar : getPlayersGameCharacters(p)) {
+			if (managedChar.getId() == charId) {
+				Player p1 = em.find(Player.class, charId);
+				managedChar.setPlayer(p1);
+				return true;
+			}
 		}
+		return false;
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -77,19 +76,18 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	@Override
 	public GameCharacter getCharById(int id) {
 		for (GameCharacter Character : getAllGameCharacters()) {
-			if (Character.getId()==id) {
+			if (Character.getId() == id) {
 				return Character;
 			}
 		}
 		return null;
 	}
 
-
 	@Override
 	public List<GameCharacter> getPlayersGameCharacters(Player player) {
 		List<GameCharacter> playersCharacters = new ArrayList<>();
 		for (GameCharacter gameChar : getAllGameCharacters()) {
-			if (gameChar.getPlayer().equals(player))  {
+			if (gameChar.getPlayer().equals(player)) {
 				playersCharacters.add(gameChar);
 			}
 		}
@@ -100,7 +98,5 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	public int getCharIdByName(String charName) {
 		return getCharByName(charName).getId();
 	}
-
-
 
 }
