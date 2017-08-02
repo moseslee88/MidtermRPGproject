@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +24,9 @@ public class GameCharacter {
 	private int id;
 	@Column
 	private String name;
-	@OneToMany(mappedBy = "gameCharacter")
-	private List<Inventory> inventory;
+	@OneToOne
+	@Column(name="inventory_id")
+	private Inventory inventory;
 	@Column
 	private int health;
 	@Column
@@ -87,11 +89,11 @@ public class GameCharacter {
 		this.player = player;
 	}
 
-	public List<Inventory> getInventory() {
+	public Inventory getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(List<Inventory> inventory) {
+	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
 
@@ -241,7 +243,7 @@ public class GameCharacter {
 
 	@Override
 	public String toString() {
-		return "GameCharacter [id=" + id + ", name=" + name + ", inventorySize=" + this.getInventory().size()
+		return "GameCharacter [id=" + id + ", name=" + name + ", inventorySize=" + this.getInventory() 
 				+ ", health=" + health + ", energy=" + energy + ", power=" + power + ", critical=" + critical
 				+ ", physicalR=" + physicalR + ", fireR=" + fireR + ", frostR=" + frostR + ", lightningR=" + lightningR
 				+ ", bloodR=" + bloodR + ", experienceGiven=" + experienceGiven + ", experienceTotal=" + experienceTotal
