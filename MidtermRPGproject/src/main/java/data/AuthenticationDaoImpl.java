@@ -1,5 +1,6 @@
 package data;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -7,20 +8,18 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
-@Transactional
-@Repository
-public class AuthenticationDaoImpl implements QuestStageEditDao {
-	@PersistenceContext
-	private EntityManager em;
 	
-	
-	import java.nio.charset.StandardCharsets;
-	import java.security.MessageDigest;
-	import java.security.NoSuchAlgorithmException;
-	import java.util.Base64;
+	@Transactional
+	@Repository
+	public class AuthenticationDaoImpl implements AuthenticationDao {
+		@PersistenceContext
+		private EntityManager em;
 
-	public class CryptoTest {
 	    public static void main(String[] args) {
 	        String plainTextPW = "banana123";
 	        String encryptedPW = null;
@@ -69,4 +68,4 @@ public class AuthenticationDaoImpl implements QuestStageEditDao {
 	        }
 	    }
 	}
-}
+
