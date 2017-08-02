@@ -13,12 +13,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import data.Ability;
 import data.Friend;
 import data.GameCharacter;
 import data.Inventory;
+import data.InventoryItem;
 import data.Player;
 import data.Quest;
+import data.Shop;
+import data.Stage;
 import data.UserType;
+import enums.Element;
+import enums.TypeOfItem;
 import enums.TypeOfUser;
 
 public class ShopTest {
@@ -66,25 +72,26 @@ public class ShopTest {
     
     @Test
     public void test_player_friend_association (){
-    	Player p =em.find(Player.class, 2);   //'player' in ENUM TypeOfUser
+    	Player p =em.find(Player.class, 1);   //'admin' in ENUM TypeOfUser
     	List<Friend> friends = p.getFriends();
     	assertNotNull(p);
-    	assertEquals(12, friends.get(0).getId());
+    	assertEquals(1, friends.get(0).getId());
+    	assertEquals("admin@admin.com", friends.get(0).getFriend().getEmail());
     }
     
     @Test
     public void test_player_quest_association (){
-    	Player p = em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	Player p = em.find(Player.class, 1);  //'admin' in ENUM TypeOfUser
     	List<Quest> quests = p.getQuests();
     	assertNotNull(p);
-    	assertEquals("beginning agaaaa", quests.get(0).getName());
+    	assertEquals("Beginning Again", quests.get(0).getName());
     }
     
     @Test
     public void test_player_usertype_association (){
-    	Player p =em.find(Player.class, 2);  //'player' in ENUM TypeOfUser
+    	Player p =em.find(Player.class, 1);  //'admin' in ENUM TypeOfUser
     	UserType ut = p.getUserType();
-    	assertEquals(TypeOfUser.user, ut.getUserType());
+    	assertEquals(TypeOfUser.admin, ut.getUserType());
     } 
     
     @Test
@@ -92,8 +99,55 @@ public class ShopTest {
     	GameCharacter gc = em.find(GameCharacter.class, 1);       //'Banshee' in GameCharacter database
     	List<Inventory> invent = gc.getInventory();
     	assertNotNull(gc);
-    	assertEquals("Bosh", invent.get(0).getGameCharacter().getName());
-    	assertEquals(55, invent.get(0).getGameCharacter().getEnergy());
+    	assertEquals("Banshee", invent.get(0).getGameCharacter().getName());
+    	assertEquals(100, invent.get(0).getGameCharacter().getEnergy());  //here we expect an integer for Energy with a value of 100
+    }
+    
+    @Test
+    public void test_quest_stage_association (){
+    	Quest q= em.find(Quest.class, 1);
+    	List<Stage> stages = q.getStages();
+    	assertNotNull(q);
+    	assertEquals("The First Stage", stages.get(0).getName());
+    	assertEquals("You entered the world under suspicious circum", stages.get(0).getIntro());
+    }
+    
+    @Test
+    public void test_game_character_ability_association (){
+    	GameCharacter gc = em.find(GameCharacter.class, 1);   //'Banshee' in GameCharacter in the database
+    	List<Ability> abilities = gc.getAbilities();
+    	assertNotNull(gc);
+    	assertEquals("Screech", abilities.get(0).getName());
+    	assertEquals(Element.frost, abilities.get(0).getElement());
+    }
+    
+    @Test
+    public void test_inventory_item_association (){
+    	Inventory i = em.find(Inventory.class, 1);
+    	List<InventoryItem> items = i.getInventory();
+    	assertNotNull(i);
+    	assertEquals("Lesser Potion", items.get(0).getItems().getName());
+    	//assertEquals("Lessr Potion", items.get(0).getItems().getName()); //test DOES NOT Pass because of spelling
+    	assertEquals(Element.physical, items.get(0).getItems().getElement());
+    	
+    }
+    
+    @Test
+    public void test_inventory_shop_association (){
+      	Inventory i = em.find(Inventory.class, 1);
+    	    Shop shop = i.getShop();
+    	    assertNotNull(i);
+    	    assertEquals("[Inventory [id=1, gameCharacterEnergy=100, inventorySize=1]]", shop.getInventory().toString());
+    	    assertEquals(1, shop.getInventory().size());  
+    }  
+    
+    @Test
+    public void test_stage_has_gameCharacter_association (){
+    	Stage stage = em.find(Stage.class, 1);
+    	GameCharacter cha = stage.getGameCharacter();
+    	assertNotNull(stage);
+    	assertEquals("User", cha.getName());
+    	assertEquals(20, cha.getBloodR());  //expect int for Blood
     }
     
 	

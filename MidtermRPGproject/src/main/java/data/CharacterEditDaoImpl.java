@@ -1,11 +1,12 @@
 package data;
+
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Transactional
 @Repository
@@ -22,9 +23,9 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 
 	@Override
 	public GameCharacter update(GameCharacter updatedChar, int id) {
-		
+
 		GameCharacter managedChar = em.find(GameCharacter.class, id);
-		
+
 		managedChar.setName(updatedChar.getName());
 		managedChar.setCritical(updatedChar.getCritical());
 		managedChar.setEnergy(updatedChar.getEnergy());
@@ -46,16 +47,41 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	@Override
 	public boolean killChar(int charId) {
 		GameCharacter managedChar = em.find(GameCharacter.class, charId);
-		if (managedChar.getId() == charId) {			
-		Player p = em.find(Player.class, 2);
-		managedChar.setPlayer(p);	
-		return true;
-		}
-		else {
+		if (managedChar.getId() == charId) {
+			Player p = em.find(Player.class, 2);
+			managedChar.setPlayer(p);
+			return true;
+		} else {
 			return false;
 		}
 	}
 	
 
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<GameCharacter> getAllGameCharacters() {
+		return em.createQuery("SELECT g from game_character").getResultList();
+	}
+
+	@Override
+	public GameCharacter getCharByName(String name) {
+		for (GameCharacter Character : getAllGameCharacters()) {
+			if (Character.getName().equalsIgnoreCase(name)) {
+				return Character;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public GameCharacter getCharById(int id) {
+		for (GameCharacter Character : getAllGameCharacters()) {
+			if (Character.getId()==id) {
+				return Character;
+			}
+		}
+		return null;
+	}
+
+
 }
