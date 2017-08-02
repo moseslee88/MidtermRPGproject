@@ -9,17 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-<<<<<<< HEAD
 
-import data.CharacterEditDao;
 import data.*;
 
 @Controller
 public class CharacterEditController {
 	@Autowired
 	private CharacterEditDao dao;
-=======
->>>>>>> dea7326ba64ce88b315891002da8968e7fd1887b
 
 
 	//takes in a Player command object and updates the character's name
@@ -35,8 +31,8 @@ public class CharacterEditController {
 	
 	//takes in a charId as an integer 
 	@RequestMapping(path="KillCharacter.do")
-    public ModelAndView killCharacter (@RequestParam("charName") String charName, HttpSession session, ModelAndView mv)	 {
-		dao.killChar(dao.getCharIdByName(charName));
+    public ModelAndView killCharacter (@RequestParam("charName") String charName, @RequestParam() HttpSession session, ModelAndView mv)	 {
+		dao.killChar(dao.getCharIdByName(charName), (Player)session.getAttribute("player"));  //takes in int charId, Player p
 		Player p = null;
 		if (session.getAttribute("player") != null) {
 			p = (Player)session.getAttribute("player");
@@ -46,10 +42,7 @@ public class CharacterEditController {
 		return mv;
 	}
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> dea7326ba64ce88b315891002da8968e7fd1887b
+
 	@RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
 	  public String show(@RequestParam("character") GameCharacter newChar, Model model) {
 		dao.create(newChar);
