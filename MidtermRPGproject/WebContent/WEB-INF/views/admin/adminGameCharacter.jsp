@@ -11,36 +11,35 @@
 <!-- Page Title -->
 <title>Admin: Character</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+<jsp:include page="../../partials/_resources.jsp"></jsp:include>
 </head>
 
 
 <!-- Page Body -->
 <body>
+	<jsp:include page="../../partials/_nav.jsp"></jsp:include>
+
 	<div class="container">
 		<div class="page-header">
 			<h2>Admin: Character</h2>
 		</div>
 		<div class="container">
-<!-- Page Content -->
-<!-- in: admin -->
-<!-- out: admin -->	
-		
-		
-		
+			<!-- Page Content -->
+			<!-- in: admin -->
+			<!-- out: admin -->
+			<c:choose>
+		<c:when test="${gameCharacter} != null">
+			<form action="AdminEditGameCharacter.do">
+				<input></input>
+			</form>
+		</c:when>
+		<c:otherwise>
+		<form action="AdminGetGameCharacter.do">
+		<select></select></form>
+		</c:otherwise>
+		</c:choose>
+
+
 		</div>
 	</div>
 	<br>
