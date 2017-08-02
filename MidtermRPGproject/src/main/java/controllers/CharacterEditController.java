@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+<<<<<<< HEAD
 
 import data.CharacterEditDao;
 import data.*;
@@ -17,6 +18,8 @@ import data.*;
 public class CharacterEditController {
 	@Autowired
 	private CharacterEditDao dao;
+=======
+>>>>>>> dea7326ba64ce88b315891002da8968e7fd1887b
 
 
 	//takes in a Player command object and updates the character's name
@@ -43,7 +46,10 @@ public class CharacterEditController {
 		return mv;
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> dea7326ba64ce88b315891002da8968e7fd1887b
 	@RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
 	  public String show(@RequestParam("character") GameCharacter newChar, Model model) {
 		dao.create(newChar);
