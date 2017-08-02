@@ -17,7 +17,6 @@
 
 <!-- Page Body -->
 <body>
-<jsp:include page="../../partials/_resources.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
 			<h2>Quest Conclusion</h2>

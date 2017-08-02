@@ -18,7 +18,6 @@
 <!-- Page Body -->
 <body>
 <jsp:include page="../../partials/_nav.jsp"></jsp:include>
-<jsp:include page="../../partials/_resources.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
 			<h2>Admin: Item</h2>
