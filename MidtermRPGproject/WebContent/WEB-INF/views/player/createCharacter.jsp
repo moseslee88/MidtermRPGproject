@@ -24,7 +24,7 @@
 			<h2>Create Character</h2>
 		</div>
 		<div class="container">
-		<form action = "main.jsp" method = "POST">
+		<form action = "PlayerCreatesChar.do" method = "POST">
          Name: <input type = "text" name = "name">
          <br />
          Health starts at 100 each point adds 10: <input type = "number" name = "health" value="0"/>

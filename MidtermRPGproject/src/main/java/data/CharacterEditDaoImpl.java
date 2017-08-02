@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import controllers.Ability;
+
 @Transactional
 @Repository
 public class CharacterEditDaoImpl implements CharacterEditDao {
@@ -17,6 +19,14 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 
 	@Override
 	public GameCharacter create(GameCharacter newChar) {
+		
+		// this is broken so that all users can get all abilities
+		List<Ability> abilityList = new ArrayList<>();
+		for (int i = 1; i < 31; i++) {
+			abilityList.add(em.find(Ability.class, i));			
+		}
+		newChar.setAbilities(abilityList);
+		
 		em.persist(newChar);
 		em.flush();
 		return newChar;

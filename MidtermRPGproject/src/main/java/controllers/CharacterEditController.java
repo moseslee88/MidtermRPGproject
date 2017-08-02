@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +47,13 @@ public class CharacterEditController {
 	}
 	
 	@RequestMapping(path="PlayerCreatesChar.do" /* method = RequestMethod.POS  */ )
-	public ModelAndView createGameCharacter(@RequestParam("newCharacter") GameCharacter newChar, HttpSession session, RedirectAttributes redir, ModelAndView mv)  {
-		dao.create(newChar);
+	public ModelAndView createGameCharacter(GameCharacter newChar, HttpSession session, RedirectAttributes redir, ModelAndView mv)  {
 		System.out.println("New Game Character: " + newChar.getName());   //a test I made AARON style to see if New Game Character object is actually being created
-		Player p = null;
-		session.setAttribute("gamecharacter", newChar);
+		Player p = (Player) session.getAttribute("player");
+		
+		newChar.setPlayer(p);		
+		dao.create(newChar);
+		session.setAttribute("newcharacter", newChar);
 		session.setAttribute("characters", dao.getPlayersGameCharacters(p));
 		mv.setViewName("redirect:NewGameCharacterAdded.do");
 		return mv;
