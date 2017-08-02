@@ -28,8 +28,8 @@
 	</error-page>
 
 	<error-page>
-		<error-code>400</error-code>
-		<location>/_400.jsp</location>
+		<error-code>404</error-code>
+		<location>/_404.jsp</location>
 	</error-page>
 
 
