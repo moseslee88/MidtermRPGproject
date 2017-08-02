@@ -345,7 +345,8 @@ COMMIT;
 START TRANSACTION;
 USE `MidtermProjectDB`;
 INSERT INTO `player` (`id`, `user_type_id`, `email`, `password`, `display_name`) VALUES (1, 1, 'admin@admin.com', 'adminpass', 'admin');
-INSERT INTO `player` (`id`, `user_type_id`, `email`, `password`, `display_name`) VALUES (2, 2, 'user@user.com', 'userpass', 'user');
+INSERT INTO `player` (`id`, `user_type_id`, `email`, `password`, `display_name`) VALUES (2, 2, 'ghost@ghost.com', 'ghostpass', 'ghost');
+INSERT INTO `player` (`id`, `user_type_id`, `email`, `password`, `display_name`) VALUES (3, 2, 'user@user.com', 'userpass', 'user');
 
 COMMIT;
 

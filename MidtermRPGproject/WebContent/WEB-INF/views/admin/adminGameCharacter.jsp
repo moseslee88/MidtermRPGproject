@@ -36,10 +36,11 @@
 				<c:otherwise>
 					<form action="AdminGetGameCharacter.do">
 						<select>
-							<c:forEach var="char" items="${characters}">
-								<option value="${char.id}">${char.name}</option>
+							<c:forEach var="gameChar" items="${gameCharacters}">
+								<option value="${gameChar.id}">${gameChar.name}</option>
 							</c:forEach>
 						</select>
+						<button type="submit" value="Submit"> Submit</button>
 					</form>
 				</c:otherwise>
 			</c:choose>

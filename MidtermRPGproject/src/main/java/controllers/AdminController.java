@@ -36,9 +36,9 @@ public class AdminController {
 	@RequestMapping(path = "AdminGetGameCharacters.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showGameCharacters(ModelAndView mv, HttpSession session) {
 
-		List<GameCharacter> characters = dao.indexGameCharacters();
+		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
-		mv.addObject("characters", characters);
+		mv.addObject("gameCharacters", gameCharacters);
 
 		mv.setViewName("WEB-INF/views/admin/adminGameCharacter.jsp");
 		return mv;
