@@ -38,7 +38,7 @@ public class CharacterEditController {
 			p = (Player)session.getAttribute("player");
 		}
 		session.setAttribute("characters", dao.getPlayersGameCharacters(p));
-		
+		mv.setViewName("/WEB-INF/views/character/characterinfo.jsp");
 		return mv;
 	}
 	
