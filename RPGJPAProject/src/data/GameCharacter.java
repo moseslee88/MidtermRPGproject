@@ -60,6 +60,8 @@ public class GameCharacter {
 	inverseJoinColumns=@JoinColumn(name="ability_id"))
 	private List<Ability> abilities;
 	
+	@OneToMany(mappedBy="gameCharacter")
+	  private List<Stage> stages;
 	
 	private Boolean active;
 	
@@ -182,6 +184,16 @@ public class GameCharacter {
 		this.active = active;
 	}
 	
+	
+	
+
+	public List<Stage> getStages() {
+		return stages;
+	}
+
+	public void setStages(List<Stage> stages) {
+		this.stages = stages;
+	}
 
 	@Override
 	public String toString() {
