@@ -18,6 +18,7 @@
 <!-- Page Body -->
 <body>
 <jsp:include page="../../partials/_nav.jsp"></jsp:include>
+
 	<div class="container">
 		<div class="page-header">
 			<h2>Create Character</h2>
