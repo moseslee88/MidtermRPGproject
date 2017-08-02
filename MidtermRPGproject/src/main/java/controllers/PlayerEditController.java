@@ -13,23 +13,25 @@ import data.PlayerEditDao;
 
 @Controller
 public class PlayerEditController {
-	
+
 	@Autowired
 	private PlayerEditDao playerDao;
 
-	
-	@RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
-	  public String show(@RequestParam("player")Player newPlayer,@RequestParam("password") String pass1,@RequestParam("conPassword") String pass2, Model model) {
-		
-		if (pass1.equals(pass2)) {
-			playerDao.create(newPlayer);
-			model.addAttribute("player", newPlayer);
-			return "WEB-INF/views/authentication/login.jsp";			
-		}
-		else {
-			return "WEB-INF/views/authentication/accountCreation.jsp";
-		}
-			
-	  }
+	//
+	// @RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
+	// public String show(@RequestParam("player")Player
+	// newPlayer,@RequestParam("password") String pass1,@RequestParam("conPassword")
+	// String pass2, Model model) {
+	//
+	// if (pass1.equals(pass2)) {
+	// playerDao.create(newPlayer);
+	// model.addAttribute("player", newPlayer);
+	// return "WEB-INF/views/authentication/login.jsp";
+	// }
+	// else {
+	// return "WEB-INF/views/authentication/accountCreation.jsp";
+	// }
+	//
+	// }
 
 }
