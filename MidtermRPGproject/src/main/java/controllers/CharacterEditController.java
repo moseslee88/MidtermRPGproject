@@ -19,7 +19,7 @@ public class CharacterEditController {
 
 
 	//takes in a Player command object and updates the character's name
-	@RequestMapping(path = "ChangeName.do")
+	@RequestMapping(path = "PlayerChangeName.do")
 	public ModelAndView updateCharacterName (@RequestParam("newCharName") String name, @RequestParam("oldCharName") String oldName, Player player, ModelAndView mv, HttpSession session) {
 		GameCharacter updatedChar = new GameCharacter();
 		updatedChar.setName(name);
@@ -30,7 +30,7 @@ public class CharacterEditController {
 	}
 	
 	//takes in a charId as an integer 
-	@RequestMapping(path="KillCharacter.do")
+	@RequestMapping(path="PlayerKillCharacter.do")
     public ModelAndView killCharacter (@RequestParam("charName") String charName, @RequestParam() HttpSession session, ModelAndView mv)	 {
 		dao.killChar(dao.getCharIdByName(charName), (Player)session.getAttribute("player"));  //takes in int charId, Player p
 		Player p = null;
