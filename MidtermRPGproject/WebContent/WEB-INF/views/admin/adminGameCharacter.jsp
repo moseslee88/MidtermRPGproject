@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Page Title -->
 <title>Admin: Character</title>
-<!-- Latest compiled and minified CSS -->
+
 <jsp:include page="../../partials/_resources.jsp"></jsp:include>
 </head>
 
