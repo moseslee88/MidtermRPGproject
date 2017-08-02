@@ -4,11 +4,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import data.CharacterEditDao;
 import data.*;
@@ -16,22 +16,9 @@ import data.*;
 @Controller
 public class CharacterEditController {
 	@Autowired
-	private CharacterEditDao charDao;
-=======
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import data.CharacterEditDao;
-import data.GameCharacter;
-import data.Player;
-
-@Controller
-public class CharacterEditController {
-	
-	@Autowired
 	private CharacterEditDao dao;
-	
+
+
 	//takes in a Player command object and updates the character's name
 	@RequestMapping(path = "ChangeName.do")
 	public ModelAndView updateCharacterName (@RequestParam("newCharName") String name, @RequestParam("oldCharName") String oldName, Player player, ModelAndView mv, HttpSession session) {
@@ -57,16 +44,9 @@ public class CharacterEditController {
 	}
 	
 	
-<<<<<<< HEAD
->>>>>>> f38479d59fc7ceba476de06f6c9d2ac73c50f38c
-=======
-	
->>>>>>> 3e732a2a4640a27cc44ca5b03e63328ffd78ba80
-
-	
 	@RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
 	  public String show(@RequestParam("character") GameCharacter newChar, Model model) {
-		charDao.create(newChar);
+		dao.create(newChar);
 	    model.addAttribute("char", newChar);
 	    return "WEB-INF/views/player/createCharacter.jsp";
 	  }
