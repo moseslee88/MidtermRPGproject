@@ -60,7 +60,7 @@ public class GameCharacter {
 
 	@OneToMany(mappedBy="gameCharacter")
 	 private List<Stage> stages;
-	
+	@Column
 	private Boolean active;
 
 	@Column(name = "ability_points")

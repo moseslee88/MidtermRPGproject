@@ -34,21 +34,31 @@ public class AdminDaoImpl implements AdminDao {
 	public GameCharacter updateGameCharacter(int id, GameCharacter gameCharacter) {
 
 		GameCharacter managedChar = em.find(GameCharacter.class, id);
-		managedChar.setName(gameCharacter.getName());
-        managedChar.setCritical(gameCharacter.getCritical());
-        managedChar.setEnergy(gameCharacter.getEnergy());
-        managedChar.setExperienceGiven(gameCharacter.getExperienceGiven());
-        managedChar.setExperienceTotal(gameCharacter.getExperienceTotal());
-        managedChar.setBloodR(gameCharacter.getBloodR());
-        managedChar.setFireR(gameCharacter.getFireR());
-        managedChar.setFrostR(gameCharacter.getFrostR());
-        managedChar.setPhysicalR(gameCharacter.getPhysicalR());
-        managedChar.setLightningR(gameCharacter.getLightningR());
-        managedChar.setHealth(gameCharacter.getHealth());
-        managedChar.setInventory(gameCharacter.getInventory());
-        managedChar.setLevel(gameCharacter.getLevel());
-        managedChar.setPower(gameCharacter.getPower());
-        managedChar.setActive(gameCharacter.getActive());
+		if (gameCharacter.getName() != null) {
+			managedChar.setName(gameCharacter.getName());
+		}
+		// managedChar.setCritical(gameCharacter.getCritical());
+		// managedChar.setEnergy(gameCharacter.getEnergy());
+		// managedChar.setExperienceGiven(gameCharacter.getExperienceGiven());
+		// managedChar.setExperienceTotal(gameCharacter.getExperienceTotal());
+		// managedChar.setBloodR(gameCharacter.getBloodR());
+		// managedChar.setFireR(gameCharacter.getFireR());
+		// managedChar.setFrostR(gameCharacter.getFrostR());
+		// managedChar.setPhysicalR(gameCharacter.getPhysicalR());
+		// managedChar.setLightningR(gameCharacter.getLightningR());
+		// managedChar.setHealth(gameCharacter.getHealth());
+		// managedChar.setInventory(gameCharacter.getInventory());
+		// managedChar.setLevel(gameCharacter.getLevel());
+		// managedChar.setPower(gameCharacter.getPower());
+		// managedChar.setActive(gameCharacter.getActive());
+		// managedChar.setAbilities(gameCharacter.getAbilities());
+		// managedChar.setInventory(gameCharacter.getInventory());
+		// managedChar.setStages(gameCharacter.getStages());
+		// managedChar.setAbilityPoints(gameCharacter.getAbilityPoints());
+		// managedChar.setStatPoints(gameCharacter.getStatPoints());
+		if (gameCharacter.getActive() != null) {
+			managedChar.setActive(gameCharacter.getActive());
+		}
 		return gameCharacter;
 	}
 
@@ -85,10 +95,24 @@ public class AdminDaoImpl implements AdminDao {
 	public Item updateItem(int id, Item item) {
 
 		Item managed = em.find(Item.class, id);
-		managed.setName(item.getName());
-		managed.setItemLevel(item.getItemLevel());
-		managed.setValue(item.getValue());
-		managed.setElement(item.getElement());
+		if (item.getName() != null) {
+			managed.setName(item.getName());
+		}
+		if (item.getItemLevel() != null) {
+			managed.setItemLevel(item.getItemLevel());
+		}
+		if (item.getValue() != null) {
+			managed.setValue(item.getValue());
+		}
+		if (item.getElement() != null) {
+			managed.setElement(item.getElement());
+		}
+		// if (item.getInventory() != null) {
+		// managed.setInventory(item.getInventory());
+		// }
+		if (item.getTypeOfItem() != null) {
+			managed.setTypeOfItem(item.getTypeOfItem());
+		}
 		return item;
 	}
 
@@ -125,11 +149,20 @@ public class AdminDaoImpl implements AdminDao {
 	public Player updatePlayer(int id, Player player) {
 
 		Player managedPlayer = em.find(Player.class, id);
-		managedPlayer.setDisplayName(player.getDisplayName());
-        managedPlayer.setEmail(player.getEmail());
-        managedPlayer.setFriends(player.getFriends());
-        managedPlayer.setPassword(player.getPassword());
-        managedPlayer.setQuests(player.getQuests());
+		if (player.getDisplayName() != null) {
+			managedPlayer.setDisplayName(player.getDisplayName());
+		}
+		if (player.getEmail() != null) {
+			managedPlayer.setEmail(player.getEmail());
+		}
+		if (player.getPassword() != null) {
+			//		managedPlayer.setFriends(player.getFriends());
+			managedPlayer.setPassword(player.getPassword());
+		}
+		if (player.getQuests() != null) {
+			managedPlayer.setQuests(player.getQuests());
+		}
+		//		managedPlayer.setGameCharacters(player.getGameCharacters());
 		return player;
 	}
 
@@ -166,13 +199,23 @@ public class AdminDaoImpl implements AdminDao {
 	public Quest updateQuest(int id, Quest quest) {
 
 		Quest managed = em.find(Quest.class, id);
-		managed.setName(quest.getName());
-		managed.setCompleted(quest.getCompleted());
-		managed.setConclusion(quest.getConclusion());
-		managed.setDescription(quest.getDescription());
-		managed.setIntro(quest.getIntro());
-		managed.setLevelMax(quest.getLevelMax());
-		managed.setLevelMin(quest.getLevelMin());
+		if (quest.getName() != null) {
+			managed.setName(quest.getName());
+		}
+		if (quest.getConclusion() != null) {
+			//		managed.setCompleted(quest.getCompleted());
+			managed.setConclusion(quest.getConclusion());
+		}
+		if (quest.getDescription() != null) {
+			managed.setDescription(quest.getDescription());
+		}
+		if (quest.getIntro() != null) {
+			managed.setIntro(quest.getIntro());
+		}
+		//		managed.setLevelMax(quest.getLevelMax());
+//		managed.setLevelMin(quest.getLevelMin());
+//		managed.setStages(quest.getStages());
+//		managed.setPlayers(quest.getPlayers());
 		return quest;
 	}
 
@@ -188,6 +231,5 @@ public class AdminDaoImpl implements AdminDao {
 			return true;
 		}
 	}
-
 
 }
