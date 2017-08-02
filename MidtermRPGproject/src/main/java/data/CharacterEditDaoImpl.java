@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -80,6 +81,22 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<GameCharacter> getPlayersGameCharacters(Player player) {
+		List<GameCharacter> playersCharacters = new ArrayList<>();
+		for (GameCharacter gameChar : getAllGameCharacters()) {
+			if (gameChar.getPlayer().equals(player))  {
+				playersCharacters.add(gameChar);
+			}
+		}
+		return playersCharacters;
+	}
+
+	@Override
+	public int getCharIdByName(String charName) {
+		return getCharByName(charName).getId();
 	}
 
 }
