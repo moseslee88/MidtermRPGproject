@@ -34,10 +34,10 @@
 					</form>
 				</c:when>
 				<c:otherwise>
-					<form action="AdminGetGameCharacter.do">
+					<form action="AdminGetGameCharacter.do" >
 						<select>
 							<c:forEach var="gameChar" items="${gameCharacters}">
-								<option value="${gameChar.id}">${gameChar.name}</option>
+								<option value="${gameChar}">${gameChar.id}: ${gameChar.name}</option>
 							</c:forEach>
 						</select>
 						<button type="submit" value="Submit"> Submit</button>
