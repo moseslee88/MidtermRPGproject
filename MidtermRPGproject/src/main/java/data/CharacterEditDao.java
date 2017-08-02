@@ -10,5 +10,8 @@ public interface CharacterEditDao {
 	public boolean killChar(int charId);
 	public GameCharacter getCharByName(String name);
 	public GameCharacter getCharById(int id);
-	public List<GameCharacter> getAllGameCharacters();
+	public int getCharIdByName (String charName);
+	public List<GameCharacter> getAllGameCharacters ();
+	public List<GameCharacter> getPlayersGameCharacters(Player player);
+
 }
