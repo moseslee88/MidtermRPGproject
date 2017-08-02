@@ -33,7 +33,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetGameCharacters.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetGameCharacters.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showGameCharacters(ModelAndView mv, HttpSession session) {
 
 		List<GameCharacter> characters = dao.indexGameCharacters();
@@ -44,7 +44,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetGameCharacter.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetGameCharacter.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showGameCharacter(@RequestParam("id") Integer id, ModelAndView mv, HttpSession session) {
 
 		GameCharacter gameCharacter = dao.showGameCharacter(id);
@@ -55,7 +55,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "NewGameCharacter.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminNewGameCharacter.do" /* , method = RequestMethod.POST */)
 	public ModelAndView newGameCharacter(ModelAndView mv, GameCharacter gameCharacter, HttpSession session) {
 
 		dao.createGameCharacter(gameCharacter);
@@ -65,7 +65,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "EditGameCharacter.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminEditGameCharacter.do" /* , method = RequestMethod.POST */)
 	public ModelAndView editGameCharacter(ModelAndView mv, Integer id, GameCharacter gameCharacter,
 			HttpSession session) {
 
@@ -76,7 +76,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "DeleteGameCharacter.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminDeleteGameCharacter.do" /* , method = RequestMethod.GET */)
 	public ModelAndView deleteGameCharacter(ModelAndView mv, Integer id, HttpSession session) {
 
 		Boolean successBool = dao.destroyGameCharacter(id);
@@ -86,7 +86,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetItems.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetItems.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showItems(ModelAndView mv, HttpSession session) {
 
 		List<Item> characters = dao.indexItems();
@@ -97,7 +97,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetItem.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetItem.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showItem(@RequestParam("id") Integer id, ModelAndView mv, HttpSession session) {
 
 		Item item = dao.showItem(id);
@@ -108,7 +108,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "NewItem.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminNewItem.do" /* , method = RequestMethod.POST */)
 	public ModelAndView newItem(ModelAndView mv, Item item, HttpSession session) {
 
 		dao.createItem(item);
@@ -118,7 +118,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "EditItem.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminEditItem.do" /* , method = RequestMethod.POST */)
 	public ModelAndView editItem(ModelAndView mv, Integer id, Item item, HttpSession session) {
 
 		Item item2 = dao.updateItem(id, item);
@@ -128,7 +128,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "DeleteItem.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminDeleteItem.do" /* , method = RequestMethod.GET */)
 	public ModelAndView deleteItem(ModelAndView mv, Integer id, HttpSession session) {
 
 		Boolean successBool = dao.destroyItem(id);
@@ -138,7 +138,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetPlayers.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetPlayers.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showPlayers(ModelAndView mv, HttpSession session) {
 
 		List<Player> characters = dao.indexPlayers();
@@ -149,7 +149,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetPlayer.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetPlayer.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showPlayer(@RequestParam("id") Integer id, ModelAndView mv, HttpSession session) {
 
 		Player player = dao.showPlayer(id);
@@ -160,7 +160,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "NewPlayer.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminNewPlayer.do" /* , method = RequestMethod.POST */)
 	public ModelAndView newPlayer(ModelAndView mv, Player player, HttpSession session) {
 
 		dao.createPlayer(player);
@@ -170,7 +170,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "EditPlayer.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminEditPlayer.do" /* , method = RequestMethod.POST */)
 	public ModelAndView editPlayer(ModelAndView mv, Integer id, Player player, HttpSession session) {
 
 		Player player2 = dao.updatePlayer(id, player);
@@ -180,7 +180,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "DeletePlayer.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminDeletePlayer.do" /* , method = RequestMethod.GET */)
 	public ModelAndView deletePlayer(ModelAndView mv, Integer id, HttpSession session) {
 
 		Boolean successBool = dao.destroyPlayer(id);
@@ -190,7 +190,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetQuests.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetQuests.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showQuests(ModelAndView mv, HttpSession session) {
 
 		List<Quest> characters = dao.indexQuests();
@@ -201,7 +201,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetQuest.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminGetQuest.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showQuest(@RequestParam("id") Integer id, ModelAndView mv, HttpSession session) {
 
 		Quest quest = dao.showQuest(id);
@@ -212,7 +212,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "NewQuest.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminNewQuest.do" /* , method = RequestMethod.POST */)
 	public ModelAndView newQuest(ModelAndView mv, Quest quest, HttpSession session) {
 
 		dao.createQuest(quest);
@@ -222,7 +222,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "EditQuest.do" /* , method = RequestMethod.POST */)
+	@RequestMapping(path = "AdminEditQuest.do" /* , method = RequestMethod.POST */)
 	public ModelAndView editQuest(ModelAndView mv, Integer id, Quest quest, HttpSession session) {
 
 		Quest quest2 = dao.updateQuest(id, quest);
@@ -232,7 +232,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping(path = "DeleteQuest.do" /* , method = RequestMethod.GET */)
+	@RequestMapping(path = "AdminDeleteQuest.do" /* , method = RequestMethod.GET */)
 	public ModelAndView deleteQuest(ModelAndView mv, Integer id, HttpSession session) {
 
 		Boolean successBool = dao.destroyQuest(id);
