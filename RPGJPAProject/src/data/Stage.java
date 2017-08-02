@@ -35,7 +35,7 @@ public class Stage {
     private String choice;
     
     @ManyToOne
-    @JoinColumn(name="gameCharacter_id")
+    @JoinColumn(name="character_id")
     private GameCharacter gameCharacter;
     
     @Column(name="completed")

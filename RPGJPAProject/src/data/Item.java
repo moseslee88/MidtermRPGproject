@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,8 +29,12 @@ public class Item {
 
 	private String value;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name="type")
 	private TypeOfItem typeOfItem;
 
+	@Enumerated(EnumType.STRING)
+	@Column
 	private Element element;
 	
 	 @ManyToMany(mappedBy="items")

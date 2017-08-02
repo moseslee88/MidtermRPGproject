@@ -53,10 +53,14 @@ public class GameCharacter {
 	@JoinColumn(name = "player_id")
 	// private int playerId;
 	private Player player;
+	
 	@ManyToMany
 	@JoinTable(name = "character_ability", joinColumns = @JoinColumn(name = "character_id"), inverseJoinColumns = @JoinColumn(name = "ability_id"))
 	private List<Ability> abilities;
 
+	@OneToMany(mappedBy="gameCharacter")
+	 private List<Stage> stages;
+	
 	private Boolean active;
 
 	@Column(name = "ability_points")
@@ -224,7 +228,15 @@ public class GameCharacter {
 	}
 
 	public void setStatPoints(int statPoints) {
-		this.statPoints = statPoints;
+		this.statPoints = statPoints;	
+	}
+
+	public List<Stage> getStages() {
+		return stages;
+	}
+
+	public void setStages(List<Stage> stages) {
+		this.stages = stages;
 	}
 
 	@Override

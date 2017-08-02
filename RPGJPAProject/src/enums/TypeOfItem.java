@@ -1,8 +1,8 @@
 package enums;
 
 public enum TypeOfItem {
-Weapon,
-Armor,
-Edible,
-Trash
+weapon,
+armor,
+edible,
+trash
 }
