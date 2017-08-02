@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 public class AuthenticationController {
 	
 	
-	@Autowired
-	//private
+//	@Autowired
+//	//private
 
 }
