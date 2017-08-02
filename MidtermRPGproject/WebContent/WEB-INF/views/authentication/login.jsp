@@ -36,8 +36,8 @@
          <input type = "submit" value = "Submit" />
       </form>
 		
-		<!--  <a href="AuthenticationRoute.do">AuthenticationRoute.do</a><br/>   -->
-		
+		<!--  <a href="AuthenticationRoute.do">AuthenticationRoute.do</a><br/>  
+		<a href="AuthenticationRoute.do">AuthenticationRoute.do</a><br/>   -->
 		
 		</div>
 	</div>
