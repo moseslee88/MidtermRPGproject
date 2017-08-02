@@ -55,6 +55,18 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 			return false;
 		}
 	}
+
+	@Override
+	public GameCharacter getCharByName(String name) {
+		
+		return null;
+	}
+
+	@Override
+	public GameCharacter getCharById(int id) {
+	
+		return null;
+	}
 	
 
 	
