@@ -24,14 +24,14 @@ public class Player {
 
 	private String password;
 
-	@Column(name = "display_name")
+	@Column(name = "display_name")  //either admin or user
 	private String displayName;
 
 	@OneToMany(mappedBy = "friend")
 	private List<Friend> friends;
 
 	@ManyToOne
-	@JoinColumn(name = "user_type_id")
+	@JoinColumn(name = "user_type_id")  //1 for admin, 2 for player
 	private UserType userType;
 
 	@ManyToMany

@@ -17,12 +17,36 @@
 
 <!-- Page Body -->
 <body>
-<jsp:include page="../../partials/_resources.jsp"></jsp:include>
+<jsp:include page="../../partials/_nav.jsp"></jsp:include>
+
 	<div class="container">
 		<div class="page-header">
 			<h2>Create Character</h2>
 		</div>
 		<div class="container">
+		<form action = "main.jsp" method = "POST">
+         Name: <input type = "text" name = "name">
+         <br />
+         Health starts at 100 each point adds 10: <input type = "number" name = "health" value="0"/>
+         <br />
+         Energy starts at 100 each point adds 10: <input type = "number" name = "energy" value="0"/>
+         <br />
+         Power: <input type = "number" name = "power" value="0"/>
+         <br />
+         Critical: <input type = "number" name = "critical" value="0" />
+         <br />
+         Physical Resistance: <input type = "number" name = "physicalR" value="0"/>
+         <br />
+         Fire Resistance: <input type = "number" name = "fire_r" value="0"/>
+         <br />
+         Frost Resistance: <input type = "number" name = "frost_r" value="0"/>
+         <br />
+         Lightning Resistance: <input type = "number" name = "lightning_r" value="0"/>
+         <br />
+         Blood Resistance: <input type = "number" name = "blood_r" value="0"/>
+         <input type="submit" value="Create Character">
+    	
+      </form>
 <!-- Page Content -->
 <!-- in: playerInfo -->
 <!-- out: playerInfo -->	
