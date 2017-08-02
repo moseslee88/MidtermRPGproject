@@ -11,43 +11,31 @@
 <!-- Page Title -->
 <title>Admin Control Page</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+
+	<jsp:include page="../../partials/_resources.jsp"></jsp:include>
 </head>
 
 
 <!-- Page Body -->
 <body>
 
-<jsp:include page="partials/_nav.jsp"></jsp:include>
+	<jsp:include page="../../partials/_nav.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
 			<h2>Admin Control Page</h2>
 		</div>
 		<div class="container">
-<!-- Page Content -->
-<!-- in: login -->
-<!-- out: adminCreation, logout -->
-<!-- test data -->
+			<!-- Page Content -->
+			<!-- in: login -->
+			<!-- out: adminCreation, logout -->
+			<!-- test data -->
 
 
-<a href="GetGameCharacters.do">get game chars</a>
-		
-		
-		
-		
+			<a href="GetGameCharacters.do">get game chars</a>
+
+
+
+
 		</div>
 	</div>
 	<br>

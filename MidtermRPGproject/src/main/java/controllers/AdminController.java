@@ -14,6 +14,8 @@ import data.AdminDao;
 import data.GameCharacter;
 import data.Item;
 import data.Player;
+import data.PlayerEditDao;
+import data.PlayerEditDaoImpl;
 import data.Quest;
 
 @Controller
@@ -21,6 +23,15 @@ public class AdminController {
 
 	@Autowired
 	private AdminDao dao;
+	
+	@RequestMapping(path = "AdminRoute.do" /* , method = RequestMethod.GET */)
+	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
+		PlayerEditDao ped = new PlayerEditDaoImpl();
+		//implement admin check!
+
+		mv.setViewName("WEB-INF/views/admin/admin.jsp");
+		return mv;
+	}
 
 	@RequestMapping(path = "GetGameCharacters.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showGameCharacters(ModelAndView mv, HttpSession session) {
