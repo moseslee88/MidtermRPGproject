@@ -17,21 +17,28 @@
 
 <!-- Page Body -->
 <body>
-<jsp:include page="../../partials/_nav.jsp"></jsp:include>
-<jsp:include page="../../partials/_resources.jsp"></jsp:include>
+	<jsp:include page="../../partials/_nav.jsp"></jsp:include>
+	
+	<c:forEach items="${characters}" var="GameCharacter">
+
+		<ul>
+			<li>${GameCharacter.Player.name} ${GameCharacter.name}</li>
+
+		</ul>
+	</c:forEach>
 	<div class="container">
 		<div class="page-header">
 			<h2>Character Info</h2>
 		</div>
 		<div class="container">
-<!-- Page Content -->
-<!-- in: playerInfo, questCompletion, levelUp, itemShop, viewInventory -->
-<!-- out: playerInfo, questStart, levelUp, itemShop, viewInventory -->	
-		
-		
-		
-		
-		<!--  <c:choose>
+			<!-- Page Content -->
+			<!-- in: playerInfo, questCompletion, levelUp, itemShop, viewInventory -->
+			<!-- out: playerInfo, questStart, levelUp, itemShop, viewInventory -->
+
+
+
+
+			<!--  <c:choose>
         <c:when test="${! empty allballer}">
             <ol>
                 <c:forEach items="${allballer}" var="s">
@@ -65,7 +72,7 @@
         </c:otherwise>
         </c:choose>     
 		 -->
-		
+
 		</div>
 	</div>
 	<br>
