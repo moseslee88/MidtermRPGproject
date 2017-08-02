@@ -32,7 +32,7 @@ public class AdminController {
 		mv.setViewName("WEB-INF/views/admin/admin.jsp");
 		return mv;
 	}
-
+	
 	@RequestMapping(path = "AdminGetGameCharacters.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showGameCharacters(ModelAndView mv, HttpSession session) {
 

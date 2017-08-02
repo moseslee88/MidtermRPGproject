@@ -28,16 +28,21 @@
 			<!-- in: admin -->
 			<!-- out: admin -->
 			<c:choose>
-		<c:when test="${gameCharacter} != null">
-			<form action="AdminEditGameCharacter.do">
-				<input></input>
-			</form>
-		</c:when>
-		<c:otherwise>
-		<form action="AdminGetGameCharacter.do">
-		<select></select></form>
-		</c:otherwise>
-		</c:choose>
+				<c:when test="${gameCharacter} != null">
+					<form action="AdminEditGameCharacter.do">
+						<input></input>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<form action="AdminGetGameCharacter.do">
+						<select>
+							<c:forEach var="char" items="${characters}">
+								<option value="${char.id}">${char.name}</option>
+							</c:forEach>
+						</select>
+					</form>
+				</c:otherwise>
+			</c:choose>
 
 
 		</div>

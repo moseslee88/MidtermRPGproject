@@ -31,7 +31,7 @@
 			<!-- test data -->
 
 
-			<a href="GetGameCharacters.do">get game chars</a>
+			<a href="AdminGetGameCharacters.do">get game chars</a>
 
 
 
