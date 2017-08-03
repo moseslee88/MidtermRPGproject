@@ -30,9 +30,8 @@ public class Player {
 	@OneToMany(mappedBy = "friend")
 	private List<Friend> friends;
 
-	@ManyToOne
-	@JoinColumn(name = "user_type_id")  //1 for admin, 2 for player
-	private UserType userType;
+	@Column(name = "user_type")  //1 for admin, 2 for player
+	private int userType;
 
 	@ManyToMany
 	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
@@ -73,11 +72,11 @@ public class Player {
 		this.friends = friends;
 	}
 
-	public UserType getUserType() {
+	public int getUserType() {
 		return userType;
 	}
 
-	public void setUserType(UserType userType) {
+	public void setUserType(int userType) {
 		this.userType = userType;
 	}
 
