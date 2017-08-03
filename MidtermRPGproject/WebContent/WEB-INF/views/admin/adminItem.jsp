@@ -69,9 +69,9 @@
 				<h3>Edit</h3>
 					<form action="AdminEditItem.do">
 						ID: ${item.id}<input type="hidden" value="${item.id}" name="id"><br>
-						New Name:<input type="text" name="name" placeholder="${item.name}"><br>
-						New Item Level: <input type="text" name="itemLevel" placeholder="${item.itemLevel}"><br>
-						New Value: <input type="text" name="value" placeholder="${item.value}"><br>
+						New Name:<input type="text" name="name" value="${item.name}"><br>
+						New Item Level: <input type="text" name="itemLevel" value="${item.itemLevel}"><br>
+						New Value: <input type="text" name="value" value="${item.value}"><br>
 						New Type: <select name="typeOfItem">
 						 			 <option value="weapon">Weapon</option>
 						  			 <option value="armor">Armor</option>

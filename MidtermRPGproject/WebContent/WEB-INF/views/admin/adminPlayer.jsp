@@ -53,10 +53,10 @@
 					<form action="AdminEditPlayer.do">
 						ID: ${player.id}<input type="hidden" value="${player.id}" name="id">
 						<br>
-						New User Type:<input type="text" name="userType" placeholder="${player.userType}">
-						New Email:<input type="text" name="email" placeholder="${player.email}">
-						New Password:<input type="text" name="password" placeholder="${player.password}">
-						New Display Name:<input type="text" name="displayName" placeholder="${player.displayName}">
+						New User Type:<input type="text" name="userType" value="${player.userType}">
+						New Email:<input type="text" name="email" value="${player.email}">
+						New Password:<input type="text" name="password" value="${player.password}">
+						New Display Name:<input type="text" name="displayName" value="${player.displayName}">
 						<br>
 						<button type="submit" value="Submit">Change!</button>
 					</form>
