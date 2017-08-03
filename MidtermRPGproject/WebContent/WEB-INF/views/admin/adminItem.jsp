@@ -26,7 +26,80 @@
 <!-- Page Content -->
 <!-- in: admin -->
 <!-- out: admin -->	
+		<c:choose>
+				<c:when test="${not empty items}">
+				<h3>Select</h3>
+					<form action="AdminGetItem.do" >
+						<select name="id">
+							<c:forEach var="item" items="${items}">
+								<option value="${item.id}">${item.id}: ${item.name}</option>
+							</c:forEach>
+						</select>
+						<button type="submit" value="Submit">Change!</button>
+					</form>
+					<br>
+					<br>
+					<h3>New</h3>
+					<form action="AdminNewItem.do" >
+					Name: <input type="text" name="name"> <br>
+					Item Level: <input type="text" name="itemLevel" max="100" min="0"> <br>
+					Value: <input type="text" name="value" max="10000" min="0"> <br>
+					
+					Type: <select name="typeOfItem">
+						 	 <option value="weapon">Weapon</option>
+						  	 <option value="armor">Armor</option>
+						  	 <option value="edible">Edible</option>
+						  	 <option value="trash">Trash</option>
+						</select>
+						<br>
+					
+					Element: <select name="element">
+						    	 	<option value="physical">Physical</option>
+						     	<option value="fire">Fire</option>
+					        		<option value="frost">Frost</option>
+						 		<option value="lightning">Lightning</option>
+						 		<option value="blood">Blood</option>
+						 		<option value="dark">Dark</option>
+						     </select> <br><br>
 		
+						<button type="submit" value="Submit">Create!</button>
+					</form>
+				</c:when>
+				<c:otherwise>
+				<h3>Edit</h3>
+					<form action="AdminEditItem.do">
+						ID: ${item.id}<input type="hidden" value="${item.id}" name="id"><br>
+						New Name:<input type="text" name="name" placeholder="${item.name}"><br>
+						New Item Level: <input type="text" name="itemLevel" placeholder="${item.itemLevel}"><br>
+						New Value: <input type="text" name="value" placeholder="${item.value}"><br>
+						New Type: <select name="typeOfItem">
+						 			 <option value="weapon">Weapon</option>
+						  			 <option value="armor">Armor</option>
+						  			 <option value="edible">Edible</option>
+						  	 		<option value="trash">Trash</option>
+								</select>
+								<br>
+						New Element: <select name="element">
+						    	 			<option value="physical">Physical</option>
+						     			<option value="fire">Fire</option>
+					        				<option value="frost">Frost</option>
+						 				<option value="lightning">Lightning</option>
+						 				<option value="blood">Blood</option>
+						 				<option value="dark">Dark</option>
+						     		</select> <br><br>
+						
+						<button type="submit" value="Submit">Change!</button>
+					</form>
+					<br>
+					<br>
+					<h3>Delete</h3>
+					<form action="AdminDeleteItem.do">
+						${item.id}: ${item.name}<input type="hidden" value="${item.id}" name="id">
+						<br>
+						<button type="submit" value="Submit">Delete!</button>
+					</form>
+				</c:otherwise>
+			</c:choose>
 		
 		
 		</div>
