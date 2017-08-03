@@ -18,115 +18,111 @@ public class Quest {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name="description")
+	@Column(name = "description")
 	private String description;
-	
-	@Column(name="intro")
+
+	@Column(name = "intro")
 	private String intro;
-	
-	@Column(name="conclusion")
+
+	@Column(name = "conclusion")
 	private String conclusion;
-	
-	@Column(name="level_min")
+
+	@Column(name = "level_min")
 	private Integer levelMin;
-	
-	@Column(name="level_max")
+
+	@Column(name = "level_max")
 	private Integer levelMax;
-	
-	@Column(name="completed")
+
+	@Column(name = "completed")
 	private Boolean completed;
-	
-	 @ManyToMany(mappedBy="questList")
-	 private List<Stage> stages; 
-	 
-	 @ManyToMany(mappedBy="quests")
-	 private List<Player> players;    
-	 
-	//getters and setters
 
-		public int getId() {
-			return id;
-		}
+	@ManyToMany(mappedBy = "questList")
+	private List<Stage> stages;
 
-		public String getName() {
-			return name;
-		}
+	@ManyToMany(mappedBy = "quests")
+	private List<Player> players;
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	// getters and setters
 
-		public String getDescription() {
-			return description;
-		}
+	public int getId() {
+		return id;
+	}
 
-		public void setDescription(String description) {
-			this.description = description;
-		}
+	public String getName() {
+		return name;
+	}
 
-		public String getIntro() {
-			return intro;
-		}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-		public void setIntro(String intro) {
-			this.intro = intro;
-		}
+	public String getDescription() {
+		return description;
+	}
 
-		public String getConclusion() {
-			return conclusion;
-		}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-		public void setConclusion(String conclusion) {
-			this.conclusion = conclusion;
-		}
+	public String getIntro() {
+		return intro;
+	}
 
-		public Integer getLevelMin() {
-			return levelMin;
-		}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
 
-		public void setLevelMin(Integer levelMin) {
-			this.levelMin = levelMin;
-		}
+	public String getConclusion() {
+		return conclusion;
+	}
 
-		public Integer getLevelMax() {
-			return levelMax;
-		}
+	public void setConclusion(String conclusion) {
+		this.conclusion = conclusion;
+	}
 
-		public void setLevelMax(Integer levelMax) {
-			this.levelMax = levelMax;
-		}
+	public Integer getLevelMin() {
+		return levelMin;
+	}
 
-		public Boolean getCompleted() {
-			return completed;
-		}
+	public void setLevelMin(Integer levelMin) {
+		this.levelMin = levelMin;
+	}
 
-		public void setCompleted(Boolean completed) {
-			this.completed = completed;
-		}
+	public Integer getLevelMax() {
+		return levelMax;
+	}
 
-		public List<Stage> getStages() {
-			return stages;
-		}
+	public void setLevelMax(Integer levelMax) {
+		this.levelMax = levelMax;
+	}
 
-		public void setStages(List<Stage> stages) {
-			this.stages = stages;
-		}
+	public Boolean getCompleted() {
+		return completed;
+	}
 
-		public List<Player> getPlayers() {
-			return players;
-		}
+	public void setCompleted(Boolean completed) {
+		this.completed = completed;
+	}
 
-		public void setPlayers(List<Player> players) {
-			this.players = players;
-		}
+	public List<Stage> getStages() {
+		return stages;
+	}
 
-		@Override
-		public String toString() {
-			return "Quest [id=" + id + ", name=" + name + ", description=" + description + ", intro=" + intro
-					+ ", conclusion=" + conclusion + ", levelMin=" + levelMin + ", levelMax=" + levelMax
-					+ ", completed=" + this.getCompleted() + ", stages size=" + this.getStages().size() + "]";
-		}
-		
-		
-	 
+	public void setStages(List<Stage> stages) {
+		this.stages = stages;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+
+	@Override
+	public String toString() {
+		return "Quest [id=" + id + ", name=" + name;
+	}
+
 }
