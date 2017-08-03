@@ -24,8 +24,7 @@ public class GameCharacter {
 	private int id;
 	@Column
 	private String name;
-	@OneToOne
-	@Column(name="inventory_id")
+	@OneToOne(mappedBy ="inventory_id")
 	private Inventory inventory;
 	@Column
 	private int health;

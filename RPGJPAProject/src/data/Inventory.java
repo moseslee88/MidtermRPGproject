@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Inventory {
@@ -20,14 +21,14 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "character_id")
 	private GameCharacter gameCharacter;
 
 	@OneToMany(mappedBy = "inventory")
 	private List<InventoryItem> inventory;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="shop_id")
 	private Shop shop;
 	
