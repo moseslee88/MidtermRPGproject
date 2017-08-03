@@ -76,25 +76,21 @@ public class GameCharacter {
 	@Column(name = "stat_points")
 	private int statPoints;
 
-	
-	
-	
-	
-	private Double critDamage( double attackPower, GameCharacter enemy) {
+	private Double critDamage(double attackPower, GameCharacter enemy) {
 		Random rand = new Random();
 		double modifier = .2;
 		double critModifier = 1.6;
 		double damage = attackPower + enemy.getPower();
-		int critChance = (int) (enemy.getCritical()*modifier);
-		//100 is the maximum and the 1 is our minimum 
-		int  n = rand.nextInt(100)+1;
-		
+		int critChance = (int) (enemy.getCritical() * modifier);
+		// 100 is the maximum and the 1 is our minimum
+		int n = rand.nextInt(100) + 1;
+
 		if (critChance > n) {
-			return damage*critModifier;
+			return damage * critModifier;
 		}
-		
+
 		if (critChance == n) {
-			return damage*2;
+			return damage * 2;
 		}
 		if (critChance < n) {
 			return damage;
@@ -104,7 +100,7 @@ public class GameCharacter {
 		}
 		return damage;
 	}
-	
+
 	private Double modifyResisitedDamage(double resist, double attackPower, GameCharacter enemy) {
 		if (resist > 100.0) {
 			resist = 100.0;
@@ -119,37 +115,51 @@ public class GameCharacter {
 		double attackPower = attack.getPower();
 		if (attack.getElement().equals(Element.physical)) {
 			double percentResisted = this.getPhysicalR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.fire)) {
 			double percentResisted = this.getFireR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.frost)) {
 			double percentResisted = this.getFrostR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.lightning)) {
 			double percentResisted = this.getLightningR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.blood)) {
 			double percentResisted = this.getBloodR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.dark)) {
 			double percentResisted = ((this.getFireR() + this.getBloodR()) / 2) * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 
 		double temp = modifyedDamage.doubleValue();
 		return (int) temp;
 	}
 
-	void takeDamage(GameCharacter enemy, Ability attack) {
-	this.hp = this.hp - calculateDamage(enemy, attack);
+	private void setInitialstats() {
+		this.power = 5;
+		this.energy = 5;
+		this.health = 100;
+		this.critical = 4;
+
+		this.physicalR = 10;
+		this.bloodR = 10;
+		this.fireR = 10;
+		this.frostR = 10;
+		this.lightningR = 10;
+
 	}
-	
+
+	public void takeDamage(GameCharacter enemy, Ability attack) {
+		this.hp = this.hp - calculateDamage(enemy, attack);
+	}
+
 	// Resets Health Points.
 	public void resetHP() {
 		this.hp = this.health;
@@ -166,12 +176,35 @@ public class GameCharacter {
 
 	}
 
-	
-	
-	
-	
-	
-	
+	public void lvlUp() {
+		int lvl = this.level + 1;
+		setCharacterLvl(lvl);
+	}
+
+	public void setCharacterLvl(int lvl) {
+		if (this.level == 0) {
+			setLevel(1);
+			setInitialstats();
+			return;
+		}
+		int lvlDiff = lvl - this.level;
+		double lvlModifier = lvlDiff * 2;
+
+		this.power = (int) (power + lvlModifier);
+		this.energy = (int) (energy + lvlModifier);
+		this.health = (int) (health + lvlModifier);
+		this.critical = (int) (critical + lvlModifier);
+
+		this.physicalR = (int) (physicalR + lvlModifier);
+		this.bloodR = (int) (bloodR + lvlModifier);
+		this.fireR = (int) (fireR + lvlModifier);
+		this.frostR = (int) (frostR + lvlModifier);
+		this.lightningR = (int) (lightningR + lvlModifier);
+
+		setLevel(lvl);
+
+	}
+
 	// gets and sets
 	public GameCharacter() { // NO args constructor
 
@@ -187,6 +220,14 @@ public class GameCharacter {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 	public Inventory getInventory() {
@@ -299,6 +340,7 @@ public class GameCharacter {
 
 	public void setLevel(int level) {
 		this.level = level;
+
 	}
 
 	public List<Ability> getAbilities() {
