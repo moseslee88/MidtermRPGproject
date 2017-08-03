@@ -41,7 +41,7 @@
 					<br>
 					<h3>New</h3>
 					<form action="AdminNewPlayer.do" >
-					User Type ID: <input type="text" name="integerUserTypeId"> <br>
+					User Type ID: <input type="number" name="integerUserTypeId" min="1" max ="2"> <br>
 					Email: <input type="text" name="email"> <br>
 					Password: <input type="text" name="password"> <br>
 					Display Name: <input type="text" name="displayName"> <br>
@@ -53,7 +53,7 @@
 					<form action="AdminEditPlayer.do">
 						ID: ${player.id}<input type="hidden" value="${player.id}" name="id">
 						<br>
-						New User Type:<input type="text" name="userType" value="${player.userType}">
+						New User Type:<input type="number" name="userType" value="${player.userType}" min="1" max="2">
 						New Email:<input type="text" name="email" value="${player.email}">
 						New Password:<input type="text" name="password" value="${player.password}">
 						New Display Name:<input type="text" name="displayName" value="${player.displayName}">
