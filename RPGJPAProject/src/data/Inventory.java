@@ -79,6 +79,6 @@ public class Inventory {
 
 	@Override
 	public String toString() {
-		return "Inventory [id=" + id + ", gameCharacterEnergy=" + this.getGameCharacter().getEnergy() + ", inventorySize=" + this.getInventory().size() + "]";
+		return "Inventory id"  +  id;
 	}
 }
