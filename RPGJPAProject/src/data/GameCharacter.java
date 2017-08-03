@@ -1,6 +1,7 @@
 package data;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,8 +66,8 @@ public class GameCharacter {
 	@ManyToMany
 	@JoinTable(name = "character_ability", joinColumns = @JoinColumn(name = "character_id"), inverseJoinColumns = @JoinColumn(name = "ability_id"))
 	private List<Ability> abilities;
-	@OneToMany(mappedBy="gameCharacter")
-	 private List<Stage> stages;
+	@OneToMany(mappedBy = "gameCharacter")
+	private List<Stage> stages;
 
 	@Column
 	private Boolean active;
@@ -76,39 +77,96 @@ public class GameCharacter {
 	private int statPoints;
 
 	
-	private void startFight() {
-		this.hp = this.health;
+	
+	
+	
+	private Double critDamage( double attackPower, GameCharacter enemy) {
+		Random rand = new Random();
+		double modifier = .2;
+		double critModifier = 1.6;
+		double damage = attackPower + enemy.getPower();
+		int critChance = (int) (enemy.getCritical()*modifier);
+		//100 is the maximum and the 1 is our minimum 
+		int  n = rand.nextInt(100)+1;
+		
+		if (critChance > n) {
+			return damage*critModifier;
+		}
+		
+		if (critChance == n) {
+			return damage*2;
+		}
+		if (critChance < n) {
+			return damage;
+		}
+		if (critChance == 1) {
+			return 0.0;
+		}
+		return damage;
 	}
-	private Double modifyResisitancePercent(int attackPower, double resist) {
-		return attackPower*((100 - resist)*.01);
+	
+	private Double modifyResisitedDamage(double resist, double attackPower, GameCharacter enemy) {
+		if (resist > 100.0) {
+			resist = 100.0;
+		}
+		Double damageDone = (critDamage(attackPower, enemy)) * ((100 - resist) * .01);
+		return damageDone;
 	}
-	private int damageModifyer(Ability attack, GameCharacter defender) {
+
+	private int calculateDamage(GameCharacter enemy, Ability attack) {
 		Double modifyedDamage = 0.0;
 		Double modifyer = .80;
+		double attackPower = attack.getPower();
 		if (attack.getElement().equals(Element.physical)) {
-			double percentResisted = defender.getPhysicalR()*modifyer; 			
-			modifyedDamage += modifyResisitancePercent(attack.getPower(), defender.getPhysicalR());
+			double percentResisted = this.getPhysicalR() * modifyer;
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
 		}
 		if (attack.getElement().equals(Element.fire)) {
-			
+			double percentResisted = this.getFireR() * modifyer;
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
 		}
 		if (attack.getElement().equals(Element.frost)) {
-			
+			double percentResisted = this.getFrostR() * modifyer;
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
 		}
 		if (attack.getElement().equals(Element.lightning)) {
-			
+			double percentResisted = this.getLightningR() * modifyer;
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
 		}
 		if (attack.getElement().equals(Element.blood)) {
-			
+			double percentResisted = this.getBloodR() * modifyer;
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
 		}
 		if (attack.getElement().equals(Element.dark)) {
-			
+			double percentResisted = ((this.getFireR() + this.getBloodR()) / 2) * modifyer;
+			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower,  enemy);
 		}
-		
+
+		double temp = modifyedDamage.doubleValue();
+		return (int) temp;
 	}
-	private void takeDamage(GameCharacter enemy, Ability attack) {
-		
+
+	void takeDamage(GameCharacter enemy, Ability attack) {
+	this.hp = this.hp - calculateDamage(enemy, attack);
 	}
+	
+	// Resets Health Points.
+	public void resetHP() {
+		this.hp = this.health;
+	}
+
+	public boolean checkIfDead() {
+		if (this.hp <= 0) {
+			return true;
+		}
+		if (this.hp > 0) {
+			return false;
+		}
+		return true;
+
+	}
+
+	
 	
 	
 	
@@ -274,20 +332,19 @@ public class GameCharacter {
 	public void setStatPoints(int statPoints) {
 		this.statPoints = statPoints;
 	}
+
 	public List<Stage> getStages() {
 		return stages;
 	}
+
 	public void setStages(List<Stage> stages) {
 		this.stages = stages;
 	}
+
 	@Override
 	public String toString() {
 
 		return "GameCharacter [id=" + id + ", name=" + name + "]";
 	}
-
-
-	
-	
 
 }
