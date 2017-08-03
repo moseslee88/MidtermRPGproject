@@ -20,15 +20,20 @@ public class AuthenticationController {
 	private AuthenticationDao dao;
 	
 	//login method must add player to session so it can be used for admin check in admin controller. thanks brian! -love Mo
-	@RequestMapping(path = "Login.do")
-	public ModelAndView checkfor (@RequestParam("newCharName") String name, @RequestParam("oldCharName") String oldName, Player player, ModelAndView mv, HttpSession session) {
-		GameCharacter updatedChar = new GameCharacter();
-		updatedChar.setName(name);
-		dao.update(updatedChar, dao.getCharByName(oldName).getId());
-		session.setAttribute("characters", dao.getPlayersGameCharacters(player));
-		mv.setViewName("/WEB-INF/views/character/characterinfo.jsp");
+	@RequestMapping(path = "CreatePlayer.do"/* , method=RequestMethod.P... )  */)
+	public ModelAndView userRegister (@RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv, HttpSession session) {
+		Player playa = new Player();
+		playa.setEmail(email);
+		playa.setPassword(password);
+		dao.register(playa);
+		session.setAttribute("players", dao.indexPlayers());
+		mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
 		return mv;
 	}
 	
-	public 
+	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password, ModelAndView mv, HttpSession session)  {
+		//TODO: implement user login here
+		
+		return null;		
+	}
 }

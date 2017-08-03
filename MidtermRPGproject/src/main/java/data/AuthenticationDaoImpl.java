@@ -1,6 +1,8 @@
 package data;
 
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -39,6 +41,11 @@ import org.springframework.transaction.annotation.Transactional;
 		public boolean isAdmin(Player p) {
 			// TODO Auto-generated method stub
 			return false;
+		}
+		
+		public List<Player> indexPlayers() {
+			String q = "select p from Player p";
+			return em.createQuery(q, Player.class).getResultList();
 		}
 
 
