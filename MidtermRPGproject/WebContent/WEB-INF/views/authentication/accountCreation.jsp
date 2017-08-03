@@ -34,8 +34,8 @@
          <br />
          Email: <input type = "text" name = "email" />
          <br />
-         Password: <input type = "text" name = "password" /><br>
-         Confirm password: <input type = "text" name = "conPassword" />
+         Password: <input type = "password" name = "password" /><br>
+         Confirm password: <input type = "password" name = "conPassword" />
 
          <input type = "submit" value = "Submit" />
       </form>

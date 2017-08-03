@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import enums.TypeOfUser;
 
 @Entity
 public class Player {
@@ -30,9 +34,13 @@ public class Player {
 	@OneToMany(mappedBy = "friend")
 	private List<Friend> friends;
 
-	@ManyToOne
+	/* @ManyToOne
 	@JoinColumn(name = "user_type_id")  //1 for admin, 2 for player
-	private UserType userType;
+	private UserType userType;  */
+	
+	@Enumerated(EnumType.STRING) //1 for admin, 2 for player
+	@Column(name="user_type_id")
+	private TypeOfUser usertype;
 
 	@ManyToMany
 	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
@@ -73,12 +81,18 @@ public class Player {
 		this.friends = friends;
 	}
 
-	public UserType getUserType() {
-		return userType;
+
+
+
+
+
+
+	public TypeOfUser getUserType() {
+		return usertype;
 	}
 
-	public void setUserType(UserType userType) {
-		this.userType = userType;
+	public void setUserType(TypeOfUser usertype) {
+		this.usertype = usertype;
 	}
 
 	public List<Quest> getQuests() {

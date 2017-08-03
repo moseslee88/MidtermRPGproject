@@ -12,6 +12,7 @@ import data.AuthenticationDao;
 import data.GameCharacter;
 import data.Player;
 import data.UserType;
+import enums.TypeOfUser;
 
 @Controller
 public class AuthenticationController {
@@ -22,13 +23,15 @@ public class AuthenticationController {
 	// login method must add player to session so it can be used for admin check in
 	// admin controller. thanks brian! -love Mo
 	@RequestMapping(path = "CreatePlayerForm.do"/* , method=RequestMethod.P... ) */)
-	public ModelAndView userRegister(@RequestParam("email") String email, @RequestParam("password") String password,
+	public ModelAndView userRegister(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("user_type") int usertype,
 			ModelAndView mv, HttpSession session) {
 		Player playa = new Player();
 		playa.setEmail(email);
 		playa.setPassword(password);
+		playa.setUserType(2);  //hardcoded to player
 		dao.register(playa);
 		session.setAttribute("players", dao.indexPlayers());
+		session.setAttribute("player", playa);
 		mv.setViewName("/WEB-INF/views/authentication/accountCreation.jsp");
 		return mv;
 	}
@@ -49,19 +52,18 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(path = "Login.do")
-	public ModelAndView goToLoginAfterAccountCreation(Player player, ModelAndView mv, HttpSession session) {
+	public ModelAndView goToLoginAfterAccountCreation(ModelAndView mv, HttpSession session) {
 		mv.setViewName("/WEB-INF/views/authentication/login.jsp");
-		mv.addObject("players", dao.indexPlayers());
+		//mv.addObject("players", dao.indexPlayers());
 		//if (dao.isAdmin(player)) {
 		//	mv.setViewName("/WEB-INF/views/admin/admin.jsp");
 		//}
-		//System.out.println(player.toString());  //sysout Test i made to print out created Player
 		return mv;
 	}
 	
 	@RequestMapping(path = "SubmitandGoToLogin.do")
 	public ModelAndView goSubmitAndLogin(Player player, ModelAndView mv, HttpSession session) {
-		userRegister(player.getEmail(), player.getPassword(), mv, session);
+		userRegister(player.getEmail(), player.getPassword(), 2, mv, session);
 		mv.setViewName("/WEB-INF/views/authentication/login.jsp");
 		mv.addObject("player", player);
 		System.out.println(player.toString());
