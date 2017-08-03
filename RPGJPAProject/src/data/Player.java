@@ -34,13 +34,8 @@ public class Player {
 	@OneToMany(mappedBy = "friend")
 	private List<Friend> friends;
 
-	/* @ManyToOne
-	@JoinColumn(name = "user_type_id")  //1 for admin, 2 for player
-	private UserType userType;  */
-	
-	@Enumerated(EnumType.STRING) //1 for admin, 2 for player
-	@Column(name="user_type_id")
-	private TypeOfUser usertype;
+	@Column(name = "user_type")  //1 for admin, 2 for player
+	private int userType;
 
 	@ManyToMany
 	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
@@ -87,12 +82,12 @@ public class Player {
 
 
 
-	public TypeOfUser getUserType() {
-		return usertype;
+	public int getUserType() {
+		return userType;
 	}
 
-	public void setUserType(TypeOfUser usertype) {
-		this.usertype = usertype;
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 
 	public List<Quest> getQuests() {

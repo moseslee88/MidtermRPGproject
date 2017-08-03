@@ -16,39 +16,21 @@ CREATE SCHEMA IF NOT EXISTS `MidtermProjectDB` DEFAULT CHARACTER SET utf8 ;
 USE `MidtermProjectDB` ;
 
 -- -----------------------------------------------------
--- Table `user_type`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `user_type` ;
-
-CREATE TABLE IF NOT EXISTS `user_type` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `type` ENUM('admin', 'player') NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `player`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `player` ;
 
 CREATE TABLE IF NOT EXISTS `player` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_type_id` INT NULL,
+  `user_type` INT NULL,
   `email` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `display_name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_player_user_type_idx` (`user_type_id` ASC),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   UNIQUE INDEX `password_UNIQUE` (`password` ASC),
-  UNIQUE INDEX `display_name_UNIQUE` (`display_name` ASC),
-  CONSTRAINT `fk_player_user_type`
-    FOREIGN KEY (`user_type_id`)
-    REFERENCES `user_type` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE)
+  UNIQUE INDEX `display_name_UNIQUE` (`display_name` ASC))
 ENGINE = InnoDB;
 
 
@@ -329,24 +311,13 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `user_type`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `MidtermProjectDB`;
-INSERT INTO `user_type` (`id`, `type`) VALUES (1, 'admin');
-INSERT INTO `user_type` (`id`, `type`) VALUES (2, 'player');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `player`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `player` (`id`, `user_type_id`, `email`, `password`, `display_name`) VALUES (1, 1, 'admin@admin.com', 'adminpass', 'admin');
-INSERT INTO `player` (`id`, `user_type_id`, `email`, `password`, `display_name`) VALUES (2, 2, 'ghost@ghost.com', 'ghostpass', 'ghost');
-INSERT INTO `player` (`id`, `user_type_id`, `email`, `password`, `display_name`) VALUES (3, 2, 'user@user.com', 'userpass', 'user');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (1, 1, 'admin@admin.com', 'adminpass', 'admin');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (2, 2, 'ghost@ghost.com', 'ghostpass', 'ghost');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (3, 2, 'user@user.com', 'userpass', 'user');
 
 COMMIT;
 
