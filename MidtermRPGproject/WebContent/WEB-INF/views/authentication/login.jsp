@@ -16,7 +16,7 @@
 
 
 <!-- Page Body -->
-<body>
+<body id = "boo">
 <jsp:include page="../../partials/_nav.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
