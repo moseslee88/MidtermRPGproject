@@ -13,6 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.Transient;
+
+import enums.Element;
 
 @Entity
 @Table(name = "game_character")
@@ -53,24 +57,60 @@ public class GameCharacter {
 	@JoinColumn(name = "player_id")
 	// private int playerId;
 	private Player player;
-	
+	@Transient
+	private int hp;
 	@ManyToMany
 	@JoinTable(name = "character_ability", joinColumns = @JoinColumn(name = "character_id"), inverseJoinColumns = @JoinColumn(name = "ability_id"))
 	private List<Ability> abilities;
-
 	@OneToMany(mappedBy="gameCharacter")
 	 private List<Stage> stages;
 	@Column
 	private Boolean active;
-
 	@Column(name = "ability_points")
 	private int abilityPoints;
-
 	@Column(name = "stat_points")
 	private int statPoints;
 
+	
+	private void startFight() {
+		this.hp = this.health;
+	}
+	private Double modifyResisitancePercent(int attackPower, double resist) {
+		return attackPower*((100 - resist)*.01);
+	}
+	private int damageModifyer(Ability attack, GameCharacter defender) {
+		Double modifyedDamage = 0.0;
+		Double modifyer = .80;
+		if (attack.getElement().equals(Element.physical)) {
+			double percentResisted = defender.getPhysicalR()*modifyer; 			
+			modifyedDamage += modifyResisitancePercent(attack.getPower(), defender.getPhysicalR());
+		}
+		if (attack.getElement().equals(Element.fire)) {
+			
+		}
+		if (attack.getElement().equals(Element.frost)) {
+			
+		}
+		if (attack.getElement().equals(Element.lightning)) {
+			
+		}
+		if (attack.getElement().equals(Element.blood)) {
+			
+		}
+		if (attack.getElement().equals(Element.dark)) {
+			
+		}
+		
+	}
+	private void takeDamage(GameCharacter enemy, Ability attack) {
+		
+	}
+	
+	
+	
+	
+	
 	// gets and sets
-
 	public GameCharacter() { // NO args constructor
 
 	}
@@ -230,23 +270,19 @@ public class GameCharacter {
 	public void setStatPoints(int statPoints) {
 		this.statPoints = statPoints;	
 	}
-
 	public List<Stage> getStages() {
 		return stages;
 	}
-
 	public void setStages(List<Stage> stages) {
 		this.stages = stages;
 	}
-
 	@Override
 	public String toString() {
-		return "GameCharacter [id=" + id + ", name=" + name + ", inventorySize=" + this.getInventory().size()
-				+ ", health=" + health + ", energy=" + energy + ", power=" + power + ", critical=" + critical
-				+ ", physicalR=" + physicalR + ", fireR=" + fireR + ", frostR=" + frostR + ", lightningR=" + lightningR
-				+ ", bloodR=" + bloodR + ", experienceGiven=" + experienceGiven + ", experienceTotal=" + experienceTotal
-				+ ", level=" + level + ", playerName=" + this.getPlayer().getId() + ", statPoints= " + statPoints + 
-				", abilityPoints= " + abilityPoints  + " ]";
+		return "GameCharacter [id=" + id + ", name=" + name + "]";
 	}
+
+
+	
+	
 
 }
