@@ -18,7 +18,7 @@ public class PlayerEditController {
 	private PlayerEditDao playerDao;
 
 	//
-	// @RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
+	// @RequestMapping(path = "CreatePlayer.do", method = RequestMethod.POST)
 	// public String show(@RequestParam("player")Player
 	// newPlayer,@RequestParam("password") String pass1,@RequestParam("conPassword")
 	// String pass2, Model model) {

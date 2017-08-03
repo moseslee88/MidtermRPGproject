@@ -1,0 +1,47 @@
+
+@Charset "UTF-8";
+
+
+
+#boo {
+	background-color: #0000ff;  <!--blue, my fav color -->
+	font-family: sans-serif;
+    color: #ffffcc; 
+    
+    font-size: 20px;
+	background-image: url("https://apollo2.dl.playstation.net/cdn/HP0082/CUSA01706_00/FREE_CONTENTViB3dLuKFNtpfo0Pe8ST/01.jpg");
+	min-height: 100%;
+	background-repeat: no-repeat;
+    background-attachment: fixed; 
+	background-position: center;
+	background-size: cover;
+	z-index: -1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;  
+}
+
+.button {
+    display: block;
+    width: 115px;
+    height: 22px;
+    background: #4E9CAF;
+    padding: 7px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.button1 {
+    display: block;
+    width: 205px;
+    height: 22px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}

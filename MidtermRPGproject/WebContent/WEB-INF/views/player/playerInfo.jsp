@@ -28,6 +28,43 @@
 <!-- in: login -->
 <!-- out: characterInfo, friendList, createQuest, report, createCharacter -->	
 		
+		<h5>${players }</h5>
+<c:forEach items="${players}" var="s">
+                    			<ul>
+				<li>${s.email}</li>
+				<li>${s.displayName}</li>
+				<li>${s.userType}</li>
+				<li>${s.gameCharacters}</li>
+			</ul>
+			
+			</c:forEach>
+			
+			
+			
+			
+		
+		<!--  
+		private String email;
+
+	private String password;
+
+	@Column(name = "display_name")  //either admin or user
+	private String displayName;
+
+	@OneToMany(mappedBy = "friend")
+	private List<Friend> friends;
+
+	@ManyToOne
+	@JoinColumn(name = "user_type_id")  //1 for admin, 2 for player
+	private UserType userType;
+
+	@ManyToMany
+	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
+	private List<Quest> quests;
+
+	@OneToMany(mappedBy = "player")
+	private List<GameCharacter> gameCharacters;    -->
+		
 		
 		
 		</div>
