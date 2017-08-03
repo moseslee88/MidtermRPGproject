@@ -113,8 +113,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", email=" + email + ", password=" + password + ", displayName=" + displayName
-				+ ", friends=" + this.getFriends().size() + ", userType=" + userType + "]";
+		return "Player [id=" + id + ", email=" + email + ", password=" + password + ", displayName=" + displayName;
 	}
 
 }

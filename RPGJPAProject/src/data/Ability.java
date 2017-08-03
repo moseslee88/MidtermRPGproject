@@ -82,15 +82,10 @@ public class Ability {
 	public int getId() {
 		return id;
 	}
-	
-	
 
 	@Override
 	public String toString() {
-		return "Ability [id=" + id + ", name=" + name + ", gameCharactersSize=" + this.getGameCharacters().size() + ", element=" + element
-				+ ", power=" + power + ", energyCost=" + energyCost + "]";
-	}
-	
-	
+		return "Ability [id=" + id + ", name=" + name + "]";
+	}	
 
 }

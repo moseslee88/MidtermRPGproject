@@ -59,7 +59,9 @@ public class AdminController {
 	public ModelAndView newGameCharacter(ModelAndView mv, GameCharacter gameCharacter, HttpSession session) {
 
 		dao.createGameCharacter(gameCharacter);
-		mv.addObject("gameCharacter", gameCharacter);
+		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
+
+		mv.addObject("gameCharacters", gameCharacters);
 
 		mv.setViewName("WEB-INF/views/admin/adminGameCharacter.jsp");
 		return mv;
@@ -69,8 +71,11 @@ public class AdminController {
 	public ModelAndView editGameCharacter(ModelAndView mv, Integer id, GameCharacter gameCharacter,
 			HttpSession session) {
 
-		GameCharacter gameCharacter2 = dao.updateGameCharacter(id, gameCharacter);
-		mv.addObject("gameCharacter", gameCharacter2);
+		dao.updateGameCharacter(id, gameCharacter);
+		
+		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
+
+		mv.addObject("gameCharacters", gameCharacters);
 
 		mv.setViewName("WEB-INF/views/admin/adminGameCharacter.jsp");
 		return mv;
@@ -81,17 +86,22 @@ public class AdminController {
 
 		Boolean successBool = dao.destroyGameCharacter(id);
 		mv.addObject("successBool", successBool);
+		
+		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
+
+		mv.addObject("gameCharacters", gameCharacters);
 
 		mv.setViewName("WEB-INF/views/admin/adminGameCharacter.jsp");
 		return mv;
 	}
 
-	@RequestMapping(path = "AdminGetItems.do" /* , method = RequestMethod.GET */)
+
+@RequestMapping(path = "AdminGetItems.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showItems(ModelAndView mv, HttpSession session) {
 
-		List<Item> characters = dao.indexItems();
+		List<Item> items = dao.indexItems();
 
-		mv.addObject("characters", characters);
+		mv.addObject("items", items);
 
 		mv.setViewName("WEB-INF/views/admin/adminItem.jsp");
 		return mv;
@@ -112,17 +122,23 @@ public class AdminController {
 	public ModelAndView newItem(ModelAndView mv, Item item, HttpSession session) {
 
 		dao.createItem(item);
-		mv.addObject("item", item);
+		List<Item> items = dao.indexItems();
+
+		mv.addObject("items", items);
 
 		mv.setViewName("WEB-INF/views/admin/adminItem.jsp");
 		return mv;
 	}
 
 	@RequestMapping(path = "AdminEditItem.do" /* , method = RequestMethod.POST */)
-	public ModelAndView editItem(ModelAndView mv, Integer id, Item item, HttpSession session) {
+	public ModelAndView editItem(ModelAndView mv, Integer id, Item item,
+			HttpSession session) {
 
-		Item item2 = dao.updateItem(id, item);
-		mv.addObject("item", item2);
+		dao.updateItem(id, item);
+		
+		List<Item> items = dao.indexItems();
+
+		mv.addObject("items", items);
 
 		mv.setViewName("WEB-INF/views/admin/adminItem.jsp");
 		return mv;
@@ -133,17 +149,22 @@ public class AdminController {
 
 		Boolean successBool = dao.destroyItem(id);
 		mv.addObject("successBool", successBool);
+		
+		List<Item> items = dao.indexItems();
+
+		mv.addObject("items", items);
 
 		mv.setViewName("WEB-INF/views/admin/adminItem.jsp");
 		return mv;
 	}
+	
 
-	@RequestMapping(path = "AdminGetPlayers.do" /* , method = RequestMethod.GET */)
+@RequestMapping(path = "AdminGetPlayers.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showPlayers(ModelAndView mv, HttpSession session) {
 
-		List<Player> characters = dao.indexPlayers();
+		List<Player> players = dao.indexPlayers();
 
-		mv.addObject("characters", characters);
+		mv.addObject("players", players);
 
 		mv.setViewName("WEB-INF/views/admin/adminPlayer.jsp");
 		return mv;
@@ -164,17 +185,23 @@ public class AdminController {
 	public ModelAndView newPlayer(ModelAndView mv, Player player, HttpSession session) {
 
 		dao.createPlayer(player);
-		mv.addObject("player", player);
+		List<Player> players = dao.indexPlayers();
+
+		mv.addObject("players", players);
 
 		mv.setViewName("WEB-INF/views/admin/adminPlayer.jsp");
 		return mv;
 	}
 
 	@RequestMapping(path = "AdminEditPlayer.do" /* , method = RequestMethod.POST */)
-	public ModelAndView editPlayer(ModelAndView mv, Integer id, Player player, HttpSession session) {
+	public ModelAndView editPlayer(ModelAndView mv, Integer id, Player player,
+			HttpSession session) {
 
-		Player player2 = dao.updatePlayer(id, player);
-		mv.addObject("player", player2);
+		dao.updatePlayer(id, player);
+		
+		List<Player> players = dao.indexPlayers();
+
+		mv.addObject("players", players);
 
 		mv.setViewName("WEB-INF/views/admin/adminPlayer.jsp");
 		return mv;
@@ -185,17 +212,22 @@ public class AdminController {
 
 		Boolean successBool = dao.destroyPlayer(id);
 		mv.addObject("successBool", successBool);
+		
+		List<Player> players = dao.indexPlayers();
+
+		mv.addObject("players", players);
 
 		mv.setViewName("WEB-INF/views/admin/adminPlayer.jsp");
 		return mv;
 	}
+	
 
-	@RequestMapping(path = "AdminGetQuests.do" /* , method = RequestMethod.GET */)
+@RequestMapping(path = "AdminGetQuests.do" /* , method = RequestMethod.GET */)
 	public ModelAndView showQuests(ModelAndView mv, HttpSession session) {
 
-		List<Quest> characters = dao.indexQuests();
+		List<Quest> quests = dao.indexQuests();
 
-		mv.addObject("characters", characters);
+		mv.addObject("quests", quests);
 
 		mv.setViewName("WEB-INF/views/admin/adminQuest.jsp");
 		return mv;
@@ -216,17 +248,23 @@ public class AdminController {
 	public ModelAndView newQuest(ModelAndView mv, Quest quest, HttpSession session) {
 
 		dao.createQuest(quest);
-		mv.addObject("quest", quest);
+		List<Quest> quests = dao.indexQuests();
+
+		mv.addObject("quests", quests);
 
 		mv.setViewName("WEB-INF/views/admin/adminQuest.jsp");
 		return mv;
 	}
 
 	@RequestMapping(path = "AdminEditQuest.do" /* , method = RequestMethod.POST */)
-	public ModelAndView editQuest(ModelAndView mv, Integer id, Quest quest, HttpSession session) {
+	public ModelAndView editQuest(ModelAndView mv, Integer id, Quest quest,
+			HttpSession session) {
 
-		Quest quest2 = dao.updateQuest(id, quest);
-		mv.addObject("quest", quest2);
+		dao.updateQuest(id, quest);
+		
+		List<Quest> quests = dao.indexQuests();
+
+		mv.addObject("quests", quests);
 
 		mv.setViewName("WEB-INF/views/admin/adminQuest.jsp");
 		return mv;
@@ -237,8 +275,15 @@ public class AdminController {
 
 		Boolean successBool = dao.destroyQuest(id);
 		mv.addObject("successBool", successBool);
+		
+		List<Quest> quests = dao.indexQuests();
+
+		mv.addObject("quests", quests);
 
 		mv.setViewName("WEB-INF/views/admin/adminQuest.jsp");
 		return mv;
 	}
+	
+	
+	
 }

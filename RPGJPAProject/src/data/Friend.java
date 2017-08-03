@@ -52,7 +52,7 @@ public class Friend {
 
 	@Override
 	public String toString() {
-		return "Friend [id=" + id + ", user=" + user + ", friend=" + friend + "]";
+		return "Friend [id=" + id;
 	}
 
 }

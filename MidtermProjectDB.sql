@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS `player` ;
 
 CREATE TABLE IF NOT EXISTS `player` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_type_id` INT NOT NULL,
+  `user_type_id` INT NULL,
   `email` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `display_name` VARCHAR(45) NULL,
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `player` (
   CONSTRAINT `fk_player_user_type`
     FOREIGN KEY (`user_type_id`)
     REFERENCES `user_type` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -86,21 +86,21 @@ CREATE TABLE IF NOT EXISTS `game_character` (
   `experience_total` INT NULL,
   `ability_points` INT NULL,
   `stat_points` INT NULL,
-  `active` TINYINT(1) NOT NULL,
-  `inventory_id` INT NOT NULL,
+  `active` TINYINT(1) NULL,
+  `inventory_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_character_player1_idx` (`player_id` ASC),
   INDEX `fk_game_character_inventory1_idx` (`inventory_id` ASC),
   CONSTRAINT `fk_character_player1`
     FOREIGN KEY (`player_id`)
     REFERENCES `player` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_game_character_inventory1`
     FOREIGN KEY (`inventory_id`)
     REFERENCES `inventory` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -141,21 +141,21 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `inventory_item` ;
 
 CREATE TABLE IF NOT EXISTS `inventory_item` (
-  `inventory_id` INT NOT NULL,
-  `item_id` INT NOT NULL,
+  `inventory_id` INT NULL,
+  `item_id` INT NULL,
   `id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   INDEX `fk_inventory_item_item1_idx` (`item_id` ASC),
   CONSTRAINT `fk_inventory_item_inventory1`
     FOREIGN KEY (`inventory_id`)
     REFERENCES `inventory` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_inventory_item_item1`
     FOREIGN KEY (`item_id`)
     REFERENCES `item` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -166,14 +166,14 @@ DROP TABLE IF EXISTS `shop` ;
 
 CREATE TABLE IF NOT EXISTS `shop` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `inventory_id` INT NOT NULL,
+  `inventory_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_shop_inventory1_idx` (`inventory_id` ASC),
   CONSTRAINT `fk_shop_inventory1`
     FOREIGN KEY (`inventory_id`)
     REFERENCES `inventory` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -183,21 +183,21 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `character_ability` ;
 
 CREATE TABLE IF NOT EXISTS `character_ability` (
-  `ability_id` INT NOT NULL,
-  `character_id` INT NOT NULL,
+  `ability_id` INT NULL,
+  `character_id` INT NULL,
   `id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   INDEX `fk_character_ability_character1_idx` (`character_id` ASC),
   CONSTRAINT `fk_character_ability_ability1`
     FOREIGN KEY (`ability_id`)
     REFERENCES `ability` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_character_ability_character1`
     FOREIGN KEY (`character_id`)
     REFERENCES `game_character` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -225,21 +225,21 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `player_quest` ;
 
 CREATE TABLE IF NOT EXISTS `player_quest` (
-  `player_id` INT NOT NULL,
-  `quest_id` INT NOT NULL,
+  `player_id` INT NULL,
+  `quest_id` INT NULL,
   `id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   INDEX `fk_player_quest_quest1_idx` (`quest_id` ASC),
   CONSTRAINT `fk_player_quest_player1`
     FOREIGN KEY (`player_id`)
     REFERENCES `player` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_player_quest_quest1`
     FOREIGN KEY (`quest_id`)
     REFERENCES `quest` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -249,22 +249,22 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `friend` ;
 
 CREATE TABLE IF NOT EXISTS `friend` (
-  `player_id1` INT NOT NULL,
-  `player_id2` INT NOT NULL,
+  `player_id1` INT NULL,
+  `player_id2` INT NULL,
   `id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
-  INDEX `fk_player_has_player_player2_idx` (`player_id2` ASC),
   INDEX `fk_player_has_player_player1_idx` (`player_id1` ASC),
+  INDEX `fk_player_has_player_player2_idx` (`player_id2` ASC),
   CONSTRAINT `fk_player_has_player_player1`
     FOREIGN KEY (`player_id1`)
     REFERENCES `player` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_player_has_player_player2`
     FOREIGN KEY (`player_id2`)
     REFERENCES `player` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -280,15 +280,15 @@ CREATE TABLE IF NOT EXISTS `stage` (
   `intro` VARCHAR(45) NULL,
   `conclusion` VARCHAR(45) NULL,
   `choice` VARCHAR(45) NULL,
-  `character_id` INT NOT NULL,
+  `character_id` INT NULL,
   `completed` TINYINT(1) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_stage_character1_idx` (`character_id` ASC),
   CONSTRAINT `fk_stage_character1`
     FOREIGN KEY (`character_id`)
     REFERENCES `game_character` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -298,8 +298,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `quest_stage` ;
 
 CREATE TABLE IF NOT EXISTS `quest_stage` (
-  `quest_id` INT NOT NULL,
-  `stage_id` INT NOT NULL,
+  `quest_id` INT NULL,
+  `stage_id` INT NULL,
   `id` INT NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   INDEX `fk_quest_has_stage_stage1_idx` (`stage_id` ASC),
@@ -307,13 +307,13 @@ CREATE TABLE IF NOT EXISTS `quest_stage` (
   CONSTRAINT `fk_quest_has_stage_quest1`
     FOREIGN KEY (`quest_id`)
     REFERENCES `quest` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_quest_has_stage_stage1`
     FOREIGN KEY (`stage_id`)
     REFERENCES `stage` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
