@@ -97,10 +97,10 @@ public class ShopTest {
     @Test
     public void test_game_character_inventory_association (){
     	GameCharacter gc = em.find(GameCharacter.class, 1);       //'Banshee' in GameCharacter database
-    	List<Inventory> invent = gc.getInventory();
+    Inventory invent = gc.getInventory();
     	assertNotNull(gc);
-    	assertEquals("Banshee", invent.get(0).getGameCharacter().getName());
-    	assertEquals(100, invent.get(0).getGameCharacter().getEnergy());  //here we expect an integer for Energy with a value of 100
+    	assertEquals("Banshee", invent.getGameCharacter().getName());
+    	assertEquals(100, invent.getGameCharacter().getEnergy());  //here we expect an integer for Energy with a value of 100
     }
     
     @Test
@@ -138,7 +138,7 @@ public class ShopTest {
     	    Shop shop = i.getShop();
     	    assertNotNull(i);
     	    assertEquals("[Inventory [id=1, gameCharacterEnergy=100, inventorySize=1]]", shop.getInventory().toString());
-    	    assertEquals(1, shop.getInventory().size());  
+    	    assertEquals(1, shop.getInventory());  
     }  
     
     @Test
