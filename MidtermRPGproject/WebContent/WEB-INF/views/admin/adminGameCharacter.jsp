@@ -44,8 +44,7 @@
 						<br>
 						New Name:<input type="text" name="name" placeholder="${gameCharacter.name}">
 						<br>
-<!-- 						Active: <input type="checkbox" name="active" value="active">
- -->						<button type="submit" value="Submit">Change!</button>
+						<button type="submit" value="Submit">Change!</button>
 					</form>
 					it works!
 				</c:otherwise>

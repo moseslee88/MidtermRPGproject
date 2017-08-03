@@ -31,10 +31,10 @@
 			<!-- test data -->
 
 
-			<a href="AdminGetGameCharacters.do">get game chars</a>
-			<a href="AdminGetItems.do">get items</a>
-			<a href="AdminGetPlayers.do">get players</a>
-			<a href="AdminGetQuests.do">get quests</a>
+			<a href="AdminGetGameCharacters.do">get game chars</a><br/>
+			<a href="AdminGetItems.do">get items</a><br/>
+			<a href="AdminGetPlayers.do">get players</a><br/>
+			<a href="AdminGetQuests.do">get quests</a><br/>
 
 
 		</div>
