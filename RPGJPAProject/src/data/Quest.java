@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Quest {
 	@Column(name = "completed")
 	private Boolean completed;
 
-	@ManyToMany(mappedBy = "questList")
+	@ManyToMany(mappedBy = "questList", fetch=FetchType.EAGER)
 	private List<Stage> stages;
 
 	@ManyToMany(mappedBy = "quests")

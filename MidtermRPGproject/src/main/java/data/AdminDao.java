@@ -30,4 +30,8 @@ public interface AdminDao {
 	public Quest createQuest(Quest Quest);
 	public Quest updateQuest(int id, Quest Quest);
 	public boolean destroyQuest(int id);
+	
+	public Stage createStage(Stage Stage);
+	public Stage updateStage(int id, Stage Stage);
+	public boolean destroyStage(int id);
 }
