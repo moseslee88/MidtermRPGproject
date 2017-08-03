@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
@@ -27,8 +28,9 @@ public class GameCharacter {
 	private int id;
 	@Column
 	private String name;
-	@OneToMany(mappedBy = "gameCharacter")
-	private List<Inventory> inventory;
+	@OneToOne
+	@JoinColumn(name = "inventory_id")
+	private Inventory inventory;
 	@Column
 	private int health;
 	@Column
@@ -57,6 +59,7 @@ public class GameCharacter {
 	@JoinColumn(name = "player_id")
 	// private int playerId;
 	private Player player;
+
 	@Transient
 	private int hp;
 	@ManyToMany
@@ -64,6 +67,7 @@ public class GameCharacter {
 	private List<Ability> abilities;
 	@OneToMany(mappedBy="gameCharacter")
 	 private List<Stage> stages;
+
 	@Column
 	private Boolean active;
 	@Column(name = "ability_points")
@@ -127,11 +131,11 @@ public class GameCharacter {
 		this.player = player;
 	}
 
-	public List<Inventory> getInventory() {
+	public Inventory getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(List<Inventory> inventory) {
+	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
 
@@ -268,7 +272,7 @@ public class GameCharacter {
 	}
 
 	public void setStatPoints(int statPoints) {
-		this.statPoints = statPoints;	
+		this.statPoints = statPoints;
 	}
 	public List<Stage> getStages() {
 		return stages;
@@ -278,6 +282,7 @@ public class GameCharacter {
 	}
 	@Override
 	public String toString() {
+
 		return "GameCharacter [id=" + id + ", name=" + name + "]";
 	}
 

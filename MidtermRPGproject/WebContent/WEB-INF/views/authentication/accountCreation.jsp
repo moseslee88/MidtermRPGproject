@@ -17,7 +17,7 @@
 
 
 <!-- Page Body -->
-<body>
+<body id="boo">
 <jsp:include page="../../partials/_nav.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
@@ -26,8 +26,10 @@
 		<div class="container">
 <!-- Page Content -->
 <!-- in: home, index, login -->
-<!-- out: login -->	
-		<form action = "main.jsp" method = "POST">
+<!-- out: login   --
+		<form action = "main.jsp" method = "POST">    -->	
+		
+		<form action = "/WEB-INF/views/authentication/login.jsp" method = "POST">
          Display Name: <input type = "text" name = displayName>
          <br />
          Email: <input type = "text" name = "email" />

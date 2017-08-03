@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Inventory {
@@ -20,15 +21,13 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne
-	@JoinColumn(name = "character_id")
+	@OneToOne(mappedBy="inventory")
 	private GameCharacter gameCharacter;
 
 	@OneToMany(mappedBy = "inventory")
-	private List<InventoryItem> inventory;
+	private List<InventoryItem> inventoryItems;
 	
-	@ManyToOne
-	@JoinColumn(name="shop_id")
+	@OneToOne(mappedBy="inventory")
 	private Shop shop;
 	
 	
@@ -51,11 +50,11 @@ public class Inventory {
 	}
 
 	public List<InventoryItem> getInventory() {
-		return inventory;
+		return inventoryItems;
 	}
 
 	public void setInventory(List<InventoryItem> inventory) {
-		this.inventory = inventory;
+		this.inventoryItems = inventory;
 	}
 
 	public Shop getShop() {
