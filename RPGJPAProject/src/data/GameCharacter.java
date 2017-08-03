@@ -55,13 +55,13 @@ public class GameCharacter {
 	@JoinColumn(name = "player_id")
 	// private int playerId;
 	private Player player;
-	
+
 	@ManyToMany
 	@JoinTable(name = "character_ability", joinColumns = @JoinColumn(name = "character_id"), inverseJoinColumns = @JoinColumn(name = "ability_id"))
 	private List<Ability> abilities;
 
-	@OneToMany(mappedBy="gameCharacter")
-	 private List<Stage> stages;
+	@OneToMany(mappedBy = "gameCharacter")
+	private List<Stage> stages;
 	@Column
 	private Boolean active;
 
@@ -230,7 +230,7 @@ public class GameCharacter {
 	}
 
 	public void setStatPoints(int statPoints) {
-		this.statPoints = statPoints;	
+		this.statPoints = statPoints;
 	}
 
 	public List<Stage> getStages() {
@@ -243,12 +243,12 @@ public class GameCharacter {
 
 	@Override
 	public String toString() {
-		return "GameCharacter [id=" + id + ", name=" + name + ", inventorySize=" + this.getInventory() 
-				+ ", health=" + health + ", energy=" + energy + ", power=" + power + ", critical=" + critical
-				+ ", physicalR=" + physicalR + ", fireR=" + fireR + ", frostR=" + frostR + ", lightningR=" + lightningR
-				+ ", bloodR=" + bloodR + ", experienceGiven=" + experienceGiven + ", experienceTotal=" + experienceTotal
-				+ ", level=" + level + ", playerName=" + this.getPlayer().getId() + ", statPoints= " + statPoints + 
-				", abilityPoints= " + abilityPoints  + " ]";
+		return "GameCharacter [id=" + id + ", name=" + name + ", inventorySize=" + this.getInventory() + ", health="
+				+ health + ", energy=" + energy + ", power=" + power + ", critical=" + critical + ", physicalR="
+				+ physicalR + ", fireR=" + fireR + ", frostR=" + frostR + ", lightningR=" + lightningR + ", bloodR="
+				+ bloodR + ", experienceGiven=" + experienceGiven + ", experienceTotal=" + experienceTotal + ", level="
+				+ level + ", playerName=" + this.getPlayer().getId() + ", statPoints= " + statPoints
+				+ ", abilityPoints= " + abilityPoints + " ]";
 	}
 
 }

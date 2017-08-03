@@ -25,7 +25,7 @@ public class Inventory {
 	private GameCharacter gameCharacter;
 
 	@OneToMany(mappedBy = "inventory")
-	private List<InventoryItem> inventory;
+	private List<InventoryItem> inventoryItems;
 	
 	@OneToOne(mappedBy="inventory")
 	private Shop shop;
@@ -50,11 +50,11 @@ public class Inventory {
 	}
 
 	public List<InventoryItem> getInventory() {
-		return inventory;
+		return inventoryItems;
 	}
 
 	public void setInventory(List<InventoryItem> inventory) {
-		this.inventory = inventory;
+		this.inventoryItems = inventory;
 	}
 
 	public Shop getShop() {
