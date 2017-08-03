@@ -35,5 +35,10 @@ public class UserType {
 		return id;
 	}
 
+	@Override
+	public String toString() {
+		return "UserType [id=" + id + "]";
+	}
+
 	
 }

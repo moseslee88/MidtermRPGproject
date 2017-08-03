@@ -40,7 +40,7 @@ public class Shop {
 
 	@Override
 	public String toString() {
-		return "Shop [id=" + id + ", inventory=" + inventory + "]";
+		return "Shop [id=" + id;
 	}
 
 }

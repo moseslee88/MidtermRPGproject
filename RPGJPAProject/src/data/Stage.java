@@ -129,9 +129,7 @@ private List<Quest> questList;
 
 	@Override
 	public String toString() {
-		return "Stage [id=" + id + ", name=" + name + ", level=" + level + ", intro=" + intro + ", conclusion="
-				+ conclusion + ", choice=" + choice + ", gameCharacter=" + this.getGameCharacter() + ", completed=" + this.isCompleted()
-				+ "]";
+		return "Stage [id=" + id;
 	}
 	 
 

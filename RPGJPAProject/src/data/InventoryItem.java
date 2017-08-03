@@ -52,7 +52,7 @@ public class InventoryItem {
 
 	@Override
 	public String toString() {
-		return "InventoryItem [id=" + id + ", inventory=" + inventory + ", items=" + item + "]";
+		return "InventoryItem [id=" + id;
 	}
 
 }
