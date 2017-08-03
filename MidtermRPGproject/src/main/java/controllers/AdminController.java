@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -284,9 +285,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "AdminNewStage.do" /* , method = RestageMethod.POST */)
-	public ModelAndView newStage(ModelAndView mv, Integer questId, Stage stage, HttpSession session) {
-
-		dao.createStage(stage);
+	public ModelAndView newStage(ModelAndView mv, Integer questId, Stage stage, Integer gameCharacterId, HttpSession session) {
+		
 		
 		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
@@ -295,6 +295,13 @@ public class AdminController {
 		Quest quest = dao.showQuest(questId);
 
 		mv.addObject("quest", quest);
+		
+		stage.setGameCharacter(dao.showGameCharacter(gameCharacterId));
+		
+		List<Quest> quests = new ArrayList<Quest>();
+		quests.add(quest);
+		stage.setQuests(quests);
+		dao.createStage(stage);
 
 		mv.setViewName("WEB-INF/views/admin/adminQuest.jsp");
 		return mv;
