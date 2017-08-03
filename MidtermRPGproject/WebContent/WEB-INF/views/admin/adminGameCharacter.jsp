@@ -28,20 +28,26 @@
 			<!-- in: admin -->
 			<!-- out: admin -->
 			<c:choose>
-				<c:when test="${gameCharacter} != null">
-					<form action="AdminEditGameCharacter.do">
-						<input></input>
+				<c:when test="${not empty gameCharacters}">
+					<form action="AdminGetGameCharacter.do" >
+						<select name="id">
+							<c:forEach var="gameChar" items="${gameCharacters}">
+								<option value="${gameChar.id}">${gameChar.id}: ${gameChar.name}</option>
+							</c:forEach>
+						</select>
+						<button type="submit" value="Submit">Change!</button>
 					</form>
 				</c:when>
 				<c:otherwise>
-					<form action="AdminGetGameCharacter.do" >
-						<select>
-							<c:forEach var="gameChar" items="${gameCharacters}">
-								<option value="${gameChar}">${gameChar.id}: ${gameChar.name}</option>
-							</c:forEach>
-						</select>
-						<button type="submit" value="Submit"> Submit</button>
+					<form action="AdminEditGameCharacter.do">
+						ID: ${gameCharacter.id}<input type="hidden" value="${gameCharacter.id}" name="id">
+						<br>
+						New Name:<input type="text" name="name" placeholder="${gameCharacter.name}">
+						<br>
+<!-- 						Active: <input type="checkbox" name="active" value="active">
+ -->						<button type="submit" value="Submit">Change!</button>
 					</form>
+					it works!
 				</c:otherwise>
 			</c:choose>
 

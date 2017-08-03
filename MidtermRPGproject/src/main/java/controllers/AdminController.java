@@ -69,8 +69,11 @@ public class AdminController {
 	public ModelAndView editGameCharacter(ModelAndView mv, Integer id, GameCharacter gameCharacter,
 			HttpSession session) {
 
-		GameCharacter gameCharacter2 = dao.updateGameCharacter(id, gameCharacter);
-		mv.addObject("gameCharacter", gameCharacter2);
+		dao.updateGameCharacter(id, gameCharacter);
+		
+		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
+
+		mv.addObject("gameCharacters", gameCharacters);
 
 		mv.setViewName("WEB-INF/views/admin/adminGameCharacter.jsp");
 		return mv;

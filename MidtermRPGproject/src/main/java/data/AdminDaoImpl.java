@@ -1,10 +1,12 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.LazyInitializationException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +18,11 @@ public class AdminDaoImpl implements AdminDao {
 
 	public List<GameCharacter> indexGameCharacters() {
 		String q = "select g from GameCharacter g";
-		return em.createQuery(q, GameCharacter.class).getResultList();
+		try {
+			return em.createQuery(q, GameCharacter.class).getResultList();
+		} catch (LazyInitializationException e) {
+			return new ArrayList<GameCharacter>();
+		} 
 	}
 
 	public GameCharacter showGameCharacter(int id) {
