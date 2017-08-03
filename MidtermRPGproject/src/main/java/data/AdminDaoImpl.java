@@ -237,5 +237,45 @@ public class AdminDaoImpl implements AdminDao {
 			return true;
 		}
 	}
+	
+	public Stage createStage(Stage stage) {
+
+		em.persist(stage);
+		em.flush();
+
+		return stage;
+	}
+
+	public Stage updateStage(int id, Stage stage) {
+
+		Stage managed = em.find(Stage.class, id);
+		if (stage.getName() != null) {
+			managed.setName(stage.getName());
+		}
+		if (stage.getIntro() != null) {
+			managed.setIntro(stage.getIntro());
+		}
+		if (stage.getConclusion() != null) {
+			managed.setConclusion(stage.getConclusion());
+		}
+		if (stage.getGameCharacter() != null) {
+			managed.setGameCharacter(stage.getGameCharacter());
+		}
+
+		return stage;
+	}
+
+	public boolean destroyStage(int id) {
+
+		Stage stage = em.find(Stage.class, id);
+
+		if (stage == null) {
+			return false;
+		} else {
+			em.remove(stage);
+
+			return true;
+		}
+	}
 
 }
