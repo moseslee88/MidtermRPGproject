@@ -51,6 +51,7 @@
 					Frost Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
 					Lightning Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
 					Blood Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
+						<button type="submit" value="Submit">Create!</button>
 					</form>
 				</c:when>
 				<c:otherwise>

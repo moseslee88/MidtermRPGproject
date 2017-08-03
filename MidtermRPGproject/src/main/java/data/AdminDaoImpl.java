@@ -30,7 +30,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	public GameCharacter createGameCharacter(GameCharacter gameCharacter) {
-
+		gameCharacter.setActive(true);
 		em.persist(gameCharacter);
 		em.flush();
 
