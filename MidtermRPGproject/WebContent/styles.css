@@ -22,10 +22,10 @@
     bottom: 0;  
 }
 
-.button {
+.button2 {
     display: block;
     width: 115px;
-    height: 22px;
+    height: 40px;
     background: #4E9CAF;
     padding: 7px;
     text-align: center;
@@ -37,7 +37,7 @@
 .button1 {
     display: block;
     width: 205px;
-    height: 22px;
+    height: 40px;
     background: #4E9CAF;
     padding: 10px;
     text-align: center;

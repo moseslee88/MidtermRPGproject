@@ -43,14 +43,14 @@
 					<h3>New</h3>
 					<form action="AdminNewGameCharacter.do" >
 					Name: <input type="text" name="name"> <br>
-					Level: <input type="number" name="level" max="100" min="0"> <br>
-					Health: <input type="number" name="health" max="10000" min="0"> <br>
-					Power: <input type="number" name="power" max="100" min="0"> <br>
-					Critical: <input type="number" name="critical" max="100" min="0"> <br>
-					Fire Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
-					Frost Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
-					Lightning Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
-					Blood Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
+					Level: <input type="number" name="level" max="100" min="0" value="1"> <br>
+					Health: <input type="number" name="health" max="10000" min="0" value="100"> <br>
+					Power: <input type="number" name="power" max="100" min="0" value="15"> <br>
+					Critical: <input type="number" name="critical" max="100" min="0" value="15"> <br>
+					Fire Resistance: <input type="number" name="fireR" max="100" min="0" value="10"> <br>
+					Frost Resistance: <input type="number" name="fireR" max="100" min="0" value="10"> <br>
+					Lightning Resistance: <input type="number" name="fireR" max="100" min="0" value="10"> <br>
+					Blood Resistance: <input type="number" name="fireR" max="100" min="0" value="10"> <br>
 						<button type="submit" value="Submit">Create!</button>
 					</form>
 				</c:when>
