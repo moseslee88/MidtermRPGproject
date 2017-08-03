@@ -7,6 +7,7 @@
 
 <html>
 <head>
+    <link rel="stylesheet" href="styles.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Page Title -->
 <title>Create Account</title>
