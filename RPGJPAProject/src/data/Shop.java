@@ -17,7 +17,7 @@ public class Shop {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@OneToOne(mappedBy="inventory_id")
+	@OneToOne(mappedBy="shop")
 	private Inventory inventory;
 
 	public Shop() {
