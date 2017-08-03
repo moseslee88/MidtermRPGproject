@@ -22,5 +22,5 @@ public class EncryptionDAOImpl implements EncryptionDAO {
 		} catch (NoSuchAlgorithmException e) {
 			return false;
 		}
-	}
+	} 
 }
