@@ -41,65 +41,53 @@
                   </form>
                   <br>
                   <br>
-                  <h3>New</h3>
+                  <h3>New Quest</h3>
                   <form action="AdminNewQuest.do">
                     Name: <input type="text" name="name"> <br> Short Description: <input type="text" name="description"> <br> Intro: <input type="text" name="intro"> <br> Conclusion: <input type="text" name="conclusion"> <br>
                     <button type="submit" value="Submit">Create!</button>
                   </form>
                 </c:when>
                 <c:otherwise>
-                  <h3>Edit</h3>
+                  <h3>Edit Quest</h3>
                   <form action="AdminEditQuest.do">
                     ID: ${quest.id}<input type="hidden" value="${quest.id}" name="id">
-                    <br> Name: <input type="text" name="name"> <br> Short Description: <input type="text" name="description"> <br> Intro: <input type="text" name="intro"> <br> Conclusion: <input type="text" name="conclusion"> <br>
+                    <br> Name: <input type="text" name="name" value="${quest.name}"> <br> Short Description: <input type="text" name="description" value="${quest.description}">
+                    <br> Intro: <input type="text" name="intro" value="${quest.intro}"> <br> Conclusion: <input type="text" name="conclusion" value="${quest.conclusion}">
+                    <br>
                     <button type="submit" value="Submit">Change!</button>
                   </form>
                   <br>
                   <br>
                   <h4>Edit Stages</h4>
                   <c:if test="${not empty quest.stages}">
-                    <form action="AdminEditStage.do">
-                      <input type="hidden" value="${quest.id}" name="questId">
-                      <c:forEach var="stage" items="${quest.stages}">
-                        ID: ${stage.id}<input type="hidden" value="${stage.id}" name="id">
-                        <br> Name:
-                        <input type="text" name="name" value="${stage.name}">
-                        <br> Intro:
-                        <input type="text" name="intro" value="${stage.intro}">
-                        <br> Conclusion:
-                        <input type="text" name="conclusion" value="${stage.conclusion}">
-                        <br> Enemy: <select name="gameCharacter">
+                    <c:forEach var="stage" items="${quest.stages}">
+                      <form action="AdminEditStage.do">
+                        <input type="hidden" value="${quest.id}" name="questId"> ID: ${stage.id}<input type="hidden" value="${stage.id}" name="id"> <br> Name: <input type="text" name="name" value="${stage.name}"> <br> Intro: <input type="text" name="intro"
+                          value="${stage.intro}"> <br> Conclusion: <input type="text" name="conclusion" value="${stage.conclusion}"> <br> Enemy: <select name="gameCharacter">
 									<c:forEach var="gameChar" items="${gameCharacters}">
 										<option value="${gameChar.id}">${gameChar.id}: ${gameChar.name}</option>
 									</c:forEach>
 								</select>
                         <button type="submit" value="Submit">Change!</button>
-                        <form action="AdminDeleteStage.do">
-                    <input type="hidden" value="${stage.id}" name="id">
-                   <input type="hidden" value="${quest.id}" name="questId">
-                    <button type="submit" value="Submit">Delete!</button>
-                  </form>
-                      </c:forEach>
-                    </form>
+                      </form>
+                      <form action="AdminDeleteStage.do">
+                        <input type="hidden" value="${stage.id}" name="id"> <input type="hidden" value="${quest.id}" name="questId">
+                        <button type="submit" value="Submit">Delete!</button>
+                      </form>
+                    </c:forEach>
                   </c:if>
                   <h4>Add Stage</h4>
                   <form action="AdminNewStage.do">
-                    <input type="hidden" value="${quest.id}" name="questId">
-                      <br> Name:
-                      <input type="text" name="name" value="${stage.name}">
-                      <br> Intro:
-                      <input type="text" name="intro" value="${stage.intro}">
-                      <br> Conclusion:
-                      <input type="text" name="conclusion" value="${stage.conclusion}">
-                      <br> Enemy: <select name="gameCharacter">
-									<c:forEach var="gameChar" items="${gameCharacters}">
-										<option value="${gameChar.id}">${gameChar.id}: ${gameChar.name}</option>
-									</c:forEach>
-								</select>
-                      <button type="submit" value="Submit">Change!</button>
+                    <input type="hidden" value="${quest.id}" name="questId"> Name: <input type="text" name="name" value="New Stage"> <br> Intro: <input type="text" name="intro" value="Stage Intro Text">
+                    <br> Conclusion: <input type="text" name="conclusion" value="Stage Conclusion Text"> <br> Enemy: <select name="gameCharacterId">
+							<c:forEach var="gameChar" items="${gameCharacters}">
+								<option value="${gameChar.id}">${gameChar.id}: ${gameChar.name}</option>
+							</c:forEach>
+						</select>
+                    <button type="submit" value="Submit">Add Stage!</button>
                   </form>
                   <br>
-                  
+
                   <br>
                   <h3>Delete Quest</h3>
                   <form action="AdminDeleteQuest.do">

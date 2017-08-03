@@ -26,6 +26,49 @@
 <!-- Page Content -->
 <!-- in: admin -->
 <!-- out: admin -->	
+<c:choose>
+				<c:when test="${not empty players}">
+				<h3>Select</h3>
+					<form action="AdminGetPlayer.do" >
+						<select name="id">
+							<c:forEach var="player" items="${players}">
+								<option value="${player.id}">${player.id}: ${player.displayName} </option>
+							</c:forEach>
+						</select>
+						<button type="submit" value="Submit">Change!</button>
+					</form>
+					<br>
+					<br>
+					<h3>New</h3>
+					<form action="AdminNewPlayer.do" >
+					User Type ID: <input type="number" name="integerUserTypeId"> <br>
+					Email: <input type="text" name="email"> <br>
+					Password: <input type="text" name="password"> <br>
+					Display Name: <input type="text" name="displayName"> <br>
+						<button type="submit" value="Submit">Create!</button>
+					</form>
+				</c:when>
+				<c:otherwise>
+				<h3>Edit</h3>
+					<form action="AdminEditPlayer.do">
+						ID: ${player.id}<input type="hidden" value="${player.id}" name="id">
+						<br>
+						New User Type:<input type="text" name="userType" placeholder="${player.userType}">
+						New Email:<input type="text" name="email" placeholder="${player.email}">
+						New Password:<input type="text" name="password" placeholder="${player.password}">
+						New Display Name:<input type="text" name="displayName" placeholder="${player.displayName}">
+						<br>
+						<button type="submit" value="Submit">Change!</button>
+					</form>
+					<br>
+					<br>
+					<h3>Delete</h3>
+					<form action="AdminDeletePlayer.do">
+						${player.id}: ${player.displayName}<input type="hidden" value="${player.id}" name="id">
+						<br>
+						<button type="submit" value="Submit">Delete!</button>
+				</c:otherwise>
+			</c:choose>
 		
 		
 		
