@@ -155,6 +155,10 @@ public class AdminDaoImpl implements AdminDao {
 	public Player updatePlayer(int id, Player player) {
 
 		Player managedPlayer = em.find(Player.class, id);
+		
+		if(player.getUserType() <= 2) {
+			managedPlayer.setUserType(player.getUserType());
+		}
 		if (player.getDisplayName() != null) {
 			managedPlayer.setDisplayName(player.getDisplayName());
 		}
