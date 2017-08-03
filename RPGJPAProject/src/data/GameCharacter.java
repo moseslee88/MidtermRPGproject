@@ -63,6 +63,8 @@ public class GameCharacter {
 
 	@Transient
 	private int hp;
+	@Transient
+	private int stamina;
 	@ManyToMany
 	@JoinTable(name = "character_ability", joinColumns = @JoinColumn(name = "character_id"), inverseJoinColumns = @JoinColumn(name = "ability_id"))
 	private List<Ability> abilities;
@@ -76,6 +78,8 @@ public class GameCharacter {
 	@Column(name = "stat_points")
 	private int statPoints;
 
+	
+	
 	private Double critDamage(double attackPower, GameCharacter enemy) {
 		Random rand = new Random();
 		double modifier = .2;
@@ -100,7 +104,6 @@ public class GameCharacter {
 		}
 		return damage;
 	}
-
 	private Double modifyResisitedDamage(double resist, double attackPower, GameCharacter enemy) {
 		if (resist > 100.0) {
 			resist = 100.0;
@@ -108,7 +111,6 @@ public class GameCharacter {
 		Double damageDone = (critDamage(attackPower, enemy)) * ((100 - resist) * .01);
 		return damageDone;
 	}
-
 	private int calculateDamage(GameCharacter enemy, Ability attack) {
 		Double modifyedDamage = 0.0;
 		Double modifyer = .80;
@@ -141,7 +143,6 @@ public class GameCharacter {
 		double temp = modifyedDamage.doubleValue();
 		return (int) temp;
 	}
-
 	private void setInitialstats() {
 		this.power = 5;
 		this.energy = 5;
@@ -155,16 +156,34 @@ public class GameCharacter {
 		this.lightningR = 10;
 
 	}
-
+	private void resetHP() {
+		this.hp = this.health;
+	}
+	private void resetStamina() {
+		this.stamina = this.energy;
+	}
+	
+	
+	// Starts a fight with full energy and health
+	public void startFight() {
+		resetHP();
+		resetStamina();
+	}
 	public void takeDamage(GameCharacter enemy, Ability attack) {
 		this.hp = this.hp - calculateDamage(enemy, attack);
 	}
-
-	// Resets Health Points.
-	public void resetHP() {
-		this.hp = this.health;
+	public void addStamina(int staminaAmount) {
+		this.stamina = stamina + staminaAmount;
+		if (this.stamina > this.energy) {
+			this.stamina = energy;
+		}
 	}
-
+	public void addHp(int healedAmount) {
+		this.hp = hp + healedAmount;
+		if (this.hp > this.health) {
+			this.hp = health;
+		}
+	}
 	public boolean checkIfDead() {
 		if (this.hp <= 0) {
 			return true;
@@ -175,12 +194,10 @@ public class GameCharacter {
 		return true;
 
 	}
-
 	public void lvlUp() {
 		int lvl = this.level + 1;
 		setCharacterLvl(lvl);
 	}
-
 	public void setCharacterLvl(int lvl) {
 		if (this.level == 0) {
 			setLevel(1);
@@ -204,10 +221,25 @@ public class GameCharacter {
 		setLevel(lvl);
 
 	}
-
+	public void endFight() {
+		resetHP();
+		resetStamina();
+	}
+	
+	
+	
+	
 	// gets and sets
 	public GameCharacter() { // NO args constructor
 
+	}
+	
+	public int getStamina() {
+		return stamina;
+	}
+
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
 	}
 
 	public int getId() {
