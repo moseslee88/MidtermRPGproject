@@ -24,7 +24,8 @@ public class GameCharacter {
 	private int id;
 	@Column
 	private String name;
-	@OneToOne(mappedBy ="gameCharacter")
+	@OneToOne
+	@JoinColumn(name = "inventory_id")
 	private Inventory inventory;
 	@Column
 	private int health;
