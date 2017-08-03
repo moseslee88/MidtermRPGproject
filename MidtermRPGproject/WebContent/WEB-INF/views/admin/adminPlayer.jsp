@@ -41,7 +41,7 @@
 					<br>
 					<h3>New</h3>
 					<form action="AdminNewPlayer.do" >
-					User Type ID: <input type="text" name="userType"> <br>
+					User Type ID: <input type="number" name="integerUserTypeId"> <br>
 					Email: <input type="text" name="email"> <br>
 					Password: <input type="text" name="password"> <br>
 					Display Name: <input type="text" name="displayName"> <br>

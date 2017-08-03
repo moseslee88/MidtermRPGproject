@@ -12,9 +12,9 @@ import javax.persistence.Table;
 import enums.TypeOfUser;
 
 @Entity
-@Table(name="user_type")
+@Table(name = "user_type")
 public class UserType {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -22,6 +22,17 @@ public class UserType {
 	@Enumerated(EnumType.STRING)
 	@Column
 	private TypeOfUser type;
+
+	public UserType() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public UserType(int id, TypeOfUser type) {
+
+		this.id = id;
+		this.type = type;
+	}
 
 	public TypeOfUser getUserType() {
 		return type;
@@ -40,5 +51,4 @@ public class UserType {
 		return "UserType [id=" + id + "]";
 	}
 
-	
 }
