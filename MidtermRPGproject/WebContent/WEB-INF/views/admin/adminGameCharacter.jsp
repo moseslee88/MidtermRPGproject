@@ -28,20 +28,48 @@
 			<!-- in: admin -->
 			<!-- out: admin -->
 			<c:choose>
-				<c:when test="${gameCharacter} != null">
-					<form action="AdminEditGameCharacter.do">
-						<input></input>
+				<c:when test="${not empty gameCharacters}">
+				<h3>Select</h3>
+					<form action="AdminGetGameCharacter.do" >
+						<select name="id">
+							<c:forEach var="gameChar" items="${gameCharacters}">
+								<option value="${gameChar.id}">${gameChar.id}: ${gameChar.name}</option>
+							</c:forEach>
+						</select>
+						<button type="submit" value="Submit">Change!</button>
+					</form>
+					<br>
+					<br>
+					<h3>New</h3>
+					<form action="AdminNewGameCharacter.do" >
+					Name: <input type="text" name="name"> <br>
+					Level: <input type="number" name="level" max="100" min="0"> <br>
+					Health: <input type="number" name="health" max="10000" min="0"> <br>
+					Power: <input type="number" name="power" max="100" min="0"> <br>
+					Critical: <input type="number" name="critical" max="100" min="0"> <br>
+					Fire Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
+					Frost Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
+					Lightning Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
+					Blood Resistance: <input type="number" name="fireR" max="100" min="0"> <br>
+						<button type="submit" value="Submit">Create!</button>
 					</form>
 				</c:when>
 				<c:otherwise>
-					<form action="AdminGetGameCharacter.do" >
-						<select>
-							<c:forEach var="gameChar" items="${gameCharacters}">
-								<option value="${gameChar}">${gameChar.id}: ${gameChar.name}</option>
-							</c:forEach>
-						</select>
-						<button type="submit" value="Submit"> Submit</button>
+				<h3>Edit</h3>
+					<form action="AdminEditGameCharacter.do">
+						ID: ${gameCharacter.id}<input type="hidden" value="${gameCharacter.id}" name="id">
+						<br>
+						New Name:<input type="text" name="name" placeholder="${gameCharacter.name}">
+						<br>
+						<button type="submit" value="Submit">Change!</button>
 					</form>
+					<br>
+					<br>
+					<h3>Delete</h3>
+					<form action="AdminDeleteGameCharacter.do">
+						${gameCharacter.id}: ${gameCharacter.name}<input type="hidden" value="${gameCharacter.id}" name="id">
+						<br>
+						<button type="submit" value="Submit">Delete!</button>
 				</c:otherwise>
 			</c:choose>
 
