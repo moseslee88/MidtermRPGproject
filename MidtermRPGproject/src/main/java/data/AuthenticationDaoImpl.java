@@ -34,7 +34,10 @@ import org.springframework.transaction.annotation.Transactional;
 		@Override
 		public Player login(Player p) {
 			// TODO Auto-generated method stub
-			return null;
+			
+			em.persist(p);
+			em.flush();
+			return p;
 		}
 
 		@Override
