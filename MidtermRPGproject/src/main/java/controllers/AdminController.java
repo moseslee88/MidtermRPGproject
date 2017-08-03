@@ -18,7 +18,11 @@ import data.Player;
 import data.PlayerEditDao;
 import data.PlayerEditDaoImpl;
 import data.Quest;
+
+import data.UserType;
+
 import data.Stage;
+
 
 @Controller
 public class AdminController {
@@ -181,8 +185,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "AdminNewPlayer.do" /* , method = RequestMethod.POST */)
-	public ModelAndView newPlayer(ModelAndView mv, Player player, HttpSession session) {
-
+	public ModelAndView newPlayer( ModelAndView mv, Player player, Integer integerUserTypeId, HttpSession session) {
+//		player.setUserType(new UserType(integerUserTypeId));
 		dao.createPlayer(player);
 		List<Player> players = dao.indexPlayers();
 
