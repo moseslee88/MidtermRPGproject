@@ -1,10 +1,12 @@
 package data;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,8 +35,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 		@Override
 		public Player login(Player p) {
-			// TODO Auto-generated method stub
-			
+			// TODO user logs in and we check if password matches SHA
+			String q = "SELECT email from Player p";
+			String sha =  null;
+			try {
+				sha = encryptor.encrypt(p.getPassword());
+				encryptor.matches(p.getPassword(), em.createQuery(q, Player.class).getSingleResult().getPassword());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				System.out.println("Please enter correct password.");
+			}
 			em.persist(p);
 			em.flush();
 			return p;
@@ -43,7 +53,13 @@ import org.springframework.transaction.annotation.Transactional;
 		@Override
 		public boolean isAdmin(Player p) {
 			// TODO Auto-generated method stub
-			return false;
+			String query = "SELECT p from Player p where p.display_name = 'admin'";
+			try {
+				Player playerfound = em.createQuery(query, Player.class).getSingleResult();
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
 		}
 		
 		public List<Player> indexPlayers() {
