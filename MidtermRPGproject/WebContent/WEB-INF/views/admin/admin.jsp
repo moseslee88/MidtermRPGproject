@@ -32,8 +32,9 @@
 
 
 			<a href="AdminGetGameCharacters.do">get game chars</a>
-
-
+			<a href="AdminGetItems.do">get items</a>
+			<a href="AdminGetPlayers.do">get players</a>
+			<a href="AdminGetQuests.do">get quests</a>
 
 
 		</div>
