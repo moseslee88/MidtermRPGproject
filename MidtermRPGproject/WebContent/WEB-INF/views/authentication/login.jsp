@@ -27,7 +27,7 @@
 <!-- in: home, index -->
 <!-- out: admin, playerInfo -->	
 		
-						<form action = "AuthenticationRoute.do" method = "POST">
+		<form action = "AuthenticationRoute.do" method = "POST">
          Email: <input type = "text" name = "email" />
          <br />
          Password: <input type = "text" name = "password" />
@@ -36,8 +36,7 @@
          <input type = "submit" value = "Submit" />
       </form>
 		
-		<!--  <a href="AuthenticationRoute.do">AuthenticationRoute.do</a><br/>  
-		<a href="AuthenticationRoute.do">AuthenticationRoute.do</a><br/>   -->
+		
 		
 		</div>
 	</div>

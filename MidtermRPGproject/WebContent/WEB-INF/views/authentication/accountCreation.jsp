@@ -21,7 +21,7 @@
 <jsp:include page="../../partials/_nav.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
-			<h2>Create Account</h2>
+			           <h2>Create Account</h2>
 		</div>
 		<div class="container">
 <!-- Page Content -->
@@ -29,16 +29,18 @@
 <!-- out: login   --
 		<form action = "main.jsp" method = "POST">    -->	
 		
-		<form action = "/WEB-INF/views/authentication/login.jsp" method = "POST">
+		<form action = "SubmitandGoToLogin.do" method = "POST">  
          Display Name: <input type = "text" name = displayName>
          <br />
          Email: <input type = "text" name = "email" />
          <br />
-         Password: <input type = "text" name = "password" />
+         Password: <input type = "text" name = "password" /><br>
          Confirm password: <input type = "text" name = "conPassword" />
 
          <input type = "submit" value = "Submit" />
       </form>
+      
+    
 		
 		
 		</div>
