@@ -79,6 +79,6 @@ public class Inventory {
 
 	@Override
 	public String toString() {
-		return "Inventory id"  +  id;
+		return "Inventory id = "  +  id;
 	}
 }

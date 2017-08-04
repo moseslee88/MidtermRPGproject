@@ -22,9 +22,7 @@ import data.Player;
 import data.Quest;
 import data.Shop;
 import data.Stage;
-import data.UserType;
 import enums.Element;
-import enums.TypeOfItem;
 import enums.TypeOfUser;
 
 public class ShopTest {
@@ -34,7 +32,7 @@ public class ShopTest {
 
 	@Before
 	public void setup() throws Exception {
-		emf = Persistence.createEntityManagerFactory("Midterm");
+		emf = Persistence.createEntityManagerFactory("MidtermRPGproject");
 		em = emf.createEntityManager();
 	}
 
@@ -42,7 +40,6 @@ public class ShopTest {
 	public void tearDown() throws Exception {
 		em.close();
 		emf.close();
-
 	}
 	
 	
@@ -90,8 +87,7 @@ public class ShopTest {
     @Test
     public void test_player_usertype_association (){
     	Player p =em.find(Player.class, 1);  //'admin' in ENUM TypeOfUser
-    	UserType ut = p.getUserType();
-    	assertEquals(TypeOfUser.admin, ut.getUserType());
+    	assertEquals(1, p.getUserType());
     } 
     
     @Test
@@ -127,7 +123,6 @@ public class ShopTest {
     	List<InventoryItem> items = i.getInventory();
     	assertNotNull(i);
     	assertEquals("Lesser Potion", items.get(0).getItems().getName());
-    	//assertEquals("Lessr Potion", items.get(0).getItems().getName()); //test DOES NOT Pass because of spelling
     	assertEquals(Element.physical, items.get(0).getItems().getElement());
     	
     }
@@ -137,8 +132,8 @@ public class ShopTest {
       	Inventory i = em.find(Inventory.class, 1);
     	    Shop shop = i.getShop();
     	    assertNotNull(i);
-    	    assertEquals("[Inventory [id=1, gameCharacterEnergy=100, inventorySize=1]]", shop.getInventory().toString());
-    	    assertEquals(1, shop.getInventory());  
+    	    assertEquals("Inventory id = 1", shop.getInventory().toString());
+//    	    assertEquals("Inventory id = 1", shop.getInventory());  
     }  
     
     @Test
