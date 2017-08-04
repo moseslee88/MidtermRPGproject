@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.LazyInitializationException;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	public GameCharacter createGameCharacter(GameCharacter gameCharacter) {
-		gameCharacter.setActive(true);
+		// gameCharacter.setActive(true);
 		em.persist(gameCharacter);
 		em.flush();
 
@@ -66,9 +67,9 @@ public class AdminDaoImpl implements AdminDao {
 		// managedChar.setStages(gameCharacter.getStages());
 		// managedChar.setAbilityPoints(gameCharacter.getAbilityPoints());
 		// managedChar.setStatPoints(gameCharacter.getStatPoints());
-		if (gameCharacter.getActive() != null) {
-			managedChar.setActive(gameCharacter.getActive());
-		}
+		// if (gameCharacter.getActive() != null) {
+		// managedChar.setActive(gameCharacter.getActive());
+		// }
 		return gameCharacter;
 	}
 
@@ -150,14 +151,6 @@ public class AdminDaoImpl implements AdminDao {
 
 	public Player createPlayer(Player player) {
 
-		if (player.getPassword() == null) {
-			try {
-				player.setPassword(encryptor.encrypt(player.getPassword()));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
 		em.persist(player);
 		em.flush();
 
@@ -172,18 +165,21 @@ public class AdminDaoImpl implements AdminDao {
 			managedPlayer.setUserType(player.getUserType());
 		}
 		if (player.getDisplayName() != null) {
-			managedPlayer.setDisplayName(player.getDisplayName());
+				managedPlayer.setDisplayName(player.getDisplayName());
+			
 		}
 		if (player.getEmail() != null) {
 			managedPlayer.setEmail(player.getEmail());
 		}
 
 		if (player.getPassword() != null)
+
 			try {
 				player.setPassword(encryptor.encrypt(player.getPassword()));
 				managedPlayer.setPassword(player.getPassword());
 			} catch (Exception e) {
 				e.printStackTrace();
+
 			}
 
 		//
@@ -302,6 +298,33 @@ public class AdminDaoImpl implements AdminDao {
 
 			return true;
 		}
+	}
+
+	public boolean checkEmail(Player player) {
+		
+		String query = "SELECT p FROM player p WHERE p.email = :email";
+		
+		List<Player> emails = em.createQuery(query, Player.class).setParameter("email", player.getEmail()).getResultList();
+		
+		if(emails.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	
+	}
+
+	public boolean checkDisplayName(Player player) {
+		
+		String query = "SELECT p FROM player p WHERE p.display_name = :displayName";
+		List<Player> displayNames = em.createQuery(query, Player.class).setParameter("displayName", player.getDisplayName()).getResultList();
+		
+		if(displayNames.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 }

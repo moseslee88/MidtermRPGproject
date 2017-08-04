@@ -37,6 +37,7 @@
 						</select>
 						<button type="submit" value="Submit">Change!</button>
 					</form>
+	 				
 					<br>
 					<br>
 					<h3>New</h3>
@@ -47,7 +48,7 @@
 					Display Name: <input type="text" name="displayName"> <br>
 						<button type="submit" value="Submit">Create!</button>
 					</form>
-				</c:when>
+					</c:when>
 				<c:otherwise>
 				<h3>Edit</h3>
 					<form action="AdminEditPlayer.do">

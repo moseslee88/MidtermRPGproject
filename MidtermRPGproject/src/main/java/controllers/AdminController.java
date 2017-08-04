@@ -60,7 +60,7 @@ public class AdminController {
 
 	@RequestMapping(path = "AdminNewGameCharacter.do" /* , method = RequestMethod.POST */)
 	public ModelAndView newGameCharacter(ModelAndView mv, GameCharacter gameCharacter, HttpSession session) {
-
+		
 		dao.createGameCharacter(gameCharacter);
 		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
@@ -184,6 +184,17 @@ public class AdminController {
 	@RequestMapping(path = "AdminNewPlayer.do" /* , method = RequestMethod.POST */)
 	public ModelAndView newPlayer( ModelAndView mv, Player player, Integer integerUserTypeId, HttpSession session) {
 //		player.setUserType(new UserType(integerUserTypeId));
+		
+		String emailError = "This Email Already Exists!";
+		String displayNameError = "This Display Name Already Exists!";
+		
+		if(dao.checkEmail(player) == true){
+			mv.addObject("emailError", emailError);
+		}	
+		
+		if(dao.checkDisplayName(player) == true) {
+			mv.addObject("displayError", displayNameError);
+		}
 		dao.createPlayer(player);
 		List<Player> players = dao.indexPlayers();
 
