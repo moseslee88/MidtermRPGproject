@@ -27,12 +27,7 @@
 <!-- in: home, index -->
 <!-- out: admin, playerInfo -->	
 		
-		<form action = "AuthenticationRoute.do" method = "POST">
-         Email: <input type = "text" name = "email" />
-         <br />
-         Password: <input type = "password" name = "password" />
-         <input type = "submit" value = "Submit" />
-      </form>
+<h5>CUSTOM 404 ERROR JSP</h5>
 		
 		
 		
