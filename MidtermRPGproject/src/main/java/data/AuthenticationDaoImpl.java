@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 	@Transactional
 	@Repository
 	public class AuthenticationDaoImpl implements AuthenticationDao {
+		
 		@PersistenceContext
 		private EntityManager em;
 		
@@ -35,21 +36,25 @@ import org.springframework.transaction.annotation.Transactional;
 		
 		
 
+		//user logs in and we check if password matches SHA
+		//Boolean result=encryptor.matches(sha, em.createQuery(q, Player.class).setParameter("password", password).getSingleResult();
 		@Override
-		public Player login(Player p) {
-			// TODO user logs in and we check if password matches SHA
-			String q = "SELECT p from Player p where p.email = :p.email and p.password = :p.password";
+		public Player login(String email, String password) {
+			Player p = new Player();
+			p.setEmail(email);
+			p.setPassword(password);
+			String encryptPW=p.getPassword();
+			//String q = "SELECT p from Player p where p.email = :email and p.password = :password";
 			String sha =  null;
 			try {
-				sha = encryptor.encrypt(p.getPassword());
-				Boolean result=encryptor.matches(p.getPassword(), em.createQuery(q, Player.class).getSingleResult().getPassword());
-			    System.out.println(result);
+				sha = encryptor.encrypt(encryptPW);
+				Boolean result = encryptor.matches(password, findUserPasswordByEmail(email));
+			    System.out.println("result: " + result);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				System.out.println("Please enter correct password.");
 			}
-			em.persist(p);
-			em.flush();
+			em.flush();  //Only need a flush, not persisting any managed entity
 			return p;
 		}
 		
@@ -63,6 +68,7 @@ import org.springframework.transaction.annotation.Transactional;
 				return pw;
 			} catch (Exception e)  {
 				e.printStackTrace();
+				System.out.println("No such user exists.");
 			}
 			return null;
 		}

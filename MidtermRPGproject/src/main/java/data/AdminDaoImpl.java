@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -302,7 +303,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	public boolean checkEmail(Player player) {
 		
-		String query = "SELECT p FROM player p WHERE p.email = :email";
+		String query = "SELECT p FROM Player p WHERE p.email = :email";
 		
 		List<Player> emails = em.createQuery(query, Player.class).setParameter("email", player.getEmail()).getResultList();
 		
@@ -316,7 +317,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	public boolean checkDisplayName(Player player) {
 		
-		String query = "SELECT p FROM player p WHERE p.display_name = :displayName";
+		String query = "SELECT p FROM Player p WHERE p.displayName = :displayName";
 		List<Player> displayNames = em.createQuery(query, Player.class).setParameter("displayName", player.getDisplayName()).getResultList();
 		
 		if(displayNames.size() > 0) {

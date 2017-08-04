@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -21,7 +22,7 @@ public interface AdminDao {
 
 	public List<Player> indexPlayers();
 	public Player showPlayer(int id);
-	public Player createPlayer(Player Player);
+	public Player createPlayer(Player Player); 
 	public Player updatePlayer(int id, Player Player);
 	public boolean destroyPlayer(int id);
 	

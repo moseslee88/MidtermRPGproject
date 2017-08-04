@@ -107,35 +107,35 @@ public class GameCharacter {
 		return damageDone;
 	}
 	private int calculateDamage(GameCharacter enemy, Ability attack) {
-		Double modifyedDamage = 0.0;
+		Double modifiedDamage = 0.0;
 		Double modifyer = .80;
 		double attackPower = attack.getPower();
 		if (attack.getElement().equals(Element.physical)) {
 			double percentResisted = this.getPhysicalR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.fire)) {
 			double percentResisted = this.getFireR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.frost)) {
 			double percentResisted = this.getFrostR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.lightning)) {
 			double percentResisted = this.getLightningR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.blood)) {
 			double percentResisted = this.getBloodR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.dark)) {
 			double percentResisted = ((this.getFireR() + this.getBloodR()) / 2) * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 
-		double temp = modifyedDamage.doubleValue();
+		double temp = modifiedDamage.doubleValue();
 		return (int) temp;
 	}
 	private void setInitialstats() {
@@ -160,25 +160,74 @@ public class GameCharacter {
 	
 	private void checkAndUseItemByType(Item item) {
 		if(item.getTypeOfItem().equals(TypeOfItem.weapon)) {
-			equipment. = item;
-			
+			unequipWeapon(weapon);
+			weapon = item;
+			equipWeapon(item);
 		}
 		if(item.getTypeOfItem().equals(TypeOfItem.armor)) {
-			
+			unequipArmor(armor);
+			armor = item;
+			equipArmor(item);
 		}
 		if(item.getTypeOfItem().equals(TypeOfItem.edible)) {
-			
+			addHp((int)(item.getItemLevel()*(.33*this.health)));
 		}
 		if(item.getTypeOfItem().equals(TypeOfItem.trash)) {
 			
 		}
 		
 	}
-	private void equipWeapon(Item item) {
+	private void unequipWeapon(Item weapon) {
+		int devisor = 3 + weapon.getItemLevel();
+		this.power = (this.power/devisor) * 3 + 1;
+	}
+	private void unequipArmor(Item armor) {
+		int devisor = 3 + armor.getItemLevel();
 		
+		if (armor.getElement().equals(Element.physical)) {
+			this.physicalR = (this.physicalR/devisor) * 3 +1;
+		}
+		if (armor.getElement().equals(Element.blood)) {
+			this.bloodR = (this.bloodR/devisor) * 3 +1;
+		}
+		if (armor.getElement().equals(Element.fire)) {
+			this.fireR = (this.fireR/devisor) * 3 +1;
+		}
+		if (armor.getElement().equals(Element.frost)) {
+			this.frostR = (this.frostR/devisor) * 3 +1;
+		}
+		if (armor.getElement().equals(Element.lightning)) {
+			this.lightningR = (this.lightningR/devisor) * 3 +1;
+		}
+		if (armor.getElement().equals(Element.dark)) {
+			
+		}
+	}
+	private void equipWeapon(Item item) {
+		double modifier = weapon.getItemLevel()*.33;
+		this.power = (int) (this.getPower()*modifier + this.getPower());
 	}
 	private void equipArmor(Item item) {
-	
+		double modifier = armor.getItemLevel()*.33;
+		
+		if (armor.getElement().equals(Element.physical)) {
+			this.physicalR += (this.physicalR * modifier);
+		}
+		if (armor.getElement().equals(Element.blood)) {
+			this.bloodR += (this.bloodR * modifier);
+		}
+		if (armor.getElement().equals(Element.fire)) {
+			this.fireR += (this.fireR * modifier);
+		}
+		if (armor.getElement().equals(Element.frost)) {
+			this.frostR += (this.frostR * modifier);
+		}
+		if (armor.getElement().equals(Element.lightning)) {
+			this.lightningR += (this.lightningR * modifier);
+		}
+		if (armor.getElement().equals(Element.dark)) {
+			
+		}
 	}
 	
 	// Starts a fight with full energy and health
@@ -198,8 +247,8 @@ public class GameCharacter {
 			this.stamina = energy;
 		}
 	}
-	public void addHp(int healedAmount) {
-		this.hp = hp + healedAmount;
+	public void addHp(int d) {
+		this.hp = hp + d;
 		if (this.hp > this.health) {
 			this.hp = health;
 		}
@@ -261,7 +310,13 @@ public class GameCharacter {
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
-
+	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getId() {
 		return id;
 	}
