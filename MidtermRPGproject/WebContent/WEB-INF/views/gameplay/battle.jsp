@@ -26,9 +26,9 @@
 			<!-- in: stageStart -->
 			<!-- out: stageConclusion -->
 			<c:choose>
-				<c:when test="${winner is not null}">
+				<c:when test="${winner != null}">
 					<div class="jumbotron">
-						<h1>${winner.name}isvictorious!</h1>
+						<h1>${winner.name} is victorious!</h1>
 						<p>
 							<a class="btn btn-primary btn-lg" href="#" role="button">Continue!</a>
 						</p>
@@ -39,27 +39,75 @@
 					<div class="row">
 						<div class="col-sm-6 col-md-6">
 							<div class="thumbnail">
-								<img src="${currentCharacter.image}" alt="../../images/defaultImage.jpg">
+								<c:if test="${attackEnemy != null}">
+									<div class="alert alert-danger" role="alert">You were hit
+										by: ${attackEnemy}</div>
+								</c:if>
+								<img src="${currentCharacter.image}"
+									alt="../../images/defaultImage.jpg">
 								<div class="caption">
-								
+									<div class="progress">
+										Health:
+										<div class="progress-bar progress-bar-success"
+											style="${newHealthCurrent}"></div>
+										<div class="progress-bar progress-bar-danger"
+											style="${oldHealthCurrent}"></div>
+									</div>
+									<div class="progress">
+										Energy:
+										<div class="progress-bar progress-bar-info"
+											style="${newEnergyCurrent}"></div>
+									</div>
 									<h3>${currentCharacter.name}</h3>
-									<p>${currentCharacter.power}</p>
+									<p>Power: ${currentCharacter.power}</p>
 									<p>
-										<a href="#" class="btn btn-primary" role="button">Button</a> <a
-											href="#" class="btn btn-default" role="button">Button</a>
+										<a href="GameplayBattleLoop.do" class="btn btn-primary"
+											role="button">Attack!</a>
 									</p>
 								</div>
 							</div>
-							
+						</div>
+					</div>
+
+
+					<div class="col-sm-6 col-md-6">
+						<div class="thumbnail">
+							<c:if test="${attackCurrent != null}">
+								<div class="alert alert-info" role="alert">You used:
+									${attackCurrent}</div>
+							</c:if>
+							<img src="${enemyCharacter.image}"
+								alt="../../images/defaultImage.jpg">
+							<div class="caption">
+								<div class="progress">
+									Health:
+									<div class="progress-bar progress-bar-success"
+										style="${newHealthEnemy}"></div>
+									<div class="progress-bar progress-bar-danger"
+										style="${oldHealthEnemy}"></div>
+								</div>
+								<div class="progress">
+									Energy:
+									<div class="progress-bar progress-bar-info"
+										style="${newEnergyEnemy}"></div>
+								</div>
+								<h3>${enemyCharacter.name}</h3>
+								<p>Power: ${enemyCharacter.power}</p>
+								<p>
+									<!-- 					<a href="GameplayBattleLoop.do" class="btn btn-primary" role="button">Attack!</a>
+ -->
+								</p>
+							</div>
 						</div>
 					</div>
 				</c:otherwise>
 			</c:choose>
-
-
-
 		</div>
+
 	</div>
+
+
+
 	<br>
 	<br>
 	<br>

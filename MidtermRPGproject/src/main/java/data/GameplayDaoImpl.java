@@ -16,6 +16,14 @@ public class GameplayDaoImpl implements GameplayDao {
 	public Ability useDefaultAbility() {
 		return em.find(Ability.class, 11);
 	}
+	
+	public Stage getDefaultStage() {
+		return em.find(Stage.class, 1);
+	}
+	
+	public GameCharacter getDefaultGameCharacter() {
+		return em.find(GameCharacter.class, 14);
+	}
 
 	@Override
 	public GameCharacter indexGameCharacters() {

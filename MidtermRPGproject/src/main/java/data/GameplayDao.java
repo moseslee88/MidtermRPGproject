@@ -12,5 +12,9 @@ public interface GameplayDao {
 	public boolean destroyGameCharacter(int id);
 	
 	public Ability useDefaultAbility();
+	
+	public Stage getDefaultStage();
+	
+	public GameCharacter getDefaultGameCharacter();
 
 }
