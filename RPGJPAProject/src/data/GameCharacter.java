@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.Transient;
 
 import enums.Element;
+import enums.TypeOfItem;
 
 @Entity
 @Table(name = "game_character")
@@ -60,6 +61,8 @@ public class GameCharacter {
 
 	@Transient
 	private int hp;
+	@Transient
+	private List<Item> equipment;
 	@Transient
 	private int stamina;
 	@ManyToMany
@@ -153,9 +156,32 @@ public class GameCharacter {
 	private void resetStamina() {
 		this.stamina = this.energy;
 	}
+	private void checkAndUseItemByType(Item item) {
+		if(item.getTypeOfItem().equals(TypeOfItem.weapon)) {
+			
+		}
+		if(item.getTypeOfItem().equals(TypeOfItem.armor)) {
+			
+		}
+		if(item.getTypeOfItem().equals(TypeOfItem.edible)) {
+			
+		}
+		if(item.getTypeOfItem().equals(TypeOfItem.trash)) {
+			
+		}
+		
+	}
+	private void equipWeapon(Item item) {
+		
+	}
+	private void equipArmor(Item item) {
 	
+	}
 	
 	// Starts a fight with full energy and health
+	public void useItem(Item item) {
+		checkAndUseItemByType(item);
+	}
 	public void startFight() {
 		resetHP();
 		resetStamina();
