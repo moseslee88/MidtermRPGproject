@@ -311,7 +311,13 @@ public class GameCharacter {
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
-
+	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getId() {
 		return id;
 	}
