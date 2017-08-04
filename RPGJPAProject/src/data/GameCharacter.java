@@ -50,16 +50,13 @@ public class GameCharacter {
 	private int lightningR;
 	@Column(name = "blood_r")
 	private int bloodR;
-	@Column(name = "experience_given")
-	private int experienceGiven;
-	@Column(name = "experience_total")
-	private int experienceTotal;
 	@Column
 	private int level;
 	@ManyToOne
 	@JoinColumn(name = "player_id")
-	// private int playerId;
 	private Player player;
+	@Column(name="image")
+	private String image;
 
 	@Transient
 	private int hp;
@@ -71,12 +68,6 @@ public class GameCharacter {
 	@OneToMany(mappedBy = "gameCharacter")
 	private List<Stage> stages;
 
-	@Column
-	private Boolean active;
-	@Column(name = "ability_points")
-	private int abilityPoints;
-	@Column(name = "stat_points")
-	private int statPoints;
 
 	
 	
@@ -350,22 +341,6 @@ public class GameCharacter {
 		this.bloodR = bloodR;
 	}
 
-	public int getExperienceGiven() {
-		return experienceGiven;
-	}
-
-	public void setExperienceGiven(int experienceGiven) {
-		this.experienceGiven = experienceGiven;
-	}
-
-	public int getExperienceTotal() {
-		return experienceTotal;
-	}
-
-	public void setExperienceTotal(int experienceTotal) {
-		this.experienceTotal = experienceTotal;
-	}
-
 	public int getLevel() {
 		return level;
 	}
@@ -382,31 +357,7 @@ public class GameCharacter {
 	public void setAbilities(List<Ability> abilities) {
 		this.abilities = abilities;
 	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	public int getAbilityPoints() {
-		return abilityPoints;
-	}
-
-	public void setAbilityPoints(int abilityPoints) {
-		this.abilityPoints = abilityPoints;
-	}
-
-	public int getStatPoints() {
-		return statPoints;
-	}
-
-	public void setStatPoints(int statPoints) {
-		this.statPoints = statPoints;
-	}
-
+	
 	public List<Stage> getStages() {
 		return stages;
 	}
