@@ -55,13 +55,14 @@ public class CharacterEditController {
 	}
 
 	@RequestMapping(path = "PlayerCreatesChar.do" /* method = RequestMethod.POS */ )
-	public ModelAndView createGameCharacter(GameCharacter newChar, HttpSession session, RedirectAttributes redir,
+	public ModelAndView createGameCharacter(@RequestParam("character") GameCharacter newChar, HttpSession session, RedirectAttributes redir,
 			ModelAndView mv) {
-		System.out.println("New Game Character: " + newChar.getName()); // a test I made AARON style to see if New Game
+	//	System.out.println("New Game Character: " + newChar.getName()); // a test I made AARON style to see if New Game
 																		// Character object is actually being created
+
+		newChar.setPlayer((Player) session.getAttribute("player"));
 		Player p = (Player) session.getAttribute("player");
 
-		newChar.setPlayer(p);
 		dao.create(newChar);
 		session.setAttribute("newcharacter", newChar);
 		session.setAttribute("characters", dao.getPlayersGameCharacters(p));
@@ -69,20 +70,7 @@ public class CharacterEditController {
 		return mv;
 	}
 
-<<<<<<< HEAD
-	@RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
-	  public String show(@RequestParam("character") GameCharacter newChar, ModelAndView mv, HttpSession session) {
-		newChar.setPlayer((Player) session.getAttribute("player"));
-		dao.create(newChar);
-	    mv.addObject("newChar", newChar);
-	    session.setAttribute("newChar", newChar);
-	    Player p = (Player) session.getAttribute("player");
-	    session.setAttribute("characters", dao.getPlayersGameCharacters(p));
-	    
-	    return "WEB-INF/views/player/createCharacter.jsp";
-	  }
-}
-=======
+
 	// here is the mapping to handle POST-redirect Get
 	@RequestMapping(path = "NewGameCharacterAdded.do", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam("character") GameCharacter newChar, Model model, ModelAndView mv) {
@@ -92,13 +80,5 @@ public class CharacterEditController {
 		// model.addAttribute("char", newChar);
 		return mv;
 	}
->>>>>>> 74ccf8239d18ab379047a7b944f3f8cfa0052c64
 
-	// @RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
-	// public String show(@RequestParam("character") GameCharacter newChar, Model
-	// model) {
-	// dao.create(newChar);
-	// model.addAttribute("char", newChar);
-	// return "WEB-INF/views/player/createCharacter.jsp";
-	// }
 }
