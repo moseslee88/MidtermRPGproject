@@ -34,4 +34,7 @@ public interface AdminDao {
 	public Stage createStage(Stage Stage);
 	public Stage updateStage(int id, Stage Stage);
 	public boolean destroyStage(int id);
+	
+	public boolean checkEmail(Player player);
+	public boolean checkDisplayName(Player player);
 }

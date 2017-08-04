@@ -12,7 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-
 @Entity
 public class Stage {
 	@Id
@@ -22,42 +21,25 @@ public class Stage {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name="level")
-	private Integer level;
-	
-    @Column(name="intro")
-    private String intro;
-    
-    @Column(name="conclusion")
-    private String conclusion;
-    
-    @Column(name="choice")
-    private String choice;
-    
-    @ManyToOne
-    @JoinColumn(name="character_id")
-    private GameCharacter gameCharacter;
-    
-    @Column(name="completed")
-    private Boolean completed;
-	 
-	// @OneToMany(mappedBy="stages")
-	// private List<Rental> renta;  
-    
-	 
-	 @ManyToMany
-	 @JoinTable(name="quest_stage",
-	 joinColumns= @JoinColumn(name="stage_id"),
-	 inverseJoinColumns=@JoinColumn(name="quest_id")
-	 )
-private List<Quest> questList;
+	@Column(name = "intro")
+	private String intro;
 
-//getters and setters
+	@Column(name = "conclusion")
+	private String conclusion;
+
+	@ManyToOne
+	@JoinColumn(name = "character_id")
+	private GameCharacter gameCharacter;
+
+	@ManyToMany
+	@JoinTable(name = "quest_stage", joinColumns = @JoinColumn(name = "stage_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
+	private List<Quest> questList;
+
+	// getters and setters
 
 	public int getId() {
 		return id;
 	}
-
 
 	public String getName() {
 		return name;
@@ -65,14 +47,6 @@ private List<Quest> questList;
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
 	}
 
 	public String getIntro() {
@@ -91,31 +65,12 @@ private List<Quest> questList;
 		this.conclusion = conclusion;
 	}
 
-	public String getChoice() {
-		return choice;
-	}
-
-	public void setChoice(String choice) {
-		this.choice = choice;
-	}
-
-
 	public GameCharacter getGameCharacter() {
 		return gameCharacter;
 	}
 
-
 	public void setGameCharacter(GameCharacter gameCharacter) {
 		this.gameCharacter = gameCharacter;
-	}
-
-
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
 	}
 
 	public List<Quest> getQuests() {
@@ -126,14 +81,9 @@ private List<Quest> questList;
 		this.questList = quests;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Stage [id=" + id;
 	}
-	 
-
-
-
 
 }

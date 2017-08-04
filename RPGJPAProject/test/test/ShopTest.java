@@ -54,7 +54,6 @@ public class ShopTest {
     	GameCharacter gc = em.find(GameCharacter.class, 5);  //test for id#5 in GameCharacter class
     	assertNotNull(gc);
     	assertEquals("Bogle", gc.getName());   //the fifth name in the database is Bogle, not Banshee
-    	assertEquals(36, gc.getExperienceGiven());     //should be 36
     	
     }
     @Test
