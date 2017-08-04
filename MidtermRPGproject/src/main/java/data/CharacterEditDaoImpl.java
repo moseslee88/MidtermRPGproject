@@ -68,6 +68,9 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 		if (updatedChar.getInventory()!=null) {
 			managedChar.setInventory(updatedChar.getInventory());
 		}
+		if (updatedChar.getImage()!=null) {
+			managedChar.setImage(updatedChar.getImage());
+		}
 		if (updatedChar.getLevel()!=0) {
 			managedChar.setLevel(updatedChar.getLevel());
 		}
