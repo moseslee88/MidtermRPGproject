@@ -27,14 +27,14 @@
 <!-- Page Content -->
 <!-- in: login -->
 <!-- out: characterInfo, friendList, createQuest, report, createCharacter -->	
-		
+		PLAYER STUFF HERE
 		<h5>${players }</h5>
 <c:forEach items="${players}" var="s">
                     			<ul>
 				<li>${s.email}</li>
 				<li>${s.displayName}</li>
 				<li>${s.userType}</li>
-				<li>${s.gameCharacters}</li>
+		
 			</ul>
 			
 			</c:forEach>

@@ -32,6 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 			em.flush();
 			return p;
 		}
+		
+		
 
 		@Override
 		public Player login(Player p) {
@@ -48,6 +50,20 @@ import org.springframework.transaction.annotation.Transactional;
 			em.persist(p);
 			em.flush();
 			return p;
+		}
+		
+		@Override
+		public String findUserPasswordByEmail(String email)  {
+			String query = "Select p FROM Player p where p.email = :email";
+			Player p = null;
+			try {
+				p = em.createQuery(query, Player.class).setParameter("email", email).getSingleResult();
+				String pw = p.getPassword();
+				return pw;
+			} catch (Exception e)  {
+				e.printStackTrace();
+			}
+			return null;
 		}
 
 		@Override

@@ -12,4 +12,5 @@ public interface AuthenticationDao {
 	public Player login(Player p);
 	public boolean isAdmin(Player p);
 	public List<Player> indexPlayers();
+	String findUserPasswordByEmail(String email);
 }
