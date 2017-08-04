@@ -55,7 +55,7 @@ public class CharacterEditController {
 	}
 
 	@RequestMapping(path = "PlayerCreatesChar.do" /* method = RequestMethod.POS */ )
-	public ModelAndView createGameCharacter(@RequestParam("character") GameCharacter newChar, HttpSession session, RedirectAttributes redir,
+	public ModelAndView createGameCharacter(GameCharacter newChar, HttpSession session, RedirectAttributes redir,
 			ModelAndView mv) {
 	//	System.out.println("New Game Character: " + newChar.getName()); // a test I made AARON style to see if New Game
 																		// Character object is actually being created
@@ -73,7 +73,7 @@ public class CharacterEditController {
 
 	// here is the mapping to handle POST-redirect Get
 	@RequestMapping(path = "NewGameCharacterAdded.do", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam("character") GameCharacter newChar, Model model, ModelAndView mv) {
+	public ModelAndView show(GameCharacter newChar, Model model, ModelAndView mv) {
 		mv.setViewName("WEB-INF/views/character/characterInfo.jsp");
 		mv.addObject("NewCharacter", dao.create(newChar));
 		mv.addObject("characters", dao.getAllGameCharacters());
