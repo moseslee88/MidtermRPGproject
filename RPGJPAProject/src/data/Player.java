@@ -34,7 +34,7 @@ public class Player {
 	@OneToMany(mappedBy = "friend")
 	private List<Friend> friends;
 
-	@Column(name = "user_type_id")  //1 for admin, 2 for player
+	@Column(name = "user_type")  //1 for admin, 2 for player
 	private int userType;
 
 	@ManyToMany
