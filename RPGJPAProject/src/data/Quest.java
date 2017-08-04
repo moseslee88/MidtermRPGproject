@@ -28,16 +28,7 @@ public class Quest {
 	@Column(name = "conclusion")
 	private String conclusion;
 
-	@Column(name = "level_min")
-	private Integer levelMin;
-
-	@Column(name = "level_max")
-	private Integer levelMax;
-
-	@Column(name = "completed")
-	private Boolean completed;
-
-	@ManyToMany(mappedBy = "questList", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "questList", fetch = FetchType.EAGER)
 	private List<Stage> stages;
 
 	@ManyToMany(mappedBy = "quests")
@@ -79,30 +70,6 @@ public class Quest {
 
 	public void setConclusion(String conclusion) {
 		this.conclusion = conclusion;
-	}
-
-	public Integer getLevelMin() {
-		return levelMin;
-	}
-
-	public void setLevelMin(Integer levelMin) {
-		this.levelMin = levelMin;
-	}
-
-	public Integer getLevelMax() {
-		return levelMax;
-	}
-
-	public void setLevelMax(Integer levelMax) {
-		this.levelMax = levelMax;
-	}
-
-	public Boolean getCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(Boolean completed) {
-		this.completed = completed;
 	}
 
 	public List<Stage> getStages() {
