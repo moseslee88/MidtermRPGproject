@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,6 @@ import data.PlayerEditDao;
 import data.PlayerEditDaoImpl;
 import data.Quest;
 import data.Stage;
-
 
 @Controller
 public class AdminController {
@@ -60,7 +60,7 @@ public class AdminController {
 
 	@RequestMapping(path = "AdminNewGameCharacter.do" /* , method = RequestMethod.POST */)
 	public ModelAndView newGameCharacter(ModelAndView mv, GameCharacter gameCharacter, HttpSession session) {
-		
+
 		dao.createGameCharacter(gameCharacter);
 		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
@@ -182,24 +182,25 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "AdminNewPlayer.do" /* , method = RequestMethod.POST */)
-	public ModelAndView newPlayer( ModelAndView mv, Player player, Integer integerUserTypeId, HttpSession session) {
-//		player.setUserType(new UserType(integerUserTypeId));
+	public ModelAndView newPlayer(ModelAndView mv, Player player, Integer integerUserTypeId, HttpSession session) {
+		// player.setUserType(new UserType(integerUserTypeId));
 		
-		String emailError = "This Email Already Exists!";
-		String displayNameError = "This Display Name Already Exists!";
-		
-		if(dao.checkEmail(player) == true){
+		String displayNameError;
+		String emailError;
+
+		if (dao.checkDisplayName(player) == true) {
+			displayNameError = "This Display Name Already Exists!";
+			mv.addObject("displayNameError", displayNameError);
+		} else if (dao.checkEmail(player) == true) {
+			emailError = "This Email Already Exists!";
 			mv.addObject("emailError", emailError);
-		}	
-		
-		if(dao.checkDisplayName(player) == true) {
-			mv.addObject("displayError", displayNameError);
+		} else {
+
+			List<Player> players = dao.indexPlayers();
+			dao.createPlayer(player);
+			mv.addObject("players", players);
+
 		}
-		dao.createPlayer(player);
-		List<Player> players = dao.indexPlayers();
-
-		mv.addObject("players", players);
-
 		mv.setViewName("WEB-INF/views/admin/adminPlayer.jsp");
 		return mv;
 	}
@@ -248,7 +249,7 @@ public class AdminController {
 		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
 		mv.addObject("gameCharacters", gameCharacters);
-		
+
 		Quest quest = dao.showQuest(id);
 
 		mv.addObject("quest", quest);
@@ -297,9 +298,9 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "AdminNewStage.do" /* , method = RestageMethod.POST */)
-	public ModelAndView newStage(ModelAndView mv, Integer questId, Stage stage, Integer gameCharacterId, HttpSession session) {
-		
-		
+	public ModelAndView newStage(ModelAndView mv, Integer questId, Stage stage, Integer gameCharacterId,
+			HttpSession session) {
+
 		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
 		mv.addObject("gameCharacters", gameCharacters);
@@ -307,9 +308,9 @@ public class AdminController {
 		Quest quest = dao.showQuest(questId);
 
 		mv.addObject("quest", quest);
-		
+
 		stage.setGameCharacter(dao.showGameCharacter(gameCharacterId));
-		
+
 		List<Quest> quests = new ArrayList<Quest>();
 		quests.add(quest);
 		stage.setQuests(quests);
@@ -325,7 +326,7 @@ public class AdminController {
 		dao.updateStage(id, stage);
 
 		Quest quest = dao.showQuest(questId);
-		
+
 		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
 		mv.addObject("gameCharacters", gameCharacters);
@@ -339,11 +340,10 @@ public class AdminController {
 	@RequestMapping(path = "AdminDeleteStage.do" /* , method = RestageMethod.GET */)
 	public ModelAndView deleteStage(ModelAndView mv, Integer questId, Integer id, HttpSession session) {
 
-		
 		List<GameCharacter> gameCharacters = dao.indexGameCharacters();
 
 		mv.addObject("gameCharacters", gameCharacters);
-		
+
 		Boolean successBool = dao.destroyStage(id);
 		mv.addObject("successBool", successBool);
 

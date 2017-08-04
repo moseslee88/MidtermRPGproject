@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,4 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 	@PersistenceContext
 	private EntityManager em;
+
+	
+	
 }
