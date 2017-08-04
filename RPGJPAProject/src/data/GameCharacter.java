@@ -62,7 +62,9 @@ public class GameCharacter {
 	@Transient
 	private int hp;
 	@Transient
-	private List<Item> equipment;
+	private Item weapon;
+	@Transient
+	private Item armor;
 	@Transient
 	private int stamina;
 	@ManyToMany
@@ -156,8 +158,10 @@ public class GameCharacter {
 	private void resetStamina() {
 		this.stamina = this.energy;
 	}
+	
 	private void checkAndUseItemByType(Item item) {
 		if(item.getTypeOfItem().equals(TypeOfItem.weapon)) {
+			equipment. = item;
 			
 		}
 		if(item.getTypeOfItem().equals(TypeOfItem.armor)) {
