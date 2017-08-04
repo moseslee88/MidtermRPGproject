@@ -17,12 +17,14 @@
 
 
 <!-- Page Body -->
-<body>
+<body id="boo">
 	<jsp:include page="../../partials/_nav.jsp"></jsp:include>
 
 	<div class="container">
 		<div class="page-header">
-			<h2>Create Character</h2>
+			<div id="title">  
+			<h2>Create Character</h2> 
+			</div>
 		</div>
 		<div class="container">
 			<form action="PlayerCreatesChar.do" method="POST">
@@ -39,7 +41,7 @@
 					name="lightning_r" value="0" /> <br /> Blood Resistance: <input
 					type="number" name="blood_r" value="0" />				
          <br>
-        Image: <select name="image" id="images" class="icon-menu">
+        Image: <select name="image" id="image" class="icon-menu">
 
 <option value="">Select an Image</option>
 <option value="../../images/Knight.jpg">Knight</option>
