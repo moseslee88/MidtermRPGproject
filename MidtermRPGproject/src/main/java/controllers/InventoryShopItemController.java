@@ -24,8 +24,14 @@ public class InventoryShopItemController {
 	@Autowired
 	private AdminDao dao2;
 
-	
 	@RequestMapping(path="BattleGear.do")
+	public ModelAndView battleGearRoute(ModelAndView mv, HttpSession session) {
+		
+		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path="setBattleGear.do")
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, GameCharacter gameCharacter) {
 		
 		
