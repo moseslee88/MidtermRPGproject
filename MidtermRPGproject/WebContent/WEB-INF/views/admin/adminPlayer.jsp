@@ -47,6 +47,7 @@
 					<c:choose>
 						<c:when test= "${emailError != null} ">
 						${emailError}
+						<h1>error</h1>
 						</c:when>
 						
 						<c:otherwise>
@@ -56,7 +57,14 @@
 					
 					
 					Password: <input type="text" name="password"> <br>
+					<c:choose>
+						<c:when test="${displayNameError != null}">
+						${displayNameError}
+						</c:when>
+						<c:otherwise>
 					Display Name: <input type="text" name="displayName"> <br>
+						</c:otherwise>
+					</c:choose>
 						<button type="submit" value="Submit">Create!</button>
 					</form>
 					</c:when>

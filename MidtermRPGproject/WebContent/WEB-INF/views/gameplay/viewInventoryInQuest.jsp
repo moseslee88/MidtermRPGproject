@@ -24,7 +24,16 @@
 		<div class="container">
 <!-- Page Content -->
 <!-- in: stageConclusion -->
-<!-- out: stageConclusion -->	
+<!-- out: stageConclusion -->
+	<h3>Select</h3>
+					<form action="GetCharacters.do" >
+						<select name="id">
+							<c:forEach var="character" items="${gameCharacters}">
+								<option value="${character.id}">${character.id}: ${character.name}  ${character.image }</option>
+							</c:forEach>
+						</select>
+						<button type="submit" value="Submit">Change!</button>
+						</form>
 		
 		
 		

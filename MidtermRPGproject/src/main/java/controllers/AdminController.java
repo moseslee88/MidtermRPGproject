@@ -207,6 +207,23 @@ public class AdminController {
 
 	@RequestMapping(path = "AdminEditPlayer.do" /* , method = RequestMethod.POST */)
 	public ModelAndView editPlayer(ModelAndView mv, Integer id, Player player, HttpSession session) {
+		
+		String displayNameError;
+		String emailError;
+
+		if (dao.checkDisplayName(player) == true) {
+			displayNameError = "This Display Name Already Exists!";
+			mv.addObject("displayNameError", displayNameError);
+		} else if (dao.checkEmail(player) == true) {
+			emailError = "This Email Already Exists!";
+			mv.addObject("emailError", emailError);
+		} else {
+
+			List<Player> players = dao.indexPlayers();
+			dao.createPlayer(player);
+			mv.addObject("players", players);
+
+		}
 
 		dao.updatePlayer(id, player);
 
