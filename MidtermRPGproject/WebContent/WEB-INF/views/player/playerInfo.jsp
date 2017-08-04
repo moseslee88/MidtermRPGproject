@@ -26,7 +26,8 @@
 		<div class="container">
 <!-- Page Content -->
 <!-- in: login -->
-<!-- out: characterInfo, friendList, createQuest, report, createCharacter -->	
+<!-- out: characterInfo, friendList, createQuest, report, createCharacter 
+WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Character-->	
 		PLAYER STUFF HERE
 		<h5>${players }</h5>
 <c:forEach items="${players}" var="s">
@@ -38,6 +39,14 @@
 			</ul>
 			
 			</c:forEach>
+			
+			 <!--Button goes here for create new character -->
+			<form action="PlayerCreateForm.do" method="GET">
+				<input type="submit" name="Create a New Character!" value="Create a new Character!">
+			</form>
+			
+			
+		
 			
 			
 			

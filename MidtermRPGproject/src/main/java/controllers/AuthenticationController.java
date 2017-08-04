@@ -2,6 +2,7 @@ package controllers;
 
 import java.security.NoSuchAlgorithmException;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,27 +43,46 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(path = "AuthenticationRoute.do")
-	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password, Player p,
+	public String userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelAndView mv, HttpSession session) {
 		// TODO: implement user login here
-		mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
-		System.out.println(dao.findUserPasswordByEmail(email) + " from database");
-	    System.out.println(password + " from user");
-	    dao.login(p);
-	    boolean passWordMatches  = edao.matches(password, dao.findUserPasswordByEmail(email));
-	        //print out true or false for password matching
-	        System.out.println(passWordMatches);         
-	       // User u = ud.validate(email, password);
-	        if (p != null && passWordMatches) {
-                session.setAttribute("player", p);
-                session.setAttribute("players", dao.indexPlayers());
-	            return mv;
+		//mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
+		//System.out.println(dao.findUserPasswordByEmail(email) + " from database");
+	    //System.out.println(password + " from user");
+	//boolean passWordMatches  = edao.matches(password, dao.findUserPasswordByEmail(email));
+	                    //print out true or false for password matching
+	       // System.out.println(passWordMatches);         
 
-	        } else {
-	        	mv.setViewName("/WEB-INF/views/player/authentication/login.jsp");
-	            return mv;
+	       // try{
+	        //	if (email != null && password!= null && passWordMatches) {
+               // session.setAttribute("player",dao.login(email, password));
+               // mv.addObject("player", dao.login(email, password));
+               // session.setAttribute("players", dao.indexPlayers());
+                //mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
+	            //return mv;
+	            
+	            
+	            
+	            
+	            
+
+		        	if (email != " " || password != " " ) {
+		        		//boolean passWordMatches  = edao.matches(password, dao.findUserPasswordByEmail(email));
+		        		      //print out true or false for password matching
+		        		//System.out.println(passWordMatches);   
+		        		dao.login(email, password);
+		        		Player p = dao.login(email, password);
+	                session.setAttribute("player",dao.login(email, password));
+	                mv.addObject("player", dao.login(email, password));
+	                session.setAttribute("players", dao.indexPlayers());
+	                mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
+	                return "/WEB-INF/views/player/playerInfo.jsp";
+	        	}
+		    else {
+		        		return "/WEB-INF/views/player/authentication/login.jsp";
+		     }
 	}
-	}
+
 
 	@RequestMapping(path = "CreatePlayer.do")
 	public ModelAndView gotNewlyCreatedPlayerAndAddedtoList(Player player, ModelAndView mv, HttpSession session) {

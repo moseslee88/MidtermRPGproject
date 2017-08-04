@@ -43,7 +43,18 @@
 					<h3>New</h3>
 					<form action="AdminNewPlayer.do" >
 					User Type ID: <input type="number" name="integerUserTypeId" min="1" max ="2"> <br>
-					Email: <input type="text" name="email"> <br>
+					
+					<c:choose>
+						<c:when test= "${emailError != null} ">
+						${emailError}
+						</c:when>
+						
+						<c:otherwise>
+						Email: <input type="text" name="email"> <br>
+						</c:otherwise>
+					</c:choose>
+					
+					
 					Password: <input type="text" name="password"> <br>
 					Display Name: <input type="text" name="displayName"> <br>
 						<button type="submit" value="Submit">Create!</button>
