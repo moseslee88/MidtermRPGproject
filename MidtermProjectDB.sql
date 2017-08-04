@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS `player` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-  UNIQUE INDEX `password_UNIQUE` (`password` ASC),
   UNIQUE INDEX `display_name_UNIQUE` (`display_name` ASC))
 ENGINE = InnoDB;
 
@@ -64,12 +63,8 @@ CREATE TABLE IF NOT EXISTS `game_character` (
   `lightning_r` INT NULL,
   `blood_r` INT NULL,
   `level` INT NULL,
-  `experience_given` INT NULL,
-  `experience_total` INT NULL,
-  `ability_points` INT NULL,
-  `stat_points` INT NULL,
-  `active` TINYINT(1) NULL,
   `inventory_id` INT NULL,
+  `image` VARCHAR(256) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_character_player1_idx` (`player_id` ASC),
   INDEX `fk_game_character_inventory1_idx` (`inventory_id` ASC),
@@ -194,9 +189,6 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `description` VARCHAR(200) NULL,
   `intro` VARCHAR(200) NULL,
   `conclusion` VARCHAR(45) NULL,
-  `level_min` INT NULL,
-  `level_max` INT NULL,
-  `completed` TINYINT(1) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -258,12 +250,9 @@ DROP TABLE IF EXISTS `stage` ;
 CREATE TABLE IF NOT EXISTS `stage` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
-  `level` INT NULL,
   `intro` VARCHAR(45) NULL,
   `conclusion` VARCHAR(45) NULL,
-  `choice` VARCHAR(45) NULL,
   `character_id` INT NULL,
-  `completed` TINYINT(1) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_stage_character1_idx` (`character_id` ASC),
   CONSTRAINT `fk_stage_character1`
@@ -386,6 +375,11 @@ INSERT INTO `inventory` (`id`) VALUES (56);
 INSERT INTO `inventory` (`id`) VALUES (57);
 INSERT INTO `inventory` (`id`) VALUES (58);
 INSERT INTO `inventory` (`id`) VALUES (59);
+INSERT INTO `inventory` (`id`) VALUES (60);
+INSERT INTO `inventory` (`id`) VALUES (61);
+INSERT INTO `inventory` (`id`) VALUES (62);
+INSERT INTO `inventory` (`id`) VALUES (63);
+INSERT INTO `inventory` (`id`) VALUES (64);
 
 COMMIT;
 
@@ -395,62 +389,68 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (1, 1, 'Banshee', 60, 100, 11, 19, 20, 10, 20, 10, 20, 1, 36, 0, 0, 0, TRUE, 3);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (2, 1, 'Basilisk', 80, 100, 18, 12, 10, 20, 10, 20, 10, 1, 38, 0, 0, 0, TRUE, 4);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (3, 1, 'Black Cat', 60, 100, 10, 20, 10, 20, 10, 10, 10, 1, 36, 0, 0, 0, TRUE, 5);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (4, 1, 'Black Dog', 70, 100, 12, 18, 15, 10, 20, 10, 10, 1, 37, 0, 0, 0, TRUE, 6);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (5, 1, 'Bogle', 60, 100, 10, 20, 10, 10, 10, 10, 20, 1, 36, 0, 0, 0, TRUE, 7);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (6, 1, 'Boogyman', 100, 100, 15, 15, 15, 15, 15, 15, 15, 1, 40, 0, 0, 0, TRUE, 8);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (7, 1, 'Centaur', 120, 100, 20, 10, 20, 10, 10, 10, 20, 1, 42, 0, 0, 0, TRUE, 9);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (8, 1, 'Cerberus', 120, 100, 15, 15, 15, 10, 10, 15, 15, 1, 42, 0, 0, 0, TRUE, 10);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (9, 1, 'Chimera', 110, 100, 10, 20, 10, 20, 20, 20, 15, 1, 41, 0, 0, 0, TRUE, 11);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (10, 1, 'Cockatrice', 90, 100, 12, 15, 10, 10, 10, 20, 10, 1, 36, 0, 0, 0, TRUE, 12);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (11, 1, 'Cyclops', 100, 100, 15, 15, 10, 10, 15, 20, 10, 1, 40, 0, 0, 0, TRUE, 13);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (12, 1, 'Demon', 100, 100, 12, 18, 15, 20, 10, 15, 20, 1, 40, 0, 0, 0, TRUE, 14);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (13, 1, 'Doppelganger', 100, 100, 15, 15, 10, 10, 10, 10, 10, 1, 40, 0, 0, 0, TRUE, 15);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (14, 1, 'Dragon', 200, 100, 25, 15, 15, 25, 15, 15, 10, 1, 60, 0, 0, 0, TRUE, 16);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (15, 1, 'Dwarf', 110, 100, 18, 12, 15, 10, 20, 10, 10, 1, 41, 0, 0, 0, TRUE, 17);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (16, 1, 'Elf', 90, 100, 12, 18, 10, 10, 10, 20, 10, 1, 39, 0, 0, 0, TRUE, 18);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (17, 1, 'Fairy', 50, 100, 10, 20, 15, 15, 15, 15, 10, 1, 35, 0, 0, 0, TRUE, 19);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (18, 1, 'Gnome', 80, 100, 14, 16, 10, 10, 20, 15, 10, 1, 38, 0, 0, 0, TRUE, 20);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (19, 1, 'Goblin', 80, 100, 14, 16, 10, 15, 10, 15, 15, 1, 38, 0, 0, 0, TRUE, 21);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (20, 1, 'Golem', 160, 100, 25, 5, 20, 20, 20, 15, 10, 1, 46, 0, 0, 0, TRUE, 22);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (21, 1, 'Gorgon', 110, 100, 13, 17, 10, 10, 15, 20, 15, 1, 41, 0, 0, 0, TRUE, 23);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (22, 1, 'Griffin', 120, 100, 15, 15, 15, 10, 10, 10, 10, 1, 42, 0, 0, 0, TRUE, 24);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (23, 1, 'Grim Reaper', 10, 100, 2, 28, 20, 20, 20, 20, 20, 1, 31, 0, 0, 0, TRUE, 25);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (24, 1, 'Hurrikane', 130, 100, 20, 12, 20, 20, 20, 10, 20, 1, 45, 0, 0, 0, TRUE, 26);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (25, 1, 'Hydra', 200, 100, 20, 10, 20, 15, 15, 15, 10, 1, 50, 0, 0, 0, TRUE, 27);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (26, 1, 'Imp', 60, 100, 10, 20, 10, 20, 10, 15, 15, 1, 36, 0, 0, 0, TRUE, 28);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (27, 1, 'Ladon', 80, 100, 18, 12, 10, 20, 10, 20, 10, 1, 38, 0, 0, 0, TRUE, 29);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (28, 1, 'Leprechaun', 70, 100, 10, 20, 15, 10, 15, 15, 10, 1, 37, 0, 0, 0, TRUE, 30);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (29, 1, 'Manticore', 110, 100, 18, 12, 15, 15, 10, 10, 10, 1, 41, 0, 0, 0, TRUE, 31);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (30, 1, 'Mermaid', 80, 100, 14, 16, 15, 10, 20, 10, 10, 1, 38, 0, 0, 0, TRUE, 32);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (31, 1, 'Minotaur', 120, 100, 17, 13, 15, 10, 10, 20, 10, 1, 42, 0, 0, 0, TRUE, 33);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (32, 1, 'Nemean Lion', 120, 100, 16, 14, 10, 20, 10, 10, 10, 1, 42, 0, 0, 0, TRUE, 34);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (34, 1, 'Nymph', 70, 100, 10, 20, 10, 10, 15, 20, 10, 1, 37, 0, 0, 0, TRUE, 35);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (35, 1, 'Ogre', 130, 100, 21, 19, 20, 10, 20, 10, 15, 1, 53, 0, 0, 0, TRUE, 36);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (36, 1, 'Orthos', 110, 100, 18, 12, 15, 10, 10, 15, 15, 1, 41, 0, 0, 0, TRUE, 37);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (37, 1, 'Pegasus', 120, 100, 16, 14, 10, 20, 10, 10, 10, 1, 42, 0, 0, 0, TRUE, 38);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (38, 1, 'Phoenix', 50, 100, 12, 18, 10, 30, 10, 15, 10, 1, 35, 0, 0, 0, TRUE, 39);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (39, 1, 'Prisoner A', 130, 100, 12, 20, 20, 20, 10, 20, 20, 1, 45, 0, 0, 0, TRUE, 40);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (40, 1, 'Satyr', 80, 100, 10, 20, 10, 10, 20, 15, 10, 1, 38, 0, 0, 0, TRUE, 41);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (41, 1, 'Sea Monster', 150, 100, 25, 10, 15, 15, 25, 10, 15, 1, 50, 0, 0, 0, TRUE, 42);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (42, 1, 'Shade', 90, 100, 15, 15, 15, 20, 10, 10, 10, 1, 39, 0, 0, 0, TRUE, 43);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (43, 1, 'Siren', 90, 100, 13, 17, 10, 15, 25, 10, 10, 1, 39, 0, 0, 0, TRUE, 44);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (44, 1, 'Sphinx', 110, 100, 17, 13, 15, 20, 10, 10, 10, 1, 41, 0, 0, 0, TRUE, 45);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (45, 1, 'Sprite', 20, 100, 5, 25, 15, 20, 10, 20, 10, 1, 32, 0, 0, 0, TRUE, 46);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (46, 1, 'Thunderbird', 50, 100, 12, 18, 10, 15, 10, 30, 10, 1, 35, 0, 0, 0, TRUE, 47);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (47, 1, 'Typhon', 170, 100, 22, 10, 15, 20, 15, 15, 15, 1, 49, 0, 0, 0, TRUE, 48);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (48, 1, 'Unicorn', 120, 100, 18, 12, 10, 10, 15, 15, 10, 1, 42, 0, 0, 0, TRUE, 49);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (49, 1, 'Valkyrie', 110, 100, 16, 14, 15, 15, 15, 15, 15, 1, 41, 0, 0, 0, TRUE, 50);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (50, 1, 'Vampire', 120, 100, 14, 16, 15, 10, 10, 10, 25, 1, 42, 0, 0, 0, TRUE, 51);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (51, 1, 'Wendigo', 160, 100, 16, 16, 15, 10, 15, 20, 20, 1, 48, 0, 0, 0, TRUE, 52);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (52, 1, 'Werewolf', 120, 100, 16, 14, 15, 10, 10, 10, 15, 1, 42, 0, 0, 0, TRUE, 53);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (53, 1, 'Will-o\'-the-wisp', 20, 100, 5, 25, 15, 25, 10, 15, 10, 1, 32, 0, 0, 0, TRUE, 54);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (54, 1, 'Wraith', 60, 100, 12, 18, 20, 10, 20, 10, 15, 1, 36, 0, 0, 0, TRUE, 55);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (55, 1, 'Yeti', 110, 100, 20, 10, 20, 10, 10, 10, 20, 1, 41, 0, 0, 0, TRUE, 56);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (56, 1, 'Zombie', 90, 100, 18, 12, 15, 10, 20, 15, 20, 1, 39, 0, 0, 0, TRUE, 57);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `experience_given`, `experience_total`, `ability_points`, `stat_points`, `active`, `inventory_id`) VALUES (57, 2, 'User', 100, 100, 20, 20, 20, 20, 20, 20, 20, 1, 0, 1, 0, 2, TRUE, 58);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (1, 1, 'Banshee', 60, 100, 11, 19, 20, 10, 20, 10, 20, 1, 3, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (2, 1, 'Basilisk', 80, 100, 18, 12, 10, 20, 10, 20, 10, 1, 4, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (3, 1, 'Black Cat', 60, 100, 10, 20, 10, 20, 10, 10, 10, 1, 5, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (4, 1, 'Black Dog', 70, 100, 12, 18, 15, 10, 20, 10, 10, 1, 6, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (5, 1, 'Bogle', 60, 100, 10, 20, 10, 10, 10, 10, 20, 1, 7, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (6, 1, 'Boogyman', 100, 100, 15, 15, 15, 15, 15, 15, 15, 1, 8, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (7, 1, 'Centaur', 120, 100, 20, 10, 20, 10, 10, 10, 20, 1, 9, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (8, 1, 'Cerberus', 120, 100, 15, 15, 15, 10, 10, 15, 15, 1, 10, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (9, 1, 'Chimera', 110, 100, 10, 20, 10, 20, 20, 20, 15, 1, 11, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (10, 1, 'Cockatrice', 90, 100, 12, 15, 10, 10, 10, 20, 10, 1, 12, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (11, 1, 'Cyclops', 100, 100, 15, 15, 10, 10, 15, 20, 10, 1, 13, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (12, 1, 'Demon', 100, 100, 12, 18, 15, 20, 10, 15, 20, 1, 14, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (13, 1, 'Doppelganger', 100, 100, 15, 15, 10, 10, 10, 10, 10, 1, 15, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (14, 1, 'Dragon', 200, 100, 25, 15, 15, 25, 15, 15, 10, 1, 16, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (15, 1, 'Dwarf', 110, 100, 18, 12, 15, 10, 20, 10, 10, 1, 17, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (16, 1, 'Elf', 90, 100, 12, 18, 10, 10, 10, 20, 10, 1, 18, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (17, 1, 'Fairy', 50, 100, 10, 20, 15, 15, 15, 15, 10, 1, 19, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (18, 1, 'Gnome', 80, 100, 14, 16, 10, 10, 20, 15, 10, 1, 20, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (19, 1, 'Goblin', 80, 100, 14, 16, 10, 15, 10, 15, 15, 1, 21, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (20, 1, 'Golem', 160, 100, 25, 5, 20, 20, 20, 15, 10, 1, 22, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (21, 1, 'Gorgon', 110, 100, 13, 17, 10, 10, 15, 20, 15, 1, 23, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (22, 1, 'Griffin', 120, 100, 15, 15, 15, 10, 10, 10, 10, 1, 24, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (23, 1, 'Grim Reaper', 10, 100, 2, 28, 20, 20, 20, 20, 20, 1, 25, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (24, 1, 'Hurrikane', 130, 100, 20, 12, 20, 20, 20, 10, 20, 1, 26, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (25, 1, 'Hydra', 200, 100, 20, 10, 20, 15, 15, 15, 10, 1, 27, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (26, 1, 'Imp', 60, 100, 10, 20, 10, 20, 10, 15, 15, 1, 28, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (27, 1, 'Ladon', 80, 100, 18, 12, 10, 20, 10, 20, 10, 1, 29, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (28, 1, 'Leprechaun', 70, 100, 10, 20, 15, 10, 15, 15, 10, 1, 30, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (29, 1, 'Manticore', 110, 100, 18, 12, 15, 15, 10, 10, 10, 1, 31, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (30, 1, 'Mermaid', 80, 100, 14, 16, 15, 10, 20, 10, 10, 1, 32, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (31, 1, 'Minotaur', 120, 100, 17, 13, 15, 10, 10, 20, 10, 1, 33, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (32, 1, 'Nemean Lion', 120, 100, 16, 14, 10, 20, 10, 10, 10, 1, 34, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (34, 1, 'Nymph', 70, 100, 10, 20, 10, 10, 15, 20, 10, 1, 35, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (35, 1, 'Ogre', 130, 100, 21, 19, 20, 10, 20, 10, 15, 1, 36, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (36, 1, 'Orthos', 110, 100, 18, 12, 15, 10, 10, 15, 15, 1, 37, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (37, 1, 'Pegasus', 120, 100, 16, 14, 10, 20, 10, 10, 10, 1, 38, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (38, 1, 'Phoenix', 50, 100, 12, 18, 10, 30, 10, 15, 10, 1, 39, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (39, 1, 'Prisoner A', 130, 100, 12, 20, 20, 20, 10, 20, 20, 1, 40, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (40, 1, 'Satyr', 80, 100, 10, 20, 10, 10, 20, 15, 10, 1, 41, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (41, 1, 'Sea Monster', 150, 100, 25, 10, 15, 15, 25, 10, 15, 1, 42, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (42, 1, 'Shade', 90, 100, 15, 15, 15, 20, 10, 10, 10, 1, 43, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (43, 1, 'Siren', 90, 100, 13, 17, 10, 15, 25, 10, 10, 1, 44, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (44, 1, 'Sphinx', 110, 100, 17, 13, 15, 20, 10, 10, 10, 1, 45, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (45, 1, 'Sprite', 20, 100, 5, 25, 15, 20, 10, 20, 10, 1, 46, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (46, 1, 'Thunderbird', 50, 100, 12, 18, 10, 15, 10, 30, 10, 1, 47, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (47, 1, 'Typhon', 170, 100, 22, 10, 15, 20, 15, 15, 15, 1, 48, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (48, 1, 'Unicorn', 120, 100, 18, 12, 10, 10, 15, 15, 10, 1, 49, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (49, 1, 'Valkyrie', 110, 100, 16, 14, 15, 15, 15, 15, 15, 1, 50, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (50, 1, 'Vampire', 120, 100, 14, 16, 15, 10, 10, 10, 25, 1, 51, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (51, 1, 'Wendigo', 160, 100, 16, 16, 15, 10, 15, 20, 20, 1, 52, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (52, 1, 'Werewolf', 120, 100, 16, 14, 15, 10, 10, 10, 15, 1, 53, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (53, 1, 'Will-o\'-the-wisp', 20, 100, 5, 25, 15, 25, 10, 15, 10, 1, 54, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (54, 1, 'Wraith', 60, 100, 12, 18, 20, 10, 20, 10, 15, 1, 55, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (55, 1, 'Yeti', 110, 100, 20, 10, 20, 10, 10, 10, 20, 1, 56, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (56, 1, 'Zombie', 90, 100, 18, 12, 15, 10, 20, 15, 20, 1, 57, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (57, 2, 'User', 100, 100, 20, 20, 20, 20, 20, 20, 20, 1, 58, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (58, 1, 'Boozer', 80, 100, 12, 20, 20, 10, 20, 10, 10, 1, 59, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (59, 1, 'Malone', 120, 100, 16, 16, 15, 15, 15, 10, 10, 1, 60, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (60, 1, 'Condor', 100, 100, 14, 20, 10, 20, 20, 20, 10, 1, 61, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (61, 1, 'Creeper', 120, 100, 20, 12, 20, 10, 10, 20, 15, 1, 62, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (62, 1, 'Ackbar', 90, 100, 18, 12, 10, 15, 15, 15, 10, 1, 63, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (63, 1, 'Silent Monk', 80, 100, 8, 22, 20, 15, 15, 15, 10, 1, 64, NULL);
 
 COMMIT;
 
@@ -499,51 +499,59 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (1, 'Lesser Potion', 1, 5, 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (2, 'Potion', 2, 8, 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (3, 'Greater Potion', 3, 13, 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (4, 'Lesser Draught', 1, 5, 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (5, 'Draught', 2, 8, 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (6, 'Greater Draught', 3, 13, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (1, 'Lesser Potion', 1, 3, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (2, 'Potion', 2, 5, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (3, 'Greater Potion', 3, 8, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (4, 'Lesser Draught', 1, 3, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (5, 'Draught', 2, 5, 'edible', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (6, 'Greater Draught', 3, 8, 'edible', 'physical');
 INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (7, 'Lesser Elixer', 1, 8, 'edible', 'physical');
 INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (8, 'Elixer', 2, 13, 'edible', 'physical');
 INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (9, 'Greater Elixer', 3, 21, 'edible', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (10, 'Sitck', 1, 13, 'weapon', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (11, 'Mace', 2, 21, 'weapon', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (12, 'Hammer', 3, 34, 'weapon', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (13, 'Shield', 1, 13, 'armor', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (14, 'Mail', 2, 21, 'armor', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (15, 'Armor', 3, 34, 'armor', 'physical');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (16, 'Earring of Burning', 1, 21, 'weapon', 'fire');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (17, 'Tiara of Fire', 2, 34, 'weapon', 'fire');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (18, 'Crown of Flame', 3, 55, 'weapon', 'fire');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (19, 'Fire Resistant Hat', 1, 21, 'armor', 'fire');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (20, 'Fire Retardant Hood', 2, 34, 'armor', 'fire');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (21, 'Fireproof Helm', 3, 55, 'armor', 'fire');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (22, 'Ring of Snow', 1, 21, 'weapon', 'frost');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (23, 'Band of Freezing', 2, 34, 'weapon', 'frost');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (24, 'Circle of Permafrost', 3, 55, 'weapon', 'frost');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (25, 'Warm Gloves', 1, 21, 'armor', 'frost');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (26, 'Frostbite Mittens', 2, 34, 'armor', 'frost');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (27, 'Freezeproof Gauntlets', 3, 55, 'armor', 'frost');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (28, 'Sandals of Shocking', 1, 21, 'weapon', 'lightning');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (29, 'Footgear of Electricity', 2, 34, 'weapon', 'lightning');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (30, 'Closed-toe Shoes of Zaps', 3, 55, 'weapon', 'lightning');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (31, 'Rubber Shoes', 1, 21, 'armor', 'lightning');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (32, 'Shock Resistant Boots', 2, 34, 'armor', 'lightning');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (33, 'Staticproof Socks', 3, 55, 'armor', 'lightning');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (34, 'Shiv of Bleeding', 1, 32, 'weapon', 'blood');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (35, 'Fang', 2, 45, 'weapon', 'blood');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (36, 'Cleaver', 3, 66, 'weapon', 'blood');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (37, 'Moisture Wicking Shirt', 1, 32, 'armor', 'blood');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (38, 'Stain Resistant Cloak', 2, 45, 'armor', 'blood');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (39, 'Bloody Chestplate', 3, 66, 'armor', 'blood');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (40, 'Knife of the Dark', 1, 32, 'weapon', 'dark');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (41, 'Hidden Dagger', 2, 45, 'weapon', 'dark');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (42, 'Blade of Obscurity', 3, 66, 'weapon', 'dark');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (43, 'Twilight Necklace', 1, 32, 'armor', 'dark');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (44, 'Dusk Collar', 2, 45, 'armor', 'dark');
-INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (45, 'Amulet of …', 3, 66, 'armor', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (10, 'Sitck', 1, 34, 'weapon', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (11, 'Mace', 2, 55, 'weapon', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (12, 'Hammer', 3, 89, 'weapon', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (13, 'Shield', 1, 21, 'armor', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (14, 'Mail', 2, 34, 'armor', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (15, 'Armor', 3, 55, 'armor', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (16, 'Earring of Burning', 1, 35, 'weapon', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (17, 'Tiara of Fire', 2, 56, 'weapon', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (18, 'Crown of Flame', 3, 90, 'weapon', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (19, 'Fire Resistant Hat', 1, 22, 'armor', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (20, 'Fire Retardant Hood', 2, 35, 'armor', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (21, 'Fireproof Helm', 3, 56, 'armor', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (22, 'Ring of Snow', 1, 36, 'weapon', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (23, 'Band of Freezing', 2, 57, 'weapon', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (24, 'Circle of Permafrost', 3, 91, 'weapon', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (25, 'Warm Gloves', 1, 23, 'armor', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (26, 'Frostbite Mittens', 2, 36, 'armor', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (27, 'Freezeproof Gauntlets', 3, 57, 'armor', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (28, 'Sandals of Shocking', 1, 37, 'weapon', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (29, 'Footgear of Electricity', 2, 58, 'weapon', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (30, 'Closed-toe Shoes of Zaps', 3, 92, 'weapon', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (31, 'Rubber Shoes', 1, 24, 'armor', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (32, 'Shock Resistant Boots', 2, 37, 'armor', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (33, 'Staticproof Socks', 3, 58, 'armor', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (34, 'Shiv of Bleeding', 1, 38, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (35, 'Fang', 2, 59, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (36, 'Cleaver', 3, 93, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (37, 'Moisture Wicking Shirt', 1, 25, 'armor', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (38, 'Stain Resistant Cloak', 2, 38, 'armor', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (39, 'Bloody Chestplate', 3, 59, 'armor', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (40, 'Knife of the Dark', 1, 39, 'weapon', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (41, 'Hidden Dagger', 2, 60, 'weapon', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (42, 'Blade of Obscurity', 3, 94, 'weapon', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (43, 'Twilight Necklace', 1, 25, 'armor', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (44, 'Dusk Collar', 2, 39, 'armor', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (45, 'Amulet of …', 3, 60, 'armor', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (46, 'Gjallarhorn', 3, 96, 'weapon', 'fire');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (47, 'Monk Hair Helmet', 3, 62, 'armor', 'physical');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (48, 'Thorn', 2, 41, 'weapon', 'lightning');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (49, 'Super-Good-Advice', 1, 41, 'weapon', 'frost');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (50, 'Red Death', 2, 62, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (51, 'Black Spindle', 3, 98, 'weapon', 'dark');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (52, 'Necrochasim', 2, 41, 'weapon', 'blood');
+INSERT INTO `item` (`id`, `name`, `item_level`, `value`, `type`, `element`) VALUES (53, 'Frying Pan', 3, 68, 'armor', 'physical');
 
 COMMIT;
 
@@ -739,6 +747,23 @@ INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (5, 
 INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (3, 54, 163);
 INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (5, 55, 164);
 INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (24, 56, 165);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (4, 59, 166);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (6, 59, 167);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (14, 59, 168);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (2, 58, 169);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (10, 58, 170);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (25, 58, 171);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (1, 60, 172);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (15, 60, 173);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (23, 60, 174);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (28, 60, 175);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (30, 61, 176);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (13, 62, 177);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (10, 62, 178);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (20, 62, 179);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (21, 63, 180);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (13, 63, 181);
+INSERT INTO `character_ability` (`ability_id`, `character_id`, `id`) VALUES (14, 63, 182);
 
 COMMIT;
 
@@ -748,7 +773,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `quest` (`id`, `name`, `description`, `intro`, `conclusion`, `level_min`, `level_max`, `completed`) VALUES (1, 'Beginning Again', 'You were trained to fight, so do that!', 'quest intro', 'quest conclusion', 1, 10, FALSE);
+INSERT INTO `quest` (`id`, `name`, `description`, `intro`, `conclusion`) VALUES (1, 'Beginning Again', 'You were trained to fight, so do that!', 'quest intro', 'quest conclusion');
 
 COMMIT;
 
@@ -779,7 +804,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `stage` (`id`, `name`, `level`, `intro`, `conclusion`, `choice`, `character_id`, `completed`) VALUES (1, 'The First Stage', 1, 'You entered the world under suspicious circumstances', 'They trained you to fight, and you did.', 'placeholder choice', 57, FALSE);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (1, 'The First Stage', 'You entered the world under suspicious circumstances', 'They trained you to fight, and you did.', 57);
 
 COMMIT;
 
