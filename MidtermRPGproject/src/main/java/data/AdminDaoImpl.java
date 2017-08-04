@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.LazyInitializationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +17,16 @@ public class AdminDaoImpl implements AdminDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	@Autowired
+	private EncryptionDAO encryptor;
+
 	public List<GameCharacter> indexGameCharacters() {
 		String q = "select g from GameCharacter g";
 		try {
 			return em.createQuery(q, GameCharacter.class).getResultList();
 		} catch (LazyInitializationException e) {
 			return new ArrayList<GameCharacter>();
-		} 
+		}
 	}
 
 	public GameCharacter showGameCharacter(int id) {
@@ -146,6 +150,14 @@ public class AdminDaoImpl implements AdminDao {
 
 	public Player createPlayer(Player player) {
 
+		if (player.getPassword() == null) {
+			try {
+				player.setPassword(encryptor.encrypt(player.getPassword()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		em.persist(player);
 		em.flush();
 
@@ -155,8 +167,8 @@ public class AdminDaoImpl implements AdminDao {
 	public Player updatePlayer(int id, Player player) {
 
 		Player managedPlayer = em.find(Player.class, id);
-		
-		if(player.getUserType() <= 2) {
+
+		if (player.getUserType() <= 2) {
 			managedPlayer.setUserType(player.getUserType());
 		}
 		if (player.getDisplayName() != null) {
@@ -165,14 +177,24 @@ public class AdminDaoImpl implements AdminDao {
 		if (player.getEmail() != null) {
 			managedPlayer.setEmail(player.getEmail());
 		}
-		if (player.getPassword() != null) {
-			//		managedPlayer.setFriends(player.getFriends());
-			managedPlayer.setPassword(player.getPassword());
-		}
+
+		if (player.getPassword() != null)
+			try {
+				player.setPassword(encryptor.encrypt(player.getPassword()));
+				managedPlayer.setPassword(player.getPassword());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		//
+		// if (player.getPassword() != null) {
+		// // managedPlayer.setFriends(player.getFriends());
+		// managedPlayer.setPassword(player.getPassword());
+		// }
 		if (player.getQuests() != null) {
 			managedPlayer.setQuests(player.getQuests());
 		}
-		//		managedPlayer.setGameCharacters(player.getGameCharacters());
+		// managedPlayer.setGameCharacters(player.getGameCharacters());
 		return player;
 	}
 
@@ -213,7 +235,7 @@ public class AdminDaoImpl implements AdminDao {
 			managed.setName(quest.getName());
 		}
 		if (quest.getConclusion() != null) {
-			//		managed.setCompleted(quest.getCompleted());
+			// managed.setCompleted(quest.getCompleted());
 			managed.setConclusion(quest.getConclusion());
 		}
 		if (quest.getDescription() != null) {
@@ -222,10 +244,10 @@ public class AdminDaoImpl implements AdminDao {
 		if (quest.getIntro() != null) {
 			managed.setIntro(quest.getIntro());
 		}
-		//		managed.setLevelMax(quest.getLevelMax());
-//		managed.setLevelMin(quest.getLevelMin());
-//		managed.setStages(quest.getStages());
-//		managed.setPlayers(quest.getPlayers());
+		// managed.setLevelMax(quest.getLevelMax());
+		// managed.setLevelMin(quest.getLevelMin());
+		// managed.setStages(quest.getStages());
+		// managed.setPlayers(quest.getPlayers());
 		return quest;
 	}
 
@@ -241,7 +263,7 @@ public class AdminDaoImpl implements AdminDao {
 			return true;
 		}
 	}
-	
+
 	public Stage createStage(Stage stage) {
 
 		em.persist(stage);
