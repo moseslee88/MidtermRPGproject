@@ -28,12 +28,12 @@ public class AuthenticationController {
 	// login method must add player to session so it can be used for admin check in
 	// admin controller. thanks brian! -love Mo
 	@RequestMapping(path = "CreatePlayerForm.do"/* , method=RequestMethod.P... ) */)
-	public ModelAndView userRegister(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("display_name") String displayname, @RequestParam("user_type") int usertype,
+	public ModelAndView userRegister(@RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("displayName") String displayName, @RequestParam("user_type") int usertype,
 			ModelAndView mv, Player playa, HttpSession session) throws NoSuchAlgorithmException {
 		playa.setEmail(email);
 		playa.setPassword(password);
 		playa.setUserType(2);  //hardcoded to player
-		playa.setDisplayName("user");
+		playa.setDisplayName(displayName);
 		dao.register(playa);  //here Player playa gets persisted 
 		session.setAttribute("players", dao.indexPlayers());
 		session.setAttribute("player", playa);
@@ -83,9 +83,10 @@ public class AuthenticationController {
 	
 	@RequestMapping(path = "SubmitandGoToLogin.do")
 	public ModelAndView goSubmitAndLogin(Player player, ModelAndView mv, HttpSession session) throws NoSuchAlgorithmException {
-		userRegister(player.getEmail(), player.getPassword(), 2, mv, player, session);
+		userRegister(player.getEmail(), player.getPassword(),  player.getDisplayName(),2, mv, player, session);
+		//userRegister(player.getEmail(), player.getPassword(), 2, mv, player, session);
 		mv.setViewName("/WEB-INF/views/authentication/login.jsp");
-		mv.addObject("player", player);
+		//mv.addObject("player", player);
 		System.out.println(player.toString());
 		return mv;
 	}

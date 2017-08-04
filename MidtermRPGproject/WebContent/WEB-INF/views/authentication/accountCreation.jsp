@@ -30,7 +30,7 @@
 		<form action = "main.jsp" method = "POST">    -->	
 		
 		<form action = "SubmitandGoToLogin.do" method = "POST">  
-         Display Name: <input type = "text" name = displayName>
+         Display Name: <input type = "name" name = displayName> 
          <br />
          Email: <input type = "text" name = "email" />
          <br />

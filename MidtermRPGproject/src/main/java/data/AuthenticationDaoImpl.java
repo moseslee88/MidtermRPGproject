@@ -38,11 +38,12 @@ import org.springframework.transaction.annotation.Transactional;
 		@Override
 		public Player login(Player p) {
 			// TODO user logs in and we check if password matches SHA
-			String q = "SELECT email from Player p";
+			String q = "SELECT p from Player p where p.email = :p.email and p.password = :p.password";
 			String sha =  null;
 			try {
 				sha = encryptor.encrypt(p.getPassword());
-				encryptor.matches(p.getPassword(), em.createQuery(q, Player.class).getSingleResult().getPassword());
+				Boolean result=encryptor.matches(p.getPassword(), em.createQuery(q, Player.class).getSingleResult().getPassword());
+			    System.out.println(result);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				System.out.println("Please enter correct password.");
