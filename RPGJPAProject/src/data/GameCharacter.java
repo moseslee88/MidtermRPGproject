@@ -108,35 +108,35 @@ public class GameCharacter {
 		return damageDone;
 	}
 	private int calculateDamage(GameCharacter enemy, Ability attack) {
-		Double modifyedDamage = 0.0;
+		Double modifiedDamage = 0.0;
 		Double modifyer = .80;
 		double attackPower = attack.getPower();
 		if (attack.getElement().equals(Element.physical)) {
 			double percentResisted = this.getPhysicalR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.fire)) {
 			double percentResisted = this.getFireR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.frost)) {
 			double percentResisted = this.getFrostR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.lightning)) {
 			double percentResisted = this.getLightningR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.blood)) {
 			double percentResisted = this.getBloodR() * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.dark)) {
 			double percentResisted = ((this.getFireR() + this.getBloodR()) / 2) * modifyer;
-			modifyedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
 		}
 
-		double temp = modifyedDamage.doubleValue();
+		double temp = modifiedDamage.doubleValue();
 		return (int) temp;
 	}
 	private void setInitialstats() {

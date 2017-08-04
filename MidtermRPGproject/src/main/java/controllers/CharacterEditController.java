@@ -61,11 +61,16 @@ public class CharacterEditController {
 	
 	
 
-//	@RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
-//	  public String show(@RequestParam("character") GameCharacter newChar, Model model) {
-//		dao.create(newChar);
-//	    model.addAttribute("char", newChar);
-//	    return "WEB-INF/views/player/createCharacter.jsp";
-//	  }
+	@RequestMapping(path = "CreateChar.do", method = RequestMethod.POST)
+	  public String show(@RequestParam("character") GameCharacter newChar, ModelAndView mv, HttpSession session) {
+		newChar.setPlayer((Player) session.getAttribute("player"));
+		dao.create(newChar);
+	    mv.addObject("newChar", newChar);
+	    session.setAttribute("newChar", newChar);
+	    Player p = (Player) session.getAttribute("player");
+	    session.setAttribute("characters", dao.getPlayersGameCharacters(p));
+	    
+	    return "WEB-INF/views/player/createCharacter.jsp";
+	  }
 }
 
