@@ -37,21 +37,43 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 
 		GameCharacter managedChar = em.find(GameCharacter.class, id);
 
-		managedChar.setName(updatedChar.getName());
-		managedChar.setCritical(updatedChar.getCritical());
-		managedChar.setEnergy(updatedChar.getEnergy());
-		managedChar.setExperienceGiven(updatedChar.getExperienceGiven());
-		managedChar.setExperienceTotal(updatedChar.getExperienceTotal());
-		managedChar.setBloodR(updatedChar.getBloodR());
-		managedChar.setFireR(updatedChar.getFireR());
-		managedChar.setFrostR(updatedChar.getFrostR());
-		managedChar.setPhysicalR(updatedChar.getPhysicalR());
-		managedChar.setLightningR(updatedChar.getLightningR());
-		managedChar.setHealth(updatedChar.getHealth());
-		managedChar.setInventory(updatedChar.getInventory());
-		managedChar.setLevel(updatedChar.getLevel());
-		managedChar.setPower(updatedChar.getPower());
-
+		
+		if (updatedChar.getName() != null) {
+			managedChar.setName(updatedChar.getName());
+		}
+		if (updatedChar.getCritical() != 0) {
+			managedChar.setCritical(updatedChar.getCritical());
+		}
+		if (updatedChar.getEnergy()!=0) {
+			managedChar.setEnergy(updatedChar.getEnergy());
+		}
+		if (updatedChar.getBloodR()!=0) {
+			managedChar.setBloodR(updatedChar.getBloodR());
+		}
+		if (updatedChar.getFireR()!=0) {
+			managedChar.setFireR(updatedChar.getFireR());
+		}
+		if (updatedChar.getFrostR()!=0) {
+			managedChar.setFrostR(updatedChar.getFrostR());
+		}
+		if (updatedChar.getPhysicalR()!=0) {
+			managedChar.setPhysicalR(updatedChar.getPhysicalR());
+		}
+		if (updatedChar.getLightningR()!=0) {
+			managedChar.setLightningR(updatedChar.getLightningR());
+		}
+		if (updatedChar.getHealth()!=0) {
+			managedChar.setHealth(updatedChar.getHealth());
+		}
+		if (updatedChar.getInventory()!=null) {
+			managedChar.setInventory(updatedChar.getInventory());
+		}
+		if (updatedChar.getLevel()!=0) {
+			managedChar.setLevel(updatedChar.getLevel());
+		}
+		if (updatedChar.getPower()!=0) {
+			managedChar.setPower(updatedChar.getPower());
+		}
 		return managedChar;
 	}
 
