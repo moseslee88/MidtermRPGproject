@@ -39,32 +39,44 @@ public class InventoryShopItemController {
 	@RequestMapping(path = "SetBattleGear.do")
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer id) {
 		GameCharacter character = dao2.showGameCharacter(id);
+
 		System.out.println("in setBattleGear() in controller");
 
-		if (dao.checkForWeapons(character) == true) {
-			List<Item> weapons = dao.weapons(character);
-			mv.addObject("weapons", weapons);
-			System.out.println("weapon check = true");
+		if (dao.checkForInventory(character) == true) {
+
+			List<Item> inventory = dao.inventory(character);
+			mv.addObject("inventory", inventory);
+
+			if (dao.checkForWeapons(character) == true) {
+				List<Item> weapons = dao.weapons(character);
+				mv.addObject("weapons", weapons);
+				System.out.println("weapon check = true");
+
+			} else {
+				String unarmedWarning = "How do you expect to fight the hordes of darkness?";
+				System.out.println("weapon check = false");
+				mv.addObject("unarmedWarning", unarmedWarning);
+			}
+
+			if (dao.checkForArmor(character) == true) {
+				List<Item> armor = dao.armor(character);
+				mv.addObject("armor", armor);
+			} else {
+				String noArmorWarning = "Not even undergarments?";
+				mv.addObject("noArmorWarning", noArmorWarning);
+			}
+
+			if (dao.checkForEdibles(character) == true) {
+				List<Item> edibles = dao.edibles(character);
+				mv.addObject("edibles", edibles);
+			} else {
+				String noEdibles = "Who needs buffs anyway?";
+				mv.addObject("noEdibles", noEdibles);
+			}
+
 		} else {
-			String unarmedWarning = "How do you expect to fight the hordes of darkness?";
-			System.out.println("weapon check = false");
-			mv.addObject("unarmedWarning", unarmedWarning);
-		}
-		
-		if(dao.checkForArmor(character) == true) {
-			List<Item> armor = dao.armor(character);
-			mv.addObject("armor", armor);
-		} else {
-			String noArmorWarning = "Not even undergarments?";
-			mv.addObject("noArmorWarning", noArmorWarning);
-		}
-		
-		if(dao.checkForEdibles(character) == true) {
-			List<Item> edibles = dao.edibles(character);
-			mv.addObject("edibles", edibles);
-		} else {
-			String noEdibles = "Who needs buffs anyway?";
-			mv.addObject("noEdibles", noEdibles);
+			String noItems = "You go forth into the world cold and alone";
+			mv.addObject("noItems", noItems);
 		}
 
 		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");

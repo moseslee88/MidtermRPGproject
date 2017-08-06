@@ -115,5 +115,21 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 			return false;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Boolean checkForInventory(GameCharacter gameCharacter) {
+		String id = Integer.toString(gameCharacter.getInventory().getId());
+		
+		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+				+ id;
+
+		List<Item> items = em.createNativeQuery(query, Item.class).getResultList();
+		
+		if(items.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
