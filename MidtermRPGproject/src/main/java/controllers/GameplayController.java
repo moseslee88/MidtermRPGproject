@@ -49,7 +49,11 @@ public class GameplayController {
 		System.out.println(enemyCharacter);
 
 		currentCharacter.startFight();
+		mv.addObject("newHealthCurrent",100);
+		mv.addObject("newEnergyCurrent",100);
 		enemyCharacter.startFight();
+		mv.addObject("newHealthEnemy",100);
+		mv.addObject("newEnergyEnemy",100);
 
 		participants.add(currentCharacter);
 		participants.add(enemyCharacter);
@@ -66,7 +70,9 @@ public class GameplayController {
 			// player one turn
 			System.out.println("\n---Player one turn---");
 			GameCharacter currentCharacter = participants.get(0);
+			mv.addObject("currentCharacter", currentCharacter);
 			GameCharacter enemyCharacter = participants.get(1);
+			mv.addObject("enemyCharacter", enemyCharacter);
 
 			System.out.println("1 health" + currentCharacter.getHp());
 			System.out.println("1 energy" + currentCharacter.getStamina());
@@ -97,7 +103,6 @@ public class GameplayController {
 
 			int oldHealthEnemy = (int) (100 * ((double) enemyCharacter.getHp() / (double) enemyCharacter.getHealth()));
 
-			mv.addObject("oldHealthEnemy", "width: " + oldHealthEnemy + "%");
 			System.out.println("old enemy " + oldHealthEnemy);
 
 			enemyCharacter.takeDamage(currentCharacter, attack1);
@@ -107,11 +112,12 @@ public class GameplayController {
 
 			int newEnergyCurrent = (int) (100
 					* ((double) currentCharacter.getStamina() / (double) currentCharacter.getEnergy()));
-			mv.addObject("newEnergyCurrent", "width: " + newEnergyCurrent + "%");
+			mv.addObject("newEnergyCurrent",  newEnergyCurrent);
 			System.out.println("energy current " + newEnergyCurrent);
 
 			int newHealthEnemy = (int) (100 * ((double) enemyCharacter.getHp() / (double) enemyCharacter.getHealth()));
-			mv.addObject("newHealthEnemy", "width: " + (100 - oldHealthEnemy - newHealthEnemy) + "%");
+			mv.addObject("newHealthEnemy",  (newHealthEnemy));
+			mv.addObject("oldHealthEnemy",  (oldHealthEnemy - newHealthEnemy));
 			System.out.println("new enemy " + newHealthEnemy);
 
 			winner = gameplayWinnerCheck(mv, session);
@@ -144,7 +150,6 @@ public class GameplayController {
 				int oldHealthCurrent = (int) (100
 						* ((double) currentCharacter.getHp() / (double) currentCharacter.getHealth()));
 
-				mv.addObject("oldHealthCurrent", "width: " + oldHealthCurrent + "%");
 				System.out.println("old current " + oldHealthCurrent);
 
 				currentCharacter.takeDamage(enemyCharacter, attack2);
@@ -153,12 +158,13 @@ public class GameplayController {
 
 				int newEnergyEnemy = (int) (100
 						* ((double) enemyCharacter.getStamina() / (double) enemyCharacter.getEnergy()));
-				mv.addObject("newEnergyEnemy", "width: " + newEnergyEnemy + "%");
+				mv.addObject("newEnergyEnemy",  newEnergyEnemy);
 				System.out.println("energy enemy " + newEnergyEnemy);
 
 				int newHealthCurrent = (int) (100
 						* ((double) currentCharacter.getHp() / (double) currentCharacter.getHealth()));
-				mv.addObject("newHealthCurrent", "width: " + (100 - oldHealthCurrent - newHealthCurrent) + "%");
+				mv.addObject("newHealthCurrent",  newHealthCurrent);
+				mv.addObject("oldHealthCurrent",  (oldHealthCurrent - newHealthCurrent));
 				System.out.println("new current " + newHealthCurrent);
 
 				winner = gameplayWinnerCheck(mv, session);
