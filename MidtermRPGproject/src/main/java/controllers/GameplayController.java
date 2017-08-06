@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,12 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 import data.Ability;
 import data.GameCharacter;
 import data.GameplayDao;
+import data.RandNumGen;
 import data.Stage;
 
 @Controller
 public class GameplayController {
 	@Autowired
 	private GameplayDao dao;
+	
+	private RandNumGen rng = new RandNumGen();
 
 	private Stage currentStage;
 
@@ -95,7 +97,7 @@ public class GameplayController {
 
 			enemyCharacter.takeDamage(currentCharacter, attack1);
 			currentCharacter.addStamina(-attack1.getEnergyCost());
-			currentCharacter.addStamina(5);
+			currentCharacter.addStamina(rng.getRNG(5, 10));
 			System.out.println("stam" + currentCharacter.getStamina());
 
 			int newEnergyCurrent = (int) (100
@@ -143,7 +145,7 @@ public class GameplayController {
 
 				currentCharacter.takeDamage(enemyCharacter, attack2);
 				enemyCharacter.addStamina(-attack1.getEnergyCost());
-				enemyCharacter.addStamina(5);
+				enemyCharacter.addStamina(rng.getRNG(5, 10));
 
 				int newEnergyEnemy = (int) (100
 						* ((double) enemyCharacter.getStamina() / (double) enemyCharacter.getEnergy()));

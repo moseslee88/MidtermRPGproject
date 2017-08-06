@@ -73,7 +73,6 @@ public class GameCharacter {
 	@OneToMany(mappedBy = "gameCharacter")
 	private List<Stage> stages;
 
-
 	
 	
 	private Double critDamage(double attackPower, GameCharacter enemy) {
@@ -108,8 +107,9 @@ public class GameCharacter {
 		return damageDone;
 	}
 	private int calculateDamage(GameCharacter enemy, Ability attack) {
-		Double modifiedDamage = 0.0;
-		Double modifyer = .80;
+		RandNumGen rng = new RandNumGen();
+		Double modifiedDamage = rng.getRNG(-(this.hp/10.0), (this.hp/10.0));
+		Double modifyer = .8;
 		double attackPower = attack.getPower();
 		if (attack.getElement().equals(Element.physical)) {
 			double percentResisted = this.getPhysicalR() * modifyer;
