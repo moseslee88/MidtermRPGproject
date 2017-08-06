@@ -59,17 +59,21 @@ public class InventoryShopItemController {
 			}
 
 			if (dao.checkForArmor(character) == true) {
+				System.out.println("armor check = true");
 				List<Item> armor = dao.armor(character);
 				mv.addObject("armor", armor);
 			} else {
+				System.out.println("armor check = false");
 				String noArmorWarning = "Not even undergarments?";
 				mv.addObject("noArmorWarning", noArmorWarning);
 			}
 
 			if (dao.checkForEdibles(character) == true) {
+				System.out.println("edibles check = true");
 				List<Item> edibles = dao.edibles(character);
 				mv.addObject("edibles", edibles);
 			} else {
+				System.out.println("edibles check = false");
 				String noEdibles = "Who needs buffs anyway?";
 				mv.addObject("noEdibles", noEdibles);
 			}

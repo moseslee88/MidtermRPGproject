@@ -42,6 +42,7 @@
 				<c:when test="${not empty inventory}">
 					<c:choose>
 						<c:when test="${not empty weapons}">
+							<h3>Choose Your Weapon</h3>
 							<form action="ViewBattleGear.do">
 								<select name="id">
 									<c:forEach var="weapon" items="${weapons}">
@@ -56,7 +57,12 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${not empty armor}">
-							<option value="${armor.id}">${armor.name}</option>
+							<h3>Choose Your Armor</h3>
+							<select name="id">
+								<c:forEach var="armor" items="${armor}">
+									<option value="${armor.id}">${armor.name}</option>
+								</c:forEach>
+							</select>
 						</c:when>
 						<c:otherwise>
 							<h3>${noArmorWarning}</h3>
@@ -64,12 +70,17 @@
 					</c:choose>
 					<c:choose>
 						<c:when test="${not empty edibles}">
-							<option value="${edibles.id}">${edibles.name}</option>
+							<h3>Pick Your Poison</h3>
+							<select name="id">
+								<c:forEach var="edible" items="${edibles}">
+									<option value="${edible.id}">${edible.name}</option>
+								</c:forEach>
+							</select>
 						</c:when>
-					
-					<c:otherwise>
-						<h3>${noEdibles}</h3>
-					</c:otherwise>
+
+						<c:otherwise>
+							<h3>${noEdibles}</h3>
+						</c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
