@@ -28,7 +28,7 @@
 <c:choose>
 	<c:when test="${not empty gameCharacters}">
 	<h3>Select</h3>
-					<form action="SetBattleGear.do" >
+					<form action="ViewBattleGear.do" >
 						<select name="id">
 							<c:forEach var="character" items="${gameCharacters}">
 								<option value="${character.id}">${character.id}: ${character.name}  ${character.image }</option>
@@ -38,14 +38,20 @@
 						</form>
 	</c:when>
 </c:choose>
-	<form action ="SetBattleGear.do">
+<c:choose>
+	<c:when test="${not empty inventory}">
+	<form action ="ViewBattleGear.do">
 		<select name="id">
 			<c:forEach var="weapon" items="${weapons}">
 				<option value="${weapon.id}">${weapon.name}</option>
 			</c:forEach>
 		</select>
 	</form>
-		
+	</c:when>
+	<c:otherwise>
+	<h3>${noItems}</h3>
+	</c:otherwise>
+</c:choose>	
 		</div>
 	</div>
 	<br>

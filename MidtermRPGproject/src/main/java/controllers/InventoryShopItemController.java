@@ -36,14 +36,14 @@ public class InventoryShopItemController {
 		return mv;
 	}
 
-	@RequestMapping(path = "SetBattleGear.do")
-	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer id) {
+	@RequestMapping(path = "ViewBattleGear.do")
+	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session, Integer id) {
 		GameCharacter character = dao2.showGameCharacter(id);
 
-		System.out.println("in setBattleGear() in controller");
+		System.out.println("in viewBattleGear() in controller");
 
 		if (dao.checkForInventory(character) == true) {
-
+			System.out.println("inventory check = true");
 			List<Item> inventory = dao.inventory(character);
 			mv.addObject("inventory", inventory);
 
@@ -75,6 +75,7 @@ public class InventoryShopItemController {
 			}
 
 		} else {
+			System.out.println("inventory check = false");
 			String noItems = "You go forth into the world cold and alone";
 			mv.addObject("noItems", noItems);
 		}
