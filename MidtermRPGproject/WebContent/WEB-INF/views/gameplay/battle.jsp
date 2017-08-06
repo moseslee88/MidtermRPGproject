@@ -43,7 +43,7 @@
 									<div class="alert alert-danger" role="alert">You were hit
 										by: ${attackEnemy}</div>
 								</c:if>
-								<img src="../images/defaultImage.jpg"
+								<img src="../../images/defaultImage.jpg"
 									alt="../images/defaultImage.jpg">
 								<div class="caption">
 										Health:

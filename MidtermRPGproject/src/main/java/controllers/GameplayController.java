@@ -72,11 +72,12 @@ public class GameplayController {
 			System.out.println("1 energy" + currentCharacter.getStamina());
 			System.out.println("2 health" + enemyCharacter.getHp());
 			System.out.println("2 energy" + enemyCharacter.getStamina());
+			List<Ability> abilities0 = new ArrayList<>();
 			List<Ability> abilities1 = new ArrayList<>();
-			abilities1.addAll(currentCharacter.getAbilities());
-			for (Ability ability : abilities1) {
-				if (ability.getEnergyCost() > currentCharacter.getStamina()) {
-					abilities1.remove(ability);
+			abilities0.addAll(currentCharacter.getAbilities());
+			for (Ability ability : abilities0) {
+				if (ability.getEnergyCost() <= currentCharacter.getStamina()) {
+					abilities1.add(ability);
 				}
 			}
 			Ability attack1 = null;
@@ -110,7 +111,7 @@ public class GameplayController {
 			System.out.println("energy current " + newEnergyCurrent);
 
 			int newHealthEnemy = (int) (100 * ((double) enemyCharacter.getHp() / (double) enemyCharacter.getHealth()));
-			mv.addObject("newHealthEnemy", "width: " + (oldHealthEnemy - newHealthEnemy) + "%");
+			mv.addObject("newHealthEnemy", "width: " + (100 - oldHealthEnemy - newHealthEnemy) + "%");
 			System.out.println("new enemy " + newHealthEnemy);
 
 			winner = gameplayWinnerCheck(mv, session);
@@ -157,7 +158,7 @@ public class GameplayController {
 
 				int newHealthCurrent = (int) (100
 						* ((double) currentCharacter.getHp() / (double) currentCharacter.getHealth()));
-				mv.addObject("newHealthCurrent", "width: " + (oldHealthCurrent - newHealthCurrent) + "%");
+				mv.addObject("newHealthCurrent", "width: " + (100 - oldHealthCurrent - newHealthCurrent) + "%");
 				System.out.println("new current " + newHealthCurrent);
 
 				winner = gameplayWinnerCheck(mv, session);
