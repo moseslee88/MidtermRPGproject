@@ -36,11 +36,11 @@ public class GameplayController {
 	@RequestMapping(path = "GameplayStartBattle.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayStartBattle(ModelAndView mv, HttpSession session) {
 
-		GameCharacter enemyCharacter = currentStage.getGameCharacter();
-//		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
+		GameCharacter enemyCharacter = dao.getDefaultGameCharacter();
+		// GameCharacter currentCharacter = (GameCharacter)
+		// session.getAttribute("currentCharacter");
 		GameCharacter currentCharacter = dao.getDefaultGameCharacter();
-		
-		
+
 		mv.addObject("currentCharacter", currentCharacter);
 		mv.addObject("enemyCharacter", enemyCharacter);
 		System.out.println(currentCharacter);
@@ -61,38 +61,49 @@ public class GameplayController {
 		GameCharacter winner = gameplayWinnerCheck(mv, session);
 		System.out.println("begin");
 		if (winner == null) {
-			System.out.println("Player one turn");
 			// player one turn
+			System.out.println("\n---Player one turn---");
 			GameCharacter currentCharacter = participants.get(0);
 			GameCharacter enemyCharacter = participants.get(1);
 
-			List<Ability> abilities1 = currentCharacter.getAbilities();
+			System.out.println("1 health" + currentCharacter.getHp());
+			System.out.println("1 energy" + currentCharacter.getStamina());
+			System.out.println("2 health" + enemyCharacter.getHp());
+			System.out.println("2 energy" + enemyCharacter.getStamina());
+			List<Ability> abilities1 = new ArrayList<>();
+			abilities1.addAll(currentCharacter.getAbilities());
 			Ability attack1 = null;
 
 			do {
-				attack1 = abilities1.remove(new Random().nextInt(abilities1.size()));
+				System.out.println(abilities1);
+				attack1 = abilities1.remove(/* new Random().nextInt */(abilities1.size()) - 1);
 				System.out.println("attack1 " + attack1);
 				if (abilities1.isEmpty()) {
 					attack1 = dao.useDefaultAbility();
 					break;
 				}
-			} while (attack1 == null || attack1.getEnergyCost() >= currentCharacter.getEnergy());
+			} while (attack1 == null || attack1.getEnergyCost() >= currentCharacter.getStamina());
 			mv.addObject("attackCurrent", attack1.getName());
 			System.out.println(attack1);
 
-			int oldHealthEnemy = (int) (100 * (enemyCharacter.getHp() / enemyCharacter.getHealth()));
+			int oldHealthEnemy = 200; /*
+										 * (int) (100 * ((double)enemyCharacter.getHp() /
+										 * (double)enemyCharacter.getHealth()));
+										 */
 			mv.addObject("oldHealthEnemy", "width: " + oldHealthEnemy + "%");
 			System.out.println("old enemy " + oldHealthEnemy);
 
 			enemyCharacter.takeDamage(currentCharacter, attack1);
 			currentCharacter.addStamina(-attack1.getEnergyCost());
 			currentCharacter.addStamina(5);
+			System.out.println("stam" + currentCharacter.getStamina());
 
-			int newEnergyCurrent = (int) (100 * (currentCharacter.getStamina() / currentCharacter.getEnergy()));
+			int newEnergyCurrent = (int) (100
+					* ((double) currentCharacter.getStamina() / (double) currentCharacter.getEnergy()));
 			mv.addObject("newEnergyCurrent", "width: " + newEnergyCurrent + "%");
 			System.out.println("energy current " + newEnergyCurrent);
 
-			int newHealthEnemy = (int) (100 * (enemyCharacter.getHp() / enemyCharacter.getHealth()));
+			int newHealthEnemy = (int) (100 * ((double) enemyCharacter.getHp() / (double) enemyCharacter.getHealth()));
 			mv.addObject("newHealthEnemy", "width: " + (oldHealthEnemy - newHealthEnemy) + "%");
 			System.out.println("new enemy " + newHealthEnemy);
 
@@ -101,39 +112,59 @@ public class GameplayController {
 
 			if (winner == null) {
 				// player two turn
-				System.out.println("Player two turn");
+				System.out.println("\n---Player two turn---");
+				System.out.println("1 health" + currentCharacter.getHp());
+				System.out.println("1 energy" + currentCharacter.getStamina());
+				System.out.println("2 health" + enemyCharacter.getHp());
+				System.out.println("2 energy" + enemyCharacter.getStamina());
 
-				List<Ability> abilities2 = enemyCharacter.getAbilities();
+				List<Ability> abilities2 = new ArrayList<>();
+				abilities2.addAll(enemyCharacter.getAbilities());
 				Ability attack2 = null;
 
 				do {
-					attack2 = abilities2.remove(new Random().nextInt(abilities2.size()));
+					System.out.println(abilities2);
+					attack2 = abilities2.remove(/* new Random().nextInt */(abilities2.size()) - 1);
 					System.out.println("attack2 " + attack2);
 					if (abilities2.isEmpty()) {
 						attack2 = dao.useDefaultAbility();
 						break;
 					}
-				} while (attack2 == null || attack2.getEnergyCost() >= enemyCharacter.getEnergy());
+				} while (attack2 == null || attack2.getEnergyCost() >= enemyCharacter.getStamina());
 				mv.addObject("attackEnemy", attack2.getName());
 				System.out.println("attack enemy " + attack2);
 
-				int oldHealthCurrent = (int) (100 * (currentCharacter.getHp() / currentCharacter.getHealth()));
+				int oldHealthCurrent = 200;/*
+											 * (int) (100 * ((double)currentCharacter.getHp() /
+											 * (double)currentCharacter.getHealth()));
+											 */
 				mv.addObject("oldHealthCurrent", "width: " + oldHealthCurrent + "%");
 				System.out.println("old current " + oldHealthCurrent);
 
-				enemyCharacter.takeDamage(currentCharacter, attack2);
+				currentCharacter.takeDamage(enemyCharacter, attack2);
+				enemyCharacter.addStamina(-attack1.getEnergyCost());
 				enemyCharacter.addStamina(5);
 
-				int newEnergyEnemy = (int) (100 * (enemyCharacter.getStamina() / enemyCharacter.getEnergy()));
+				int newEnergyEnemy = (int) (100
+						* ((double) enemyCharacter.getStamina() / (double) enemyCharacter.getEnergy()));
 				mv.addObject("newEnergyEnemy", "width: " + newEnergyEnemy + "%");
 				System.out.println("energy enemy " + newEnergyEnemy);
 
-				int newHealthCurrent = (int) (100 * (currentCharacter.getHp() / currentCharacter.getHealth()));
+				int newHealthCurrent = (int) (100
+						* ((double) currentCharacter.getHp() / (double) currentCharacter.getHealth()));
 				mv.addObject("newHealthCurrent", "width: " + (oldHealthCurrent - newHealthCurrent) + "%");
 				System.out.println("new current " + newHealthCurrent);
 
 				winner = gameplayWinnerCheck(mv, session);
 				System.out.println("win2 " + winner);
+				System.out.println("\n---end---");
+				System.out.println("1 health" + currentCharacter.getHp());
+				System.out.println("1 energy" + currentCharacter.getStamina());
+				System.out.println("2 health" + enemyCharacter.getHp());
+				System.out.println("2 energy" + enemyCharacter.getStamina());
+
+				mv.addObject("winner", winner);
+				mv.setViewName("WEB-INF/views/gameplay/battle.jsp");
 				return mv;
 			}
 			mv.addObject("winner", winner);
@@ -150,7 +181,6 @@ public class GameplayController {
 		GameCharacter winner = gameplayWinnerCheck(mv, session);
 		System.out.println("win3 " + winner);
 
-		
 		mv.addObject("winner", winner);
 		mv.setViewName("WEB-INF/views/gameplay/battle.jsp");
 		return mv;

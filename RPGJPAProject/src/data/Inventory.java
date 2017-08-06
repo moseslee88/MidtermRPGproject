@@ -31,7 +31,7 @@ public class Inventory {
 	@OneToOne(mappedBy = "inventory")
 	private Shop shop;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany/*(fetch = FetchType.EAGER)*/
 	@JoinTable(name = "inventory_item", joinColumns = @JoinColumn(name = "inventory_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
 	private List<Item> items;
 

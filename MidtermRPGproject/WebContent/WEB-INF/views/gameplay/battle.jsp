@@ -79,15 +79,15 @@
 							<img src="${enemyCharacter.image}"
 								alt="../../images/defaultImage.jpg">
 							<div class="caption">
-								<div class="progress">
 									Health:
+								<div class="progress">
 									<div class="progress-bar progress-bar-success"
 										style="${newHealthEnemy}"></div>
 									<div class="progress-bar progress-bar-danger"
 										style="${oldHealthEnemy}"></div>
 								</div>
-								<div class="progress">
 									Energy:
+								<div class="progress">
 									<div class="progress-bar progress-bar-info"
 										style="${newEnergyEnemy}"></div>
 								</div>

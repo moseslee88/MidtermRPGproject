@@ -67,7 +67,7 @@ public class GameCharacter {
 	private Item armor;
 	@Transient
 	private int stamina;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "character_ability", joinColumns = @JoinColumn(name = "character_id"), inverseJoinColumns = @JoinColumn(name = "ability_id"))
 	private List<Ability> abilities;
 	@OneToMany(mappedBy = "gameCharacter")
