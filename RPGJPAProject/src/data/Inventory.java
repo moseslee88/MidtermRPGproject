@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,24 +22,27 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@OneToOne(mappedBy="inventory")
+	@OneToOne(mappedBy = "inventory")
 	private GameCharacter gameCharacter;
 
 	@OneToMany(mappedBy = "inventory")
 	private List<InventoryItem> inventoryItems;
-	
-	@OneToOne(mappedBy="inventory")
+
+	@OneToOne(mappedBy = "inventory")
 	private Shop shop;
-	
-	
-	@ManyToMany
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "inventory_item", joinColumns = @JoinColumn(name = "inventory_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
 	private List<Item> items;
-	
-	//gets and sets  
+
+	// gets and sets
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public GameCharacter getGameCharacter() {
@@ -65,10 +69,6 @@ public class Inventory {
 		this.shop = shop;
 	}
 
-	
-	
-
-	
 	public List<Item> getItems() {
 		return items;
 	}
@@ -79,6 +79,6 @@ public class Inventory {
 
 	@Override
 	public String toString() {
-		return "Inventory id = "  +  id;
+		return "Inventory id = " + id;
 	}
 }

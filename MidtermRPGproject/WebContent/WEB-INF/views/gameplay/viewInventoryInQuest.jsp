@@ -25,16 +25,34 @@
 <!-- Page Content -->
 <!-- in: stageConclusion -->
 <!-- out: stageConclusion -->
+<c:choose>
+	<c:when test="${not empty gameCharacters}">
 	<h3>Select</h3>
-					<form action="GetCharacters.do" >
+					<form action="SetBattleGear.do" >
 						<select name="id">
 							<c:forEach var="character" items="${gameCharacters}">
 								<option value="${character.id}">${character.id}: ${character.name}  ${character.image }</option>
 							</c:forEach>
 						</select>
-						<button type="submit" value="Submit">Change!</button>
+						<button type="submit" value="Submit">Submit</button>
 						</form>
-		
+		</c:when>
+		</c:choose>
+		<c:choose>
+		<c:when test="${not empty inventoryList}">
+			<h3>Select Your Gear</h3>
+			<c:forEach items = "${inventoryList}"  var = "item">
+         <c:out value = "${item.name}"/>
+         <c:out value = "${item.itemLevel}"/>
+         <c:out value = "${item.value}"/>
+         <c:out value = "${item.typeOfItem}"/>
+         <c:out value = "${item.element}"/>
+      </c:forEach>
+		</c:when>
+		<c:otherwise>
+		No Items In Inventory
+		</c:otherwise>
+		</c:choose>
 		
 		
 		</div>
