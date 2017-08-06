@@ -40,6 +40,8 @@
 </c:choose>
 <c:choose>
 	<c:when test="${not empty inventory}">
+		<c:choose>
+		<c:when test="${not empty weapons}">
 	<form action ="ViewBattleGear.do">
 		<select name="id">
 			<c:forEach var="weapon" items="${weapons}">
@@ -47,6 +49,11 @@
 			</c:forEach>
 		</select>
 	</form>
+	</c:when>
+	<c:otherwise>
+	<h3>${unarmedWarning}</h3>
+	</c:otherwise>
+	</c:choose>
 	</c:when>
 	<c:otherwise>
 	<h3>${noItems}</h3>
