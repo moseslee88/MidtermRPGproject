@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Page Title -->
-<title>Stage</title>
+<title>Battle!</title>
 
 <jsp:include page="../../partials/_resources.jsp"></jsp:include>
 </head>
@@ -43,18 +43,18 @@
 									<div class="alert alert-danger" role="alert">You were hit
 										by: ${attackEnemy}</div>
 								</c:if>
-								<img src="${currentCharacter.image}"
+								<img src="../../images/defaultImage.jpg"
 									alt="../../images/defaultImage.jpg">
 								<div class="caption">
-									<div class="progress">
 										Health:
+									<div class="progress">
 										<div class="progress-bar progress-bar-success"
 											style="${newHealthCurrent}"></div>
 										<div class="progress-bar progress-bar-danger"
 											style="${oldHealthCurrent}"></div>
 									</div>
-									<div class="progress">
 										Energy:
+									<div class="progress">
 										<div class="progress-bar progress-bar-info"
 											style="${newEnergyCurrent}"></div>
 									</div>

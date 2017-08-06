@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Ability {
 	@Column(name = "energy_cost")
 	private int energyCost;
 	
-	@ManyToMany(mappedBy = "abilities")
+	@ManyToMany(mappedBy = "abilities", fetch=FetchType.EAGER)
 	private List<GameCharacter> gameCharacters;
 	
 	//sets and gets

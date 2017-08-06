@@ -59,7 +59,9 @@ public class GameplayController {
 	@RequestMapping(path = "GameplayBattleLoop.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayBattleLoop(ModelAndView mv, HttpSession session) {
 		GameCharacter winner = gameplayWinnerCheck(mv, session);
-		if (winner != null) {
+		System.out.println("begin");
+		if (winner == null) {
+			System.out.println("Player one turn");
 			// player one turn
 			GameCharacter currentCharacter = participants.get(0);
 			GameCharacter enemyCharacter = participants.get(1);
@@ -69,6 +71,7 @@ public class GameplayController {
 
 			do {
 				attack1 = abilities1.remove(new Random().nextInt(abilities1.size()));
+				System.out.println("attack1 " + attack1);
 				if (abilities1.isEmpty()) {
 					attack1 = dao.useDefaultAbility();
 					break;
@@ -96,14 +99,16 @@ public class GameplayController {
 			winner = gameplayWinnerCheck(mv, session);
 			System.out.println("win1 " + winner);
 
-			if (winner != null) {
+			if (winner == null) {
 				// player two turn
+				System.out.println("Player two turn");
 
 				List<Ability> abilities2 = enemyCharacter.getAbilities();
 				Ability attack2 = null;
 
 				do {
 					attack2 = abilities2.remove(new Random().nextInt(abilities2.size()));
+					System.out.println("attack2 " + attack2);
 					if (abilities2.isEmpty()) {
 						attack2 = dao.useDefaultAbility();
 						break;
@@ -155,8 +160,10 @@ public class GameplayController {
 
 		if (participants != null) {
 			if (participants.get(0).checkIfDead()) {
+				System.out.println(participants.get(0).getName());
 				return participants.get(1);
 			} else if (participants.get(1).checkIfDead()) {
+				System.out.println(participants.get(1).getName());
 				return participants.get(0);
 			}
 		}
