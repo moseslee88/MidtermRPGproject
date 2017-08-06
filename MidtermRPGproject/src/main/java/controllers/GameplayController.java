@@ -20,7 +20,7 @@ import data.Stage;
 public class GameplayController {
 	@Autowired
 	private GameplayDao dao;
-	
+
 	private RandNumGen rng = new RandNumGen();
 
 	private Stage currentStage;
@@ -74,24 +74,28 @@ public class GameplayController {
 			System.out.println("2 energy" + enemyCharacter.getStamina());
 			List<Ability> abilities1 = new ArrayList<>();
 			abilities1.addAll(currentCharacter.getAbilities());
+			for (Ability ability : abilities1) {
+				if (ability.getEnergyCost() > currentCharacter.getStamina()) {
+					abilities1.remove(ability);
+				}
+			}
 			Ability attack1 = null;
 
 			do {
-				System.out.println(abilities1);
-				attack1 = abilities1.remove(/* new Random().nextInt */(abilities1.size()) - 1);
-				System.out.println("attack1 " + attack1);
 				if (abilities1.isEmpty()) {
 					attack1 = dao.useDefaultAbility();
 					break;
 				}
+				System.out.println(abilities1);
+				attack1 = abilities1.remove(/* new Random().nextInt */(abilities1.size()) - 1);
+				System.out.println("attack1 " + attack1);
+
 			} while (attack1 == null || attack1.getEnergyCost() >= currentCharacter.getStamina());
 			mv.addObject("attackCurrent", attack1.getName());
 			System.out.println(attack1);
 
-			int oldHealthEnemy = 200; /*
-										 * (int) (100 * ((double)enemyCharacter.getHp() /
-										 * (double)enemyCharacter.getHealth()));
-										 */
+			int oldHealthEnemy = (int) (100 * ((double) enemyCharacter.getHp() / (double) enemyCharacter.getHealth()));
+
 			mv.addObject("oldHealthEnemy", "width: " + oldHealthEnemy + "%");
 			System.out.println("old enemy " + oldHealthEnemy);
 
@@ -136,10 +140,9 @@ public class GameplayController {
 				mv.addObject("attackEnemy", attack2.getName());
 				System.out.println("attack enemy " + attack2);
 
-				int oldHealthCurrent = 200;/*
-											 * (int) (100 * ((double)currentCharacter.getHp() /
-											 * (double)currentCharacter.getHealth()));
-											 */
+				int oldHealthCurrent = (int) (100
+						* ((double) currentCharacter.getHp() / (double) currentCharacter.getHealth()));
+
 				mv.addObject("oldHealthCurrent", "width: " + oldHealthCurrent + "%");
 				System.out.println("old current " + oldHealthCurrent);
 

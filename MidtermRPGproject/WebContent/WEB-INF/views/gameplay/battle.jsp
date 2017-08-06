@@ -43,15 +43,15 @@
 									<div class="alert alert-danger" role="alert">You were hit
 										by: ${attackEnemy}</div>
 								</c:if>
-								<img src="../../images/defaultImage.jpg"
-									alt="../../images/defaultImage.jpg">
+								<img src="../images/defaultImage.jpg"
+									alt="../images/defaultImage.jpg">
 								<div class="caption">
 										Health:
 									<div class="progress">
 										<div class="progress-bar progress-bar-success"
 											style="${newHealthCurrent}"></div>
 										<div class="progress-bar progress-bar-danger"
-											style="${oldHealthCurrent}"></div>
+											style="width: 10%"></div>
 									</div>
 										Energy:
 									<div class="progress">
