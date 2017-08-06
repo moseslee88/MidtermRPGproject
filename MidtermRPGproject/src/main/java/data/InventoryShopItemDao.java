@@ -6,8 +6,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InventoryShopItemDao {
 	public List<Item> inventory(GameCharacter gameCharacter);
-	public Item weapon(Item weapon);
-	public List<Item> armor(Item armor);
-	public List<Item> edible(Item edible);
+	public List<Item> weapons(GameCharacter gameCharacter);
+	public List<Item> armor(GameCharacter gameCharacter);
+	public List<Item> edibles(GameCharacter gameCharacter);
+	
+	public Boolean checkForWeapons(GameCharacter gameCharacter);
+	public Boolean checkForArmor(GameCharacter gameCharacter);
+	public Boolean checkForEdibles(GameCharacter gameCharacter);
 
 }

@@ -22,35 +22,53 @@ public class InventoryShopItemController {
 
 	@Autowired
 	private InventoryShopItemDao dao;
-	
+
 	@Autowired
 	private AdminDao dao2;
 
-	@RequestMapping(path="BattleGear.do")
+	@RequestMapping(path = "BattleGear.do")
 	public ModelAndView battleGearRoute(ModelAndView mv, HttpSession session) {
-		
-		System.out.println("battleGearRoute() in controller");
+
 		List<GameCharacter> gameCharacters = dao2.indexGameCharacters();
 		mv.addObject("gameCharacters", gameCharacters);
-		
+
 		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
 		return mv;
 	}
-	
-	@RequestMapping(path="SetBattleGear.do")
+
+	@RequestMapping(path = "SetBattleGear.do")
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer id) {
-		System.out.println("setBattleGear() in controller");
 		GameCharacter character = dao2.showGameCharacter(id);
-		List<Item> inventoryList = dao.inventory(character);
+		System.out.println("in setBattleGear() in controller");
+
+		if (dao.checkForWeapons(character) == true) {
+			List<Item> weapons = dao.weapons(character);
+			mv.addObject("weapons", weapons);
+			System.out.println("weapon check = true");
+		} else {
+			String unarmedWarning = "How do you expect to fight the hordes of darkness?";
+			System.out.println("weapon check = false");
+			mv.addObject("unarmedWarning", unarmedWarning);
+		}
 		
-		Boolean empty = inventoryList.isEmpty();
-		System.out.println("List is emtpy " + empty);
+		if(dao.checkForArmor(character) == true) {
+			List<Item> armor = dao.armor(character);
+			mv.addObject("armor", armor);
+		} else {
+			String noArmorWarning = "Not even undergarments?";
+			mv.addObject("noArmorWarning", noArmorWarning);
+		}
 		
-		
-		mv.addObject("inventoryList", inventoryList);
-		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");	
+		if(dao.checkForEdibles(character) == true) {
+			List<Item> edibles = dao.edibles(character);
+			mv.addObject("edibles", edibles);
+		} else {
+			String noEdibles = "Who needs buffs anyway?";
+			mv.addObject("noEdibles", noEdibles);
+		}
+
+		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
 		return mv;
 	}
-	
-	
+
 }

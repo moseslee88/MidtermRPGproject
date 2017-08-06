@@ -18,7 +18,7 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	@SuppressWarnings("unchecked") // a conversion warning is made from the native query on line 30;
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Item> inventory(GameCharacter gameCharacter) {
 
@@ -32,19 +32,88 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 		return items;
 	}
 
-	public Item weapon(Item weapon) {
-		Item weapon2 = weapon;
-		return weapon2;
+	@SuppressWarnings("unchecked")
+	public List<Item> weapons(GameCharacter gameCharacter) {
+		String id = Integer.toString(gameCharacter.getInventory().getId());
+
+		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+				+ id + " AND i.type = 'weapon'";
+
+		List<Item> weapons = em.createNativeQuery(query, Item.class).getResultList();
+
+		return weapons;
 	}
 
-	public List<Item> armor(Item armor) {
-		List<Item> armor2 = new ArrayList<>();
-		return armor2;
+	@SuppressWarnings("unchecked")
+	public List<Item> armor(GameCharacter gameCharacter) {
+		String id = Integer.toString(gameCharacter.getInventory().getId());
+
+		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+				+ id + " AND i.type = 'armor'";
+
+		List<Item> armor = em.createNativeQuery(query, Item.class).getResultList();
+
+		return armor;
 	}
 
-	public List<Item> edible(Item edible) {
-		List<Item> edible2 = new ArrayList<>();
-		return edible2;
+	@SuppressWarnings("unchecked")
+	public List<Item> edibles(GameCharacter gameCharacter) {
+		String id = Integer.toString(gameCharacter.getInventory().getId());
+
+		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+				+ id + " AND i.type = 'edible'";
+
+		List<Item> edibles = em.createNativeQuery(query, Item.class).getResultList();
+
+		return edibles;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Boolean checkForWeapons(GameCharacter gameCharacter) {
+		String id = Integer.toString(gameCharacter.getInventory().getId());
+
+		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+				+ id + " AND i.type = 'weapon' ";
+
+		List<Item> weapons = em.createNativeQuery(query, Item.class).getResultList();
+
+		if (weapons.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public Boolean checkForArmor(GameCharacter gameCharacter) {
+		String id = Integer.toString(gameCharacter.getInventory().getId());
+
+		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+				+ id + " AND i.type = 'armor'";
+
+		List<Item> armor = em.createNativeQuery(query, Item.class).getResultList();
+
+		if (armor.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public Boolean checkForEdibles(GameCharacter gameCharacter) {
+		String id = Integer.toString(gameCharacter.getInventory().getId());
+
+		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+				+ id + " AND i.type = 'edible'";
+
+		List<Item> edibles = em.createNativeQuery(query, Item.class).getResultList();
+
+		if (edibles.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }
