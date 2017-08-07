@@ -147,4 +147,12 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 			return item;
 	}
 	
+	public Boolean removeItemFromInventory(GameCharacter gameCharacter, Integer itemId) {
+		String id = itemId.toString();
+		String query = "DELET * FROM item WHERE item.id = " + id;
+		
+		em.createNativeQuery(query);
+		return true;
+	}
+	
 }

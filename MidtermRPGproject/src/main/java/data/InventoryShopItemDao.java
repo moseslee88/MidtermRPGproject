@@ -14,7 +14,7 @@ public interface InventoryShopItemDao {
 	public Boolean checkForArmor(GameCharacter gameCharacter);
 	public Boolean checkForEdibles(GameCharacter gameCharacter);
 	public Boolean checkForInventory(GameCharacter gameCharacter);
+	public Boolean removeItemFromInventory(GameCharacter gameCharacter, Integer itemId);
 	
 	public Item getItemFromGameCharacter(GameCharacter gameCharacter, Integer itemId);
-	
 }
