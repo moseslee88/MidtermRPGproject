@@ -304,9 +304,14 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (1, 1, 'admin@admin.com', 'adminpass', 'admin');
-INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (2, 2, 'ghost@ghost.com', 'ghostpass', 'ghost');
-INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (3, 2, 'user@user.com', 'userpass', 'user');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (1, 1, 'admin@admin.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'admin');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (2, 2, 'ghost@ghost.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'ghost');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (3, 2, 'user@user.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'user');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (4, 2, 'bryan@bryan.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'bryan');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (5, 2, 'connor@connor.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'connor');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (6, 2, 'jake@jake.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'jake');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (7, 2, 'mo@mo.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'mo');
+INSERT INTO `player` (`id`, `user_type`, `email`, `password`, `display_name`) VALUES (8, 1, 'admin@tmw.com', 'XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg', 'admin8');
 
 COMMIT;
 

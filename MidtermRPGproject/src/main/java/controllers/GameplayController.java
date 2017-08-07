@@ -43,6 +43,7 @@ public class GameplayController {
 		// GameCharacter currentCharacter = (GameCharacter)
 		// session.getAttribute("currentCharacter");
 		GameCharacter currentCharacter = dao.getDefaultGameCharacter();
+		
 
 		currentCharacter.startFight();
 		mv.addObject("newHealthCurrent", 100);
@@ -209,6 +210,13 @@ public class GameplayController {
 	public ModelAndView gameplayConcludeBattle(ModelAndView mv, HttpSession session) {
 		GameCharacter winner = gameplayWinnerCheck(mv, session);
 		System.out.println("win3 " + winner);
+		GameCharacter currentCharacter = participants.get(0);
+		currentCharacter.endFight();
+		mv.addObject("currentCharacter", currentCharacter);
+		GameCharacter enemyCharacter = participants.get(1);
+		enemyCharacter.endFight();
+		mv.addObject("enemyCharacter", enemyCharacter);
+		
 
 		mv.addObject("winner", winner);
 		mv.setViewName("WEB-INF/views/gameplay/battle.jsp");

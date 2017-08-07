@@ -84,15 +84,17 @@
 									<form action="GameplayBattleLoop.do">
 										<input type="submit" class="btn btn-primary"
 											role="button" name="characterAbility" value="${ability.name}"/>
+											<input type="submit" class="btn btn-primary"
+											role="button" name="characterAbility" value="Defend!"/>
 									</form>
 									</c:forEach>
 									</c:when>
 									<c:otherwise>
 									<form action="GameplayBattleLoop.do">
 									<input type="submit" class="btn btn-primary"
-											role="button" name="attack" value="Attack!"/>
+											role="button" name="characterAbility" value="Attack!"/>
 											<input type="submit" class="btn btn-primary"
-											role="button" name="defend" value="Defend!"/>
+											role="button" name="characterAbility" value="Defend!"/>
 									</form>
 									</c:otherwise>
 									</c:choose>
