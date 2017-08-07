@@ -30,9 +30,10 @@
 
 					<c:choose>
 						<c:when test="${not empty gameCharacters}">
+						
 							<h3>Select</h3>
 							<form action="ViewBattleGear.do">
-								<select name="id">
+								<select name="gameCharacterId">
 									<c:forEach var="character" items="${gameCharacters}">
 										<option value="${character.id}">${character.id}: ${character.name}  ${character.image }</option>
 									</c:forEach>
@@ -41,13 +42,15 @@
 							</form>
 						</c:when>
 					</c:choose>
+					
 					<c:choose>
-						<c:when test="${not empty inventory}">
+						<c:when test="${not empty inventory}">	
+							
 							<c:choose>
 								<c:when test="${not empty weapons}">
 									<h3>Choose Your Weapon</h3>
 									<form action="SetBattleGear.do">
-										<select name="id">
+										<select name="weaponId">
 											<c:forEach var="weapon" items="${weapons}">
 												<option value="${weapon.id}">${weapon.name}</option>
 											</c:forEach>
@@ -62,9 +65,10 @@
 							</c:choose>
 							<c:choose>
 								<c:when test="${not empty armor}">
+								
 									<h3>Choose Your Armor</h3>
 									<form action="SetBattleGear.do">
-										<select name="id">
+										<select name="weaponId">
 											<c:forEach var="armor" items="${armor}">
 												<option value="${armor.id}">${armor.name}</option>
 											</c:forEach>
@@ -78,13 +82,15 @@
 							</c:choose>
 							<c:choose>
 								<c:when test="${not empty edibles}">
+								
 									<h3>Pick Your Poison</h3>
 									<form action="SetBattleGear.do">
-										<select name="id">
+										<select name="weaponId">
 											<c:forEach var="edible" items="${edibles}">
 												<option value="${edible.id}">${edible.name}</option>
 											</c:forEach>
 										</select>
+												<button type="submit" value="Submit">Consume</button>
 									</form>
 								</c:when>
 
@@ -99,26 +105,22 @@
 					</c:choose>
 
 				</div>
-					<c:if test="${beforeStats != null}">
+				<c:if test="${(beforeStats != null)}">
 						<div class="col-sm-4 col-md-4">
 							<h3>${beforeStats.name}</h3>
 							<h4>Stats</h4>
 							<p></p>
-							<p>${beforeStats.health}Health ${afterStats.health}</p>
-							<p>${beforeStats.energy}Energy ${afterStats.energy}</p>
-							<p>${beforeStats.power}Power ${afterStats.power}</p>
-							<p>${beforeStats.critical}Critical ${afterStats.critical}</p>
-							<p>${beforeStats.physicalR}Physical Resistance
-								${afterStats.physicalR}</p>
-							<p>${beforeStats.fireR}Fire Resistance ${afterStats.fireR}</p>
-							<p>${beforeStats.lightningR}Lightning Resistance
-								${afterStats.lightningR}</p>
-							<p>${beforeStats.bloodR}Blood Resistance ${afterStats.bloodR}</p>
-							<p>${beforeStats.frostR}Frost Resistance ${afterStats.frostR}</p>
+							<p>${beforeStats.health} Health ${afterStats.health}</p>
+							<p>${beforeStats.energy} Energy ${afterStats.energy}</p>
+							<p>${beforeStats.power} Power ${afterStats.power}</p>
+							<p>${beforeStats.critical} Critical ${afterStats.critical}</p>
+							<p>${beforeStats.physicalR} Physical Resistance ${afterStats.physicalR}</p>
+							<p>${beforeStats.fireR} Fire Resistance ${afterStats.fireR}</p>
+							<p>${beforeStats.lightningR} Lightning Resistance ${afterStats.lightningR}</p>
+							<p>${beforeStats.bloodR} Blood Resistance ${afterStats.bloodR}</p>
+							<p>${beforeStats.frostR} Frost Resistance ${afterStats.frostR}</p>
 						</div>
 					</c:if>
-
-
 			</div>
 		</div>
 	</div>

@@ -138,7 +138,7 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 	}
 	
 	public Item getItemFromGameCharacter(GameCharacter gameCharacter, Integer itemId) {
-			String id = Integer.toString(itemId);
+			String id = itemId.toString();
 			
 			String query = "SELECT * FROM item WHERE item.id =" + id;
 			
