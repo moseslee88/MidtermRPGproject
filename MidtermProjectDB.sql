@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `game_character` ;
 
 CREATE TABLE IF NOT EXISTS `game_character` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `player_id` INT NULL,
   `name` VARCHAR(45) NOT NULL,
   `health` INT NULL,
