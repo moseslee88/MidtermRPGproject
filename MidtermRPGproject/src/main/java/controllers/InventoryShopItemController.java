@@ -93,16 +93,15 @@ public class InventoryShopItemController {
 	@RequestMapping(path = "SetBattleGear.do")
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer id) {
 		GameCharacter gameCharacter = (GameCharacter) session.getAttribute("gameCharacter");
-		System.out.println("GameCharacter in Controller: " + gameCharacter.getName());
-		System.out.println("Before equipment: " + gameCharacter.getPower());
+		System.out.println("GameCharacter in Controller: " + gameCharacter.getName() 
+				+ " has a power of " + gameCharacter.getPower() + " before equipment");
 
 		List<Item> battleGear = new ArrayList<>();
 		battleGear.add(dao.getItemFromGameCharacter(gameCharacter, id));
 		System.out.println("Item Name:" + dao.getItemFromGameCharacter(gameCharacter, id).getName());
 
-		for (int i = 0; i < battleGear.size(); i++) {
-			System.out.println("In for loop, battleGear Size: " + battleGear.size());
-			
+		for (Item item : battleGear) {
+			System.out.println("in for loop, battleGear size is " + battleGear.size());
 			gameCharacter.useItem(battleGear.get(0));
 		}
 
