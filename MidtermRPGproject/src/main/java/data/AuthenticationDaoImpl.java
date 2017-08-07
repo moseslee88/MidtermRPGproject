@@ -39,8 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 		//user logs in and we check if password matches SHA
 		//Boolean result=encryptor.matches(sha, em.createQuery(q, Player.class).setParameter("password", password).getSingleResult();
 		@Override
-		public Player login(String email, String password) {
-			Player p = new Player();
+		public Player login(Player p, String email, String password) {
 			p.setEmail(email);
 			p.setPassword(password);
 			String encryptPW=p.getPassword();
@@ -48,7 +47,8 @@ import org.springframework.transaction.annotation.Transactional;
 			String sha =  null;
 			try {
 				sha = encryptor.encrypt(encryptPW);
-				Boolean result = encryptor.matches(password, findUserPasswordByEmail(email));
+				//Boolean result = encryptor.matches(password, findUserPasswordByEmail(email));
+				Boolean result = encryptor.matches(sha, findUserPasswordByEmail(email));
 			    System.out.println("result: " + result);
 			} catch (Exception e1) {
 				e1.printStackTrace();
@@ -88,6 +88,28 @@ import org.springframework.transaction.annotation.Transactional;
 		public List<Player> indexPlayers() {
 			String q = "select p from Player p";
 			return em.createQuery(q, Player.class).getResultList();
+		}
+		
+		@Override
+		public Boolean validEmail(String email){
+			if(email == null || email.length() < 5) 
+				return null;
+			else for(Player p : indexPlayers()) 
+				if (p.getEmail().equals(email))  
+				    return true;
+			
+			return false;
+		}
+		
+		@Override
+		public Boolean validPassword(String password){
+			if(password == null || password.length() < 5 || password.length() > 30)
+				return null;
+			else for(Player p: indexPlayers()) 
+				if (p.getPassword().equals(password)) 
+					return true;
+			
+			return false;
 		}
 
 

@@ -28,6 +28,7 @@
 <!-- out: admin, playerInfo -->	
 		
 <h5>CUSTOM 404 ERROR JSP</h5>
+<a href="WEB-INF/views/authentication/login.jsp" class="btn" role="button">Get back to Login Page</a><br/>
 		
 		
 		
