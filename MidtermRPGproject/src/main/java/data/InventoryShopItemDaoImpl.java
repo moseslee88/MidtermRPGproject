@@ -28,6 +28,10 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 				+ id;
 
 		List<Item> items = em.createNativeQuery(query, Item.class).getResultList();
+		
+		System.out.println("items size " + items.size());
+		System.out.println("name " + gameCharacter.getName());
+		System.out.println("id " + gameCharacter.getId());
 
 		return items;
 	}
@@ -40,7 +44,7 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 				+ id + " AND i.type = 'weapon'";
 
 		List<Item> weapons = em.createNativeQuery(query, Item.class).getResultList();
-
+		System.out.println("weapons: " + weapons.size());
 		return weapons;
 	}
 
@@ -53,6 +57,7 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 
 		List<Item> armor = em.createNativeQuery(query, Item.class).getResultList();
 
+		System.out.println("armor: " + armor.size());
 		return armor;
 	}
 
@@ -131,5 +136,15 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 			return false;
 		}
 	}
-
+	
+	public Item getItemFromGameCharacter(GameCharacter gameCharacter, Integer itemId) {
+			String id = Integer.toString(itemId);
+			
+			String query = "SELECT * FROM item WHERE item.id =" + id;
+			
+			Item item = (Item) em.createNativeQuery(query, Item.class).getSingleResult();
+			
+			return item;
+	}
+	
 }

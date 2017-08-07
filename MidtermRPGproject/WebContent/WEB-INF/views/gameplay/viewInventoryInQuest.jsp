@@ -43,12 +43,14 @@
 					<c:choose>
 						<c:when test="${not empty weapons}">
 							<h3>Choose Your Weapon</h3>
-							<form action="ViewBattleGear.do">
+							<form action="SetBattleGear.do">
 								<select name="id">
 									<c:forEach var="weapon" items="${weapons}">
 										<option value="${weapon.id}">${weapon.name}</option>
 									</c:forEach>
+									
 								</select>
+								<button type="submit" value="Submit">Take Weapon</button>
 							</form>
 						</c:when>
 						<c:otherwise>

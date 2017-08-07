@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,17 +39,18 @@ public class InventoryShopItemController {
 
 	@RequestMapping(path = "ViewBattleGear.do")
 	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session, Integer id) {
-		GameCharacter character = dao2.showGameCharacter(id);
+		GameCharacter gameCharacter = dao2.showGameCharacter(id);
+		session.setAttribute("gameCharacter", gameCharacter);
 
 		System.out.println("in viewBattleGear() in controller");
 
-		if (dao.checkForInventory(character) == true) {
+		if (dao.checkForInventory(gameCharacter) == true) {
 			System.out.println("inventory check = true");
-			List<Item> inventory = dao.inventory(character);
+			List<Item> inventory = dao.inventory(gameCharacter);
 			mv.addObject("inventory", inventory);
 
-			if (dao.checkForWeapons(character) == true) {
-				List<Item> weapons = dao.weapons(character);
+			if (dao.checkForWeapons(gameCharacter) == true) {
+				List<Item> weapons = dao.weapons(gameCharacter);
 				mv.addObject("weapons", weapons);
 				System.out.println("weapon check = true");
 
@@ -58,9 +60,9 @@ public class InventoryShopItemController {
 				mv.addObject("unarmedWarning", unarmedWarning);
 			}
 
-			if (dao.checkForArmor(character) == true) {
+			if (dao.checkForArmor(gameCharacter) == true) {
 				System.out.println("armor check = true");
-				List<Item> armor = dao.armor(character);
+				List<Item> armor = dao.armor(gameCharacter);
 				mv.addObject("armor", armor);
 			} else {
 				System.out.println("armor check = false");
@@ -68,9 +70,9 @@ public class InventoryShopItemController {
 				mv.addObject("noArmorWarning", noArmorWarning);
 			}
 
-			if (dao.checkForEdibles(character) == true) {
+			if (dao.checkForEdibles(gameCharacter) == true) {
 				System.out.println("edibles check = true");
-				List<Item> edibles = dao.edibles(character);
+				List<Item> edibles = dao.edibles(gameCharacter);
 				mv.addObject("edibles", edibles);
 			} else {
 				System.out.println("edibles check = false");
@@ -84,6 +86,28 @@ public class InventoryShopItemController {
 			mv.addObject("noItems", noItems);
 		}
 
+		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
+		return mv;
+	}
+
+	@RequestMapping(path = "SetBattleGear.do")
+	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer id) {
+		GameCharacter gameCharacter = (GameCharacter) session.getAttribute("gameCharacter");
+		System.out.println("GameCharacter in Controller: " + gameCharacter.getName());
+		System.out.println("Before equipment: " + gameCharacter.getPower());
+
+		List<Item> battleGear = new ArrayList<>();
+		battleGear.add(dao.getItemFromGameCharacter(gameCharacter, id));
+		System.out.println("Item Name:" + dao.getItemFromGameCharacter(gameCharacter, id).getName());
+
+		for (int i = 0; i < battleGear.size(); i++) {
+			System.out.println("In for loop, battleGear Size: " + battleGear.size());
+			
+			gameCharacter.useItem(battleGear.get(0));
+		}
+
+		System.out.println("After for loop, battleGear size: " + battleGear.size());
+		System.out.println("After equipment: " + gameCharacter.getPower());
 		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
 		return mv;
 	}
