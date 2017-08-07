@@ -13,8 +13,11 @@ public class EncryptionDAOImpl implements EncryptionDAO {
 		MessageDigest digest;
 		digest = MessageDigest.getInstance("SHA-256");
 		byte[] hash = digest.digest(plainText.getBytes(StandardCharsets.UTF_8));
-		return Base64.getEncoder().encodeToString(hash);
+		return Base64.getEncoder()
+						.encodeToString(hash)
+						.replaceAll("[^A-Za-z0-9]", "");
 	}
+	
 	public boolean matches(String plainText, String sha) {
 		try {
 			return encrypt(plainText).equals(sha);

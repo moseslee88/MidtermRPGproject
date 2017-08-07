@@ -48,9 +48,7 @@ import org.springframework.transaction.annotation.Transactional;
 							.setParameter("email", email)
 							.getResultList()
 							.get(0);
-				//Boolean result = encryptor.matches(encryptPW, findUserPasswordByEmail(email));
 				Boolean result = encryptor.matches(password, p.getPassword());
-				//Boolean result = encryptor.matches(sha, findUserPasswordByEmail(email));
 			    System.out.println("result: " + result);
 			} catch (Exception e1) {
 				e1.printStackTrace();

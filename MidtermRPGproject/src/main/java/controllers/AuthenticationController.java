@@ -48,14 +48,6 @@ public class AuthenticationController {
 	@RequestMapping(path = "AuthenticationRoute.do", method = RequestMethod.POST)
 	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelAndView mv, HttpSession session) {
-		// TODO: implement user login here
-		// mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
-		// System.out.println(dao.findUserPasswordByEmail(email) + " from database");
-		// System.out.println(password + " from user");
-		// boolean passWordMatches = edao.matches(password,
-		// dao.findUserPasswordByEmail(email));
-		// print out true or false for password matching
-		// System.out.println(passWordMatches);
 
 		// try{
 		// if (email != null && password!= null && passWordMatches) {
@@ -79,12 +71,12 @@ public class AuthenticationController {
 			// return "/WEB-INF/views/player/authentication/login.jsp";
 			return mv;
 		}
-		if (dao.login(email, password).getUserType() == 1) {
+		if (dao.login(email.trim(), password.trim()).getUserType() == 1) {
 			mv.setViewName("/WEB-INF/views/admin/admin.jsp");
 			session.setAttribute("player", dao.login(email, password));
 			return mv;
 		}
-		if (dao.login(email, password).getUserType() == 2) {
+		if ((dao.login(email.trim(), password.trim()).getUserType() == 2) && validE ) { 
 			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
 			session.setAttribute("player", dao.login(email, password));
 			return mv;
