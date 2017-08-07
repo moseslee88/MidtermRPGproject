@@ -95,7 +95,8 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<GameCharacter> getAllGameCharacters() {
-		return em.createQuery("SELECT g from game_character").getResultList();
+		List<GameCharacter> charList = em.createQuery("SELECT g from GameCharacter g").getResultList();
+		return charList;
 	}
 
 	@Override

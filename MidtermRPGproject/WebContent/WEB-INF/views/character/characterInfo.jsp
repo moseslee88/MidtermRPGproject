@@ -17,6 +17,8 @@
 
 <!-- Page Body -->
 <body>
+<h1>Player Characters</h1>
+<hr>
 	<jsp:include page="../../partials/_nav.jsp"></jsp:include>
 	
 	<c:forEach items="${characters}" var="GameCharacter">

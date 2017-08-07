@@ -158,7 +158,7 @@ public class GameCharacter {
 		this.hp = this.health;
 	}
 
-	private void resetStamina() {
+	public void resetStamina() {
 		this.stamina = this.energy;
 	}
 

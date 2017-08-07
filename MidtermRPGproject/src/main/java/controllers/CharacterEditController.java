@@ -21,8 +21,15 @@ import data.Player;
 public class CharacterEditController {
 	@Autowired
 	private CharacterEditDao dao;
-
+	
 	// takes in a Player command object and updates the character's name
+		@RequestMapping(path = "CharacterRoute.do")
+	public ModelAndView showCharacters(ModelAndView mv, HttpSession session) {
+		Player p = (Player) session.getAttribute("player");
+		session.setAttribute("characters", dao.getPlayersGameCharacters(p));
+		mv.setViewName("/WEB-INF/views/character/characterinfo.jsp");
+		return mv;
+	}
 	@RequestMapping(path = "PlayerChangeName.do")
 	public ModelAndView updateCharacterName(@RequestParam("newCharName") String name,
 			@RequestParam("oldCharName") String oldName, Player player, ModelAndView mv, HttpSession session) {
