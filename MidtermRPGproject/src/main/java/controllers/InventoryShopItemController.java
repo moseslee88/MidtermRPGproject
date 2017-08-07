@@ -38,6 +38,9 @@ public class InventoryShopItemController {
 	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session, Integer id) {
 		GameCharacter gameCharacter = dao2.showGameCharacter(id);
 		session.setAttribute("gameCharacter", gameCharacter);
+		
+		GameCharacter beforeGameCharacter = dao2.showGameCharacter(id);
+		session.setAttribute("beforeStats", beforeGameCharacter);
 
 		mv.addObject("beforeStats", gameCharacter);
 
@@ -93,9 +96,6 @@ public class InventoryShopItemController {
 	@RequestMapping(path = "SetBattleGear.do")
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer id) {
 		GameCharacter gameCharacter = (GameCharacter) session.getAttribute("gameCharacter");
-		
-		GameCharacter beforeGameCharacter = (GameCharacter) session.getAttribute("gameCharacter");
-		mv.addObject("beforeStats", beforeGameCharacter);
 		
 		System.out.println("GameCharacter in Controller: " + gameCharacter.getName() + " has a power of "
 				+ gameCharacter.getPower() + "and a physical resistance of " + gameCharacter.getPhysicalR()

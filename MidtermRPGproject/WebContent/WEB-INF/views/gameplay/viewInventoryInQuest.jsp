@@ -27,7 +27,7 @@
 			<!-- out: stageConclusion -->
 			<div class="row">
 				<div class="col-sm-8 col-md-8">
-				
+
 					<c:choose>
 						<c:when test="${not empty gameCharacters}">
 							<h3>Select</h3>
@@ -97,30 +97,28 @@
 							<h3>${noItems}</h3>
 						</c:otherwise>
 					</c:choose>
-					
+
 				</div>
-					<c:choose>
-					<c:when test="${beforeStats != null}">
-					<div class="col-sm-4 col-md-4">
-						<h3>${beforeStats.name}</h3>					
-						<p>Level: ${beforeStats.level}</p>
-						<p>Health: ${beforeStats.health}</p>
-						<p>Energy: ${beforeStats.energy}</p>
-						<p>Power: ${beforeStats.power}</p>
-						<p>Critical: ${beforeStats.critical}</p>
-						<p>Physical Resistance: ${beforeStats.physicalR}</p>
-						<p>Fire Resistance: ${beforeStats.fireR}</p>
-						<p>Lightning Resistance: ${beforeStats.lightningR}</p>
-						<p>Blood Resistance: ${beforeStats.bloodR}</p>
-						<p>Frost Resistance: ${beforeStats.frostR}</p>
-						
-					${afterStats.health}
-					${afterStats.energy}
-					${afterStats.power}
-					${afterStats.critical}
-					${afterStats.physicalR}
-					</c:when>
-					</c:choose>
+					<c:if test="${beforeStats != null}">
+						<div class="col-sm-4 col-md-4">
+							<h3>${beforeStats.name}</h3>
+							<h4>Stats</h4>
+							<p></p>
+							<p>${beforeStats.health}Health ${afterStats.health}</p>
+							<p>${beforeStats.energy}Energy ${afterStats.energy}</p>
+							<p>${beforeStats.power}Power ${afterStats.power}</p>
+							<p>${beforeStats.critical}Critical ${afterStats.critical}</p>
+							<p>${beforeStats.physicalR}Physical Resistance
+								${afterStats.physicalR}</p>
+							<p>${beforeStats.fireR}Fire Resistance ${afterStats.fireR}</p>
+							<p>${beforeStats.lightningR}Lightning Resistance
+								${afterStats.lightningR}</p>
+							<p>${beforeStats.bloodR}Blood Resistance ${afterStats.bloodR}</p>
+							<p>${beforeStats.frostR}Frost Resistance ${afterStats.frostR}</p>
+						</div>
+					</c:if>
+
+
 			</div>
 		</div>
 	</div>
