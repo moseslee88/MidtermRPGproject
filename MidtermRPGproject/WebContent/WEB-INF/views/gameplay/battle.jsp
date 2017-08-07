@@ -80,21 +80,21 @@
 									<p>
 									<c:choose>
 									<c:when test="${not empty currentAbilities}">
-									<c:forEach var="ability" items="${currentAbilities}">
 									<form action="GameplayBattleLoop.do">
+									<c:forEach var="ability" items="${currentAbilities}">
 										<input type="submit" class="btn btn-primary"
 											role="button" name="characterAbility" value="${ability.name}"/>
-											<input type="submit" class="btn btn-primary"
-											role="button" name="characterAbility" value="Defend!"/>
-									</form>
 									</c:forEach>
+											<input type="submit" class="btn btn-primary"
+											role="button" name="characterAbility" value="Defend"/>
+									</form>
 									</c:when>
 									<c:otherwise>
 									<form action="GameplayBattleLoop.do">
 									<input type="submit" class="btn btn-primary"
 											role="button" name="characterAbility" value="Attack!"/>
 											<input type="submit" class="btn btn-primary"
-											role="button" name="characterAbility" value="Defend!"/>
+											role="button" name="characterAbility" value="Defend"/>
 									</form>
 									</c:otherwise>
 									</c:choose>

@@ -27,16 +27,23 @@
 <!-- Page Content -->
 <!-- in: login -->
 <!-- out: characterInfo, friendList, createQuest, report, createCharacter 
-WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Character-->	
+WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Character	
 		PLAYER STUFF HERE
-		<h5>${players }</h5>
+		<h5>${players }</h5>  FORM for each game character that goes to CHOOSE BATTLE BattleGear.do-->
 <c:forEach items="${players}" var="s">
                     			<ul>
 				<li>${s.email}</li>
 				<li>${s.displayName}</li>
 				<li>${s.userType}</li>
+                                      <li>${s.quests}</li>
+				<li>${s.userType}</li>
+				<li>${s.userType}</li>
 		
 			</ul>
+			<form action="BattleGear.do" method="POST">
+						                     <input type="hidden" name="id" value="${s.id }">${s.id }<br>
+						                     <input type="submit" value="GET Battle Gear Here">
+                                      </form><br><br>
 			
 			</c:forEach>
 			

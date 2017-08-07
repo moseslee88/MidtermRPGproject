@@ -20,14 +20,14 @@
 <jsp:include page="../../partials/_nav.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
-			<h2>Login</h2>
+			<h2>Login Error</h2>
 		</div>
 		<div class="container">
 <!-- Page Content -->
 <!-- in: home, index -->
 <!-- out: admin, playerInfo -->	
 		
-<h5>CUSTOM 404 ERROR JSP</h5>
+<h5>Incorrect username/password. Please go back and input correct information.</h5>
 <a href="index.html" class="btn" role="button">Get back to Home Page</a><br/>
 		
 		
