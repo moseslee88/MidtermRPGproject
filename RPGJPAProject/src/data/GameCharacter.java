@@ -163,7 +163,7 @@ public class GameCharacter {
 	}
 
 	private void checkAndUseItemByType(Item item) {
-		if (item == this.weapon || item == this.armor) {
+		if (item.getId() == this.weapon.getId() || item.getId() == this.armor.getId()) {
 			return;
 		}
 		if (item.getTypeOfItem().equals(TypeOfItem.weapon)) {
