@@ -22,12 +22,18 @@
 			<h2>Quest Start</h2>
 		</div>
 		<div class="container">
-<!-- Page Content -->
-<!-- in: characterInfo -->
-<!-- out: stageStart -->	
-		
-		
-		
+			<!-- Page Content -->
+			<!-- in: characterInfo -->
+			<!-- out: stageStart -->
+			<div class="jumbotron">
+				<h2>${currentQuest.name}</h2>
+				<p>
+					${currentQuest.intro} <a class="btn btn-primary btn-lg"
+						href="GameplayStageStart.do" role="button">Continue!</a>
+				</p>
+			</div>
+
+
 		</div>
 	</div>
 	<br>

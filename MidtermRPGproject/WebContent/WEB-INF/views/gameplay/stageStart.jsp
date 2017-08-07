@@ -22,12 +22,24 @@
 			<h2>Stage</h2>
 		</div>
 		<div class="container">
-<!-- Page Content -->
-<!-- in: questStart, stageConclusion -->
-<!-- out: battle -->	
-		
-		
-		
+			<!-- Page Content -->
+			<!-- in: questStart, stageConclusion -->
+			<!-- out: battle -->
+			<div class="jumbotron">
+				<h2>${currentStage.name}</h2>
+				<p>${currentStage.intro}
+				<form action="GameplayStartBattle.do">
+					<input type="Submit" class="btn btn-primary btn-lg" role="button"
+						value="Continue!"/>		
+				</form>
+				<form action="BattleGear.do">
+					<input type="Submit" class="btn btn-primary btn-lg" role="button"
+						value="Continue!"/>		
+				</form>
+				</p>
+			</div>
+
+
 		</div>
 	</div>
 	<br>
