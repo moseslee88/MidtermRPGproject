@@ -1,26 +1,39 @@
 package data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
 @Repository
 public class GameplayDaoImpl implements GameplayDao {
 	@PersistenceContext
 	private EntityManager em;
-	
+
+	public Ability useAbilityByName(String abilityName) {
+		String qString = "select a from Ability a";
+			List<Ability> abilities = em.createQuery(qString, Ability.class).getResultList();
+
+			for (Ability ability : abilities) {
+				if (ability.getName().equals(abilityName)) {
+					return ability;
+				}
+			}
+			return null;
+	}
+
 	public Ability useDefaultAbility() {
 		return em.find(Ability.class, 11);
 	}
-	
+
 	public Stage getDefaultStage() {
 		return em.find(Stage.class, 1);
 	}
-	
+
 	public GameCharacter getDefaultGameCharacter() {
 		return em.find(GameCharacter.class, 14);
 	}
@@ -54,5 +67,5 @@ public class GameplayDaoImpl implements GameplayDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }

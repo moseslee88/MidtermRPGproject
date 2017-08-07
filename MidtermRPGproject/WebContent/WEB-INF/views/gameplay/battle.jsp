@@ -28,7 +28,7 @@
 			<c:choose>
 				<c:when test="${winner != null}">
 					<div class="jumbotron">
-						<h1>${winner.name}is victorious!</h1>
+						<h1>${winner.name} is victorious!</h1>
 						<p>
 							<a class="btn btn-primary btn-lg" href="#" role="button">Continue!</a>
 						</p>
@@ -44,13 +44,13 @@
 										<h2 class="media-heading">${currentCharacter.name}</h2>
 										Power: ${currentCharacter.power} <br>
 										<c:if test="${attackEnemy != null}">
-											<div class="alert alert-danger" role="alert">You were
-												hit by: ${attackEnemy}</div>
+											<div class="alert alert-danger" role="alert">
+												${enemyCharacter.name} used ${attackEnemy}</div>
 										</c:if>
 									</div>
 									<div class="media-right">
 										<img class="media-object"
-											src="<%=request.getContextPath()%>/images/defaultImage.jpg"
+											src="<%=request.getContextPath()%>/images/${currentCharacter.name}.jpg"
 											height="160em">
 									</div>
 								</div>
@@ -78,8 +78,24 @@
 											style="width: ${newEnergyCurrent}%"></div>
 									</div>
 									<p>
-										<a href="GameplayBattleLoop.do" class="btn btn-primary"
-											role="button">Attack!</a>
+									<c:choose>
+									<c:when test="${not empty currentAbilities}">
+									<c:forEach var="ability" items="${currentAbilities}">
+									<form action="GameplayBattleLoop.do">
+										<input type="submit" class="btn btn-primary"
+											role="button" name="characterAbility" value="${ability.name}"/>
+									</form>
+									</c:forEach>
+									</c:when>
+									<c:otherwise>
+									<form action="GameplayBattleLoop.do">
+									<input type="submit" class="btn btn-primary"
+											role="button" name="attack" value="Attack!"/>
+											<input type="submit" class="btn btn-primary"
+											role="button" name="defend" value="Defend!"/>
+									</form>
+									</c:otherwise>
+									</c:choose>
 									</p>
 								</div>
 							</div>
@@ -99,7 +115,7 @@
 									</div>
 									<div class="media-right">
 										<img class="media-object"
-											src="<%=request.getContextPath()%>/images/defaultImage.jpg"
+											src="<%=request.getContextPath()%>/images/${enemyCharacter.name}.jpg"
 											height="160em">
 									</div>
 								</div>

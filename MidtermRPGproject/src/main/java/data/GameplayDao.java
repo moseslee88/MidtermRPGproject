@@ -10,6 +10,7 @@ public interface GameplayDao {
 	public boolean destroyGameCharacter(int id);
 	
 	public Ability useDefaultAbility();
+	public Ability useAbilityByName(String abilityName);
 	
 	public Stage getDefaultStage();
 	
