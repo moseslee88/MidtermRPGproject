@@ -45,6 +45,13 @@ WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Chara
 				<input type="submit" name="Create a New Character!" value="Create a new Character!">
 			</form>
 			
+			<a href="AdminRoute.do">AdminRoute.do</a><br/>
+<a href="ContentCreationRoute.do">ContentCreationRoute.do</a><br/>
+<a href="PlayerRoute.do">PlayerRoute.do</a><br/>
+<a href="CharacterRoute.do">CharacterRoute.do</a><br/>
+<a href="GameplayRoute.do">GameplayRoute.do</a><br/>
+<a href="BattleGear.do">BattleGear.do</a><br/>
+			
 			
 		
 			

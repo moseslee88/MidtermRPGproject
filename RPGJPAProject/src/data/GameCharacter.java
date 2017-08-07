@@ -163,11 +163,11 @@ public class GameCharacter {
 	}
 
 	private void checkAndUseItemByType(Item item) {
-		if (item == this.weapon || item == this.armor) {
-			return;
-		}
 		if (item.getTypeOfItem().equals(TypeOfItem.weapon)) {
 			if (this.weapon != null) {
+				if (item.getId() == this.weapon.getId()) {
+					return;
+				}
 				unequipWeapon(this.weapon);				
 			}
 			weapon = item;
@@ -175,6 +175,9 @@ public class GameCharacter {
 		}
 		if (item.getTypeOfItem().equals(TypeOfItem.armor)) {
 			if (this.armor != null) {
+				if (item.getId() == this.armor.getId()) {
+					return;
+				}
 				unequipArmor(this.armor);				
 			}
 			armor = item;
