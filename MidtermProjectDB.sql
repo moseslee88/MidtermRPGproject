@@ -779,7 +779,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `quest` (`id`, `name`, `description`, `intro`, `conclusion`) VALUES (1, 'Beginning Again', 'You were trained to fight, so do that!', 'quest intro', 'quest conclusion');
+INSERT INTO `quest` (`id`, `name`, `description`, `intro`, `conclusion`) VALUES (1, 'Beginning Again', 'You were trained to fight, so do that!', 'Cliche Narrator: You just went through a terrible break-up and you decide to go for a walk. ', 'Narrator: there is no way that anyone will make it this far. ');
 
 COMMIT;
 

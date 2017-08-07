@@ -33,17 +33,15 @@ public class GameplayController {
 	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
 		currentStage = dao.getDefaultStage();
 
-		mv.setViewName("WEB-INF/views/gameplay/stageStart.jsp");
+		mv.setViewName("WEB-INF/views/gameplay/questStart.jsp");
 		return mv;
 	}
 
 	@RequestMapping(path = "GameplayStartBattle.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayStartBattle(ModelAndView mv, HttpSession session) {
 
-		GameCharacter enemyCharacter = dao.getDefaultGameCharacter();
-		// GameCharacter currentCharacter = (GameCharacter)
-		// session.getAttribute("currentCharacter");
-		GameCharacter currentCharacter = dao.getDefaultGameCharacter();
+		 GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
+		 GameCharacter enemyCharacter = ((Stage)session.getAttribute("currentStage")).getGameCharacter();
 
 		currentCharacter.startFight();
 		mv.addObject("newHealthCurrent", 100);
@@ -251,6 +249,12 @@ public class GameplayController {
 			session.setAttribute("currentStage", nextStage);
 			mv.setViewName("WEB-INF/views/gameplay/stageStart.jsp");
 		}
+		return mv;
+	}
+	
+	@RequestMapping(path = "GameplayEndOfQuest.do" /* , method = RequestMethod.GET */)
+	public ModelAndView gameplayEndOfQuest(ModelAndView mv, HttpSession session) {
+		mv.setViewName("WEB-INF/views/gameplay/questConclusion.jsp");
 		return mv;
 	}
 	
