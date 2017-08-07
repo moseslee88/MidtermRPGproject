@@ -29,7 +29,7 @@
 <!-- out: characterInfo, friendList, createQuest, report, createCharacter 
 WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Character	
 		PLAYER STUFF HERE
-		<h5>${players }</h5>  FORM for each game character that goes to CHOOSE BATTLE BattleGear.do-->
+		<h5>${players }</h5>  FORM for each game character that goes to CHOOSE BATTLE BattleGear.do
 <c:forEach items="${players}" var="s">
                     			<ul>
 				<li>${s.email}</li>
@@ -40,19 +40,17 @@ WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Chara
 				<li>${s.userType}</li>
 		
 			</ul>
-			<form action="BattleGear.do" method="POST">
-						                     <input type="hidden" name="id" value="${s.id }">${s.id }<br>
-						                     <input type="submit" value="GET Battle Gear Here">
-                                      </form><br><br>
+			</c:forEach>  -->
+	  <h5>${player.displayName}</h5>
+	  <h5>${player.email}</h5>
 			
-			</c:forEach>
 			
 			 <!--Button goes here for create new character -->
 			<form action="PlayerCreateForm.do" method="GET">
 				<input type="submit" name="Create a New Character!" value="Create a new Character!">
 			</form>
 			
-			<a href="AdminRoute.do">AdminRoute.do</a><br/>
+	
 <a href="ContentCreationRoute.do">ContentCreationRoute.do</a><br/>
 <a href="PlayerRoute.do">PlayerRoute.do</a><br/>
 <a href="CharacterRoute.do">CharacterRoute.do</a><br/>

@@ -24,11 +24,11 @@ public class CharacterEditController {
 	private CharacterEditDao dao;
 	
 	// takes in a Player command object and updates the character's name
-		@RequestMapping(path = "CharacterRoute.do")
+		@RequestMapping(path = "CharacterRoute.do", method=RequestMethod.GET)
 	public ModelAndView showCharacters(ModelAndView mv, HttpSession session) {
 		Player p = (Player) session.getAttribute("player");
 		session.setAttribute("characters", dao.getPlayersGameCharacters(p));
-		mv.setViewName("/WEB-INF/views/character/characterinfo.jsp");
+		mv.setViewName("/WEB-INF/views/character/characterInfo.jsp");
 		return mv;
 	}
 	@RequestMapping(path = "PlayerChangeName.do")
@@ -38,7 +38,7 @@ public class CharacterEditController {
 		updatedChar.setName(name);
 		dao.update(updatedChar, dao.getCharByName(oldName).getId());
 		session.setAttribute("characters", dao.getPlayersGameCharacters(player));
-		mv.setViewName("/WEB-INF/views/character/characterinfo.jsp");
+		mv.setViewName("/WEB-INF/views/character/characterInfo.jsp");
 		return mv;
 	}
 

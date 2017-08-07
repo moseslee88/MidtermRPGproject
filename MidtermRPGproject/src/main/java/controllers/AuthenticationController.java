@@ -2,9 +2,7 @@ package controllers;
 
 import java.security.NoSuchAlgorithmException;
 
-import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import data.AdminDao;
 import data.AuthenticationDao;
 import data.EncryptionDAO;
-import data.GameCharacter;
 import data.Player;
-
-import enums.TypeOfUser;
 
 @Controller
 public class AuthenticationController {
@@ -27,6 +23,8 @@ public class AuthenticationController {
 	private AuthenticationDao dao;
 	@Autowired
 	private EncryptionDAO edao;
+	@Autowired
+	private AdminDao admindao;
 
 	// login method must add player to session so it can be used for admin check in
 	// admin controller. thanks brian! -love Mo

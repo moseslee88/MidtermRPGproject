@@ -23,16 +23,14 @@
 	
 	<c:forEach items="${characters}" var="GameCharacter">
 
-		<ul>
-			<li> ${GameCharacter.name}</li>
-			<li> ${GameCharacter.health}</li>
-			<li> ${GameCharacter.energy}</li>
-			<li> ${GameCharacter.power}</li>
-
-		</ul>
+		
+			Name:  ${GameCharacter.name}
+			Health:  ${GameCharacter.health}
+			Energy:  ${GameCharacter.energy}
+			Power:  ${GameCharacter.power}
+			
 		                    <form action="BattleGear.do" method="POST">
-                               <input type="hidden" name="name" value="${s.name}" /> 
-                               <input type="submit" value="Go to Battle Gear" class="submit"/><br><br>
+                               <input type="submit" value="Get your Battle Gear" class="submit"/><br><br>
                     </form>
 	</c:forEach>
 	<div class="container">
