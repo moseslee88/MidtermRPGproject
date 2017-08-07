@@ -163,6 +163,9 @@ public class GameCharacter {
 	}
 
 	private void checkAndUseItemByType(Item item) {
+		if (item == this.weapon || item == this.armor) {
+			return;
+		}
 		if (item.getTypeOfItem().equals(TypeOfItem.weapon)) {
 			if (this.weapon != null) {
 				unequipWeapon(this.weapon);				
