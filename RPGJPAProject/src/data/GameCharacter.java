@@ -3,6 +3,7 @@ package data;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +31,8 @@ public class GameCharacter {
 	private int id;
 	@Column
 	private String name;
-	@OneToOne
+	
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "inventory_id")
 	private Inventory inventory;
 	@Column

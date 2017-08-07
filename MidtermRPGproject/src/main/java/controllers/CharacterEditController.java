@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import data.CharacterEditDao;
 import data.GameCharacter;
+import data.Inventory;
 import data.Player;
 
 @Controller
@@ -69,7 +70,9 @@ public class CharacterEditController {
 
 		newChar.setPlayer((Player) session.getAttribute("player"));
 		Player p = (Player) session.getAttribute("player");
-
+        newChar.setLevel(1);
+        Inventory i = new Inventory();
+        newChar.setInventory(i);
 		dao.create(newChar);
 		session.setAttribute("newcharacter", newChar);
 		session.setAttribute("characters", dao.getPlayersGameCharacters(p));
@@ -80,10 +83,11 @@ public class CharacterEditController {
 
 	// here is the mapping to handle POST-redirect Get
 	@RequestMapping(path = "NewGameCharacterAdded.do", method = RequestMethod.GET)
-	public ModelAndView show(GameCharacter newChar, Model model, ModelAndView mv) {
+	public ModelAndView show(GameCharacter newChar, Model model, ModelAndView mv, HttpSession session) {
 		mv.setViewName("WEB-INF/views/character/characterInfo.jsp");
-		mv.addObject("NewCharacter", dao.create(newChar));
-		mv.addObject("characters", dao.getAllGameCharacters());
+		mv.addObject("NewCharacter", newChar);
+		mv.addObject("characters", dao.getPlayersGameCharacters((Player)session.getAttribute("player")));
+		//mv.addObject("NewCharacter", dao.create(newChar));
 		// model.addAttribute("char", newChar);
 		return mv;
 	}

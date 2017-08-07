@@ -24,9 +24,16 @@
 	<c:forEach items="${characters}" var="GameCharacter">
 
 		<ul>
-			<li>${GameCharacter.Player.name} ${GameCharacter.name}</li>
+			<li> ${GameCharacter.name}</li>
+			<li> ${GameCharacter.health}</li>
+			<li> ${GameCharacter.energy}</li>
+			<li> ${GameCharacter.power}</li>
 
 		</ul>
+		                    <form action="BattleGear.do" method="POST">
+                               <input type="hidden" name="name" value="${s.name}" /> 
+                               <input type="submit" value="Go to Battle Gear" class="submit"/><br><br>
+                    </form>
 	</c:forEach>
 	<div class="container">
 		<div class="page-header">

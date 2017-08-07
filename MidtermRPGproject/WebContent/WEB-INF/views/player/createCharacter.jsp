@@ -28,18 +28,18 @@
 		</div>
 		<div class="container">
 			<form action="PlayerCreatesChar.do" method="POST">
-				Name: <input type="text" name="name"> <br /> Health starts
+				Name: <input type="text" name="name" value="name"> <br /> Health starts
 				at 100 each point adds 10: <input type="number" name="health"
 					value="0" /> <br /> Energy starts at 100 each point adds 10: <input
 					type="number" name="energy" value="0" /> <br /> Power: <input
 					type="number" name="power" value="0" /> <br /> Critical: <input
 					type="number" name="critical" value="0" /> <br /> Physical
 				Resistance: <input type="number" name="physicalR" value="0" /> <br />
-				Fire Resistance: <input type="number" name="fire_r" value="0" /> <br />
-				Frost Resistance: <input type="number" name="frost_r" value="0" />
+				Fire Resistance: <input type="number" name="fireR" value="0" /> <br />
+				Frost Resistance: <input type="number" name="frostR" value="0" />
 				<br /> Lightning Resistance: <input type="number"
-					name="lightning_r" value="0" /> <br /> Blood Resistance: <input
-					type="number" name="blood_r" value="0" />				
+					name="lightningR" value="0" /> <br /> Blood Resistance: <input
+					type="number" name="bloodR" value="0" />				
          <br>
         Image: <select name="image" id="image" class="icon-menu">
 
