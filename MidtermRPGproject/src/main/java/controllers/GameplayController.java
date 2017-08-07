@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import data.Ability;
 import data.GameCharacter;
 import data.GameplayDao;
+import data.Item;
+import data.Quest;
 import data.RandNumGen;
 import data.Stage;
 
@@ -31,7 +33,7 @@ public class GameplayController {
 	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
 		currentStage = dao.getDefaultStage();
 
-		mv.setViewName("GameplayStartBattle.do");
+		mv.setViewName("WEB-INF/views/gameplay/stageStart.jsp");
 		return mv;
 	}
 
@@ -141,9 +143,10 @@ public class GameplayController {
 			mv.addObject("oldHealthEnemy", (oldHealthEnemy - newHealthEnemy));
 			System.out.println("new enemy " + newHealthEnemy);
 
-			for (Ability ability : abilities1) {
-				if (ability.getEnergyCost() > currentCharacter.getStamina()) {
-					abilities1.remove(ability);
+			abilities1.clear();
+			for (Ability ability : abilities0) {
+				if (ability.getEnergyCost() <= currentCharacter.getStamina()) {
+					abilities1.add(ability);
 				}
 			}
 			mv.addObject("currentAbilities", abilities1);
@@ -222,15 +225,36 @@ public class GameplayController {
 		System.out.println("win3 " + winner);
 		GameCharacter currentCharacter = participants.get(0);
 		currentCharacter.endFight();
+		currentCharacter.lvlUp();
 		mv.addObject("currentCharacter", currentCharacter);
 		GameCharacter enemyCharacter = participants.get(1);
 		enemyCharacter.endFight();
 		mv.addObject("enemyCharacter", enemyCharacter);
-
 		mv.addObject("winner", winner);
+		
+		if (winner.getId() == currentCharacter.getId()) {
+			Item reward = dao.addItemToGameCharacter(currentCharacter);
+			mv.addObject("reward", reward);
+			mv.setViewName("WEB-INF/views/gameplay/stageConclusion.jsp");
+			return mv;
+		}
 		mv.setViewName("WEB-INF/views/gameplay/battle.jsp");
 		return mv;
 	}
+	
+	@RequestMapping(path = "GameplayEndOfStage.do" /* , method = RequestMethod.GET */)
+	public ModelAndView gameplayEndOfStage(ModelAndView mv, HttpSession session) {
+		Stage nextStage = dao.getNextStage((Quest)session.getAttribute("currentQuest"), (Stage)session.getAttribute("currentStage"));
+		if (nextStage == null) {
+			mv.setViewName("GameplayEndOfQuest.do");
+		} else {
+			session.setAttribute("currentStage", nextStage);
+			mv.setViewName("WEB-INF/views/gameplay/stageStart.jsp");
+		}
+		return mv;
+	}
+	
+	
 
 	public GameCharacter gameplayWinnerCheck(ModelAndView mv, HttpSession session) {
 

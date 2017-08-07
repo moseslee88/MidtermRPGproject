@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -37,35 +39,35 @@ public class GameplayDaoImpl implements GameplayDao {
 	public GameCharacter getDefaultGameCharacter() {
 		return em.find(GameCharacter.class, 14);
 	}
-
-	@Override
-	public GameCharacter indexGameCharacters() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Item addItemToGameCharacter(GameCharacter gameCharacter) {
+		Item reward = null;
+		String q = "select i from Item i";
+		List<Item> items = em.createQuery(q, Item.class).getResultList();
+		
+		int targetItemLevel = (gameCharacter.getHp()/40)+1;
+		if (targetItemLevel > 3) targetItemLevel = 3;
+		else if (targetItemLevel < 1) targetItemLevel = 1;
+		
+		Collections.shuffle(items);
+		
+		for (Item item : items) {
+			if (item.getItemLevel() == targetItemLevel) {
+				gameCharacter.getInventory().getItems().add(item);
+				return item;
+			}
+		}
+		return reward;
 	}
-
-	@Override
-	public GameCharacter showGameCharacter(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GameCharacter createGameCharacter(GameCharacter GameCharacter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public GameCharacter updateGameCharacter(int id, GameCharacter GameCharacter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean destroyGameCharacter(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	
+	public Stage getNextStage(Quest quest, Stage stage) {
+		if (stage == null) {
+			return quest.getStages().get(0);
+		} else if (stage.getId() == quest.getStages().get(quest.getStages().size()-1).getId()) {
+			return null;
+		} else {
+			return quest.getStages().get(quest.getStages().indexOf(stage)+1);
+		}
 	}
 
 }

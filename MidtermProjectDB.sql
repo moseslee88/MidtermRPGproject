@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `game_character` ;
 
 CREATE TABLE IF NOT EXISTS `game_character` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `player_id` INT NULL,
   `name` VARCHAR(45) NOT NULL,
   `health` INT NULL,
@@ -249,9 +249,9 @@ DROP TABLE IF EXISTS `stage` ;
 
 CREATE TABLE IF NOT EXISTS `stage` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `intro` VARCHAR(45) NULL,
-  `conclusion` VARCHAR(45) NULL,
+  `name` VARCHAR(100) NULL,
+  `intro` VARCHAR(500) NULL,
+  `conclusion` VARCHAR(500) NULL,
   `character_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_stage_character1_idx` (`character_id` ASC),
@@ -416,7 +416,7 @@ INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `po
 INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (20, 1, 'Golem', 160, 100, 25, 5, 20, 20, 20, 15, 10, 1, 22, NULL);
 INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (21, 1, 'Gorgon', 110, 100, 13, 17, 10, 10, 15, 20, 15, 1, 23, NULL);
 INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (22, 1, 'Griffin', 120, 100, 15, 15, 15, 10, 10, 10, 10, 1, 24, NULL);
-INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (23, 1, 'Grim Reaper', 10, 100, 2, 28, 20, 20, 20, 20, 20, 1, 25, NULL);
+INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (23, 1, 'Grim Reaper', 25, 100, 30, 30, 20, 20, 20, 20, 20, 1, 25, NULL);
 INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (24, 1, 'Hurrikane', 130, 100, 20, 12, 20, 20, 20, 10, 20, 1, 26, NULL);
 INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (25, 1, 'Hydra', 200, 100, 20, 10, 20, 15, 15, 15, 10, 1, 27, NULL);
 INSERT INTO `game_character` (`id`, `player_id`, `name`, `health`, `energy`, `power`, `critical`, `physical_r`, `fire_r`, `frost_r`, `lightning_r`, `blood_r`, `level`, `inventory_id`, `image`) VALUES (26, 1, 'Imp', 60, 100, 10, 20, 10, 20, 10, 15, 15, 1, 28, NULL);
@@ -790,6 +790,13 @@ COMMIT;
 START TRANSACTION;
 USE `MidtermProjectDB`;
 INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (1, 1, 1);
+INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (2, 1, 2);
+INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (3, 1, 3);
+INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (4, 1, 4);
+INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (5, 1, 5);
+INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (6, 1, 6);
+INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (7, 1, 7);
+INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (8, 1, 8);
 
 COMMIT;
 
@@ -810,7 +817,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (1, 'The First Stage', 'You entered the world under suspicious circumstances', 'They trained you to fight, and you did.', 57);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (1, 'The First Stage', 'You have no idea who you are, or what you are capable of!', 'They trained you to fight, and you did. Move along now.', 35);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (2, 'The Second Stage', 'You come to a bridge. A wizard animated a golem to protect his turf beyond.', 'You defeated the golem, crossed the bridge, trampled over the wizard\'s turf, and some of his carefully planted perennials.', 20);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (3, 'The Final Stage!', 'You turn around to see the shade of the wizard in front of you. Clearly he was too busy to conjure a portal and come himself. But while you\'re here you might as well fight this thing too. ', 'That was easy. ', 42);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (4, 'Surprize!', 'You understand, it\'s nothing personal. But the wizard has contracted with his associate to come destroy you. Better get him before he gets you!', 'I didn\'t expect you to make it this far. Congratulations... ', 23);
 
 COMMIT;
 
@@ -821,6 +831,9 @@ COMMIT;
 START TRANSACTION;
 USE `MidtermProjectDB`;
 INSERT INTO `quest_stage` (`quest_id`, `stage_id`, `id`) VALUES (1, 1, 1);
+INSERT INTO `quest_stage` (`quest_id`, `stage_id`, `id`) VALUES (1, 2, 2);
+INSERT INTO `quest_stage` (`quest_id`, `stage_id`, `id`) VALUES (1, 3, 3);
+INSERT INTO `quest_stage` (`quest_id`, `stage_id`, `id`) VALUES (1, 4, 4);
 
 COMMIT;
 
