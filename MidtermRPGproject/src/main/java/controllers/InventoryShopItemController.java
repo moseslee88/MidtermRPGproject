@@ -106,7 +106,10 @@ public class InventoryShopItemController {
 		}
 
 		System.out.println("After for loop, battleGear size: " + battleGear.size());
-		System.out.println("After equipment: " + gameCharacter.getPower());
+		System.out.println("GameCharacter in Controller: " + gameCharacter.getName() 
+		+ " has a power of " + gameCharacter.getPower() + " after equipment");
+
+		
 		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
 		return mv;
 	}
