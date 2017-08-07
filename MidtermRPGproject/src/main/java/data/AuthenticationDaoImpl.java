@@ -42,7 +42,6 @@ import org.springframework.transaction.annotation.Transactional;
 		@Override
 		public Player login(String email, String password) {
 			Player p=null;
-			//String q = "SELECT p from Player p where p.email = :email and p.password = :password";
 			String query = "SELECT p FROM Player p WHERE p.email = :email";
 			try {
 				p = em.createQuery(query, Player.class)

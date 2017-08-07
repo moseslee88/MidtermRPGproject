@@ -45,7 +45,7 @@ public class AuthenticationController {
 		return mv;
 	}
 
-	@RequestMapping(path = "AuthenticationRoute.do", method=RequestMethod.POST)
+	@RequestMapping(path = "AuthenticationRoute.do", method = RequestMethod.POST)
 	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelAndView mv, HttpSession session) {
 		// TODO: implement user login here
@@ -64,35 +64,33 @@ public class AuthenticationController {
 		// session.setAttribute("players", dao.indexPlayers());
 		// mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
 		// return mv;
-        
-		Boolean validE= dao.validEmail(email);
-		Boolean validPW=dao.validPassword(password);
-		if(dao.login(email, password).getDisplayName().equals("admin")) {
-			if(dao.isAdmin(dao.login(email, password)))  {
-			mv.setViewName("/WEB-INF/views/admin/admin.jsp");
-			return mv;
-			}
-		}
-		if (email != "" && password != "" &&validPW &&validE ) {
-			// boolean passWordMatches = edao.matches(password,
-			// dao.findUserPasswordByEmail(email));
-			// print out true or false for password matching
-			// System.out.println(passWordMatches);
-			session.setAttribute("player", dao.login(email, password));
-			mv.addObject("player", dao.login(email, password));
-			session.setAttribute("players", dao.indexPlayers());
-			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
-			return mv;
-		} 
-		if(email=="" && password=="" && !validE) {
+		//if (validPW && validE) {
+			//session.setAttribute("player", dao.login(email, password));
+			//mv.addObject("player", dao.login(email, password));
+			//session.setAttribute("players", dao.indexPlayers());
+			//mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
+			//return mv;
+		//}
+
+		Boolean validE = dao.validEmail(email);
+		Boolean validPW = dao.validPassword(password);
+		if (email == "" || password == "" || !validE) {
 			mv.setViewName("/WEB-INF/views/authentication/_500.jsp");
-			//return "/WEB-INF/views/player/authentication/login.jsp";
+			// return "/WEB-INF/views/player/authentication/login.jsp";
 			return mv;
 		}
-		else {
-			mv.setViewName("/WEB-INF/views/authentication/_404.jsp");
+		if (dao.login(email, password).getUserType() == 1) {
+			mv.setViewName("/WEB-INF/views/admin/admin.jsp");
+			session.setAttribute("player", dao.login(email, password));
 			return mv;
 		}
+		if (dao.login(email, password).getUserType() == 2) {
+			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
+			session.setAttribute("player", dao.login(email, password));
+			return mv;
+		}
+		mv.setViewName("/WEB-INF/views/authentication/_404.jsp");
+		return mv;
 	}
 
 	@RequestMapping(path = "CreatePlayer.do")
