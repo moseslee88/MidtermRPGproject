@@ -7,7 +7,7 @@ public interface GameplayDao {
 	public Ability useDefaultAbility();
 	public Ability useAbilityByName(String abilityName);
 	
-	public Stage getDefaultStage();
+	public Quest getDefaultQuest();
 	
 	public GameCharacter getDefaultGameCharacter();
 	

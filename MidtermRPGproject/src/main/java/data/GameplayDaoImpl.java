@@ -32,12 +32,12 @@ public class GameplayDaoImpl implements GameplayDao {
 		return em.find(Ability.class, 11);
 	}
 
-	public Stage getDefaultStage() {
-		return em.find(Stage.class, 1);
+	public Quest getDefaultQuest() {
+		return em.find(Quest.class, 1);
 	}
 
 	public GameCharacter getDefaultGameCharacter() {
-		return em.find(GameCharacter.class, 14);
+		return em.find(GameCharacter.class, 1);
 	}
 	
 	public Item addItemToGameCharacter(GameCharacter gameCharacter) {

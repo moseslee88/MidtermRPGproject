@@ -12,40 +12,41 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.AdminDao;
 import data.GameCharacter;
+import data.GameplayDao;
 import data.InventoryShopItemDao;
 import data.Item;
 
 @Controller
 public class InventoryShopItemController {
 
+
 	@Autowired
 	private InventoryShopItemDao dao;
 
 	@Autowired
-	private AdminDao dao2;
+	private GameplayDao dao2;
 
 	@RequestMapping(path = "BattleGear.do")
 	public ModelAndView battleGearRoute(ModelAndView mv, HttpSession session) {
 
-		List<GameCharacter> gameCharacter = dao2.indexGameCharacters();
+		session.setAttribute("currentCharacter", (GameCharacter) dao2.getDefaultGameCharacter());
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 
-		mv.addObject("gameCharacters", gameCharacter);
-		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
+
+		mv.addObject("currentCharacter", currentCharacter);
+		mv.setViewName("ViewBattleGear.do");
 		return mv;
 	}
 
 	@RequestMapping(path = "ViewBattleGear.do")
-	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session, Integer gameCharacterId) {
-		GameCharacter gameCharacter = dao2.showGameCharacter(gameCharacterId);
-		session.setAttribute("gameCharacter", gameCharacter);
+	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session) {
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 
-		GameCharacter beforeGameCharacter = dao2.showGameCharacter(gameCharacterId);
-		session.setAttribute("beforeStats", beforeGameCharacter);
 		// session.getAttribute("currentCharacter");
 
-		mv = addInventoryToModelAndView(mv, gameCharacter);
+		mv = addInventoryToModelAndView(mv, currentCharacter);
 
-		mv.addObject("beforeStats", gameCharacter);
+		mv.addObject("beforeStats", currentCharacter);
 
 		System.out.println("in viewBattleGear() in controller");
 
@@ -56,19 +57,19 @@ public class InventoryShopItemController {
 
 	@RequestMapping(path = "SetBattleGear.do")
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer weaponId) {
-		GameCharacter gameCharacter = (GameCharacter) session.getAttribute("gameCharacter");
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 
-		mv = addInventoryToModelAndView(mv, gameCharacter);
+		mv = addInventoryToModelAndView(mv, currentCharacter);
 
 		List<Item> battleGear = new ArrayList<>();
-		battleGear.add(dao.getItemFromGameCharacter(gameCharacter, weaponId));
+		battleGear.add(dao.getItemFromGameCharacter(currentCharacter, weaponId));
 
 		for (Item item : battleGear) {
-			gameCharacter.useItem(battleGear.get(0));
+			currentCharacter.useItem(battleGear.get(0));
 		}
 
-		mv.addObject("afterStats", gameCharacter);
-		mv.addObject("gameCharacterId", gameCharacter.getId());
+		mv.addObject("afterStats", currentCharacter);
+		mv.addObject("gameCharacterId", currentCharacter.getId());
 		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
 
 		return mv;

@@ -25,23 +25,33 @@ public class GameplayController {
 
 	private RandNumGen rng = new RandNumGen();
 
-	private Stage currentStage;
-
 	private List<GameCharacter> participants = new ArrayList<>();
 
 	@RequestMapping(path = "GameplayRoute.do" /* , method = RequestMethod.GET */)
 	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
-		currentStage = dao.getDefaultStage();
+		// temp!
+		session.setAttribute("currentQuest", dao.getDefaultQuest());
+		session.setAttribute("currentStage", ((Quest) session.getAttribute("currentQuest")).getStages().get(0));
 
+		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
+		mv.addObject("currentStage", (Stage) session.getAttribute("currentStage"));
 		mv.setViewName("WEB-INF/views/gameplay/questStart.jsp");
+		return mv;
+	}
+	
+	@RequestMapping(path = "GameplayStageStart.do" /* , method = RequestMethod.GET */)
+	public ModelAndView gameplayStageStart(ModelAndView mv, HttpSession session) {
+		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
+		mv.addObject("currentStage", (Stage) session.getAttribute("currentStage"));
+		mv.setViewName("WEB-INF/views/gameplay/stageStart.jsp");
 		return mv;
 	}
 
 	@RequestMapping(path = "GameplayStartBattle.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayStartBattle(ModelAndView mv, HttpSession session) {
 
-		 GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
-		 GameCharacter enemyCharacter = ((Stage)session.getAttribute("currentStage")).getGameCharacter();
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
+		GameCharacter enemyCharacter = ((Stage) session.getAttribute("currentStage")).getGameCharacter();
 
 		currentCharacter.startFight();
 		mv.addObject("newHealthCurrent", 100);
@@ -229,7 +239,7 @@ public class GameplayController {
 		enemyCharacter.endFight();
 		mv.addObject("enemyCharacter", enemyCharacter);
 		mv.addObject("winner", winner);
-		
+
 		if (winner.getId() == currentCharacter.getId()) {
 			Item reward = dao.addItemToGameCharacter(currentCharacter);
 			mv.addObject("reward", reward);
@@ -239,10 +249,11 @@ public class GameplayController {
 		mv.setViewName("WEB-INF/views/gameplay/battle.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "GameplayEndOfStage.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayEndOfStage(ModelAndView mv, HttpSession session) {
-		Stage nextStage = dao.getNextStage((Quest)session.getAttribute("currentQuest"), (Stage)session.getAttribute("currentStage"));
+		Stage nextStage = dao.getNextStage((Quest) session.getAttribute("currentQuest"),
+				(Stage) session.getAttribute("currentStage"));
 		if (nextStage == null) {
 			mv.setViewName("GameplayEndOfQuest.do");
 		} else {
@@ -251,14 +262,12 @@ public class GameplayController {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "GameplayEndOfQuest.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayEndOfQuest(ModelAndView mv, HttpSession session) {
 		mv.setViewName("WEB-INF/views/gameplay/questConclusion.jsp");
 		return mv;
 	}
-	
-	
 
 	public GameCharacter gameplayWinnerCheck(ModelAndView mv, HttpSession session) {
 
