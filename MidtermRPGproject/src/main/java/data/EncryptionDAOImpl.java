@@ -15,7 +15,6 @@ public class EncryptionDAOImpl implements EncryptionDAO {
 		byte[] hash = digest.digest(plainText.getBytes(StandardCharsets.UTF_8));
 		return Base64.getEncoder().encodeToString(hash);
 	}
-
 	public boolean matches(String plainText, String sha) {
 		try {
 			return encrypt(plainText).equals(sha);

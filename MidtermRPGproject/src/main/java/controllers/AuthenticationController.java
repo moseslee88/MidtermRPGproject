@@ -46,7 +46,7 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(path = "AuthenticationRoute.do", method=RequestMethod.POST)
-	public String userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
+	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelAndView mv, HttpSession session) {
 		// TODO: implement user login here
 		// mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
@@ -66,10 +66,14 @@ public class AuthenticationController {
 		// return mv;
         
 		Boolean validE= dao.validEmail(email);
-		if(dao.isAdmin(dao.login(email, password))) {
-			return "/WEB-INF/views/admin/admin.jsp";
+		Boolean validPW=dao.validPassword(password);
+		if(dao.login(email, password).getDisplayName().equals("admin")) {
+			if(dao.isAdmin(dao.login(email, password)))  {
+			mv.setViewName("/WEB-INF/views/admin/admin.jsp");
+			return mv;
+			}
 		}
-		if (email != "" || password != "") {
+		if (email != "" && password != "" &&validPW &&validE ) {
 			// boolean passWordMatches = edao.matches(password,
 			// dao.findUserPasswordByEmail(email));
 			// print out true or false for password matching
@@ -78,15 +82,16 @@ public class AuthenticationController {
 			mv.addObject("player", dao.login(email, password));
 			session.setAttribute("players", dao.indexPlayers());
 			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
-			return "/WEB-INF/views/player/playerInfo.jsp";
+			return mv;
 		} 
-		if(email=="" || password=="" || !validE) {
-			return "/WEB-INF/views/authentication/_500.jsp";
+		if(email=="" && password=="" && !validE) {
+			mv.setViewName("/WEB-INF/views/authentication/_500.jsp");
 			//return "/WEB-INF/views/player/authentication/login.jsp";
+			return mv;
 		}
 		else {
-			
-			return "/WEB-INF/views/authentication/_404.jsp";
+			mv.setViewName("/WEB-INF/views/authentication/_404.jsp");
+			return mv;
 		}
 	}
 

@@ -38,21 +38,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 		//user logs in and we check if password matches SHA
 		//Boolean result=encryptor.matches(sha, em.createQuery(q, Player.class).setParameter("password", password).getSingleResult();
+		// 1st arg: plain text password, 2nd arg: encrypted password for user from db (em.find(User.class,1).getPassword();)
 		@Override
 		public Player login(String email, String password) {
 			Player p=null;
-			String encryptPW= password;
 			//String q = "SELECT p from Player p where p.email = :email and p.password = :password";
-			String sha =  null;
-			try { 
-				sha = encryptor.encrypt(encryptPW);
+			String query = "SELECT p FROM Player p WHERE p.email = :email";
+			try {
+				p = em.createQuery(query, Player.class)
+							.setParameter("email", email)
+							.getResultList()
+							.get(0);
 				//Boolean result = encryptor.matches(encryptPW, findUserPasswordByEmail(email));
-				Boolean result = encryptor.matches(password, sha);
+				Boolean result = encryptor.matches(password, p.getPassword());
 				//Boolean result = encryptor.matches(sha, findUserPasswordByEmail(email));
 			    System.out.println("result: " + result);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				System.out.println("Please enter correct password.");
+				return null;
 			}
 
 			em.flush();  //Only need a flush, not persisting any managed entity
