@@ -165,20 +165,26 @@ public class GameCharacter {
 	private void checkAndUseItemByType(Item item) {
 		if (item.getTypeOfItem().equals(TypeOfItem.weapon)) {
 			if (this.weapon != null) {
-				unequipWeapon(weapon);				
+				if (item.getId() == this.weapon.getId()) {
+					return;
+				}
+				unequipWeapon(this.weapon);				
 			}
 			weapon = item;
 			equipWeapon(item);
 		}
 		if (item.getTypeOfItem().equals(TypeOfItem.armor)) {
 			if (this.armor != null) {
-				unequipArmor(armor);				
+				if (item.getId() == this.armor.getId()) {
+					return;
+				}
+				unequipArmor(this.armor);				
 			}
 			armor = item;
 			equipArmor(item);
 		}
 		if (item.getTypeOfItem().equals(TypeOfItem.edible)) {
-			addHp((int) (item.getItemLevel() * (.33 * this.health)));
+			addHp((int) (item.getItemLevel() * (.35 * this.health)));
 		}
 		if (item.getTypeOfItem().equals(TypeOfItem.trash)) {
 
@@ -189,26 +195,26 @@ public class GameCharacter {
 	private void unequipWeapon(Item weapon) {
 		
 		int devisor = 3 + weapon.getItemLevel();
-		this.power = (this.power / devisor) * 3 + 1;
+		this.power = ((int)(this.power / devisor) * 3) + 1;
 	}
 
 	private void unequipArmor(Item armor) {
 		int devisor = 3 + armor.getItemLevel();
 
 		if (armor.getElement().equals(Element.physical)) {
-			this.physicalR = (this.physicalR / devisor) * 3 + 1;
+			this.physicalR = ((int)(this.physicalR / devisor) * 3) + 1;
 		}
 		if (armor.getElement().equals(Element.blood)) {
-			this.bloodR = (this.bloodR / devisor) * 3 + 1;
+			this.bloodR = ((int)(this.bloodR / devisor) * 3) + 1;
 		}
 		if (armor.getElement().equals(Element.fire)) {
-			this.fireR = (this.fireR / devisor) * 3 + 1;
+			this.fireR = ((int)(this.fireR / devisor) * 3) + 1;
 		}
 		if (armor.getElement().equals(Element.frost)) {
-			this.frostR = (this.frostR / devisor) * 3 + 1;
+			this.frostR = ((int)(this.frostR / devisor) * 3) + 1;
 		}
 		if (armor.getElement().equals(Element.lightning)) {
-			this.lightningR = (this.lightningR / devisor) * 3 + 1;
+			this.lightningR = ((int)(this.lightningR / devisor) * 3) + 1;
 		}
 		if (armor.getElement().equals(Element.dark)) {
 
@@ -216,12 +222,12 @@ public class GameCharacter {
 	}
 
 	private void equipWeapon(Item item) {
-		double modifier = weapon.getItemLevel() * .33;
-		this.power = (int) (this.getPower() * modifier + this.getPower());
+		double modifier = weapon.getItemLevel() * .35;
+		this.power =((int) (this.getPower() * modifier) + this.getPower());
 	}
 
 	private void equipArmor(Item item) {
-		double modifier = armor.getItemLevel() * .33;
+		double modifier = armor.getItemLevel() * .35;
 
 		if (armor.getElement().equals(Element.physical)) {
 			this.physicalR += (this.physicalR * modifier);
