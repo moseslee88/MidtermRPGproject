@@ -105,20 +105,20 @@
 					</c:choose>
 
 				</div>
-				<c:if test="${(beforeStats != null)}">
+				<c:if test="${(beforeStats == null) or (afterStats != null)}">
 						<div class="col-sm-4 col-md-4">
 							<h3>${beforeStats.name}</h3>
 							<h4>Stats</h4>
 							<p></p>
-							<p>${beforeStats.health} Health ${afterStats.health}</p>
-							<p>${beforeStats.energy} Energy ${afterStats.energy}</p>
-							<p>${beforeStats.power} Power ${afterStats.power}</p>
-							<p>${beforeStats.critical} Critical ${afterStats.critical}</p>
-							<p>${beforeStats.physicalR} Physical Resistance ${afterStats.physicalR}</p>
-							<p>${beforeStats.fireR} Fire Resistance ${afterStats.fireR}</p>
-							<p>${beforeStats.lightningR} Lightning Resistance ${afterStats.lightningR}</p>
-							<p>${beforeStats.bloodR} Blood Resistance ${afterStats.bloodR}</p>
-							<p>${beforeStats.frostR} Frost Resistance ${afterStats.frostR}</p>
+							<p>Health: ${afterStats.health}</p>
+							<p>Energy: ${afterStats.energy}</p>
+							<p>Power: ${afterStats.power}</p>
+							<p>Critical: ${afterStats.critical}</p>
+							<p>Physical Resistance: ${afterStats.physicalR}</p>
+							<p>Fire Resistance: ${afterStats.fireR}</p>
+							<p>Lightning Resistance: ${afterStats.lightningR}</p>
+							<p>Blood Resistance: ${afterStats.bloodR}</p>
+							<p>Frost Resistance: ${afterStats.frostR}</p>
 						</div>
 					</c:if>
 			</div>

@@ -19,6 +19,7 @@ import data.Item;
 @Controller
 public class InventoryShopItemController {
 
+
 	@Autowired
 	private InventoryShopItemDao dao;
 
@@ -27,8 +28,10 @@ public class InventoryShopItemController {
 
 	@RequestMapping(path = "BattleGear.do")
 	public ModelAndView battleGearRoute(ModelAndView mv, HttpSession session) {
+
 		session.setAttribute("currentCharacter", (GameCharacter) dao2.getDefaultGameCharacter());
-		GameCharacter currentCharacter = (GameCharacter)session.getAttribute("currentCharacter");
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
+
 
 		mv.addObject("currentCharacter", currentCharacter);
 		mv.setViewName("ViewBattleGear.do");
@@ -37,10 +40,8 @@ public class InventoryShopItemController {
 
 	@RequestMapping(path = "ViewBattleGear.do")
 	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session) {
-		GameCharacter currentCharacter = (GameCharacter)session.getAttribute("currentCharacter");
-		
-		GameCharacter beforeGameCharacter = currentCharacter;
-		session.setAttribute("beforeStats", beforeGameCharacter);
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
+
 		// session.getAttribute("currentCharacter");
 
 		mv = addInventoryToModelAndView(mv, currentCharacter);
@@ -56,7 +57,7 @@ public class InventoryShopItemController {
 
 	@RequestMapping(path = "SetBattleGear.do")
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer weaponId) {
-		GameCharacter currentCharacter = (GameCharacter)session.getAttribute("currentCharacter");
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 
 		mv = addInventoryToModelAndView(mv, currentCharacter);
 
