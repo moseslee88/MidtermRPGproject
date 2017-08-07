@@ -26,7 +26,7 @@
 			<!-- in: stageConclusion -->
 			<!-- out: stageConclusion -->
 			<div class="row">
-				<div class="col-sm-6 col-md-6">
+				<div class="col-sm-8 col-md-8">
 				
 					<c:choose>
 						<c:when test="${not empty gameCharacters}">
@@ -98,10 +98,10 @@
 						</c:otherwise>
 					</c:choose>
 					
+				</div>
 					<c:choose>
 					<c:when test="${beforeStats != null}">
-					<div class="col-sm-6 col-md-6">
-						<div class="row">
+					<div class="col-sm-4 col-md-4">
 						<h3>${beforeStats.name}</h3>					
 						<p>Level: ${beforeStats.level}</p>
 						<p>Health: ${beforeStats.health}</p>
@@ -114,13 +114,6 @@
 						<p>Blood Resistance: ${beforeStats.bloodR}</p>
 						<p>Frost Resistance: ${beforeStats.frostR}</p>
 						
-						</div>
-					</div>
-					</c:when>
-					</c:choose>
-					
-					<c:choose>
-					<c:when test="${afterStats != null}">
 					${afterStats.health}
 					${afterStats.energy}
 					${afterStats.power}
@@ -128,7 +121,6 @@
 					${afterStats.physicalR}
 					</c:when>
 					</c:choose>
-				</div>
 			</div>
 		</div>
 	</div>
