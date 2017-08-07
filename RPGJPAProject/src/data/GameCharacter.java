@@ -56,7 +56,7 @@ public class GameCharacter {
 	@ManyToOne
 	@JoinColumn(name = "player_id")
 	private Player player;
-	@Column(name="image")
+	@Column(name = "image")
 	private String image;
 
 	@Transient
@@ -67,14 +67,12 @@ public class GameCharacter {
 	private Item armor;
 	@Transient
 	private int stamina;
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "character_ability", joinColumns = @JoinColumn(name = "character_id"), inverseJoinColumns = @JoinColumn(name = "ability_id"))
 	private List<Ability> abilities;
 	@OneToMany(mappedBy = "gameCharacter")
 	private List<Stage> stages;
 
-	
-	
 	private Double critDamage(double attackPower, GameCharacter enemy) {
 		Random rand = new Random();
 		double modifier = .2;
@@ -99,6 +97,7 @@ public class GameCharacter {
 		}
 		return damage;
 	}
+
 	private Double modifyResisitedDamage(double resist, double attackPower, GameCharacter enemy) {
 		if (resist > 100.0) {
 			resist = 100.0;
@@ -106,9 +105,10 @@ public class GameCharacter {
 		Double damageDone = (critDamage(attackPower, enemy)) * ((100 - resist) * .01);
 		return damageDone;
 	}
+
 	private int calculateDamage(GameCharacter enemy, Ability attack) {
 		RandNumGen rng = new RandNumGen();
-		Double modifiedDamage = rng.getRNG(-(this.hp/10.0), (this.hp/10.0));
+		Double modifiedDamage = rng.getRNG(-(this.hp / 10.0), (this.hp / 10.0));
 		Double modifyer = .8;
 		double attackPower = attack.getPower();
 		if (attack.getElement().equals(Element.physical)) {
@@ -139,6 +139,7 @@ public class GameCharacter {
 		double temp = modifiedDamage.doubleValue();
 		return (int) temp;
 	}
+
 	private void setInitialstats() {
 		this.power = 5;
 		this.energy = 5;
@@ -152,65 +153,76 @@ public class GameCharacter {
 		this.lightningR = 10;
 
 	}
+
 	private void resetHP() {
 		this.hp = this.health;
 	}
+
 	private void resetStamina() {
 		this.stamina = this.energy;
 	}
-	
+
 	private void checkAndUseItemByType(Item item) {
-		if(item.getTypeOfItem().equals(TypeOfItem.weapon)) {
-			unequipWeapon(weapon);
+		if (item.getTypeOfItem().equals(TypeOfItem.weapon)) {
+			if (this.weapon != null) {
+				unequipWeapon(weapon);				
+			}
 			weapon = item;
 			equipWeapon(item);
 		}
-		if(item.getTypeOfItem().equals(TypeOfItem.armor)) {
-			unequipArmor(armor);
+		if (item.getTypeOfItem().equals(TypeOfItem.armor)) {
+			if (this.armor != null) {
+				unequipArmor(armor);				
+			}
 			armor = item;
 			equipArmor(item);
 		}
-		if(item.getTypeOfItem().equals(TypeOfItem.edible)) {
-			addHp((int)(item.getItemLevel()*(.33*this.health)));
+		if (item.getTypeOfItem().equals(TypeOfItem.edible)) {
+			addHp((int) (item.getItemLevel() * (.33 * this.health)));
 		}
-		if(item.getTypeOfItem().equals(TypeOfItem.trash)) {
-			
+		if (item.getTypeOfItem().equals(TypeOfItem.trash)) {
+
 		}
-		
+
 	}
+
 	private void unequipWeapon(Item weapon) {
+		
 		int devisor = 3 + weapon.getItemLevel();
-		this.power = (this.power/devisor) * 3 + 1;
+		this.power = (this.power / devisor) * 3 + 1;
 	}
+
 	private void unequipArmor(Item armor) {
 		int devisor = 3 + armor.getItemLevel();
-		
+
 		if (armor.getElement().equals(Element.physical)) {
-			this.physicalR = (this.physicalR/devisor) * 3 +1;
+			this.physicalR = (this.physicalR / devisor) * 3 + 1;
 		}
 		if (armor.getElement().equals(Element.blood)) {
-			this.bloodR = (this.bloodR/devisor) * 3 +1;
+			this.bloodR = (this.bloodR / devisor) * 3 + 1;
 		}
 		if (armor.getElement().equals(Element.fire)) {
-			this.fireR = (this.fireR/devisor) * 3 +1;
+			this.fireR = (this.fireR / devisor) * 3 + 1;
 		}
 		if (armor.getElement().equals(Element.frost)) {
-			this.frostR = (this.frostR/devisor) * 3 +1;
+			this.frostR = (this.frostR / devisor) * 3 + 1;
 		}
 		if (armor.getElement().equals(Element.lightning)) {
-			this.lightningR = (this.lightningR/devisor) * 3 +1;
+			this.lightningR = (this.lightningR / devisor) * 3 + 1;
 		}
 		if (armor.getElement().equals(Element.dark)) {
-			
+
 		}
 	}
+
 	private void equipWeapon(Item item) {
-		double modifier = weapon.getItemLevel()*.33;
-		this.power = (int) (this.getPower()*modifier + this.getPower());
+		double modifier = weapon.getItemLevel() * .33;
+		this.power = (int) (this.getPower() * modifier + this.getPower());
 	}
+
 	private void equipArmor(Item item) {
-		double modifier = armor.getItemLevel()*.33;
-		
+		double modifier = armor.getItemLevel() * .33;
+
 		if (armor.getElement().equals(Element.physical)) {
 			this.physicalR += (this.physicalR * modifier);
 		}
@@ -227,33 +239,38 @@ public class GameCharacter {
 			this.lightningR += (this.lightningR * modifier);
 		}
 		if (armor.getElement().equals(Element.dark)) {
-			
+
 		}
 	}
-	
+
 	// Starts a fight with full energy and health
 	public void useItem(Item item) {
 		checkAndUseItemByType(item);
 	}
+
 	public void startFight() {
 		resetHP();
 		resetStamina();
 	}
+
 	public void takeDamage(GameCharacter enemy, Ability attack) {
 		this.hp = this.hp - calculateDamage(enemy, attack);
 	}
+
 	public void addStamina(int staminaAmount) {
 		this.stamina = stamina + staminaAmount;
 		if (this.stamina > this.energy) {
 			this.stamina = energy;
 		}
 	}
+
 	public void addHp(int d) {
 		this.hp = hp + d;
 		if (this.hp > this.health) {
 			this.hp = health;
 		}
 	}
+
 	public boolean checkIfDead() {
 		if (this.hp <= 0) {
 			return true;
@@ -264,10 +281,12 @@ public class GameCharacter {
 		return true;
 
 	}
+
 	public void lvlUp() {
 		int lvl = this.level + 1;
 		setCharacterLvl(lvl);
 	}
+
 	public void setCharacterLvl(int lvl) {
 		if (this.level == 0) {
 			setLevel(1);
@@ -291,19 +310,17 @@ public class GameCharacter {
 		setLevel(lvl);
 
 	}
+
 	public void endFight() {
 		resetHP();
 		resetStamina();
 	}
-	
-	
-	
-	
+
 	// gets and sets
 	public GameCharacter() { // NO args constructor
 
 	}
-	
+
 	public int getStamina() {
 		return stamina;
 	}
@@ -311,13 +328,15 @@ public class GameCharacter {
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
-	
+
 	public String getImage() {
 		return image;
 	}
+
 	public void setImage(String image) {
 		this.image = image;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -442,7 +461,7 @@ public class GameCharacter {
 	public void setAbilities(List<Ability> abilities) {
 		this.abilities = abilities;
 	}
-	
+
 	public List<Stage> getStages() {
 		return stages;
 	}
