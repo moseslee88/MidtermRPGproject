@@ -1,6 +1,7 @@
 package controllers;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import data.AdminDao;
 import data.AuthenticationDao;
 import data.EncryptionDAO;
 import data.Player;
+import data.Quest;
 
 @Controller
 public class AuthenticationController {
@@ -46,22 +48,8 @@ public class AuthenticationController {
 	@RequestMapping(path = "AuthenticationRoute.do", method = RequestMethod.POST)
 	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelAndView mv, HttpSession session) {
-
-		// try{
-		// if (email != null && password!= null && passWordMatches) {
-		// session.setAttribute("player",dao.login(email, password));
-		// mv.addObject("player", dao.login(email, password));
-		// session.setAttribute("players", dao.indexPlayers());
-		// mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
-		// return mv;
-		//if (validPW && validE) {
-			//session.setAttribute("player", dao.login(email, password));
-			//mv.addObject("player", dao.login(email, password));
-			//session.setAttribute("players", dao.indexPlayers());
-			//mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
-			//return mv;
-		//}
-
+        List<Quest> questList = admindao.indexQuests();
+        session.setAttribute("questList", questList);
 		Boolean validE = dao.validEmail(email);
 		Boolean validPW = dao.validPassword(password);
 		if (email == "" || password == "" || !validE) {

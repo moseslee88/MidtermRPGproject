@@ -28,17 +28,17 @@
 		</div>
 		<div class="container">
 			<form action="PlayerCreatesChar.do" method="POST">
-				Name: <input type="text" name="name" value="name"> <br /> Health starts
-				at 100 each point adds 10: <input type="number" name="health"
-					value="0" /> <br /> Energy starts at 100 each point adds 10: <input
-					type="number" name="energy" value="0" /> <br /> Power: <input
-					type="number" name="power" value="0" /> <br /> Critical: <input
-					type="number" name="critical" value="0" /> <br /> Physical
-				Resistance: <input type="number" name="physicalR" value="0" /> <br />
-				Fire Resistance: <input type="number" name="fireR" value="0" /> <br />
-				Frost Resistance: <input type="number" name="frostR" value="0" />
+				Name: <input type="text" name="name" value="name"> <br /> 
+				Health starts at 100 each point adds 10: <input type="number" name="health"
+					min="0" value="0" /> <br /> Energy starts at 100 each point adds 10: <input
+					type="number" name="energy" min="0" value="0" /> <br /> Power: <input
+					type="number" name="power" min="0" value="0" /> <br /> Critical: <input
+					type="number" name="critical" min="0" value="0" /> <br /> Physical
+				Resistance: <input type="number" name="physicalR" min="0" value="0" /> <br />
+				Fire Resistance: <input type="number" min="0" name="fireR" value="0" /> <br />
+				Frost Resistance: <input type="number" min="0" name="frostR" value="0" />
 				<br /> Lightning Resistance: <input type="number"
-					name="lightningR" value="0" /> <br /> Blood Resistance: <input
+					name="lightningR" min="0" value="0" /> <br /> Blood Resistance: <input
 					type="number" name="bloodR" value="0" />				
          <br>
         Image: <select name="image" id="image" class="icon-menu">

@@ -29,7 +29,7 @@
 			Energy:  ${GameCharacter.energy}
 			Power:  ${GameCharacter.power}
 			
-		                    <form action="BattleGear.do" method="POST">
+		                    <form action="CharacterDetails.do" method="POST">
                                <input type="submit" value="Get your Battle Gear" class="submit"/><br><br>
                     </form>
 	</c:forEach>
