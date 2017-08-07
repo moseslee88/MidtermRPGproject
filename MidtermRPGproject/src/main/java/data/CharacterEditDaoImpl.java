@@ -27,8 +27,8 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 		}
 		newChar.setAbilities(abilityList);
 		
-		em.persist(newChar);
 		em.flush();
+		em.persist(newChar);
 		return newChar;
 	}
 
