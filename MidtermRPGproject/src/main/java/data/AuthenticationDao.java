@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthenticationDao {
 	public Player register(Player p);
-	public Player login(Player p, String email, String password);
+	public Player login(String email, String password);
 	public boolean isAdmin(Player p);
 	public List<Player> indexPlayers();
 	String findUserPasswordByEmail(String email);

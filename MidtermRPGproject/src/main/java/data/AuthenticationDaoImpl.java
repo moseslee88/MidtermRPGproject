@@ -1,12 +1,10 @@
 package data;
 
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 		
 		@Autowired
 		private EncryptionDAO encryptor;
+		@Autowired
+		private AuthenticationDao adao;
 		
 		public Player register(Player p) {
 			try {
@@ -39,21 +39,22 @@ import org.springframework.transaction.annotation.Transactional;
 		//user logs in and we check if password matches SHA
 		//Boolean result=encryptor.matches(sha, em.createQuery(q, Player.class).setParameter("password", password).getSingleResult();
 		@Override
-		public Player login(Player p, String email, String password) {
-			p.setEmail(email);
-			p.setPassword(password);
-			String encryptPW=p.getPassword();
+		public Player login(String email, String password) {
+			Player p=null;
+			String encryptPW= password;
 			//String q = "SELECT p from Player p where p.email = :email and p.password = :password";
 			String sha =  null;
-			try {
+			try { 
 				sha = encryptor.encrypt(encryptPW);
-				//Boolean result = encryptor.matches(password, findUserPasswordByEmail(email));
-				Boolean result = encryptor.matches(sha, findUserPasswordByEmail(email));
+				//Boolean result = encryptor.matches(encryptPW, findUserPasswordByEmail(email));
+				Boolean result = encryptor.matches(password, sha);
+				//Boolean result = encryptor.matches(sha, findUserPasswordByEmail(email));
 			    System.out.println("result: " + result);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				System.out.println("Please enter correct password.");
 			}
+
 			em.flush();  //Only need a flush, not persisting any managed entity
 			return p;
 		}
@@ -75,8 +76,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 		@Override
 		public boolean isAdmin(Player p) {
-			// TODO Auto-generated method stub
-			String query = "SELECT p from Player p where p.display_name = 'admin'";
+			String query = "SELECT p from Player p where p.displayName = 'admin'";
 			try {
 				Player playerfound = em.createQuery(query, Player.class).getSingleResult();
 				return true;
