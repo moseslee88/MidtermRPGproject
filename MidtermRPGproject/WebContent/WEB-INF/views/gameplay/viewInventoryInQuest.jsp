@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-sm-8 col-md-8">
 
-					<c:choose>
+					<%-- <c:choose>
 						<c:when test="${not empty gameCharacters}">
 						
 							<h3>Select</h3>
@@ -41,7 +41,7 @@
 								<button type="submit" value="Submit">Submit</button>
 							</form>
 						</c:when>
-					</c:choose>
+					</c:choose> --%>
 					
 					<c:choose>
 						<c:when test="${not empty inventory}">	
