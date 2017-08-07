@@ -42,6 +42,8 @@ public class InventoryShopItemController {
 		GameCharacter gameCharacter = dao2.showGameCharacter(id);
 		session.setAttribute("gameCharacter", gameCharacter);
 
+		mv.addObject("beforeStats", gameCharacter);
+		
 		System.out.println("in viewBattleGear() in controller");
 
 		if (dao.checkForInventory(gameCharacter) == true) {
@@ -94,12 +96,15 @@ public class InventoryShopItemController {
 	public ModelAndView setBattleGear(ModelAndView mv, HttpSession session, Integer id) {
 		GameCharacter gameCharacter = (GameCharacter) session.getAttribute("gameCharacter");
 		System.out.println("GameCharacter in Controller: " + gameCharacter.getName() 
-				+ " has a power of " + gameCharacter.getPower() + " before equipment");
+				+ " has a power of " + gameCharacter.getPower() + "and a physical resistance of " + 
+				gameCharacter.getPhysicalR() + " before equipment");
 
 		List<Item> battleGear = new ArrayList<>();
 		battleGear.add(dao.getItemFromGameCharacter(gameCharacter, id));
 		System.out.println("Item Name:" + dao.getItemFromGameCharacter(gameCharacter, id).getName());
 
+		
+		
 		for (Item item : battleGear) {
 			System.out.println("in for loop, battleGear size is " + battleGear.size());
 			gameCharacter.useItem(battleGear.get(0));
@@ -107,9 +112,10 @@ public class InventoryShopItemController {
 
 		System.out.println("After for loop, battleGear size: " + battleGear.size());
 		System.out.println("GameCharacter in Controller: " + gameCharacter.getName() 
-		+ " has a power of " + gameCharacter.getPower() + " after equipment");
-
+		+ " has a power of " + gameCharacter.getPower() + " physical resistance of " 
+		+ gameCharacter.getPhysicalR() + " after equipment");
 		
+		mv.addObject("afterStats", gameCharacter);
 		mv.setViewName("WEB-INF/views/gameplay/viewInventoryInQuest.jsp");
 		return mv;
 	}

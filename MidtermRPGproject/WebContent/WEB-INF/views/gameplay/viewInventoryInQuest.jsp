@@ -25,70 +25,111 @@
 			<!-- Page Content -->
 			<!-- in: stageConclusion -->
 			<!-- out: stageConclusion -->
-			<c:choose>
-				<c:when test="${not empty gameCharacters}">
-					<h3>Select</h3>
-					<form action="ViewBattleGear.do">
-						<select name="id">
-							<c:forEach var="character" items="${gameCharacters}">
-								<option value="${character.id}">${character.id}: ${character.name}  ${character.image }</option>
-							</c:forEach>
-						</select>
-						<button type="submit" value="Submit">Submit</button>
-					</form>
-				</c:when>
-			</c:choose>
-			<c:choose>
-				<c:when test="${not empty inventory}">
+			<div class="row">
+				<div class="col-sm-6 col-md-6">
+				
 					<c:choose>
-						<c:when test="${not empty weapons}">
-							<h3>Choose Your Weapon</h3>
-							<form action="SetBattleGear.do">
+						<c:when test="${not empty gameCharacters}">
+							<h3>Select</h3>
+							<form action="ViewBattleGear.do">
 								<select name="id">
-									<c:forEach var="weapon" items="${weapons}">
-										<option value="${weapon.id}">${weapon.name}</option>
+									<c:forEach var="character" items="${gameCharacters}">
+										<option value="${character.id}">${character.id}: ${character.name}  ${character.image }</option>
 									</c:forEach>
-									
 								</select>
-								<button type="submit" value="Submit">Take Weapon</button>
+								<button type="submit" value="Submit">Submit</button>
 							</form>
 						</c:when>
-						<c:otherwise>
-							<h3>${unarmedWarning}</h3>
-						</c:otherwise>
 					</c:choose>
 					<c:choose>
-						<c:when test="${not empty armor}">
-							<h3>Choose Your Armor</h3>
-							<select name="id">
-								<c:forEach var="armor" items="${armor}">
-									<option value="${armor.id}">${armor.name}</option>
-								</c:forEach>
-							</select>
-						</c:when>
-						<c:otherwise>
-							<h3>${noArmorWarning}</h3>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${not empty edibles}">
-							<h3>Pick Your Poison</h3>
-							<select name="id">
-								<c:forEach var="edible" items="${edibles}">
-									<option value="${edible.id}">${edible.name}</option>
-								</c:forEach>
-							</select>
-						</c:when>
+						<c:when test="${not empty inventory}">
+							<c:choose>
+								<c:when test="${not empty weapons}">
+									<h3>Choose Your Weapon</h3>
+									<form action="SetBattleGear.do">
+										<select name="id">
+											<c:forEach var="weapon" items="${weapons}">
+												<option value="${weapon.id}">${weapon.name}</option>
+											</c:forEach>
 
+										</select>
+										<button type="submit" value="Submit">Take Weapon</button>
+									</form>
+								</c:when>
+								<c:otherwise>
+									<h3>${unarmedWarning}</h3>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${not empty armor}">
+									<h3>Choose Your Armor</h3>
+									<form action="SetBattleGear.do">
+										<select name="id">
+											<c:forEach var="armor" items="${armor}">
+												<option value="${armor.id}">${armor.name}</option>
+											</c:forEach>
+										</select>
+										<button type="submit" value="Submit">Use Armor</button>
+									</form>
+								</c:when>
+								<c:otherwise>
+									<h3>${noArmorWarning}</h3>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${not empty edibles}">
+									<h3>Pick Your Poison</h3>
+									<form action="SetBattleGear.do">
+										<select name="id">
+											<c:forEach var="edible" items="${edibles}">
+												<option value="${edible.id}">${edible.name}</option>
+											</c:forEach>
+										</select>
+									</form>
+								</c:when>
+
+								<c:otherwise>
+									<h3>${noEdibles}</h3>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
 						<c:otherwise>
-							<h3>${noEdibles}</h3>
+							<h3>${noItems}</h3>
 						</c:otherwise>
 					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<h3>${noItems}</h3>
-				</c:otherwise>
-			</c:choose>
+					
+					<c:choose>
+					<c:when test="${beforeStats != null}">
+					<div class="col-sm-6 col-md-6">
+						<div class="row">
+						<h3>${beforeStats.name}</h3>					
+						<p>Level: ${beforeStats.level}</p>
+						<p>Health: ${beforeStats.health}</p>
+						<p>Energy: ${beforeStats.energy}</p>
+						<p>Power: ${beforeStats.power}</p>
+						<p>Critical: ${beforeStats.critical}</p>
+						<p>Physical Resistance: ${beforeStats.physicalR}</p>
+						<p>Fire Resistance: ${beforeStats.fireR}</p>
+						<p>Lightning Resistance: ${beforeStats.lightningR}</p>
+						<p>Blood Resistance: ${beforeStats.bloodR}</p>
+						<p>Frost Resistance: ${beforeStats.frostR}</p>
+						
+						</div>
+					</div>
+					</c:when>
+					</c:choose>
+					
+					<c:choose>
+					<c:when test="${afterStats != null}">
+					${afterStats.health}
+					${afterStats.energy}
+					${afterStats.power}
+					${afterStats.critical}
+					${afterStats.physicalR}
+					</c:when>
+					</c:choose>
+				</div>
+			</div>
 		</div>
 	</div>
 	<br>
