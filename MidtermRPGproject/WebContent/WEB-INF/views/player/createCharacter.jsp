@@ -44,9 +44,9 @@
 						Health: <input type="number" name="health" min="80" max="120"
 							value="120" /> <br /> Energy: <input type="number"
 							name="energy" min="100" max="100" value="100" /> <br /> Power:
-						<input type="number" name="power" min="10" max="20" value="15" />
+						<input type="number" name="power" min="10" max="25" value="15" />
 						<br /> Critical: <input type="number" name="critical" min="10"
-							max="20" value="15" /> <br /> <br>
+							max="25" value="15" /> <br /> <br>
 					</div>
 					<div class="col-sm-6 col-md-4 col-lg-3">
 						<h4>Resistances</h4>
