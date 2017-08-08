@@ -115,5 +115,12 @@ public class AuthenticationController {
 
 		return mv;
 	}
+	
+	@RequestMapping(path = "HomeButton.do")
+	public ModelAndView goHomeButton(Player player, ModelAndView mv, HttpSession session, HttpServletRequest request) {
+	mv.addObject("player",(Player)session.getAttribute("player"));
+		mv.setViewName("/WEB-INF/views/authentication/login.jsp");
+		return mv;
+	}
 
 }
