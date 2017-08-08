@@ -1,6 +1,7 @@
 package data;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 import enums.Element;
 import enums.TypeOfItem;
@@ -39,7 +39,7 @@ public class Item {
 	private Element element;
 	
 	 @ManyToMany(mappedBy="items", fetch=FetchType.EAGER)
-	 private List<Inventory> inventory;  
+	 private Set<Inventory> inventory;  
 	
 	//gets and sets
 
@@ -93,11 +93,11 @@ public class Item {
 	
 	
 
-	public List<Inventory> getInventory() {
+	public Set<Inventory> getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(List<Inventory> inventory) {
+	public void setInventory(Set<Inventory> inventory) {
 		this.inventory = inventory;
 	}
 

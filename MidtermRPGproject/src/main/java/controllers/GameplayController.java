@@ -234,7 +234,7 @@ public class GameplayController {
 	public ModelAndView gameplayConcludeBattle(ModelAndView mv, HttpSession session) {
 		GameCharacter winner = gameplayWinnerCheck(mv, session);
 		System.out.println("win3 " + winner);
-		GameCharacter currentCharacter = participants.get(0);
+		GameCharacter currentCharacter = (GameCharacter)session.getAttribute("currentCharacter");
 		currentCharacter.endFight();
 		currentCharacter.lvlUp();
 		mv.addObject("currentCharacter", currentCharacter);
@@ -245,7 +245,9 @@ public class GameplayController {
 
 		if (winner.getId() == currentCharacter.getId()) {
 			Item reward = dao.addItemToGameCharacter(currentCharacter);
+			mv.addObject("currentCharacter", currentCharacter);
 			mv.addObject("reward", reward);
+			System.out.println("items: " + currentCharacter.getInventory().getItems());
 			mv.setViewName("WEB-INF/views/gameplay/stageConclusion.jsp");
 			return mv;
 		}

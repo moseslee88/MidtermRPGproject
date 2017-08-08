@@ -1,16 +1,14 @@
 package data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import enums.TypeOfItem;
 
 @Transactional
 @Repository
@@ -21,56 +19,44 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Item> inventory(GameCharacter gameCharacter) {
+//
+//		String id = Integer.toString(gameCharacter.getInventory().getId());
+//
+//		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+//				+ id;
+//
+//		List<Item> items = em.createNativeQuery(query, Item.class).getResultList();
+//
+//		System.out.println("items size " + items.size());
+//		System.out.println("name " + gameCharacter.getName());
+//		System.out.println("id " + gameCharacter.getId());
+//
+//		return items;
+		return gameCharacter.getInventory().getItems();
 
-		String id = Integer.toString(gameCharacter.getInventory().getId());
-
-		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
-				+ id;
-
-		List<Item> items = em.createNativeQuery(query, Item.class).getResultList();
-		
-		System.out.println("items size " + items.size());
-		System.out.println("name " + gameCharacter.getName());
-		System.out.println("id " + gameCharacter.getId());
-
-		return items;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> weapons(GameCharacter gameCharacter) {
-		String id = Integer.toString(gameCharacter.getInventory().getId());
-
-		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
-				+ id + " AND i.type = 'weapon'";
-
-		List<Item> weapons = em.createNativeQuery(query, Item.class).getResultList();
-		System.out.println("weapons: " + weapons.size());
-		return weapons;
+//		String id = Integer.toString(gameCharacter.getInventory().getId());
+//
+//		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+//				+ id + " AND i.type = 'weapon'";
+//
+//		List<Item> weapons = em.createNativeQuery(query, Item.class).getResultList();
+//		System.out.println("weapons: " + weapons.size());
+//		return weapons;
+		return gameCharacter.getInventory().getItems(TypeOfItem.weapon);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> armor(GameCharacter gameCharacter) {
-		String id = Integer.toString(gameCharacter.getInventory().getId());
-
-		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
-				+ id + " AND i.type = 'armor'";
-
-		List<Item> armor = em.createNativeQuery(query, Item.class).getResultList();
-
-		System.out.println("armor: " + armor.size());
-		return armor;
+		return gameCharacter.getInventory().getItems(TypeOfItem.armor);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> edibles(GameCharacter gameCharacter) {
-		String id = Integer.toString(gameCharacter.getInventory().getId());
-
-		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
-				+ id + " AND i.type = 'edible'";
-
-		List<Item> edibles = em.createNativeQuery(query, Item.class).getResultList();
-
-		return edibles;
+		return gameCharacter.getInventory().getItems(TypeOfItem.edible);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -85,6 +71,9 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 		if (weapons.size() > 0) {
 			return true;
 		} else {
+			if (gameCharacter.getInventory().getItems(TypeOfItem.weapon).size() > 0) {
+				return true;
+			}
 			return false;
 		}
 	}
@@ -101,6 +90,9 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 		if (armor.size() > 0) {
 			return true;
 		} else {
+			if (gameCharacter.getInventory().getItems(TypeOfItem.armor).size() > 0) {
+				return true;
+			}
 			return false;
 		}
 	}
@@ -117,42 +109,48 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 		if (edibles.size() > 0) {
 			return true;
 		} else {
+			if (gameCharacter.getInventory().getItems(TypeOfItem.edible).size() > 0) {
+				return true;
+			}
 			return false;
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Boolean checkForInventory(GameCharacter gameCharacter) {
 		String id = Integer.toString(gameCharacter.getInventory().getId());
-		
+
 		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
 				+ id;
 
 		List<Item> items = em.createNativeQuery(query, Item.class).getResultList();
-		
-		if(items.size() > 0) {
+
+		if (items.size() > 0) {
 			return true;
 		} else {
+			if (gameCharacter.getInventory().getItems().size() > 0) {
+				return true;
+			}
 			return false;
 		}
 	}
-	
+
 	public Item getItemFromGameCharacter(GameCharacter gameCharacter, Integer itemId) {
-			String id = itemId.toString();
-			
-			String query = "SELECT * FROM item WHERE item.id =" + id;
-			
-			Item item = (Item) em.createNativeQuery(query, Item.class).getSingleResult();
-			
-			return item;
+		String id = itemId.toString();
+
+		String query = "SELECT * FROM item WHERE item.id =" + id;
+
+		Item item = (Item) em.createNativeQuery(query, Item.class).getSingleResult();
+
+		return item;
 	}
-	
+
 	public Boolean removeItemFromInventory(GameCharacter gameCharacter, Integer itemId) {
 		String id = itemId.toString();
 		String query = "DELETE * FROM item WHERE item.id = " + id;
-		
+
 		em.createNativeQuery(query);
 		return true;
 	}
-	
+
 }

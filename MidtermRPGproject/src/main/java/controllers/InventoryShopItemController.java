@@ -28,7 +28,6 @@ public class InventoryShopItemController {
 	@RequestMapping(path = "BattleGear.do")
 	public ModelAndView battleGearRoute(ModelAndView mv, HttpSession session) {
 
-		session.setAttribute("currentCharacter", (GameCharacter) dao2.getDefaultGameCharacter());
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 
 		mv.addObject("currentCharacter", currentCharacter);
@@ -40,11 +39,7 @@ public class InventoryShopItemController {
 	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session) {
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 
-		// session.getAttribute("currentCharacter");
-
 		mv = addInventoryToModelAndView(mv, currentCharacter);
-
-		//mv.addObject("beforeStats", currentCharacter);
 
 		System.out.println("in viewBattleGear() in controller");
 

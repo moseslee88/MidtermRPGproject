@@ -123,11 +123,11 @@
 					</c:if>
 			</div>
 		</div>
-	</div>
 	<form action="GameplayStartBattle.do">
 					<input type="Submit" class="btn btn-primary btn-lg" role="button"
-						value="Continue!"/>		
+						value="Fight!"/>		
 				</form>
+	</div>
 	<br>
 	<br>
 	<br>

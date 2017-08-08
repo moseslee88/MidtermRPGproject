@@ -25,6 +25,15 @@
 <!-- Page Content -->
 <!-- in: stageConclusion -->
 <!-- out: characterInfo -->	
+			<div class="jumbotron">
+				<h2>${currentQuest.name}</h2>
+				<p>
+					${currentQuest.conclusion} <br>
+						<form action="ChooseACharacter.do">
+						                     <input type="hidden" name="gameCharacterId" value="${currentCharacter.id}">
+						                     <input type="submit" class="btn btn-primary btn-lg" role="button" value="Return Home!">
+				</p>
+			</div>
 		
 		
 		

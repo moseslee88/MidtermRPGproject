@@ -53,6 +53,7 @@ public class GameplayDaoImpl implements GameplayDao {
 		for (Item item : items) {
 			if (item.getItemLevel() == targetItemLevel) {
 				gameCharacter.getInventory().getItems().add(item);
+				System.out.println("added item: " + item);
 				return item;
 			}
 		}

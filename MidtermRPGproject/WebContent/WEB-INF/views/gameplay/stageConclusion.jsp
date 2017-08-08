@@ -25,7 +25,13 @@
 <!-- Page Content -->
 <!-- in: stageStart, viewInventoryInQuest -->
 <!-- out: stageStart, viewInventoryInQuest, characterInfo, questConclusion -->	
-		
+					<div class="jumbotron">
+				<h2>${currentStage.name}</h2>
+				<p>
+					${currentStage.conclusion} <br><a class="btn btn-primary btn-lg"
+						href="GameplayEndOfStage.do" role="button">Moving on...</a>
+				</p>
+			</div>
 		
 		
 		</div>
