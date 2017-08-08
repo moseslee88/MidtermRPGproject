@@ -62,7 +62,8 @@ public class CharacterEditController {
 	}
 
 	@RequestMapping(path = "PlayerCreateForm.do", method = RequestMethod.GET)
-	 public ModelAndView getPlayerToCreateCharacterForm(ModelAndView mv) {
+	 public ModelAndView getPlayerToCreateCharacterForm(ModelAndView mv, HttpSession session) {
+		mv.addObject("player", (Player)session.getAttribute("player"));
 		mv.setViewName("/WEB-INF/views/player/createCharacter.jsp");
 		return mv;
 	}

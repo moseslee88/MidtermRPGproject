@@ -30,7 +30,7 @@
 					<div class="jumbotron">
 						<h1>${winner.name} is victorious!</h1>
 						<p>
-							<a class="btn btn-primary btn-lg" role="button" href="/WEB-INF/views/player/playerInfo.jsp" >Continue!</a>
+							<a class="btn btn-primary btn-lg" role="button" href="HomeButton.do" >Continue!</a>
 						</p>
 					</div>
 				</c:when>

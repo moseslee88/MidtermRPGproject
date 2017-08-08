@@ -21,46 +21,50 @@
 	<jsp:include page="../../partials/_resources.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
-			<h2>Player Information</h2>
+			<h2>${player.displayName}&#9<small>PLAYER INFORMATION</small>
+			</h2>
+
 		</div>
 		<div class="container">
-
-
-			<h5>${player.displayName}</h5>
-			<h5>${player.email}</h5>
-					<div class="row">
+			<div class="row">
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<div class="thumbnail text-center">
+						<img class="media-object"
+							src="https://s-media-cache-ak0.pinimg.com/736x/aa/ba/e0/aabae0270c9635881205c87f3be59fc1--armor-concept-knight-concept-art.jpg"
+							width="60%">
+						<div class="caption text-center">
+							<h3>New Character</h3>
+							<br>
+							<!--Button goes here for create new character -->
+							<form action="PlayerCreateForm.do" method="GET">
+								<input type="submit" class="btn btn-primary btn-md"
+									role="button" name="Create a New Character!"
+									value="Create!">
+							</form>
+						</div>
+					</div>
+				</div>
 				<c:forEach items="${gameC}" var="s">
-						<div class="col-sm-4 col-md-4 col-lg-4">
-							<div class="thumbnail">
-								<img class="media-object" src="https://s-media-cache-ak0.pinimg.com/736x/aa/ba/e0/aabae0270c9635881205c87f3be59fc1--armor-concept-knight-concept-art.jpg" height="10px">
-								<div class="caption">
-									<h3>${s.name}</h3>
-									<br>Health: ${s.health} <br>Energy:
-									${s.energy} <br>Power: ${s.power}<br>
-									<form action="ChooseACharacter.do" method="GET">
-										<input type="hidden" name="gameCharacterId" value="${s.id }">
-										<input type="submit"
-											class="btn btn-primary btn-sm" role="button"
-											value="Select This Character!">
-									</form>
-								</div>
+					<div class="col-sm-12 col-md-6 col-lg-4">
+						<div class="thumbnail text-center">
+							<img class="media-object"
+								src="${s.image}"
+								width="60%">
+							<div class="caption text-center">
+								<h3>${s.name}</h3>
+								<br>Health: ${s.health} <br>Energy: ${s.energy} <br>Power:
+								${s.power}<br>
+								<br>
+								<form action="ChooseACharacter.do" method="GET" >
+									<input type="hidden" name="gameCharacterId" value="${s.id }">
+									<input type="submit" class="btn btn-default btn-sm"
+										role="button" value="Select!">
+								</form>
 							</div>
 						</div>
-				</c:forEach>
 					</div>
-			<!--Button goes here for create new character -->
-			<form action="PlayerCreateForm.do" method="GET">
-				<input type="submit" class="btn btn-primary btn-md" role="button"
-					name="Create a New Character!" value="Create a new Character!">
-			</form>
-
-
-
-
-
-
-
-
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 	<br>
