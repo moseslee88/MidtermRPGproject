@@ -16,7 +16,7 @@ The technologies we incorporated into this project are....
 
 //The methodologies you are using to build the application (group project, agile etc).
 
-The origin of this game idea came from a lab we did earlier in our second week here at Skill Distillery.  For an interactive fiction "lord_of_the_objects" labs, some of us chose to build out elaborate, illustrious user-interactive text word games.  Also, another one of our sources of inspiration was the old fictional text game [Zork](https://en.wikipedia.org/wiki/Zork "Zork"). First, we built out the structure of the wireframe, and then collaborated on making user stories on Trello. One lesson we discovered is that throughout the duration of our project, we made many changes to our schema in the database side. Then started with login and authentication.
+The origin of this game idea came from a lab we did earlier in our second week here at Skill Distillery.  For an interactive fiction "lord_of_the_objects" labs, some of us chose to build out elaborate, illustrious user-interactive text word games, using text-parsers.  Also, another one of our sources of inspiration was the old fictional text game [Zork](https://en.wikipedia.org/wiki/Zork "Zork"). First, we built out the structure of the wireframe, and then collaborated on making user stories on Trello. One lesson we discovered is that throughout the duration of our project, we made many changes to our schema in the database side. Then started with login and authentication.
 
 Then, we handled the game logic and the plethora of options a player has. Here is a snippet of sample code.
 
