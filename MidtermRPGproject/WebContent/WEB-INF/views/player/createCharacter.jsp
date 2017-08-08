@@ -33,7 +33,7 @@
 						<h4>Heraldry</h4>
 						Name: <input type="text" name="name"
 							value="Sir ${player.displayName} the Something"> <br />
-						Image URL: <input type="url" name="image" id="image"
+						Image URL: <input type="url" maxlength="255" name="image" id="image"
 							class="icon-menu"
 							value="https://s-media-cache-ak0.pinimg.com/736x/aa/ba/e0/aabae0270c9635881205c87f3be59fc1--armor-concept-knight-concept-art.jpg">
 						<br> <br> <input type="submit"

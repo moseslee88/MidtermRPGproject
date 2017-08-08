@@ -50,7 +50,7 @@
 									</div>
 									<div class="media-right">
 										<img class="media-object"
-											src="<%=request.getContextPath()%>/images/${currentCharacter.name}.jpg"
+											src="${currentCharacter.image}"
 											height="160em">
 									</div>
 								</div>

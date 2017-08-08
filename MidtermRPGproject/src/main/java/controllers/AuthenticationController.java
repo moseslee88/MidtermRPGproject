@@ -111,7 +111,7 @@ public class AuthenticationController {
 		if (session != null) {
 			session.invalidate();
 		}
-		mv.setViewName("/index.html");
+		mv.setViewName("index.html");
 
 		return mv;
 	}

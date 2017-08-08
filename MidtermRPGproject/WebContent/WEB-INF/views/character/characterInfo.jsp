@@ -18,29 +18,46 @@
 <!-- Page Body -->
 <body>
 	<jsp:include page="../../partials/_nav.jsp"></jsp:include>
-	<hr>
 	<div class="container">
 		<div class="page-header">
 			<h2>Character Info</h2>
 		</div>
 		<div class="container">
-			Name: ${currentCharacter.name} 
-			Health: ${currentCharacter.health} 
-			Energy: ${currentCharacter.energy} 
-			Power: ${currentCharacter.power}
+			<div class="row">
 
-			<form action="GoOnAQuest.do" method="GET">
-			<select name="questId">
-			<c:forEach var="quest" items="${questList}">
-			<option value="${quest.id}">${quest.name}</option>
-			</c:forEach>
-			</select>
-			<input type="submit" class="btn btn-primary btn-lg" role="button" value="submit"/>
-			</form>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div class="thumbnail text-center">
+						<img class="media-object"
+							src="https://s-media-cache-ak0.pinimg.com/736x/aa/ba/e0/aabae0270c9635881205c87f3be59fc1--armor-concept-knight-concept-art.jpg"
+							width="60%">
+						<div class="caption text-center">
+							<h3>${currentCharacter.name}</h3>
+							<br>Health: ${currentCharacter.health} <br>Energy:
+							${currentCharacter.energy} <br>Power:
+							${currentCharacter.power}<br> <br>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div class="thumbnail text-center">
+						<form action="GoOnAQuest.do" method="GET">
+							<select name="questId">
+								<c:forEach var="quest" items="${questList}">
+									<option value="${quest.id}">${quest.name}</option>
+								</c:forEach>
 
+							</select> <br> <br> <input type="submit"
+								class="btn btn-primary btn-md" role="button" value="submit" />
+						</form>
+					</div>
+				</div>
 
+			</div>
 		</div>
+
+
 	</div>
+
 	<br>
 	<br>
 	<br>
