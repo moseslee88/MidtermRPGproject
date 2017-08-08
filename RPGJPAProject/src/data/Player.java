@@ -35,7 +35,9 @@ public class Player {
 //	private List<Quest> quests;
 
 
+
 	@OneToMany(mappedBy = "player", fetch= FetchType.EAGER)
+
 	private List<GameCharacter> gameCharacters;
 
 	public String getEmail() {
