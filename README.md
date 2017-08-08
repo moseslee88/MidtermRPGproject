@@ -1,7 +1,8 @@
 
 ## MidtermRPGproject
 ---
-Our group midterm project - *Connor, Jake, Bryan, and Moses*.
+by *Connor, Jake, Bryan, and Moses*<br>
+Our group midterm project was created by four aspiring software engineers with a vision of building a game that was both fun and educational. Play today at [MidtermRPG](http://13.56.109.233:8080/MidtermRPGproject/)
 
 The technologies we incorporated into this project are....
 
