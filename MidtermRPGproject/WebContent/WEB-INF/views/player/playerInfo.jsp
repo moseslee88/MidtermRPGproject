@@ -42,9 +42,27 @@ WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Chara
 			</ul>
 			</c:forEach>  -->
 	  <h5>${player.displayName}</h5>
-	  <h5>${player.email}</h5>
-			
-			
+	  <h5>${player.email}</h5><br><br>
+	  <ul>
+			<c:forEach items="${gameC}" var="s">
+
+	       <tr>
+        
+                <td>${s.name}</td>
+                <td>${s.hp} HP/${s.health}</td>
+                <td>${s.energy} energy</td>
+                <td>${s.power} power</td>
+                <td>${s.stamina} stamina</td>
+                <td>${s.level} level</td>
+            </tr><br>         
+                                <form>
+						                     <form action="ChooseACharacter.do" method="POST">
+						                     <input type="hidden" name="gameCharacterId" value="${s.id }">gameCharacter ID: ${s.id }<br>
+						                     <input type="submit" value="Select This Character!">
+
+                                      </form><br><br>
+			</c:forEach>
+			</ul>
 			 <!--Button goes here for create new character -->
 			<form action="PlayerCreateForm.do" method="GET">
 				<input type="submit" name="Create a New Character!" value="Create a new Character!">
