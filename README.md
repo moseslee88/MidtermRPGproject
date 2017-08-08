@@ -39,14 +39,6 @@ The beginning of our "happy path" started with login and authentication.  Then, 
 			double percentResisted = this.getFrostR() * modifier;
 			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
 		}
-		if (attack.getElement().equals(Element.lightning)) {
-			double percentResisted = this.getLightningR() * modifier;
-			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
-		}
-		if (attack.getElement().equals(Element.blood)) {
-			double percentResisted = this.getBloodR() * modifier;
-			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
-		}
 		if (attack.getElement().equals(Element.dark)) {
 			double percentResisted = ((this.getFireR() + this.getBloodR()) / 2) * modifier;
 			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
@@ -57,4 +49,4 @@ The beginning of our "happy path" started with login and authentication.  Then, 
 	}
 ```
 
-We are building a RPG game in our project. We built our schema to include a player(user) table and a groups table, so that it would be easier for us to see the Many-to-One relationship.
+We are building a RPG game in our project. We built our schema to include a player(user) table and a game_characters table, so that it would be easier for us to see the Many-to-Many relationship. Since we wanted to play each player's list of game characters each time we loaded the webpage, we created the ```private List<GameCharacter> gameCharacters``` field inside of Player entity.
