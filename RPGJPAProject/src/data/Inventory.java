@@ -25,7 +25,7 @@ public class Inventory {
 	@OneToOne(mappedBy = "inventory")
 	private GameCharacter gameCharacter;
 
-	@OneToMany(mappedBy = "inventory", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "inventory"/*, fetch=FetchType.EAGER*/)
 	private List<InventoryItem> inventoryItems;
 
 //	@OneToOne(mappedBy = "inventory")
