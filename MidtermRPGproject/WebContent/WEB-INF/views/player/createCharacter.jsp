@@ -52,7 +52,7 @@
 
 				</select> <br> 
 				
-				<input type="submit"
+				<input type="submit" class="btn btn-primary btn-lg" role="button"
 					value="Create Character">
 
 			</form>

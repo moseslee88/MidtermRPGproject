@@ -42,7 +42,7 @@
             </tr><br>         
 						                     <form action="ChooseACharacter.do" method="GET">
 						                     <input type="hidden" name="gameCharacterId" value="${s.id }">gameCharacter ID: ${s.id }<br>
-						                     <input type="submit" value="Select This Character!">
+						                     <input type="submit" class="btn btn-primary btn-lg" role="button" value="Select This Character!">
 
                                       </form><br><br>
 			</c:forEach>

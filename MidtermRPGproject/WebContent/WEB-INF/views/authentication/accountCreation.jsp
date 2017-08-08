@@ -37,7 +37,7 @@
          Password: <input type = "password" name = "password" /><br>
          Confirm password: <input type = "password" name = "conPassword" />
 
-         <input type = "submit" value = "Submit" />
+         <input type = "submit" class="btn btn-primary btn-lg" role="button" value = "Submit" />
       </form>
       
     
