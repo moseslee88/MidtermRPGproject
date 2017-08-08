@@ -105,20 +105,20 @@
 					</c:choose>
 
 				</div>
-				<c:if test="${(beforeStats == null) or (afterStats != null)}">
+				<c:if test="${(currentCharacter != null)}">
 						<div class="col-sm-4 col-md-4">
-							<h3>${beforeStats.name}</h3>
+							<h3>${currentCharacter.name}</h3>
 							<h4>Stats</h4>
 							<p></p>
-							<p>Health: ${afterStats.health}</p>
-							<p>Energy: ${afterStats.energy}</p>
-							<p>Power: ${afterStats.power}</p>
-							<p>Critical: ${afterStats.critical}</p>
-							<p>Physical Resistance: ${afterStats.physicalR}</p>
-							<p>Fire Resistance: ${afterStats.fireR}</p>
-							<p>Lightning Resistance: ${afterStats.lightningR}</p>
-							<p>Blood Resistance: ${afterStats.bloodR}</p>
-							<p>Frost Resistance: ${afterStats.frostR}</p>
+							<p>Health: ${currentCharacter.health}</p>
+							<p>Energy: ${currentCharacter.energy}</p>
+							<p>Power: ${currentCharacter.power}</p>
+							<p>Critical: ${currentCharacter.critical}</p>
+							<p>Physical Resistance: ${currentCharacter.physicalR}</p>
+							<p>Fire Resistance: ${currentCharacter.fireR}</p>
+							<p>Lightning Resistance: ${currentCharacter.lightningR}</p>
+							<p>Blood Resistance: ${currentCharacter.bloodR}</p>
+							<p>Frost Resistance: ${currentCharacter.frostR}</p>
 						</div>
 					</c:if>
 			</div>
