@@ -4,18 +4,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import enums.TypeOfUser;
 
 @Entity
 public class Player {
@@ -31,15 +23,15 @@ public class Player {
 	@Column(name = "display_name")  //either admin or user
 	private String displayName;
 
-	@OneToMany(mappedBy = "friend")
-	private List<Friend> friends;
+//	@OneToMany(mappedBy = "friend")
+//	private List<Friend> friends;
 
 	@Column(name = "user_type")  //1 for admin, 2 for player
 	private int userType;
 
-	@ManyToMany
-	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
-	private List<Quest> quests;
+//	@ManyToMany
+//	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
+//	private List<Quest> quests;
 
 	@OneToMany(mappedBy = "player")
 	private List<GameCharacter> gameCharacters;
@@ -68,13 +60,13 @@ public class Player {
 		this.displayName = displayName;
 	}
 
-	public List<Friend> getFriends() {
-		return friends;
-	}
-
-	public void setFriends(List<Friend> friends) {
-		this.friends = friends;
-	}
+//	public List<Friend> getFriends() {
+//		return friends;
+//	}
+//
+//	public void setFriends(List<Friend> friends) {
+//		this.friends = friends;
+//	}
 
 
 
@@ -90,13 +82,13 @@ public class Player {
 		this.userType = userType;
 	}
 
-	public List<Quest> getQuests() {
-		return quests;
-	}
-
-	public void setQuests(List<Quest> quests) {
-		quests = quests;
-	}
+//	public List<Quest> getQuests() {
+//		return quests;
+//	}
+//
+//	public void setQuests(List<Quest> quests) {
+//		quests = quests;
+//	}
 
 	public int getId() {
 		return id;
@@ -110,15 +102,15 @@ public class Player {
 		this.gameCharacters = gameCharacters;
 	}
 
-	public boolean addPlayerAsFriend(Friend friend) {
-		friends.add(friend);
-		return true;
-	}
-	
-	public boolean removePlayerAsFriend(Friend friend) {
-		friends.remove(friend);
-		return true;
-	}
+	// public boolean addPlayerAsFriend(Friend friend) {
+	// friends.add(friend);
+	// return true;
+	// }
+	//
+	// public boolean removePlayerAsFriend(Friend friend) {
+	// friends.remove(friend);
+	// return true;
+	// }
 
 	@Override
 	public String toString() {

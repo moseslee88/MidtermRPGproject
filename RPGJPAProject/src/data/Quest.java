@@ -28,11 +28,11 @@ public class Quest {
 	@Column(name = "conclusion")
 	private String conclusion;
 
-	@ManyToMany(mappedBy = "questList", fetch = FetchType.EAGER)
-	private List<Stage> stages;
+	 @ManyToMany(mappedBy = "questList", fetch = FetchType.EAGER)
+	 private List<Stage> stages;
 
-	@ManyToMany(mappedBy = "quests")
-	private List<Player> players;
+//	@ManyToMany(mappedBy = "quests")
+//	private List<Player> players;
 
 	// getters and setters
 
@@ -72,21 +72,21 @@ public class Quest {
 		this.conclusion = conclusion;
 	}
 
-	public List<Stage> getStages() {
-		return stages;
-	}
+	 public List<Stage> getStages() {
+	 return stages;
+	 }
+	
+	 public void setStages(List<Stage> stages) {
+	 this.stages = stages;
+	 }
 
-	public void setStages(List<Stage> stages) {
-		this.stages = stages;
-	}
-
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
+//	public List<Player> getPlayers() {
+//		return players;
+//	}
+//
+//	public void setPlayers(List<Player> players) {
+//		this.players = players;
+//	}
 
 	@Override
 	public String toString() {

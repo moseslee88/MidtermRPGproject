@@ -28,8 +28,8 @@ public class Inventory {
 	@OneToMany(mappedBy = "inventory")
 	private List<InventoryItem> inventoryItems;
 
-	@OneToOne(mappedBy = "inventory")
-	private Shop shop;
+//	@OneToOne(mappedBy = "inventory")
+//	private Shop shop;
 
 	@ManyToMany/*(fetch = FetchType.EAGER)*/
 	@JoinTable(name = "inventory_item", joinColumns = @JoinColumn(name = "inventory_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
@@ -61,13 +61,13 @@ public class Inventory {
 		this.inventoryItems = inventory;
 	}
 
-	public Shop getShop() {
-		return shop;
-	}
-
-	public void setShop(Shop shop) {
-		this.shop = shop;
-	}
+//	public Shop getShop() {
+//		return shop;
+//	}
+//
+//	public void setShop(Shop shop) {
+//		this.shop = shop;
+//	}
 
 	public List<Item> getItems() {
 		return items;

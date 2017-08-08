@@ -9,15 +9,14 @@
 
 		<class>data.Ability</class>
 		<class>data.GameCharacter</class>
-		<class>data.Friend</class>
-		<class>data.Inventory</class>
+<!-- 		<class>data.Friend</class>
+ -->		<class>data.Inventory</class>
 		<class>data.InventoryItem</class>
 		<class>data.Item</class>
 		<class>data.Player</class>
 		<class>data.Quest</class>
-		<class>data.Shop</class>
-		<class>data.Stage</class>
-		<class>data.UserType</class>
+<!-- 		<class>data.Shop</class>
+ -->		<class>data.Stage</class>
 
 
 		<properties>

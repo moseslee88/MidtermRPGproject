@@ -137,24 +137,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `shop`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `shop` ;
-
-CREATE TABLE IF NOT EXISTS `shop` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `inventory_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_shop_inventory1_idx` (`inventory_id` ASC),
-  CONSTRAINT `fk_shop_inventory1`
-    FOREIGN KEY (`inventory_id`)
-    REFERENCES `inventory` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `character_ability`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `character_ability` ;
@@ -190,55 +172,6 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `intro` VARCHAR(200) NULL,
   `conclusion` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `player_quest`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `player_quest` ;
-
-CREATE TABLE IF NOT EXISTS `player_quest` (
-  `player_id` INT NULL,
-  `quest_id` INT NULL,
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`),
-  INDEX `fk_player_quest_quest1_idx` (`quest_id` ASC),
-  CONSTRAINT `fk_player_quest_player1`
-    FOREIGN KEY (`player_id`)
-    REFERENCES `player` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_player_quest_quest1`
-    FOREIGN KEY (`quest_id`)
-    REFERENCES `quest` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `friend`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `friend` ;
-
-CREATE TABLE IF NOT EXISTS `friend` (
-  `player_id1` INT NULL,
-  `player_id2` INT NULL,
-  `id` INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`),
-  INDEX `fk_player_has_player_player1_idx` (`player_id1` ASC),
-  INDEX `fk_player_has_player_player2_idx` (`player_id2` ASC),
-  CONSTRAINT `fk_player_has_player_player1`
-    FOREIGN KEY (`player_id1`)
-    REFERENCES `player` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_player_has_player_player2`
-    FOREIGN KEY (`player_id2`)
-    REFERENCES `player` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -574,16 +507,6 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `shop`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `MidtermProjectDB`;
-INSERT INTO `shop` (`id`, `inventory_id`) VALUES (1, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `character_ability`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -780,34 +703,6 @@ COMMIT;
 START TRANSACTION;
 USE `MidtermProjectDB`;
 INSERT INTO `quest` (`id`, `name`, `description`, `intro`, `conclusion`) VALUES (1, 'Beginning Again', 'You were trained to fight, so do that!', 'Cliche Narrator: You just went through a terrible break-up and you decide to go for a walk. ', 'Narrator: there is no way that anyone will make it this far. ');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `player_quest`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `MidtermProjectDB`;
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (1, 1, 1);
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (2, 1, 2);
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (3, 1, 3);
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (4, 1, 4);
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (5, 1, 5);
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (6, 1, 6);
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (7, 1, 7);
-INSERT INTO `player_quest` (`player_id`, `quest_id`, `id`) VALUES (8, 1, 8);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `friend`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `MidtermProjectDB`;
-INSERT INTO `friend` (`player_id1`, `player_id2`, `id`) VALUES (1, 1, 1);
-INSERT INTO `friend` (`player_id1`, `player_id2`, `id`) VALUES (1, 2, 2);
 
 COMMIT;
 
