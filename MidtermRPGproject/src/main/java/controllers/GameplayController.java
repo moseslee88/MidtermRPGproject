@@ -15,6 +15,7 @@ import data.CharacterEditDao;
 import data.GameCharacter;
 import data.GameplayDao;
 import data.Item;
+import data.Player;
 import data.Quest;
 import data.RandNumGen;
 import data.Stage;
@@ -239,6 +240,7 @@ public class GameplayController {
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 		currentCharacter.endFight();
 		currentCharacter.lvlUp();
+		cDao.killChar(currentCharacter.getId(), (Player)session.getAttribute("player"));
 		cDao.update(currentCharacter, currentCharacter.getId());
 		
 		mv.addObject("currentCharacter", currentCharacter);
