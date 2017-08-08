@@ -108,15 +108,18 @@ public class CharacterEditController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "ChooseACharacter.do")
+	@RequestMapping(path = "ChooseACharacter.do", method=RequestMethod.GET)
 	public ModelAndView characterChooseACharacter(ModelAndView mv, HttpSession session, Integer gameCharacterId) {
 		session.setAttribute("currentCharacter", adminDao.showGameCharacter(gameCharacterId));
 		GameCharacter currentCharacter = (GameCharacter)session.getAttribute("currentCharacter");
 		
 		List<Quest> quests = adminDao.indexQuests();
-		
+		System.out.println(quests.size());
+		System.out.println(currentCharacter);
 		mv.addObject("currentCharacter", currentCharacter);
+		session.setAttribute("currentCharacter", currentCharacter);
 		mv.addObject("questList", quests);
+		session.setAttribute("questList", quests);
 		mv.setViewName("/WEB-INF/views/player/characterInfo.jsp");
 		return mv;
 	}
