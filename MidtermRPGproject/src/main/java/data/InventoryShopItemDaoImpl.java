@@ -19,33 +19,35 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Item> inventory(GameCharacter gameCharacter) {
-//
-//		String id = Integer.toString(gameCharacter.getInventory().getId());
-//
-//		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
-//				+ id;
-//
-//		List<Item> items = em.createNativeQuery(query, Item.class).getResultList();
-//
-//		System.out.println("items size " + items.size());
-//		System.out.println("name " + gameCharacter.getName());
-//		System.out.println("id " + gameCharacter.getId());
-//
-//		return items;
+		//
+		// String id = Integer.toString(gameCharacter.getInventory().getId());
+		//
+		// String query = "SELECT * FROM item i JOIN inventory_item j ON i.id =
+		// j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+		// + id;
+		//
+		// List<Item> items = em.createNativeQuery(query, Item.class).getResultList();
+		//
+		// System.out.println("items size " + items.size());
+		// System.out.println("name " + gameCharacter.getName());
+		// System.out.println("id " + gameCharacter.getId());
+		//
+		// return items;
 		return gameCharacter.getInventory().getItems();
 
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> weapons(GameCharacter gameCharacter) {
-//		String id = Integer.toString(gameCharacter.getInventory().getId());
-//
-//		String query = "SELECT * FROM item i JOIN inventory_item j ON i.id = j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
-//				+ id + " AND i.type = 'weapon'";
-//
-//		List<Item> weapons = em.createNativeQuery(query, Item.class).getResultList();
-//		System.out.println("weapons: " + weapons.size());
-//		return weapons;
+		// String id = Integer.toString(gameCharacter.getInventory().getId());
+		//
+		// String query = "SELECT * FROM item i JOIN inventory_item j ON i.id =
+		// j.item_id JOIN inventory k ON j.inventory_id = k.id WHERE k.id ="
+		// + id + " AND i.type = 'weapon'";
+		//
+		// List<Item> weapons = em.createNativeQuery(query, Item.class).getResultList();
+		// System.out.println("weapons: " + weapons.size());
+		// return weapons;
 		return gameCharacter.getInventory().getItems(TypeOfItem.weapon);
 	}
 
@@ -135,14 +137,21 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public Item getItemFromGameCharacter(GameCharacter gameCharacter, Integer itemId) {
-		String id = itemId.toString();
 
-		String query = "SELECT * FROM item WHERE item.id =" + id;
+		Item itemResult = null;
 
-		Item item = (Item) em.createNativeQuery(query, Item.class).getSingleResult();
+		List<Item> items = gameCharacter.getInventory().getItems();
 
-		return item;
+		for (Item item : items) {
+			if (item.getId() == itemId) {
+				itemResult = item;
+			}
+
+		}
+
+		return itemResult;
 	}
 
 	public Boolean removeItemFromInventory(GameCharacter gameCharacter, Integer itemId) {
