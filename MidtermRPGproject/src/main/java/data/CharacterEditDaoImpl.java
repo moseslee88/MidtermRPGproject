@@ -1,6 +1,8 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,9 +22,11 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	@Override
 	public GameCharacter create(GameCharacter newChar) {
 		
+		
 		// this is broken so that all users can get all abilities
 		List<Ability> abilityList = new ArrayList<>();
-		for (int i = 1; i < 31; i++) {
+		Collections.shuffle(abilityList);
+		for (int i = 1; i < 4; i++) {
 			abilityList.add(em.find(Ability.class, i));			
 		}
 		newChar.setAbilities(abilityList);
