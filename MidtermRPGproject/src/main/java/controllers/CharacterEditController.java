@@ -91,5 +91,12 @@ public class CharacterEditController {
 		// model.addAttribute("char", newChar);
 		return mv;
 	}
+	
+	@RequestMapping(path = "GoOnAQuest.do")
+	public ModelAndView characterGoOnAQuest(ModelAndView mv, HttpSession session) {
+		
+		
+		return mv;
+	}
 
 }
