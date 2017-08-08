@@ -89,8 +89,15 @@ public class CharacterEditController {
 	// here is the mapping to handle POST-redirect Get
 	@RequestMapping(path = "NewGameCharacterAdded.do", method = RequestMethod.GET)
 	public ModelAndView show(GameCharacter newChar, Model model, ModelAndView mv, HttpSession session) {
-		mv.setViewName("WEB-INF/views/character/characterInfo.jsp");
-		mv.addObject("NewCharacter", newChar);
+		System.out.println(newChar);
+		System.out.println(newChar.getId());
+		session.setAttribute("currentCharacter", adminDao.showGameCharacter(newChar.getId()));
+		GameCharacter currentCharacter = (GameCharacter)session.getAttribute("currentCharacter");
+		session.setAttribute("currentCharacter", currentCharacter);
+		
+		
+		mv.setViewName("WEB-INF/views/character/playerInfo.jsp");
+		mv.addObject("currentCharacter", newChar);
 		mv.addObject("characters", dao.getPlayersGameCharacters((Player)session.getAttribute("player")));
 		//mv.addObject("NewCharacter", dao.create(newChar));
 		// model.addAttribute("char", newChar);
