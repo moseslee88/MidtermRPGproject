@@ -28,8 +28,8 @@
 					<div class="jumbotron">
 				<h2>${currentStage.name}</h2>
 				<p>
-					${currentStage.conclusion} <br><a class="btn btn-primary btn-lg"
-						href="GameplayEndOfStage.do" role="button">Moving on...</a>
+					${currentStage.conclusion} <br><a class="btn btn-primary btn-lg" role="button"
+						href="GameplayEndOfStage.do">Moving on...</a>
 				</p>
 			</div>
 		
