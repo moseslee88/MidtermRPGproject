@@ -1,6 +1,6 @@
 package controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import data.AdminDao;
 import data.CharacterEditDao;
 import data.GameCharacter;
 import data.Inventory;
 import data.Player;
+import data.Quest;
 
 @Controller
 public class CharacterEditController {
 	@Autowired
 	private CharacterEditDao dao;
+	
+	@Autowired
+	private AdminDao adminDao;
 	
 	// takes in a Player command object and updates the character's name
 		@RequestMapping(path = "CharacterRoute.do", method=RequestMethod.GET)
@@ -93,9 +98,26 @@ public class CharacterEditController {
 	}
 	
 	@RequestMapping(path = "GoOnAQuest.do")
-	public ModelAndView characterGoOnAQuest(ModelAndView mv, HttpSession session) {
+	public ModelAndView characterGoOnAQuest(ModelAndView mv, HttpSession session, Integer questId) {
+		session.setAttribute("currentQuest", adminDao.showQuest(questId));
+		Quest currentQuest = (Quest)session.getAttribute("currentQuest");
 		
+		mv.addObject("currentQuest", currentQuest);
+		mv.addObject("currentCharacter", (GameCharacter)session.getAttribute("currentCharacter"));
+		mv.setViewName("GameplayRoute.do");
+		return mv;
+	}
+	
+	@RequestMapping(path = "ChooseACharacter.do")
+	public ModelAndView characterChooseACharacter(ModelAndView mv, HttpSession session, Integer gameCharacterId) {
+		session.setAttribute("currentCharacter", adminDao.showGameCharacter(gameCharacterId));
+		GameCharacter currentCharacter = (GameCharacter)session.getAttribute("currentCharacter");
 		
+		List<Quest> quests = adminDao.indexQuests();
+		
+		mv.addObject("currentCharacter", currentCharacter);
+		mv.addObject("questList", quests);
+		mv.setViewName("/WEB-INF/views/player/characterInfo.jsp");
 		return mv;
 	}
 

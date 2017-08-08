@@ -24,15 +24,16 @@
 			<h2>Character Info</h2>
 		</div>
 		<div class="container">
-			Name:  ${GameCharacter.name}
-			Health:  ${GameCharacter.health}
-			Energy:  ${GameCharacter.energy}
-			Power:  ${GameCharacter.power}
+			Name: ${GameCharacter.name} 
+			Health: ${GameCharacter.health} 
+			Energy: ${GameCharacter.energy} 
+			Power: ${GameCharacter.power}
 
-		                    <form action="CharacterDetails.do" method="POST">
-					<input type="submit" value="Use Character" class="submit" /><br>
-					<br>
-				</form>
+			<form action="GoOnAQuest.do">
+			<select name="questId">
+			<c:forEach var="quest" items="questList"></c:forEach>
+			</select>
+			</form>
 
 
 		</div>
