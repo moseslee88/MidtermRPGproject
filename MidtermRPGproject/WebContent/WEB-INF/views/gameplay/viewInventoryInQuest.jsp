@@ -56,7 +56,7 @@
 											</c:forEach>
 
 										</select>
-										<button type="submit" value="Submit">Take Weapon</button>
+										<button type="submit" class="btn btn-primary btn-lg" role="button" value="Submit">Take Weapon</button>
 									</form>
 								</c:when>
 								<c:otherwise>
@@ -73,7 +73,7 @@
 												<option value="${armor.id}">${armor.name}</option>
 											</c:forEach>
 										</select>
-										<button type="submit" value="Submit">Use Armor</button>
+										<button type="submit" class="btn btn-primary btn-lg" role="button" value="Submit">Use Armor</button>
 									</form>
 								</c:when>
 								<c:otherwise>
@@ -90,7 +90,7 @@
 												<option value="${edible.id}">${edible.name}</option>
 											</c:forEach>
 										</select>
-												<button type="submit" value="Submit">Consume</button>
+												<button type="submit" class="btn btn-primary btn-lg" role="button" value="Submit">Consume</button>
 									</form>
 								</c:when>
 
@@ -123,11 +123,11 @@
 					</c:if>
 			</div>
 		</div>
-	</div>
 	<form action="GameplayStartBattle.do">
 					<input type="Submit" class="btn btn-primary btn-lg" role="button"
-						value="Continue!"/>		
+						value="Fight!"/>		
 				</form>
+	</div>
 	<br>
 	<br>
 	<br>

@@ -31,7 +31,7 @@
 				
 				<form action="BattleGear.do">
 					<input type="Submit" class="btn btn-primary btn-lg" role="button"
-						value="Continue!"/>		
+						value="Prepare for Battle!"/>		
 				</form>
 				</p>
 			</div>

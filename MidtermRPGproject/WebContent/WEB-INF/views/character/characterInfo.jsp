@@ -35,7 +35,7 @@
 			<option value="${quest.id}">${quest.name}</option>
 			</c:forEach>
 			</select>
-			<input type="submit" value="submit"/>
+			<input type="submit" class="btn btn-primary btn-lg" role="button" value="submit"/>
 			</form>
 
 

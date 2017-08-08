@@ -28,8 +28,8 @@
 			<div class="jumbotron">
 				<h2>${currentQuest.name}</h2>
 				<p>
-					${currentQuest.intro} <a class="btn btn-primary btn-lg"
-						href="GameplayStageStart.do" role="button">Continue!</a>
+					${currentQuest.intro} <a class="btn btn-primary btn-lg" role="button"
+						href="GameplayStageStart.do" >Continue!</a>
 				</p>
 			</div>
 

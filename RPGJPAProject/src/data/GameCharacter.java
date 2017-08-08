@@ -32,7 +32,7 @@ public class GameCharacter {
 	@Column
 	private String name;
 	
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@JoinColumn(name = "inventory_id")
 	private Inventory inventory;
 	@Column

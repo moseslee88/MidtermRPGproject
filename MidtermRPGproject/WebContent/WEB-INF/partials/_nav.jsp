@@ -20,7 +20,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="PlayerInfo.do">Home</a></li>
+				<li><a href="HomeButton.do">Home</a></li>
 				<li><a href="Logout.do">Logout</a></li>
 				<!-- <li class="active"><a href="#">active<span class="sr-only">(current)</span></a></li> -->
 			</ul>

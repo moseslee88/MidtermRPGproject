@@ -25,15 +25,13 @@ public class GameplayController {
 
 	private RandNumGen rng = new RandNumGen();
 
-	private List<GameCharacter> participants = new ArrayList<>();
-
 	@RequestMapping(path = "GameplayRoute.do" /* , method = RequestMethod.GET */)
 	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
 		// temp!
-//		GameCharacter currentCharacter = dao.getDefaultGameCharacter();
-//		session.setAttribute("currentCharacter", currentCharacter);
-//		session.setAttribute("currentQuest", dao.getDefaultQuest());
-		//temp!
+		// GameCharacter currentCharacter = dao.getDefaultGameCharacter();
+		// session.setAttribute("currentCharacter", currentCharacter);
+		// session.setAttribute("currentQuest", dao.getDefaultQuest());
+		// temp!
 
 		session.setAttribute("currentStage", ((Quest) session.getAttribute("currentQuest")).getStages().get(0));
 		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
@@ -41,7 +39,7 @@ public class GameplayController {
 		mv.setViewName("WEB-INF/views/gameplay/questStart.jsp");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "GameplayStageStart.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayStageStart(ModelAndView mv, HttpSession session) {
 		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
@@ -77,8 +75,8 @@ public class GameplayController {
 		}
 		mv.addObject("currentAbilities", abilities1);
 
-		participants.add(currentCharacter);
-		participants.add(enemyCharacter);
+		session.setAttribute("currentCharacter", currentCharacter);
+		session.setAttribute("enemyCharacter", enemyCharacter);
 
 		mv.setViewName("WEB-INF/views/gameplay/battle.jsp");
 		return mv;
@@ -91,9 +89,9 @@ public class GameplayController {
 		if (winner == null) {
 			// player one turn
 			System.out.println("\n---Player one turn---");
-			GameCharacter currentCharacter = participants.get(0);
+			GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 			mv.addObject("currentCharacter", currentCharacter);
-			GameCharacter enemyCharacter = participants.get(1);
+			GameCharacter enemyCharacter = (GameCharacter) session.getAttribute("enemyCharacter");
 			mv.addObject("enemyCharacter", enemyCharacter);
 
 			System.out.println("1 health" + currentCharacter.getHp());
@@ -234,18 +232,20 @@ public class GameplayController {
 	public ModelAndView gameplayConcludeBattle(ModelAndView mv, HttpSession session) {
 		GameCharacter winner = gameplayWinnerCheck(mv, session);
 		System.out.println("win3 " + winner);
-		GameCharacter currentCharacter = participants.get(0);
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 		currentCharacter.endFight();
 		currentCharacter.lvlUp();
 		mv.addObject("currentCharacter", currentCharacter);
-		GameCharacter enemyCharacter = participants.get(1);
+		GameCharacter enemyCharacter = (GameCharacter) session.getAttribute("enemyCharacter");
 		enemyCharacter.endFight();
 		mv.addObject("enemyCharacter", enemyCharacter);
 		mv.addObject("winner", winner);
 
 		if (winner.getId() == currentCharacter.getId()) {
 			Item reward = dao.addItemToGameCharacter(currentCharacter);
+			mv.addObject("currentCharacter", currentCharacter);
 			mv.addObject("reward", reward);
+			System.out.println("items: " + currentCharacter.getInventory().getItems());
 			mv.setViewName("WEB-INF/views/gameplay/stageConclusion.jsp");
 			return mv;
 		}
@@ -273,16 +273,17 @@ public class GameplayController {
 	}
 
 	public GameCharacter gameplayWinnerCheck(ModelAndView mv, HttpSession session) {
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
+		GameCharacter enemyCharacter = (GameCharacter) session.getAttribute("enemyCharacter");
 
-		if (participants != null) {
-			if (participants.get(0).checkIfDead()) {
-				System.out.println(participants.get(0).getName());
-				return participants.get(1);
-			} else if (participants.get(1).checkIfDead()) {
-				System.out.println(participants.get(1).getName());
-				return participants.get(0);
-			}
+		if (currentCharacter.checkIfDead()) {
+			System.out.println(currentCharacter.getName());
+			return enemyCharacter;
+		} else if (enemyCharacter.checkIfDead()) {
+			System.out.println(enemyCharacter.getName());
+			return currentCharacter;
 		}
+
 		return null;
 	}
 

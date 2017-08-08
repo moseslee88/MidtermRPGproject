@@ -32,6 +32,10 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	public GameCharacter showGameCharacter(int id) {
+//		String c = "select c from GameCharacter c join fetch c.inventory.items where id =" + id;
+//		
+//		return em.createQuery(c, GameCharacter.class).getResultList().get(0);
+		
 		return em.find(GameCharacter.class, id);
 	}
 

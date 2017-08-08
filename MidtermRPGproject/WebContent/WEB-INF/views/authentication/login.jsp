@@ -31,7 +31,7 @@
          Email: <input type = "text" name = "email" />
          <br />
          Password: <input type = "password" name = "password" />
-         <input type = "submit" value = "Submit" />
+         <input type = "submit" class="btn btn-primary btn-lg" role="button" value = "Submit" />
       </form>
 		
 		
