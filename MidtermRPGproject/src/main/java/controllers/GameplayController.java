@@ -24,7 +24,7 @@ import data.Stage;
 public class GameplayController {
 	@Autowired
 	private GameplayDao dao;
-	
+
 	@Autowired
 	private CharacterEditDao cDao;
 
@@ -240,25 +240,29 @@ public class GameplayController {
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 		currentCharacter.endFight();
 		currentCharacter.lvlUp();
-		cDao.killChar(currentCharacter);
 		cDao.update(currentCharacter, currentCharacter.getId());
-		
+
 		mv.addObject("currentCharacter", currentCharacter);
 		GameCharacter enemyCharacter = (GameCharacter) session.getAttribute("enemyCharacter");
 		enemyCharacter.endFight();
 		mv.addObject("enemyCharacter", enemyCharacter);
 		mv.addObject("winner", winner);
+		System.out.println("dead?");
 
 		if (winner.getId() == currentCharacter.getId()) {
+			System.out.println("dead? no");
 			Item reward = dao.addItemToGameCharacter(currentCharacter);
 			mv.addObject("currentCharacter", currentCharacter);
 			mv.addObject("reward", reward);
 			System.out.println("items: " + currentCharacter.getInventory().getItems());
 			mv.setViewName("WEB-INF/views/gameplay/stageConclusion.jsp");
 			return mv;
+		} else {
+			System.out.println("dead? yes");
+			cDao.killChar(currentCharacter);
+			mv.setViewName("WEB-INF/views/gameplay/battle.jsp");
+			return mv;
 		}
-		mv.setViewName("WEB-INF/views/gameplay/battle.jsp");
-		return mv;
 	}
 
 	@RequestMapping(path = "GameplayEndOfStage.do" /* , method = RequestMethod.GET */)

@@ -50,7 +50,7 @@ public class CharacterEditController {
 	// takes in a charId as an integer
 	@RequestMapping(path = "PlayerKillCharacter.do")
 	public ModelAndView killCharacter(@RequestParam("charName") String charName, HttpSession session, ModelAndView mv) {
-		dao.killChar(dao.getCharIdByName(charName), (Player) session.getAttribute("player")); // takes in int charId,
+		dao.killChar((GameCharacter)session.getAttribute("currentCharacter")); // takes in int charId,
 																								// Player p
 		Player p = null;
 		if (session.getAttribute("player") != null) {

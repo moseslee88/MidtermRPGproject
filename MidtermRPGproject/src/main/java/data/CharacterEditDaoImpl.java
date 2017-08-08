@@ -70,9 +70,9 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 		if (updatedChar.getHealth()!=0) {
 			managedChar.setHealth(updatedChar.getHealth());
 		}
-		if (updatedChar.getInventory()!=null) {
-			managedChar.setInventory(updatedChar.getInventory());
-		}
+//		if (updatedChar.getInventory()!=null) {
+//			managedChar.setInventory(updatedChar.getInventory());
+//		}
 		if (updatedChar.getImage()!=null) {
 			managedChar.setImage(updatedChar.getImage());
 		}
@@ -89,6 +89,7 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	public boolean killChar(GameCharacter gameCharacter) {
 		try {
 			gameCharacter.setPlayer(em.find(Player.class, 1));
+			em.persist(gameCharacter);
 			return true;
 		} catch (Exception e) {
 			return false;

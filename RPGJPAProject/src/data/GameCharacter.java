@@ -324,8 +324,8 @@ public class GameCharacter {
 	public void endFight() {
 		resetHP();
 		resetStamina();
-		unequipArmor(this.armor);
-		unequipWeapon(this.weapon);
+//		unequipArmor(this.armor);
+//		unequipWeapon(this.weapon);
 	}
 
 	// gets and sets
