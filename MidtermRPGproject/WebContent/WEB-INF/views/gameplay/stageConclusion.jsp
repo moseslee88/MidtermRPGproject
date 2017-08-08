@@ -22,18 +22,22 @@
 			<h2>Stage Conclusion</h2>
 		</div>
 		<div class="container">
-<!-- Page Content -->
-<!-- in: stageStart, viewInventoryInQuest -->
-<!-- out: stageStart, viewInventoryInQuest, characterInfo, questConclusion -->	
-					<div class="jumbotron">
+			<!-- Page Content -->
+			<!-- in: stageStart, viewInventoryInQuest -->
+			<!-- out: stageStart, viewInventoryInQuest, characterInfo, questConclusion -->
+			<div class="jumbotron">
 				<h2>${currentStage.name}</h2>
+				<p>${currentStage.conclusion}</p>
+				<p>And you received the ${reward.name} for your efforts (in pilfering
+					pockets).</p>
 				<p>
-					${currentStage.conclusion} <br><a class="btn btn-primary btn-lg" role="button"
+					<a class="btn btn-primary btn-lg" role="button"
 						href="GameplayEndOfStage.do">Moving on...</a>
 				</p>
+
 			</div>
-		
-		
+
+
 		</div>
 	</div>
 	<br>

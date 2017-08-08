@@ -26,22 +26,7 @@
 			<!-- in: stageConclusion -->
 			<!-- out: stageConclusion -->
 			<div class="row">
-				<div class="col-sm-8 col-md-8">
-
-					<%-- <c:choose>
-						<c:when test="${not empty gameCharacters}">
-						
-							<h3>Select</h3>
-							<form action="ViewBattleGear.do">
-								<select name="gameCharacterId">
-									<c:forEach var="character" items="${gameCharacters}">
-										<option value="${character.id}">${character.id}: ${character.name}  ${character.image }</option>
-									</c:forEach>
-								</select>
-								<button type="submit" value="Submit">Submit</button>
-							</form>
-						</c:when>
-					</c:choose> --%>
+				<div class="col-sm-8 col-md-8 col-lg-8">
 					
 					<c:choose>
 						<c:when test="${not empty inventory}">	
@@ -56,7 +41,7 @@
 											</c:forEach>
 
 										</select>
-										<button type="submit" class="btn btn-primary btn-lg" role="button" value="Submit">Take Weapon</button>
+										<button type="submit" class="btn btn-primary btn-sm" role="button" value="Submit">Take Weapon</button>
 									</form>
 								</c:when>
 								<c:otherwise>
@@ -73,7 +58,7 @@
 												<option value="${armor.id}">${armor.name}</option>
 											</c:forEach>
 										</select>
-										<button type="submit" class="btn btn-primary btn-lg" role="button" value="Submit">Use Armor</button>
+										<button type="submit" class="btn btn-primary btn-sm" role="button" value="Submit">Use Armor</button>
 									</form>
 								</c:when>
 								<c:otherwise>
@@ -90,12 +75,12 @@
 												<option value="${edible.id}">${edible.name}</option>
 											</c:forEach>
 										</select>
-												<button type="submit" class="btn btn-primary btn-lg" role="button" value="Submit">Consume</button>
+												<button type="submit" class="btn btn-primary btn-sm" role="button" value="Submit">Consume</button>
 									</form>
 								</c:when>
 
 								<c:otherwise>
-									<h3>${noEdibles}</h3>
+									<h3></h3>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -103,6 +88,10 @@
 							<h3>${noItems}</h3>
 						</c:otherwise>
 					</c:choose>
+					<form action="GameplayStartBattle.do">
+						<input type="Submit" class="btn btn-primary btn-md" role="button"
+							value="Fight!" />
+					</form>
 
 				</div>
 				<c:if test="${(currentCharacter != null)}">
@@ -123,10 +112,6 @@
 					</c:if>
 			</div>
 		</div>
-	<form action="GameplayStartBattle.do">
-					<input type="Submit" class="btn btn-primary btn-lg" role="button"
-						value="Fight!"/>		
-				</form>
 	</div>
 	<br>
 	<br>

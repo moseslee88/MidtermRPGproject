@@ -9,6 +9,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import enums.TypeOfItem;
+
 @Transactional
 @Repository
 public class GameplayDaoImpl implements GameplayDao {
@@ -51,7 +53,7 @@ public class GameplayDaoImpl implements GameplayDao {
 		Collections.shuffle(items);
 		
 		for (Item item : items) {
-			if (item.getItemLevel() == targetItemLevel) {
+			if (item.getItemLevel() == targetItemLevel && (item.getTypeOfItem() == TypeOfItem.armor || item.getTypeOfItem() == TypeOfItem.weapon)) {
 				gameCharacter.getInventory().getItems().add(item);
 				System.out.println("added item: " + item);
 				return item;
