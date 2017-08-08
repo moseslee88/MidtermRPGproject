@@ -1,5 +1,5 @@
 
-##MidtermRPGproject
+## MidtermRPGproject
 ---
 Our group midterm project - *Connor, Jake, Bryan, and Moses*.
 
