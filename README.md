@@ -1,7 +1,7 @@
 
 ## MidtermRPGproject
 ---
-by *Connor, Jake, Bryan, and Moses*<br>
+by *[Connor](https://github.com/csgibson4/), [Jake](https://github.com/JakeDaTank), [Bryan](https://github.com/broberson7801), and [Moses](https://github.com/moseslee88)*<br>
 Our group midterm project was created by four aspiring software engineers with a vision of building a game that was both fun and educational. Play today at [MidtermRPG](http://13.56.109.233:8080/MidtermRPGproject/)
 
 ## Tech Stack
