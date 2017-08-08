@@ -97,6 +97,7 @@ public class GameplayController {
 			GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 			mv.addObject("currentCharacter", currentCharacter);
 			GameCharacter enemyCharacter = (GameCharacter) session.getAttribute("enemyCharacter");
+			enemyCharacter.setLevel((currentCharacter.getPower()/2)-10);
 			mv.addObject("enemyCharacter", enemyCharacter);
 
 			System.out.println("1 health" + currentCharacter.getHp());
