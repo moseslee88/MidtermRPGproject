@@ -31,7 +31,7 @@
 
 			<form action="GoOnAQuest.do" method="GET">
 			<select name="questId">
-			<c:forEach var="quest" items="questList">
+			<c:forEach var="quest" items="${questList}">
 			<option value="${quest.id}">${quest.name}</option>
 			</c:forEach>
 			</select>
