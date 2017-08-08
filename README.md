@@ -13,6 +13,10 @@ The technologies we will incorporate into this project are....
 
 -HTML/CSS
 
+First, we started with login and authentication.
+
+Then, we handled the game logic and the plethora of options a player has. Here is a snippet of sample code..
+
 
 ```
 	private int calculateDamage(GameCharacter enemy, Ability attack) {
