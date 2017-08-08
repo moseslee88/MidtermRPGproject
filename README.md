@@ -8,11 +8,11 @@ Our group midterm project was created by four aspiring software engineers with a
 ---
 The technologies we incorporated into this project are....
 
-..*Spring MVC
-..*JPA
-..*MySQL
-..*Bootstrap/HTML/CSS
-..*Build with Gradle
+  *Spring MVC
+  *JPA
+  *MySQL
+  *Bootstrap/HTML/CSS
+  *Build with Gradle
 
 //The methodologies you are using to build the application (group project, agile etc).
 
