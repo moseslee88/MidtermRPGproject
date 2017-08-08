@@ -65,7 +65,7 @@ public class AuthenticationController {
 			session.setAttribute("player", dao.login(email, password));
 			return mv;
 		}
-		if ((dao.login(email.trim(), password.trim()).getUserType() == 2) && validE) {
+		if ((dao.login(email.trim(), password.trim()).getUserType() == 2) && validE && validPW) {
 			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
 			session.setAttribute("player", dao.login(email, password));
 			session.setAttribute("gameC", dao.login(email, password).getGameCharacters());
