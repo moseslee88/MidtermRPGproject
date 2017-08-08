@@ -4,17 +4,17 @@
 by *Connor, Jake, Bryan, and Moses*<br>
 Our group midterm project was created by four aspiring software engineers with a vision of building a game that was both fun and educational. Play today at [MidtermRPG](http://13.56.109.233:8080/MidtermRPGproject/)
 
+## Tech Stack
+---
 The technologies we incorporated into this project are....
 
 -Spring MVC
-
 -JPA
-
 -MySQL
-
 -Bootstrap/HTML/CSS
+-Build with Gradle
 
-The methodologies you are using to build the application (group project, agile etc).
+//The methodologies you are using to build the application (group project, agile etc).
 
 The origin of this game idea came from a lab we did earlier in our second week here at Skill Distillery.  For an interactive fiction "lord_of_the_objects" labs, some of us chose to build out elaborate, illustrious user-interactive text word games.  Also, another one of our sources of inspiration was the old fictional text game [Zork](https://en.wikipedia.org/wiki/Zork "Zork"). First, we built out the structure of the wireframe, and then collaborated on making user stories on Trello. One lesson we discovered is that throughout the duration of our project, we made many changes to our schema in the database side. Then started with login and authentication.
 
