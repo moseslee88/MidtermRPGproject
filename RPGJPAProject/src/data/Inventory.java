@@ -25,13 +25,13 @@ public class Inventory {
 	@OneToOne(mappedBy = "inventory")
 	private GameCharacter gameCharacter;
 
-	@OneToMany(mappedBy = "inventory")
+	@OneToMany(mappedBy = "inventory", fetch=FetchType.EAGER)
 	private List<InventoryItem> inventoryItems;
 
 //	@OneToOne(mappedBy = "inventory")
 //	private Shop shop;
 
-	@ManyToMany/*(fetch = FetchType.EAGER)*/
+	@ManyToMany
 	@JoinTable(name = "inventory_item", joinColumns = @JoinColumn(name = "inventory_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
 	private List<Item> items;
 

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Item {
 	@Column
 	private Element element;
 	
-	 @ManyToMany(mappedBy="items")
+	 @ManyToMany(mappedBy="items", fetch=FetchType.EAGER)
 	 private List<Inventory> inventory;  
 	
 	//gets and sets
