@@ -44,7 +44,7 @@ public class InventoryShopItemController {
 
 		mv = addInventoryToModelAndView(mv, currentCharacter);
 
-		mv.addObject("beforeStats", currentCharacter);
+		//mv.addObject("beforeStats", currentCharacter);
 
 		System.out.println("in viewBattleGear() in controller");
 

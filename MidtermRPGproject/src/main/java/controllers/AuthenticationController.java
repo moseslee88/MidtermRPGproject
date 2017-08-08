@@ -3,6 +3,8 @@ package controllers;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +50,8 @@ public class AuthenticationController {
 	@RequestMapping(path = "AuthenticationRoute.do", method = RequestMethod.POST)
 	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelAndView mv, HttpSession session) {
-        List<Quest> questList = admindao.indexQuests();
-        session.setAttribute("questList", questList);
+		List<Quest> questList = admindao.indexQuests();
+		session.setAttribute("questList", questList);
 		Boolean validE = dao.validEmail(email);
 		System.out.println("Email: " + validE);
 		System.out.println("Email valid: " + validE);
@@ -64,7 +66,7 @@ public class AuthenticationController {
 			session.setAttribute("player", dao.login(email, password));
 			return mv;
 		}
-		if ((dao.login(email.trim(), password.trim()).getUserType() == 2) && validE ) { 
+		if ((dao.login(email.trim(), password.trim()).getUserType() == 2) && validE) {
 			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
 			session.setAttribute("player", dao.login(email, password));
 			session.setAttribute("gameC", dao.login(email, password).getGameCharacters());
@@ -100,6 +102,17 @@ public class AuthenticationController {
 		mv.setViewName("/WEB-INF/views/authentication/login.jsp");
 		// mv.addObject("player", player);
 		System.out.println(player.toString());
+		return mv;
+	}
+
+	@RequestMapping(path = "Logout.do")
+	public ModelAndView goClickAndLogout(Player player, ModelAndView mv, HttpSession session, HttpServletRequest request) {
+		session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		mv.setViewName("index.html");
+
 		return mv;
 	}
 
