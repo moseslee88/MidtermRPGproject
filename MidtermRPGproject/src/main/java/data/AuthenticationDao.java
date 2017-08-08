@@ -1,4 +1,5 @@
 package data;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -11,5 +12,5 @@ public interface AuthenticationDao {
 	public List<Player> indexPlayers();
 	String findUserPasswordByEmail(String email);
 	public Boolean validEmail(String email);
-	public Boolean validPassword(String password);
+	public Boolean validPassword(String password) throws NoSuchAlgorithmException;
 }

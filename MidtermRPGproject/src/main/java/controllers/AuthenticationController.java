@@ -48,13 +48,12 @@ public class AuthenticationController {
 
 	@RequestMapping(path = "AuthenticationRoute.do", method = RequestMethod.POST)
 	public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
-			ModelAndView mv, HttpSession session) {
+			ModelAndView mv, HttpSession session) throws NoSuchAlgorithmException {
 		List<Quest> questList = admindao.indexQuests();
 		session.setAttribute("questList", questList);
 		Boolean validE = dao.validEmail(email);
-		System.out.println("Email: " + validE);
-		System.out.println("Email valid: " + validE);
 		Boolean validPW = dao.validPassword(password);
+		System.out.println("Password valid: " + validPW);
 		if (email == "" || password == "" || !validE) {
 			mv.setViewName("/WEB-INF/views/authentication/_500.jsp");
 			// return "/WEB-INF/views/player/authentication/login.jsp";
@@ -65,7 +64,7 @@ public class AuthenticationController {
 			session.setAttribute("player", dao.login(email, password));
 			return mv;
 		}
-		if ((dao.login(email.trim(), password.trim()).getUserType() == 2) && validE) {
+		if ((validE) && (validPW)) {
 			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
 			session.setAttribute("player", dao.login(email, password));
 			session.setAttribute("gameC", dao.login(email, password).getGameCharacters());
@@ -85,10 +84,6 @@ public class AuthenticationController {
 	@RequestMapping(path = "Login.do")
 	public ModelAndView goToLoginAfterAccountCreation(ModelAndView mv, HttpSession session) {
 		mv.setViewName("/WEB-INF/views/authentication/login.jsp");
-		// mv.addObject("players", dao.indexPlayers());
-		// if (dao.isAdmin(player)) {
-		// mv.setViewName("/WEB-INF/views/admin/admin.jsp");
-		// }
 		return mv;
 	}
 
@@ -119,9 +114,10 @@ public class AuthenticationController {
 	@RequestMapping(path = "HomeButton.do")
 	public ModelAndView goHomeButton(Player player, ModelAndView mv, HttpSession session, HttpServletRequest request) {
 		mv.addObject("player", (Player) session.getAttribute("player"));
-		if (player!=null) {
-		mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
-		} else mv.setViewName("/WEB-INF/views/authentication/login.jsp");
+		if (player != null) {
+			mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
+		} else
+			mv.setViewName("/WEB-INF/views/authentication/login.jsp");
 		return mv;
 	}
 
