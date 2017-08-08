@@ -24,31 +24,31 @@ Then, we handled the game logic and the plethora of options a player has. Here i
 	private int calculateDamage(GameCharacter enemy, Ability attack) {
 		RandNumGen rng = new RandNumGen();
 		Double modifiedDamage = rng.getRNG(-(this.hp / 10.0), (this.hp / 10.0));
-		Double modifyer = .8;
+		Double modifier = .8;
 		double attackPower = attack.getPower();
 		if (attack.getElement().equals(Element.physical)) {
-			double percentResisted = this.getPhysicalR() * modifyer;
-			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			double percentResisted = this.getPhysicalR() * modifier;
+			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.fire)) {
-			double percentResisted = this.getFireR() * modifyer;
-			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			double percentResisted = this.getFireR() * modifier;
+			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.frost)) {
-			double percentResisted = this.getFrostR() * modifyer;
-			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			double percentResisted = this.getFrostR() * modifier;
+			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.lightning)) {
-			double percentResisted = this.getLightningR() * modifyer;
-			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			double percentResisted = this.getLightningR() * modifier;
+			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.blood)) {
-			double percentResisted = this.getBloodR() * modifyer;
-			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			double percentResisted = this.getBloodR() * modifier;
+			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
 		}
 		if (attack.getElement().equals(Element.dark)) {
-			double percentResisted = ((this.getFireR() + this.getBloodR()) / 2) * modifyer;
-			modifiedDamage += modifyResisitedDamage(percentResisted, attackPower, enemy);
+			double percentResisted = ((this.getFireR() + this.getBloodR()) / 2) * modifier;
+			modifiedDamage += modifyResistedDamage(percentResisted, attackPower, enemy);
 		}
 
 		double temp = modifiedDamage.doubleValue();
