@@ -4,7 +4,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +105,8 @@ public class AuthenticationController {
 	}
 
 	@RequestMapping(path = "Logout.do")
-	public ModelAndView goClickAndLogout(Player player, ModelAndView mv, HttpSession session, HttpServletRequest request) {
+	public ModelAndView goClickAndLogout(Player player, ModelAndView mv, HttpSession session,
+			HttpServletRequest request) {
 		session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
@@ -115,11 +115,11 @@ public class AuthenticationController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "HomeButton.do")
 	public ModelAndView goHomeButton(Player player, ModelAndView mv, HttpSession session, HttpServletRequest request) {
-	mv.addObject("player",(Player)session.getAttribute("player"));
-		mv.setViewName("/WEB-INF/views/authentication/login.jsp");
+		mv.addObject("player", (Player) session.getAttribute("player"));
+		mv.setViewName("/WEB-INF/views/player/playerInfo.jsp");
 		return mv;
 	}
 
