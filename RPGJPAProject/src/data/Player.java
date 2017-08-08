@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class Player {
 //	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
 //	private List<Quest> quests;
 
-	@OneToMany(mappedBy = "player")
+	@OneToMany(mappedBy = "player", fetch=FetchType.EAGER)
 	private List<GameCharacter> gameCharacters;
 
 	public String getEmail() {
