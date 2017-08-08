@@ -121,9 +121,13 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 
 	@Override
 	public List<GameCharacter> getPlayersGameCharacters(Player player) {
-
 		List<GameCharacter> playersCharacters = new ArrayList<>();
-		playersCharacters.addAll(player.getGameCharacters());
+		
+		for (GameCharacter gameCharacter : getAllGameCharacters()) {
+			if (gameCharacter.getPlayer().getId() == player.getId()) {
+				playersCharacters.add(gameCharacter);
+			}
+		}
 
 		return playersCharacters;
 	}
