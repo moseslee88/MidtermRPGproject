@@ -31,11 +31,11 @@ public class GameplayController {
 	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
 		// temp!
 //		GameCharacter currentCharacter = dao.getDefaultGameCharacter();
-//		session.setAttribute("currentQuest", dao.getDefaultQuest());
-//		session.setAttribute("currentStage", ((Quest) session.getAttribute("currentQuest")).getStages().get(0));
 //		session.setAttribute("currentCharacter", currentCharacter);
+//		session.setAttribute("currentQuest", dao.getDefaultQuest());
 		//temp!
 
+		session.setAttribute("currentStage", ((Quest) session.getAttribute("currentQuest")).getStages().get(0));
 		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
 		mv.addObject("currentStage", (Stage) session.getAttribute("currentStage"));
 		mv.setViewName("WEB-INF/views/gameplay/questStart.jsp");
