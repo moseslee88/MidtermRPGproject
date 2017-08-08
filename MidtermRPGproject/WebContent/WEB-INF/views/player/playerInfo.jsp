@@ -55,8 +55,7 @@ WHAT WE WANT TO SEE HERE: characters(character info), account Name, create Chara
                 <td>${s.stamina} stamina</td>
                 <td>${s.level} level</td>
             </tr><br>         
-                                <form>
-						                     <form action="ChooseACharacter.do" method="POST">
+						                     <form action="ChooseACharacter.do" method="GET">
 						                     <input type="hidden" name="gameCharacterId" value="${s.id }">gameCharacter ID: ${s.id }<br>
 						                     <input type="submit" value="Select This Character!">
 

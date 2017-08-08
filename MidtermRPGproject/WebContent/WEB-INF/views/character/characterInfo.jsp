@@ -24,15 +24,18 @@
 			<h2>Character Info</h2>
 		</div>
 		<div class="container">
-			Name: ${GameCharacter.name} 
-			Health: ${GameCharacter.health} 
-			Energy: ${GameCharacter.energy} 
-			Power: ${GameCharacter.power}
+			Name: ${currentCharacter.name} 
+			Health: ${currentCharacter.health} 
+			Energy: ${currentCharacter.energy} 
+			Power: ${currentCharacter.power}
 
-			<form action="GoOnAQuest.do">
+			<form action="GoOnAQuest.do" method="GET">
 			<select name="questId">
-			<c:forEach var="quest" items="questList"></c:forEach>
+			<c:forEach var="quest" items="questList">
+			<option value="${quest.id}">${quest.name}</option>
+			</c:forEach>
 			</select>
+			<input type="submit" value="submit"/>
 			</form>
 
 
