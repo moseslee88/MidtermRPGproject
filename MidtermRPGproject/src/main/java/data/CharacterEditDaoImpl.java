@@ -22,14 +22,17 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	@Override
 	public GameCharacter create(GameCharacter newChar) {
 		
-		
-		// this is broken so that all users can get all abilities
-		List<Ability> abilityList = new ArrayList<>();
-		Collections.shuffle(abilityList);
-		for (int i = 1; i < 4; i++) {
-			abilityList.add(em.find(Ability.class, i));			
+		List<Ability> abilityList1 = new ArrayList<>();
+		for (int i = 1; i < 31; i++) {
+			abilityList1.add(em.find(Ability.class, i));			
 		}
-		newChar.setAbilities(abilityList);
+		
+		List<Ability> abilityList = new ArrayList<>();
+		// this is broken so that all users can get all abilities
+		Collections.shuffle(abilityList1);
+		for (int i = 0; i < 4; i++) {
+			newChar.setAbilities(abilityList);			
+		}
 		
 		em.flush();
 		em.persist(newChar);
