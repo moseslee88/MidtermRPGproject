@@ -7,7 +7,7 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="styles.css"/>
+<!-- <link rel="stylesheet" href="styles.css"/> -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Page Title -->
 <title>Create Character</title>
@@ -29,17 +29,17 @@
 		<div class="container">
 			<form action="PlayerCreatesChar.do" method="POST">
 				Name: <input type="text" name="name" value="name"> <br /> 
-				Health starts at 100 each point adds 10: <input type="number" name="health"
-					min="0" value="0" /> <br /> Energy starts at 100 each point adds 10: <input
-					type="number" name="energy" min="0" value="0" /> <br /> Power: <input
-					type="number" name="power" min="0" value="0" /> <br /> Critical: <input
-					type="number" name="critical" min="0" value="0" /> <br /> Physical
-				Resistance: <input type="number" name="physicalR" min="0" value="0" /> <br />
-				Fire Resistance: <input type="number" min="0" name="fireR" value="0" /> <br />
-				Frost Resistance: <input type="number" min="0" name="frostR" value="0" />
+				Health: <input type="number" name="health"
+					min="80" max="120" value="120" /> <br /> <input
+					type="number" name="energy" min="100" max="100" value="100" /> <br /> Power: <input
+					type="number" name="power" min="10" max="20" value="15" /> <br /> Critical: <input
+					type="number" name="critical" min="10" max="20" value="15" /> <br /> Physical
+				Resistance: <input type="number" name="physicalR" min="10" max="20" value="15" /> <br />
+				Fire Resistance: <input type="number" name="fireR" min="10" max="20" value="15" /> <br />
+				Frost Resistance: <input type="number" name="frostR" min="10" max="20" value="15" />
 				<br /> Lightning Resistance: <input type="number"
-					name="lightningR" min="0" value="0" /> <br /> Blood Resistance: <input
-					type="number" name="bloodR" value="0" />				
+					name="lightningR" min="10" max="20" value="15" /> <br /> Blood Resistance: <input
+					type="number" name="bloodR" min="10" max="20" value="10" />				
          <br>
         Image: <select name="image" id="image" class="icon-menu">
 

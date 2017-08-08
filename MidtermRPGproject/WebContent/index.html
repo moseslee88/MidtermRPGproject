@@ -1,15 +1,11 @@
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 
-<!-- <link rel="stylesheet" href="styles.css"/>
- -->
- 
- 
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MidtermRPGproject</title>
 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>MidtermRPGproject</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -26,50 +22,53 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-<div style="padding-top: 70px;" > </div>
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+	<div style="padding-top: 70px;"></div>
+	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand active" href="index.html">-TMW-<span
+					class="sr-only">(current)</span></a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="PlayerInfo.do">Home</a></li>
+					<li><a href="Logout.do">Logout</a></li>
+					<!-- <li class="active"><a href="#">active<span class="sr-only">(current)</span></a></li> -->
+				</ul>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+	</nav>
+
 	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand active" href="index.html">-TMW-<span
-				class="sr-only">(current)</span></a>
+		<div class="jumbotron">
+			<h2>Welcome to -TMW-!</h2>
+			<p>Go on a quest, fight a monster, get loot, rinse and repeat.</p>
+			<form action="Login.do" style="display: inline;">
+				<input type="submit" class="btn btn-primary btn-lg" role="button"
+					value="Log In!">
+			</form>
+			<form action="CreatePlayer.do" style="display: inline;">
+				<input type="submit" class="btn btn-primary btn-lg" role="button"
+					value="Sign up!">
+			</form>
+
 		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="PlayerInfo.do">Home</a></li>
-				<li><a href="Logout.do">Logout</a></li>
-				<!-- <li class="active"><a href="#">active<span class="sr-only">(current)</span></a></li> -->
-			</ul>
-			<!-- /.navbar-collapse -->
-		</div>
-		<!-- /.container-fluid -->
+		<!-- Content Below! -->
+
+
+		<br /> <br />
 	</div>
-</nav>
-
-<div class="container-fluid">
-
-<!-- Content Below! -->
-
-<a class="button" href="Login.do" role="button">Log in to your account!</a><br>
-<a class="button" href="CreatePlayer.do" role="button">Sign up here!</a><br>
-<hr>
-<a href="AdminRoute.do">AdminRoute.do</a><br/>
-<a href="ContentCreationRoute.do">ContentCreationRoute.do</a><br/>
-<a href="PlayerRoute.do">PlayerRoute.do</a><br/>
-<a href="CharacterRoute.do">CharacterRoute.do</a><br/>
-<a href="GameplayRoute.do">GameplayRoute.do</a><br/>
-<a href="BattleGear.do">BattleGear.do</a><br/>
-
-<br/><br/>
-</div>
 </body>
 </html>

@@ -17,8 +17,8 @@
 
 <!-- Page Body -->
 <body>
-<jsp:include page="../../partials/_nav.jsp"></jsp:include>
-<jsp:include page="../../partials/_resources.jsp"></jsp:include>
+	<jsp:include page="../../partials/_nav.jsp"></jsp:include>
+	<jsp:include page="../../partials/_resources.jsp"></jsp:include>
 	<div class="container">
 		<div class="page-header">
 			<h2>Player Information</h2>
@@ -26,45 +26,41 @@
 		<div class="container">
 
 
-	  <h5>${player.displayName}</h5>
-	  <h5>${player.email}</h5><br><br>
-	  <ul>
-			<c:forEach items="${gameC}" var="s">
-
-	       <tr>
-        
-                <td>${s.name}</td>
-                <td>${s.hp} HP/${s.health}</td>
-                <td>${s.energy} energy</td>
-                <td>${s.power} power</td>
-                <td>${s.stamina} stamina</td>
-                <td>${s.level} level</td>
-            </tr><br>         
-						                     <form action="ChooseACharacter.do" method="GET">
-						                     <input type="hidden" name="gameCharacterId" value="${s.id }">gameCharacter ID: ${s.id }<br>
-						                     <input type="submit" class="btn btn-primary btn-md" role="button" value="Select This Character!">
-
-                                      </form><br><br>
-			</c:forEach>
-			</ul>
-			 <!--Button goes here for create new character -->
+			<h5>${player.displayName}</h5>
+			<h5>${player.email}</h5>
+					<div class="row">
+				<c:forEach items="${gameC}" var="s">
+						<div class="col-sm-4 col-md-4 col-lg-4">
+							<div class="thumbnail">
+								<img class="media-object" src="https://s-media-cache-ak0.pinimg.com/736x/aa/ba/e0/aabae0270c9635881205c87f3be59fc1--armor-concept-knight-concept-art.jpg" height="10px">
+								<div class="caption">
+									<h3>${s.name}</h3>
+									<br>Health: ${s.health} <br>Energy:
+									${s.energy} <br>Power: ${s.power}<br>
+									<form action="ChooseACharacter.do" method="GET">
+										<input type="hidden" name="gameCharacterId" value="${s.id }">
+										<input type="submit"
+											class="btn btn-primary btn-sm" role="button"
+											value="Select This Character!">
+									</form>
+								</div>
+							</div>
+						</div>
+				</c:forEach>
+					</div>
+			<!--Button goes here for create new character -->
 			<form action="PlayerCreateForm.do" method="GET">
-				<input type="submit" class="btn btn-primary btn-md" role="button" name="Create a New Character!" value="Create a new Character!">
+				<input type="submit" class="btn btn-primary btn-md" role="button"
+					name="Create a New Character!" value="Create a new Character!">
 			</form>
-			
-	
-<a href="ContentCreationRoute.do">ContentCreationRoute.do</a><br/>
-<a href="PlayerRoute.do">PlayerRoute.do</a><br/>
-<a href="CharacterRoute.do">CharacterRoute.do</a><br/>
-<a href="GameplayRoute.do">GameplayRoute.do</a><br/>
-<a href="BattleGear.do">BattleGear.do</a><br/>
-			
-			
-		
-			
-			
-	
-		
+
+
+
+
+
+
+
+
 		</div>
 	</div>
 	<br>
