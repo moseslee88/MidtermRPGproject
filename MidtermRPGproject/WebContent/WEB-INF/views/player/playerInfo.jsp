@@ -42,14 +42,14 @@
             </tr><br>         
 						                     <form action="ChooseACharacter.do" method="GET">
 						                     <input type="hidden" name="gameCharacterId" value="${s.id }">gameCharacter ID: ${s.id }<br>
-						                     <input type="submit" class="btn btn-primary btn-lg" role="button" value="Select This Character!">
+						                     <input type="submit" class="btn btn-primary btn-md" role="button" value="Select This Character!">
 
                                       </form><br><br>
 			</c:forEach>
 			</ul>
 			 <!--Button goes here for create new character -->
 			<form action="PlayerCreateForm.do" method="GET">
-				<input type="submit" name="Create a New Character!" value="Create a new Character!">
+				<input type="submit" class="btn btn-primary btn-md" role="button" name="Create a New Character!" value="Create a new Character!">
 			</form>
 			
 	
