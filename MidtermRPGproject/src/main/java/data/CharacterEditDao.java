@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface CharacterEditDao {
 	public GameCharacter create(GameCharacter newChar);
 	public GameCharacter update(GameCharacter updatedChar, int id);
-	public boolean killChar(int charId, Player p);
+	public boolean killChar(GameCharacter gameCharacter);
 	public GameCharacter getCharByName(String name);
 	public GameCharacter getCharById(int id);
 	public int getCharIdByName (String charName);

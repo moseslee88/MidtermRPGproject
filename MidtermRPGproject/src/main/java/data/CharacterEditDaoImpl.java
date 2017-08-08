@@ -88,15 +88,13 @@ public class CharacterEditDaoImpl implements CharacterEditDao {
 	}
 
 	@Override
-	public boolean killChar(int charId, Player p) {
-		for (GameCharacter managedChar : getPlayersGameCharacters(p)) {
-			if (managedChar.getId() == charId) {
-				Player p1 = em.find(Player.class, charId);
-				managedChar.setPlayer(p1);
-				return true;
-			}
+	public boolean killChar(GameCharacter gameCharacter) {
+		try {
+			gameCharacter.setPlayer(em.find(Player.class, 1));
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
-		return false;
 	}
 
 	@SuppressWarnings("unchecked")

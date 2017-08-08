@@ -240,7 +240,7 @@ public class GameplayController {
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 		currentCharacter.endFight();
 		currentCharacter.lvlUp();
-		cDao.killChar(currentCharacter.getId(), (Player)session.getAttribute("player"));
+		cDao.killChar(currentCharacter);
 		cDao.update(currentCharacter, currentCharacter.getId());
 		
 		mv.addObject("currentCharacter", currentCharacter);
