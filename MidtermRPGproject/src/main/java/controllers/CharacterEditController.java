@@ -120,7 +120,7 @@ public class CharacterEditController {
 		session.setAttribute("currentCharacter", currentCharacter);
 		mv.addObject("questList", quests);
 		session.setAttribute("questList", quests);
-		mv.setViewName("/WEB-INF/views/player/characterInfo.jsp");
+		mv.setViewName("/WEB-INF/views/character/characterInfo.jsp");
 		return mv;
 	}
 
