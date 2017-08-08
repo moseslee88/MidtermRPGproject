@@ -40,7 +40,7 @@ public class InventoryShopItemController {
 	public ModelAndView viewBattleGear(ModelAndView mv, HttpSession session) {
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 
-		mv = addInventoryToModelAndView(mv, currentCharacter);
+		addInventoryToModelAndView(mv, currentCharacter);
 
 		System.out.println("in viewBattleGear() in controller");
 
