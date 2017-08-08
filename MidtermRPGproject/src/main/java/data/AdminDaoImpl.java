@@ -183,14 +183,7 @@ public class AdminDaoImpl implements AdminDao {
 
 			}
 
-		//
-		// if (player.getPassword() != null) {
-		// // managedPlayer.setFriends(player.getFriends());
-		// managedPlayer.setPassword(player.getPassword());
-		// }
-		if (player.getQuests() != null) {
-			managedPlayer.setQuests(player.getQuests());
-		}
+
 		// managedPlayer.setGameCharacters(player.getGameCharacters());
 		return player;
 	}

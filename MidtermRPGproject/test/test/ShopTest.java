@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import data.Inventory;
 import data.Player;
-import data.Shop;
+
 
 public class ShopTest {
 	private EntityManagerFactory emf = null;

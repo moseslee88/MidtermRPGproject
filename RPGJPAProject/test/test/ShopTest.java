@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import data.Ability;
-import data.Friend;
 import data.GameCharacter;
 import data.Inventory;
 import data.InventoryItem;

@@ -29,9 +29,9 @@ public class PlayerEditDaoImpl implements PlayerEditDao {
 		Player managedPlayer = em.find(Player.class, id);
 		managedPlayer.setDisplayName(updatedPlayer.getDisplayName());
 		managedPlayer.setEmail(updatedPlayer.getEmail());
-		managedPlayer.setFriends(updatedPlayer.getFriends());
+
 		managedPlayer.setPassword(updatedPlayer.getPassword());
-		managedPlayer.setQuests(updatedPlayer.getQuests());
+
 		return managedPlayer;
 	}
 
