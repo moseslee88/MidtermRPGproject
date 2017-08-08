@@ -19,7 +19,6 @@ import data.Item;
 @Controller
 public class InventoryShopItemController {
 
-
 	@Autowired
 	private InventoryShopItemDao dao;
 
@@ -31,7 +30,6 @@ public class InventoryShopItemController {
 
 		session.setAttribute("currentCharacter", (GameCharacter) dao2.getDefaultGameCharacter());
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
-
 
 		mv.addObject("currentCharacter", currentCharacter);
 		mv.setViewName("ViewBattleGear.do");
@@ -65,7 +63,8 @@ public class InventoryShopItemController {
 		battleGear.add(dao.getItemFromGameCharacter(currentCharacter, weaponId));
 
 		for (Item item : battleGear) {
-			currentCharacter.useItem(battleGear.get(0));
+			currentCharacter.useItem(item);
+
 		}
 
 		mv.addObject("afterStats", currentCharacter);

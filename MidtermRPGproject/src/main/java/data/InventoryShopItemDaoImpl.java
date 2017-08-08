@@ -149,7 +149,7 @@ public class InventoryShopItemDaoImpl implements InventoryShopItemDao {
 	
 	public Boolean removeItemFromInventory(GameCharacter gameCharacter, Integer itemId) {
 		String id = itemId.toString();
-		String query = "DELET * FROM item WHERE item.id = " + id;
+		String query = "DELETE * FROM item WHERE item.id = " + id;
 		
 		em.createNativeQuery(query);
 		return true;

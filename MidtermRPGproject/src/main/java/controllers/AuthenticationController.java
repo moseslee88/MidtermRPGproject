@@ -51,6 +51,8 @@ public class AuthenticationController {
         List<Quest> questList = admindao.indexQuests();
         session.setAttribute("questList", questList);
 		Boolean validE = dao.validEmail(email);
+		System.out.println("Email: " + validE);
+		System.out.println("Email valid: " + validE);
 		Boolean validPW = dao.validPassword(password);
 		if (email == "" || password == "" || !validE) {
 			mv.setViewName("/WEB-INF/views/authentication/_500.jsp");

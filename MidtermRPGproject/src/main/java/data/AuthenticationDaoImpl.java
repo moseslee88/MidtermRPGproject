@@ -94,12 +94,15 @@ import org.springframework.transaction.annotation.Transactional;
 		
 		@Override
 		public Boolean validEmail(String email){
-			if(email == null || email.length() < 5) 
+			if(email == null || email.length() < 5) {
 				return null;
-			else for(Player p : indexPlayers()) 
-				if (p.getEmail().equals(email))  
+			}else { 
+				for(Player p : indexPlayers()) { 
+					if (p.getEmail().equals(email)) {  
 				    return true;
-			
+					}
+				}
+			}
 			return false;
 		}
 		
