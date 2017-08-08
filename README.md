@@ -1,9 +1,9 @@
 
-##MidtermRPGproject
+##MidtermRPGproject##
 ---
 Our group midterm project - *Connor, Jake, Bryan, and Moses*.
 
-The technologies we will incorporate into this project are....
+The technologies we incorporated into this project are....
 
 -Spring MVC
 
@@ -11,11 +11,13 @@ The technologies we will incorporate into this project are....
 
 -MySQL
 
--HTML/CSS
+-Bootstrap/HTML/CSS
 
-First, we started with login and authentication.
+The methodologies you are using to build the application (group project, agile etc).
 
-Then, we handled the game logic and the plethora of options a player has. Here is a snippet of sample code..
+The origin of this game idea came from a lab we did earlier in our second week here at Skill Distillery.  For an interactive fiction "lord_of_the_objects" labs, some of us chose to build out elaborate, illustrious user-interactive text word games.  Also, another one of our sources of inspiration was the old fictional text game [Zork] (https://en.wikipedia.org/wiki/Zork). First, we built out the structore of the wireframe, collaborated on making user stories on Trello. Then started with login and authentication.
+
+Then, we handled the game logic and the plethora of options a player has. Here is a snippet of sample code.
 
 
 ```
