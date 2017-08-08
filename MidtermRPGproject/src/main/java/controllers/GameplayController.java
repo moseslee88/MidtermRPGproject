@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.Ability;
+import data.CharacterEditDao;
 import data.GameCharacter;
 import data.GameplayDao;
 import data.Item;
@@ -22,6 +23,9 @@ import data.Stage;
 public class GameplayController {
 	@Autowired
 	private GameplayDao dao;
+	
+	@Autowired
+	private CharacterEditDao cDao;
 
 	private RandNumGen rng = new RandNumGen();
 
@@ -235,6 +239,8 @@ public class GameplayController {
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 		currentCharacter.endFight();
 		currentCharacter.lvlUp();
+		cDao.update(currentCharacter, currentCharacter.getId());
+		
 		mv.addObject("currentCharacter", currentCharacter);
 		GameCharacter enemyCharacter = (GameCharacter) session.getAttribute("enemyCharacter");
 		enemyCharacter.endFight();
