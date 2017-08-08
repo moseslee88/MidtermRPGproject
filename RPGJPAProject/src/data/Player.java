@@ -34,7 +34,8 @@ public class Player {
 //	@JoinTable(name = "player_quest", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "quest_id"))
 //	private List<Quest> quests;
 
-	@OneToMany(mappedBy = "player", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "player", fetch= FetchType.EAGER)
 	private List<GameCharacter> gameCharacters;
 
 	public String getEmail() {

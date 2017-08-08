@@ -30,10 +30,10 @@ public class GameplayController {
 	@RequestMapping(path = "GameplayRoute.do" /* , method = RequestMethod.GET */)
 	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
 		// temp!
-		GameCharacter currentCharacter = dao.getDefaultGameCharacter();
-		session.setAttribute("currentQuest", dao.getDefaultQuest());
-		session.setAttribute("currentStage", ((Quest) session.getAttribute("currentQuest")).getStages().get(0));
-		session.setAttribute("currentCharacter", currentCharacter);
+//		GameCharacter currentCharacter = dao.getDefaultGameCharacter();
+//		session.setAttribute("currentQuest", dao.getDefaultQuest());
+//		session.setAttribute("currentStage", ((Quest) session.getAttribute("currentQuest")).getStages().get(0));
+//		session.setAttribute("currentCharacter", currentCharacter);
 		//temp!
 
 		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
