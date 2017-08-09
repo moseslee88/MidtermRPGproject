@@ -62,9 +62,9 @@ public class GameplayController {
 
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 		GameCharacter enemyCharacter = ((Stage) session.getAttribute("currentStage")).getGameCharacter();
-		enemyCharacter.setPower(currentCharacter.getPower()+(rng.getRNG(-currentCharacter.getPower()/20, stageCounter*currentCharacter.getPower()/10)));
-		enemyCharacter.setHealth(currentCharacter.getHealth()+(rng.getRNG(-currentCharacter.getHealth()/20, (currentCharacter.getPower() + stageCounter*currentCharacter.getHealth()/10))));
-		enemyCharacter.setEnergy(currentCharacter.getEnergy()+(rng.getRNG(-currentCharacter.getEnergy()/20, stageCounter*currentCharacter.getEnergy()/10)));
+		enemyCharacter.setPower(currentCharacter.getPower()+(stageCounter-10));
+		enemyCharacter.setHealth(currentCharacter.getHealth()+(rng.getRNG(-currentCharacter.getHealth()/10, stageCounter*currentCharacter.getHealth()/10)));
+		enemyCharacter.setEnergy(currentCharacter.getEnergy()+(rng.getRNG(-currentCharacter.getEnergy()/10, stageCounter*currentCharacter.getEnergy()/10)));
 		
 		
 		currentCharacter.startFight();
