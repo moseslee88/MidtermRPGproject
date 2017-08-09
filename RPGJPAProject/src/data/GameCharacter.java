@@ -193,6 +193,12 @@ public class GameCharacter {
 		}
 
 	}
+	
+	
+	public void unequipGear() {
+		unequipArmor(this.armor);
+		unequipWeapon(this.weapon);
+	}
 
 	private void unequipWeapon(Item weapon) {
 		if (weapon != null) {

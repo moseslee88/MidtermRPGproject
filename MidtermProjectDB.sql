@@ -702,7 +702,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `quest` (`id`, `name`, `description`, `intro`, `conclusion`) VALUES (1, 'Beginning Again', 'You were trained to fight, so do that!', 'Cliche Narrator: You just went through a terrible break-up and you decide to go for a walk. ', 'Narrator: there is no way that anyone will make it this far. ');
+INSERT INTO `quest` (`id`, `name`, `description`, `intro`, `conclusion`) VALUES (1, 'Beginning Again', 'You\'ve been working out, let\'s see if it pays off.', 'Cliche Narrator Voice: You just went through a terrible break-up and you decide to go for a walk.', 'Narrator: Wow! You are almost as impressive as Moses Lee!');
 
 COMMIT;
 
@@ -712,10 +712,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `MidtermProjectDB`;
-INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (1, 'The First Stage', 'You have no idea who you are, or what you are capable of!', 'They trained you to fight, and you did. Move along now.', 35);
-INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (2, 'The Second Stage', 'You come to a bridge. A wizard animated a golem to protect his turf beyond.', 'You defeated the golem, crossed the bridge, trampled over the wizard\'s turf, and some of his carefully planted perennials.', 20);
-INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (3, 'The Final Stage!', 'You turn around to see the shade of the wizard in front of you. Clearly he was too busy to conjure a portal and come himself. But while you\'re here you might as well fight this thing too. ', 'That was easy. ', 42);
-INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (4, 'Surprize!', 'You understand, it\'s nothing personal. But the wizard has contracted with his associate to come destroy you. Better get him before he gets you!', 'I didn\'t expect you to make it this far. Congratulations... ', 23);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (1, 'The First Stage', 'You wipe away the tears and climb to the top of nearby hill so you watch your ex from afar. Someone (or something) taps you on the shoulder...', 'No you have a taste for victory. You like that taste.', 35);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (2, 'The Second Stage', 'You come to a bridge. A wizard animated a golem to protect his turf beyond...', 'You defeated the golem, crossed the bridge, trampled over the wizard\'s turf, and some of his carefully planted perennials.', 20);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (3, 'The Final Stage!', 'You turn around to see the shade of the wizard in front of you. Clearly he was too busy to conjure a portal and come himself. But while you\'re here you might as well fight this thing too...', 'That was easy. Almost too easy.', 42);
+INSERT INTO `stage` (`id`, `name`, `intro`, `conclusion`, `character_id`) VALUES (4, 'Surprize!', 'You understand, it\'s nothing personal. But the wizard has contracted with his associate to come destroy you. Better get him before he gets you! He looks like he has weak ankles but you might not want to get hit by that pointy thing.', 'I didn\'t expect you to make it this far. Congratulations... ', 23);
 
 COMMIT;
 

@@ -29,6 +29,8 @@ public class GameplayController {
 	private CharacterEditDao cDao;
 
 	private RandNumGen rng = new RandNumGen();
+	
+	private int stageCounter = 1;
 
 	@RequestMapping(path = "GameplayRoute.do" /* , method = RequestMethod.GET */)
 	public ModelAndView adminRoute(ModelAndView mv, HttpSession session) {
@@ -40,6 +42,7 @@ public class GameplayController {
 
 		session.setAttribute("currentStage", ((Quest) session.getAttribute("currentQuest")).getStages().get(0));
 		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
+		stageCounter = 1;
 		mv.addObject("currentStage", (Stage) session.getAttribute("currentStage"));
 		mv.setViewName("WEB-INF/views/gameplay/questStart.jsp");
 		return mv;
@@ -49,6 +52,7 @@ public class GameplayController {
 	public ModelAndView gameplayStageStart(ModelAndView mv, HttpSession session) {
 		mv.addObject("currentQuest", (Quest) session.getAttribute("currentQuest"));
 		mv.addObject("currentStage", (Stage) session.getAttribute("currentStage"));
+		stageCounter++;
 		mv.setViewName("WEB-INF/views/gameplay/stageStart.jsp");
 		return mv;
 	}
@@ -58,7 +62,11 @@ public class GameplayController {
 
 		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 		GameCharacter enemyCharacter = ((Stage) session.getAttribute("currentStage")).getGameCharacter();
-
+		enemyCharacter.setPower(currentCharacter.getPower()+(rng.getRNG(-currentCharacter.getPower()/20, stageCounter*currentCharacter.getPower()/10)));
+		enemyCharacter.setHealth(currentCharacter.getHealth()+(rng.getRNG(-currentCharacter.getHealth()/20, (currentCharacter.getPower() + stageCounter*currentCharacter.getHealth()/10))));
+		enemyCharacter.setEnergy(currentCharacter.getEnergy()+(rng.getRNG(-currentCharacter.getEnergy()/20, stageCounter*currentCharacter.getEnergy()/10)));
+		
+		
 		currentCharacter.startFight();
 		mv.addObject("newHealthCurrent", 100);
 		mv.addObject("newEnergyCurrent", 100);
@@ -97,7 +105,7 @@ public class GameplayController {
 			GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
 			mv.addObject("currentCharacter", currentCharacter);
 			GameCharacter enemyCharacter = (GameCharacter) session.getAttribute("enemyCharacter");
-			enemyCharacter.setLevel((currentCharacter.getPower()/2)-10);
+			
 			mv.addObject("enemyCharacter", enemyCharacter);
 
 			System.out.println("1 health" + currentCharacter.getHp());
@@ -281,6 +289,9 @@ public class GameplayController {
 
 	@RequestMapping(path = "GameplayEndOfQuest.do" /* , method = RequestMethod.GET */)
 	public ModelAndView gameplayEndOfQuest(ModelAndView mv, HttpSession session) {
+		GameCharacter currentCharacter = (GameCharacter) session.getAttribute("currentCharacter");
+		currentCharacter.unequipGear();
+		cDao.update(currentCharacter, currentCharacter.getId());
 		mv.setViewName("WEB-INF/views/gameplay/questConclusion.jsp");
 		return mv;
 	}
